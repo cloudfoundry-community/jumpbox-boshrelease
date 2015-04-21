@@ -2,16 +2,35 @@
 
 HOME_DIR=/var/vcap/store/jumpbox/home
 
+assure_string_in_file() {
+  assurefilename=$1
+  assuresearchString=$2
+  assurereplaceString=$3
+
+  re="s#^.*$assuresearchString.*#$assurereplaceString#"
+  sed -i "${re}" "$assurefilename"
+  (( "$?" == "0" )) ||
+  echo "Could not execute execute sed command replace $assuresearchString with $assurereplaceString in file $assurefilename, terminating install."
+}
+
 case $1 in
 
   start)
     mkdir -p $HOME_DIR
     chown vcap:vcap $HOME_DIR
-    chpst -u vcap:vcap touch $HOME_DIR/.jumpbox_test
+    touch /var/vcap/sys/run/.jumpbox_test
 
     mkdir -p $HOME_DIR/tmp
 
-    usermod -d $HOME_DIR -m vcap
+    assure_string_in_file /etc/passwd "vcap:x:1000:1000:BOSH System User:/home/vcap:/bin/bash" "vcap:x:1000:1000:BOSH System User:/var/vcap/store/jumpbox/home:/bin/bash"
+
+    mkdir -p $HOME_DIR/.ssh
+    if [ ! -e $HOME_DIR/.ssh/authorized_keys ]; then
+      cp /home/vcap/.ssh/authorized_keys $HOME_DIR/.ssh/authorized_keys
+      chown vcap:vcap $HOME_DIR/.ssh/authorized_keys
+      chmod 600 $HOME_DIR/.ssh/authorized_keys
+    fi
+
 
     if [ ! -e /etc/profile.d/bosh.sh ]; then
       echo 'export PATH=/var/vcap/packages/jumpbox/bin:/var/vcap/packages/ruby-2.1.6/bin:$PATH' >> /etc/profile.d/bosh.sh

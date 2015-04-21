@@ -1,4 +1,4 @@
-check file jumpbox path /var/vcap/store/jumpbox/home/.jumpbox_test
+check file jumpbox path /var/vcap/sys/run/.jumpbox_test
   start program "/var/vcap/jobs/jumpbox/bin/jumpbox_ctl start"
   stop program "/var/vcap/jobs/jumpbox/bin/jumpbox_ctl stop"
   group vcap
