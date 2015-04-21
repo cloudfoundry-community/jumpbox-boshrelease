@@ -12,19 +12,11 @@ update:
   update_watch_time: 1000-30000
 
 jobs:
-  - name: jumpbox_leader_z1
+  - name: jumpbox_z1
     instances: 1
     networks:
       - name: jumpbox1
         static_ips: (( static_ips(0) ))
-  - name: jumpbox_z1
-    instances: 2
-    networks:
-      - name: jumpbox1
-        static_ips: ~
-    properties:
-      jumpbox:
-        leader_address: (( jobs.jumpbox_leader_z1.networks.jumpbox1.static_ips.[0] ))
 
 compilation:
   cloud_properties:

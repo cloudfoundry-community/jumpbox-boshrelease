@@ -1,5 +1,7 @@
 # BOSH Release for jumpbox
 
+This is BOSH release for jumpbox with BOSH cli with BOSH bootstrap and workspace installed.
+
 ## Usage
 
 To use this bosh release, first upload it to your bosh:

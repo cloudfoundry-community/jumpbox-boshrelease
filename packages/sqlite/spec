@@ -1,0 +1,4 @@
+---
+name: sqlite
+files:
+- sqlite/sqlite-autoconf-3080900.tar.gz

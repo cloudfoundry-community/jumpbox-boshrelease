@@ -9,24 +9,13 @@ update:
   serial: false
 
 jobs:
-  - name: jumpbox_leader_z1
-    template: jumpbox
-    instances: 0
-    resource_pool: small_z1
-    networks: (( merge ))
-    persistent_disk: 0
-    properties: {}
   - name: jumpbox_z1
     template: jumpbox
     instances: 0
     resource_pool: small_z1
     networks: (( merge ))
-    persistent_disk: 0
-    update:
-      canaries: 10
-    properties:
-      jumpbox:
-        leader_address: (( merge ))
+    persistent_disk: 10240
+    properties: {}
 
 networks: (( merge ))
 

@@ -1,13 +1,8 @@
 ---
 name: jumpbox
-packages: []
+packages:
+- ruby-2.1.6
+- jumpbox
 templates:
-  bin/monit_debugger: bin/monit_debugger
   bin/jumpbox_ctl: bin/jumpbox_ctl
-  config/jumpbox.conf.erb: config/jumpbox.conf
-  data/properties.sh.erb: data/properties.sh
-  helpers/ctl_setup.sh: helpers/ctl_setup.sh
-  helpers/ctl_utils.sh: helpers/ctl_utils.sh
-properties:
-  jumpbox.leader_address:
-    description: Hostname/IP to the leader/master of the cluster
+properties: {}

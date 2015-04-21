@@ -9,19 +9,12 @@ meta:
     version: latest
 
 jobs:
-  - name: jumpbox_leader_z1
+  - name: jumpbox_z1
     instances: 1
     networks:
       - name: jumpbox1
     persistent_disk: (( meta.persistent_disk ))
-  - name: jumpbox_z1
-    instances: 2
-    networks:
-      - name: jumpbox1
-    persistent_disk: (( meta.persistent_disk ))
-    properties:
-      jumpbox:
-        leader_address: (( "0.jumpbox-leader-z1.jumpbox1." meta.environment "." meta.dns_root ))
+
 
 compilation:
   cloud_properties:
