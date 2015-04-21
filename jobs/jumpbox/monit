@@ -1,0 +1,5 @@
+check process jumpbox
+  with pidfile /var/vcap/sys/run/jumpbox/jumpbox.pid
+  start program "/var/vcap/jobs/jumpbox/bin/monit_debugger jumpbox_ctl '/var/vcap/jobs/jumpbox/bin/jumpbox_ctl start'"
+  stop program "/var/vcap/jobs/jumpbox/bin/monit_debugger jumpbox_ctl '/var/vcap/jobs/jumpbox/bin/jumpbox_ctl stop'"
+  group vcap
