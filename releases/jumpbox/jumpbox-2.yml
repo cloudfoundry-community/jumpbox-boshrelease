@@ -1,0 +1,32 @@
+---
+packages:
+- name: jumpbox
+  version: 75e8d98e3e75c8147fa8e8a9b293b3715a667ca0
+  fingerprint: 75e8d98e3e75c8147fa8e8a9b293b3715a667ca0
+  sha1: 37c552d57970a6a858a6a0a4bd2b6b81ac05891d
+  dependencies:
+  - ruby-2.1.6
+  - sqlite
+- name: ruby-2.1.6
+  version: fcc91ffcd6664719c89f259e635cb13a8f8c494f
+  fingerprint: fcc91ffcd6664719c89f259e635cb13a8f8c494f
+  sha1: 9edae53ccb14349b2d7e7aab8d85619d52801a24
+  dependencies: []
+- name: sqlite
+  version: 1d78c1850cf24af00eb38ba9696a50a74529b905
+  fingerprint: 1d78c1850cf24af00eb38ba9696a50a74529b905
+  sha1: 5fbbfc42cc373d028aea2a5eae958edd2a35be3e
+  dependencies: []
+jobs:
+- name: jumpbox
+  version: 20dc2d115abf65987ec8b508306fd256c230b87a
+  fingerprint: 20dc2d115abf65987ec8b508306fd256c230b87a
+  sha1: 11c60c0d80db8ae1803b99041e724ea57c37840d
+license:
+  version: a00ab0d4170cb74ed8f464700c229556099d14b8
+  fingerprint: a00ab0d4170cb74ed8f464700c229556099d14b8
+  sha1: 793c69b8e755bd63916a9c9ac99bb02d74764c3b
+commit_hash: bfec3e2d
+uncommitted_changes: true
+name: jumpbox
+version: '2'
