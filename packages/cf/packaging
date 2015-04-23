@@ -1,0 +1,4 @@
+set -e
+
+unzip spiff/spiff_linux_amd64.zip -d ${BOSH_INSTALL_TARGET}
+tar xvf cf/cf-linux-amd64.tgz -C ${BOSH_INSTALL_TARGET}

@@ -21,10 +21,12 @@ case $1 in
     touch /var/vcap/sys/run/.jumpbox_test
 
     mkdir -p $HOME_DIR/tmp
+    chown vcap:vcap $HOME_DIR/tmp
 
     assure_string_in_file /etc/passwd "vcap:x:1000:1000:BOSH System User:/home/vcap:/bin/bash" "vcap:x:1000:1000:BOSH System User:/var/vcap/store/jumpbox/home:/bin/bash"
 
     mkdir -p $HOME_DIR/.ssh
+    chown vcap:vcap $HOME_DIR/.ssh
     if [ ! -e $HOME_DIR/.ssh/authorized_keys ]; then
       cp /home/vcap/.ssh/authorized_keys $HOME_DIR/.ssh/authorized_keys
       chown vcap:vcap $HOME_DIR/.ssh/authorized_keys
@@ -33,7 +35,7 @@ case $1 in
 
 
     if [ ! -e /etc/profile.d/bosh.sh ]; then
-      echo 'export PATH=/var/vcap/packages/jumpbox/bin:/var/vcap/packages/ruby-2.1.6/bin:$PATH' >> /etc/profile.d/bosh.sh
+      echo 'export PATH=/var/vcap/packages/jumpbox/bin:/var/vcap/packages/ruby-2.1.6/bin:/var/vcap/packages/cf:$PATH' >> /etc/profile.d/bosh.sh
       echo "export TMPDIR=$HOME_DIR/tmp" >> /etc/profile.d/bosh.sh
       chmod +x /etc/profile.d/bosh.sh
     fi

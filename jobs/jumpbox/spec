@@ -3,6 +3,7 @@ name: jumpbox
 packages:
 - ruby-2.1.6
 - jumpbox
+- cf
 templates:
   bin/jumpbox_ctl: bin/jumpbox_ctl
 properties: {}
