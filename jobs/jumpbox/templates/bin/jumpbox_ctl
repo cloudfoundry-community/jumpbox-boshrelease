@@ -35,7 +35,7 @@ case $1 in
 
 
     if [ ! -e /etc/profile.d/bosh.sh ]; then
-      echo 'export PATH=/var/vcap/packages/jumpbox/bin:/var/vcap/packages/ruby-2.1.6/bin:/var/vcap/packages/cf:$PATH' >> /etc/profile.d/bosh.sh
+      echo 'export PATH=/var/vcap/packages/jumpbox/bosh/bin:/var/vcap/packages/jumpbox/cf-uaac/bin:/var/vcap/packages/ruby-2.1.6/bin:/var/vcap/packages/cf:$PATH' >> /etc/profile.d/bosh.sh
       echo "export TMPDIR=$HOME_DIR/tmp" >> /etc/profile.d/bosh.sh
       chmod +x /etc/profile.d/bosh.sh
     fi
