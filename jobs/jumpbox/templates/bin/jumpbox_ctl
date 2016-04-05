@@ -1,5 +1,5 @@
 #!/bin/bash
-exec </dev/null >>/var/vcap/sys/log/shell.log 2>&1
+exec </dev/null >>/var/vcap/sys/log/jumpbox.log 2>&1
 
 log() {
   echo >&2 "[$(date +'%Y%m%d %HH%MM.%SS')] jumpbox/setup[$$]: " $*
