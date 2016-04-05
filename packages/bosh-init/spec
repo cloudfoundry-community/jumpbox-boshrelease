@@ -1,0 +1,5 @@
+---
+name: bosh-init
+dependencies: []
+files:
+- bosh-init/bosh-init

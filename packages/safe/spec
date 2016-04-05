@@ -1,0 +1,5 @@
+---
+name: safe
+dependencies: []
+files:
+- safe/safe

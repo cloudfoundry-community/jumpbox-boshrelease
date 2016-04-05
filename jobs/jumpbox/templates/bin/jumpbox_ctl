@@ -1,44 +1,124 @@
 #!/bin/bash
+exec </dev/null >>/var/vcap/sys/log/shell.log 2>&1
 
-HOME_DIR=/var/vcap/store/jumpbox/home
-
-assure_string_in_file() {
-  assurefilename=$1
-  assuresearchString=$2
-  assurereplaceString=$3
-
-  re="s#^.*$assuresearchString.*#$assurereplaceString#"
-  sed -i "${re}" "$assurefilename"
-  (( "$?" == "0" )) ||
-  echo "Could not execute execute sed command replace $assuresearchString with $assurereplaceString in file $assurefilename, terminating install."
+log() {
+  echo >&2 "[$(date +'%Y%m%d %HH%MM.%SS')] jumpbox/setup[$$]: " $*
 }
 
+global_go=/usr/local/go
+
+newuser() {
+  user=$1         ; shift
+  shell=$1        ; shift
+  repo=$1         ; shift
+  setup_script=$1 ; shift
+
+  home="/var/vcap/store/jumpbox/home/${user}"
+  [ -z ${shell} ] && shell="/bin/bash"
+
+  log "Setting up user ${user}"
+  if ! grep -q "^${user}:" /etc/passwd; then
+    log "User ${user} does not exist; adding"
+    /usr/sbin/useradd -m -d ${home} -s ${shell} ${user}
+  fi
+
+  log "Setting up sudoers access for ${user}"
+  if ! grep -q "^${user} " /etc/sudoers; then
+    log "Access not found; configuring ${user} with NOPASSWD:ALL access"
+    (echo; echo "${user} ALL=(ALL:ALL) NOPASSWD:ALL") >> /etc/sudoers
+    chmod 0400 /etc/sudoers
+  fi
+
+  if [[ $# -gt 0 ]]; then
+    log "Setting up ${user} SSH authorized keys"
+    mkdir -p ${home}/.ssh
+    chmod 0700 ${home}/.ssh
+    touch ${home}/.ssh/authorized_keys
+    for key in "$@"; do
+      if ! grep -q "^$key$" ${home}/.ssh/authorized_keys; then
+        echo "$key" >> ${home}/.ssh/authorized_keys
+      fi
+    done
+  fi
+  chown -R ${user} ${home}
+
+  if [[ -n "${repo}" ]]; then
+    log "Setting up ${user} environment"
+    if [[ ! -d ${home}/env ]]; then
+      log "Environment repo ${home}/env not found; cloning from upstream"
+      git clone ${repo} ${home}/env
+
+      log "Running install script from inside of ${home}/env, as ${user} with HOME=${home}"
+      (cd ${home}/env
+       export HOME=${home}
+       export USER=${user}
+       [ -x ./install ] && ./install || true)
+
+      log "Running setup script ('${setup_script}') from inside of ${home}/env, as ${user} with HOME=${home}"
+      (sudo -iu ${user} bash -c "[ -x ${setup_script} ] && ${setup_script} || true" )
+
+      log "Setting up golang for ${user}"
+      mkdir ${home}/go
+      cat >>${home}/.bashrc << EOF
+export GOPATH=${home}/go
+export PATH=\${PATH}:${global_go}/bin:\${GOPATH}/bin
+EOF
+    fi
+  fi
+
+  chown -R ${user} ${home}
+}
+
+set -e
 case $1 in
 
   start)
-    mkdir -p $HOME_DIR
-    chown vcap:vcap $HOME_DIR
+    log "Installing/Updating system packages we desire"
+    apt-get update
+    DEBIAN_FRONTEND=noninteractive apt-get install -y jq git tree tmux pwgen unzip telnet wget curl sqlite3
+
+    log "Creating persistent home container"
+    mkdir -p /var/vcap/store/jumpbox/home
+    log "Fixing permissions on /tmp"
+    chmod 1777 /tmp
+
+    log "Installing go to ${global_go}"
+    if [[ ! -e ${global_go} ]]; then
+        ln -s /var/vcap/packages/golang ${global_go}
+    fi
+
+    log "Installing common utilities to /usr/local/bin"
+    cp /var/vcap/packages/cf/bin/cf /usr/local/bin/cf
+    cp /var/vcap/packages/spruce/bin/spruce /usr/local/bin/spruce
+    cp /var/vcap/packages/genesis/bin/genesis /usr/local/bin/genesis
+    cp /var/vcap/packages/shield/bin/shield /usr/local/bin/shield
+    cp /var/vcap/packages/bosh-init/bin/bosh-init /usr/local/bin/bosh-init
+    cp /var/vcap/packages/yaml2json/bin/yaml2json /usr/local/bin/yaml2json
+    cp /var/vcap/packages/safe/bin/safe /usr/local/bin/safe
+    cp /var/vcap/packages/vault/bin/vault /usr/local/bin/vault
+    cp /var/vcap/packages/spiff/bin/spiff /usr/local/bin/spiff
+
+    log "Setting hostname to <%= p('jumpbox.hostname') %>"
+    echo "<%= p('jumpbox.hostname') %>" > /etc/hostname
+    hostname -b -F /etc/hostname
+
+    log "Setting up /etc/hosts"
+<% p('jumpbox.hosts').each do |line| %>
+    if ! grep -q '^<%= line %>$' /etc/hosts; then
+        echo "<%= line %>" >> /etc/hosts
+    fi
+<% end %>
+
+<% p('jumpbox.users').each do |user| %>
+# jumpbox.users[<%= user['name'] %>
+    newuser "<%= user['name'] %>" \
+        "<%= user['shell'] %>" \
+        "<%= user['env'] %>" \
+        "<%= user['setup_script'] %>"<% if !(user['ssh_keys'] || []).empty? %> \<% end %>
+       <% (user['ssh_keys'] || []).each do |k| %> "<%= k %>"<% end %>
+<% end %>
+
     touch /var/vcap/sys/run/.jumpbox_test
-
-    mkdir -p $HOME_DIR/tmp
-    chown vcap:vcap $HOME_DIR/tmp
-
-    assure_string_in_file /etc/passwd "vcap:x:1000:1000:BOSH System User:/home/vcap:/bin/bash" "vcap:x:1000:1000:BOSH System User:/var/vcap/store/jumpbox/home:/bin/bash"
-
-    mkdir -p $HOME_DIR/.ssh
-    chown vcap:vcap $HOME_DIR/.ssh
-    if [ ! -e $HOME_DIR/.ssh/authorized_keys ]; then
-      cp /home/vcap/.ssh/authorized_keys $HOME_DIR/.ssh/authorized_keys
-      chown vcap:vcap $HOME_DIR/.ssh/authorized_keys
-      chmod 600 $HOME_DIR/.ssh/authorized_keys
-    fi
-
-
-    if [ ! -e /etc/profile.d/bosh.sh ]; then
-      echo 'export PATH=/var/vcap/packages/jumpbox/bosh/bin:/var/vcap/packages/jumpbox/cf-uaac/bin:/var/vcap/packages/ruby-2.1.6/bin:/var/vcap/packages/cf:$PATH' >> /etc/profile.d/bosh.sh
-      echo "export TMPDIR=$HOME_DIR/tmp" >> /etc/profile.d/bosh.sh
-      chmod +x /etc/profile.d/bosh.sh
-    fi
     ;;
 
   stop)

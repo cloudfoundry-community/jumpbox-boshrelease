@@ -1,7 +1,0 @@
----
-name: jumpbox
-dependencies:
-- ruby-2.1.6
-- sqlite
-files:
-- jumpbox/**/*

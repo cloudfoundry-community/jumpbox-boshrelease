@@ -8,7 +8,7 @@ CPUS=$(grep -c ^processor /proc/cpuinfo)
 # $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
 export HOME=/var/vcap
 
-BIN=cf
+BIN=bosh-init
 mkdir ${BOSH_INSTALL_TARGET}/bin
-tar -xzf ${BIN}/${BIN}.tgz -C ${BOSH_INSTALL_TARGET}/bin
+cp ${BIN}/${BIN} ${BOSH_INSTALL_TARGET}/bin
 chmod 755 ${BOSH_INSTALL_TARGET}/bin/${BIN}
