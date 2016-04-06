@@ -1,9 +1,36 @@
 ---
 name: jumpbox
 packages:
-- ruby-2.1.6
-- jumpbox
+- ruby-gems
 - cf
+- spruce
+- genesis
+- safe
+- yaml2json
+- golang
+- bosh-init
+- shield
+- spiff
+- vault
 templates:
   bin/jumpbox_ctl: bin/jumpbox_ctl
-properties: {}
+properties:
+  jumpbox.hostname:
+    description: "Hostname to set on the jumpbox"
+    default: "jumpbox.local"
+
+  jumpbox.hosts:
+    description: "A list of entries to append to /etc/hosts"
+    default: []
+
+  jumpbox.users:
+    default: []
+    description: |-
+      List of users to create
+      - name: jhunt
+        shell: /bin/bash
+        env: https://github.com/jhunt/devbox-env.git  # specifies a git environment to clone
+        setup_script: /path/to/setup/script           # runs a script as the user, after cloning the above repo
+        ssh_keys:
+          - ssh-rsa AAAAB3NzaC1yabcd
+          - ssh-rsa AAAAB3NzaC1y1234

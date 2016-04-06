@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# install RVM
+if [[ ! -f ~/.rvmrc ]]; then
+	echo rvm_silence_path_mismatch_check_flag=1 > ~/.rvmrc
+fi
+if [[ -z "$(command -v rvm)" ]]; then
+	gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+	curl -sSL https://get.rvm.io | bash -s stable --ruby
+
+	source ~/.rvm/scripts/rvm
+	source ~/.bashrc
+fi
+
+# install ruby
+
+rvm install ruby-2.3
+
+gem install --no-ri --no-rdoc bosh_cli bosh-workspace cf-uaac

@@ -1,5 +1,4 @@
 ---
 name: cf
 files:
-- spiff/*
-- cf/*
+- cf/cf.tgz
