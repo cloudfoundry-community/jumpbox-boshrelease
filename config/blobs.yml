@@ -1,1 +1,33 @@
---- {}
+---
+bosh-init/bosh-init:
+  object_id: f632546f-e503-42e8-a48f-125a69f30847
+  sha: 16f8f7705748f8ef349d2a1d0e54c9bc463b24b2
+  size: 13065056
+cf/cf.tgz:
+  object_id: f8c4f9a2-7767-4909-840a-fa55ec0c3f5b
+  sha: ad1782a564c5bf47270e1bfbe0fdd1298394a1d0
+  size: 6104120
+genesis/genesis:
+  object_id: f2ddac32-4f03-4100-bbbc-93a4d81a287a
+  sha: 2293ac17d64339a757c8fc723c02a33777049ae2
+  size: 62385
+golang_1.5/go1.5.3.linux-amd64.tar.gz:
+  object_id: 5d8b0264-6ad9-405e-961f-4449dd9a180f
+  sha: c5377eca4837968d043b681f00a852a262f0f5f6
+  size: 80147269
+shield/shield:
+  object_id: 0a9aad0f-e1e4-401d-9d72-0312a48b384f
+  sha: 34d3dd2619ab3daa5639791caa6c8e70d842a6f2
+  size: 8175536
+spiff/spiff:
+  object_id: e0038f67-ce28-4164-a73c-8337cd0969f1
+  sha: 7489aa87ad7f5b3b774fc8a03ccda65860b1374c
+  size: 5063744
+spruce/spruce:
+  object_id: 4409a63f-1d7b-4675-a4e5-8801c073add9
+  sha: 30d726a971715788211c221ad1274e13c9947f33
+  size: 9190008
+vault/vault.gz:
+  object_id: 67ac8265-b123-47e5-8f9b-abe72de9bbc7
+  sha: c4d9ec11309877885bab68d3a1df6c80f63a8159
+  size: 8966609
