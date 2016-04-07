@@ -75,7 +75,7 @@ case $1 in
   start)
     log "Installing/Updating system packages we desire"
     apt-get update
-    DEBIAN_FRONTEND=noninteractive apt-get install -y jq git tree tmux pwgen unzip telnet wget curl sqlite3
+    DEBIAN_FRONTEND=noninteractive apt-get install -y jq git tree tmux pwgen unzip telnet wget curl sqlite3 vim
 
     log "Creating persistent home container"
     mkdir -p /var/vcap/store/jumpbox/home
