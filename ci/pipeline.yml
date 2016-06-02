@@ -47,6 +47,8 @@ groups:
       - testflight
       - rc
       - shipit
+      - bump-blobs
+      - create-boshrelease
       - major
       - minor
 
@@ -119,13 +121,14 @@ jobs:
         run:
           path: ./git/ci/scripts/update-blob
         params:
-          REPO_ROOT: git
-          REPO_OUT: pushme
-          RELEASE_DIR: spruce
-          BLOB_BINARY: spruce-linux-amd64
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          RELEASE_DIR:      spruce
+          BLOB:             spruce
+          BLOB_BINARY:      spruce-linux-amd64
           BLOB_DESTINATION: spruce/spruce
-          AWS_ACCESS_KEY:       (( grab meta.aws.access_key ))
-          AWS_SECRET_KEY:       (( grab meta.aws.secret_key ))
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
     - put: git
       params:
         rebase: true

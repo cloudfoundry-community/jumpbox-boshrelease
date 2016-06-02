@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 if [[ -z ${RELEASE_DIR} ]]; then
   echo >&2 "RELEASE_DIR envrionment variable not set, or empty. Did you misconfigure Concourse?"
 fi
@@ -15,9 +17,9 @@ fi
 
 VERSION=$(cat ${RELEASE_DIR}/version)
 
-cd ${REPO_ROOT}
+pushd ${REPO_ROOT}
 
-cat <<EOF >git/config/private.yml
+cat <<EOF >config/private.yml
 ---
 blobstore:
   s3:
@@ -25,6 +27,7 @@ blobstore:
     secret_access_key: ${AWS_SECRET_KEY}
 EOF
 
+mkdir -p blobs/$(dirname ${BLOB_DESTINATION})
 cp ../${RELEASE_DIR}/${BLOB_BINARY} blobs/${BLOB_DESTINATION}
 bosh upload blobs
 rm config/private.yml
@@ -34,6 +37,7 @@ cat <<EOF >>ci/release_notes.md
 ##### ${BLOB}
 Bumped ${BLOB} to v${VERSION}
 EOF
+popd
 
 # GIT!
 if [[ -z $(git config --global user.email) ]]; then
