@@ -29,7 +29,7 @@ EOF
 
 mkdir -p blobs/$(dirname ${BLOB_DESTINATION})
 cp ../${RELEASE_DIR}/${BLOB_BINARY} blobs/${BLOB_DESTINATION}
-bosh upload blobs
+bosh -n upload blobs
 rm config/private.yml
 
 cat <<EOF >>ci/release_notes.md
