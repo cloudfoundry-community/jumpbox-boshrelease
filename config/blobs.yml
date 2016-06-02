@@ -8,9 +8,9 @@ cf/cf.tgz:
   sha: ad1782a564c5bf47270e1bfbe0fdd1298394a1d0
   size: 6104120
 genesis/genesis:
-  object_id: f2ddac32-4f03-4100-bbbc-93a4d81a287a
-  sha: 2293ac17d64339a757c8fc723c02a33777049ae2
-  size: 62385
+  object_id: 26101b6a-129b-467b-bde7-18562505a262
+  sha: a5ff3be7f2daec6bd00a77efb14aec7ba4a99c56
+  size: 85932
 golang_1.5/go1.5.3.linux-amd64.tar.gz:
   object_id: 5d8b0264-6ad9-405e-961f-4449dd9a180f
   sha: c5377eca4837968d043b681f00a852a262f0f5f6
