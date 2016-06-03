@@ -14,6 +14,7 @@
 meta:
   name:     (( param "Please name your pipeline" ))
   target:   (( param "Please identify the name of the target Concourse CI" ))
+  url:      (( param "Please specify the full url of the target Concourse CI" ))
   pipeline: (( grab meta.name ))
 
   aws:
@@ -36,7 +37,10 @@ meta:
 
   slack:
     webhook:       (( param "Please specify your Slack Incoming Webhook Integration URL" ))
-    notification: '(( concat ":sadpanda: " meta.name " build failed!<br>URL-GOES-HERE" ))'
+    blob_failure:  '(( concat ":concourse-fail: <" meta.url "/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME| Failed to update the blob for $BUILD_JOB_NAME>" ))'
+    build_failure: '(( concat ":concourse-fail: <" meta.url "/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME| Failed to ship a new bosh release. :sad-panda:>" ))'
+    blob_success:  '(( concat "New version of $BUILD_JOB_NAME was detected, and updated in master. <" meta.url "/pipelines/$BUILD_PIPELINE_NAME| Cut a new release?>" ))'
+    test_failure:  '(( concat ":concourse-fail: <" meta.url "/pipelines/$BUILD_PIPELINE_NAME/jos/$BUILD_JOB_NAME/builds/$BUILD_NAME| Tests failed!>" ))'
     channel:       (( param "Please specify the channel (#name) or user (@user) to send messages to" ))
     username:      concourse
     icon:          http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
@@ -78,6 +82,13 @@ jobs:
             BOSH_LITE_USERNAME:   (( grab meta.bosh-lite.username ))
             BOSH_LITE_PASSWORD:   (( grab meta.bosh-lite.password ))
             BOSH_LITE_DEPLOYMENT: (( concat "ci-" meta.name ))
+        on_failure:
+          put: notify
+          params:
+            channel:  (( grab meta.slack.channel ))
+            username: (( grab meta.slack.username ))
+            icon_url: (( grab meta.slack.icon ))
+            text:     (( grab meta.slack.test_failure ))
 
   - name: rc
     public: true
@@ -135,6 +146,13 @@ jobs:
 
             AWS_ACCESS_KEY:       (( grab meta.aws.access_key ))
             AWS_SECRET_KEY:       (( grab meta.aws.secret_key ))
+        on_failure:
+          put: notify
+          params:
+            channel:  (( grab meta.slack.channel ))
+            username: (( grab meta.slack.username ))
+            icon_url: (( grab meta.slack.icon ))
+            text:     (( grab meta.slack.test_failure ))
 
       - aggregate:
         - put: version
@@ -144,12 +162,26 @@ jobs:
           params:
             rebase: true
             repository: pushme/git
+          on_failure:
+            put: notify
+            params:
+              channel:  (( grab meta.slack.channel ))
+              username: (( grab meta.slack.username ))
+              icon_url: (( grab meta.slack.icon ))
+              text:     (( grab meta.slack.test_failure ))
         - put: github
           params:
             name:   gh/name
             tag:    gh/tag
             body:   gh/notes.md
             globs: [gh/artifacts/*]
+          on_failure:
+            put: notify
+            params:
+              channel:  (( grab meta.slack.channel ))
+              username: (( grab meta.slack.username ))
+              icon_url: (( grab meta.slack.icon ))
+              text:     (( grab meta.slack.test_failure ))
         - put: s3
           params:
             from:  gh/artifacts/.*-(.*).tgz
@@ -181,10 +213,31 @@ jobs:
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
           AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
           BRANCH:       (( grab meta.github.branch ))
+      on_failure:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_failure ))
     - put: git
       params:
         rebase: true
         repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_success ))
+      on_failure:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_failure ))
   - name: genesis
     public: true
     plan:
@@ -212,11 +265,24 @@ jobs:
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
           AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
           BRANCH:       (( grab meta.github.branch ))
+      on_failure:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_failure ))
     - put: git
       params:
         rebase: true
         repository: pushme/git
-
+      on_failure:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_failure ))
   - name: safe
     public: true
     plan:
@@ -244,10 +310,31 @@ jobs:
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
           AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
           BRANCH:       (( grab meta.github.branch ))
+      on_failure:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_failure ))
     - put: git
       params:
         rebase: true
         repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_success ))
+      on_failure:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_failure ))
 
 resource_types:
   - name: slack-notification

@@ -1,6 +1,7 @@
 ---
 meta:
   name: jumpbox-boshrelease
+  url: https://ci.vsphere.starkandwayne.com/
   target: sw
   aws:
     access_key: (( vault "secret/aws/cfcommunity:access" ))
