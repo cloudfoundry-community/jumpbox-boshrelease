@@ -53,6 +53,7 @@ groups:
     jobs:
     - spruce
     - genesis
+    - safe
 
 jobs:
   - name: testflight
@@ -216,6 +217,37 @@ jobs:
         rebase: true
         repository: pushme/git
 
+  - name: safe
+    public: true
+    plan:
+    - aggregate:
+      - { get: git }
+      - { get: safe, trigger: true }
+    - task: update-safe
+      config:
+        image: docker:///starkandwayne/concourse
+        platform: linux
+        inputs:
+        - name: git
+        - name: safe
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          RELEASE_DIR:      safe
+          BLOB:             safe
+          BLOB_BINARY:      safe-linux-amd64
+          BLOB_DESTINATION: safe/safe
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:       (( grab meta.github.branch ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
 
 resource_types:
   - name: slack-notification
@@ -285,4 +317,11 @@ resources:
     source:
       user: starkandwayne
       repository: genesis
+      access_token: (( grab meta.github.access_token ))
+
+  - name: safe
+    type: github-release
+    source:
+      user: jhunt
+      repository: safe
       access_token: (( grab meta.github.access_token ))
