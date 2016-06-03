@@ -33,7 +33,7 @@ bosh -n upload blobs
 rm config/private.yml
 popd
 
-if [[ -n "$(git status --porcelain)" ]]; then
+if [[ -n "$(cd ${REPO_ROOT}; git status --porcelain)" ]]; then
   pushd ${REPO_ROOT}
   cat <<EOF >>ci/release_notes.md
 
