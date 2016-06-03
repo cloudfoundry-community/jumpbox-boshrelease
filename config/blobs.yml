@@ -24,9 +24,9 @@ spiff/spiff:
   sha: 7489aa87ad7f5b3b774fc8a03ccda65860b1374c
   size: 5063744
 spruce/spruce:
-  object_id: 6f55ff22-2ccb-47b7-beef-45b7e3d777e3
-  sha: 416cb210191450996af96ab65ea3221892fa5f78
-  size: 9304352
+  object_id: 7e177c89-5d4b-4452-8e2c-373c147726e6
+  sha: f095f0d26572224d87a108c6344334bb6befbfbb
+  size: 9304360
 vault/vault.gz:
   object_id: 67ac8265-b123-47e5-8f9b-abe72de9bbc7
   sha: c4d9ec11309877885bab68d3a1df6c80f63a8159
