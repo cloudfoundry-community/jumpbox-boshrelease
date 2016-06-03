@@ -47,10 +47,12 @@ groups:
       - testflight
       - rc
       - shipit
-      - bump-blobs
-      - create-boshrelease
       - major
       - minor
+  - name: blobs
+    jobs:
+    - spruce
+    - genesis
 
 jobs:
   - name: testflight
@@ -99,48 +101,11 @@ jobs:
 
   - name: shipit
     public: true
-    plan:
-    - aggregate:
-      - { get: git, passed: [rc] }
-
-  - name: bump-blobs
-    public: true
-    plan:
-    - aggregate:
-      - { get: git, passed: [shipit], trigger: true }
-      - { get: spruce, trigger: true }
-    - task: update-spruce
-      config:
-        image: docker:///starkandwayne/concourse
-        platform: linux
-        inputs:
-        - name: git
-        - name: spruce
-        outputs:
-        - name: pushme
-        run:
-          path: ./git/ci/scripts/update-blob
-        params:
-          REPO_ROOT:        git
-          REPO_OUT:         pushme
-          RELEASE_DIR:      spruce
-          BLOB:             spruce
-          BLOB_BINARY:      spruce-linux-amd64
-          BLOB_DESTINATION: spruce/spruce
-          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
-          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
-    - put: git
-      params:
-        rebase: true
-        repository: pushme/git
-
-  - name: create-boshrelease
-    public: true
     serial: true
     plan:
       - aggregate:
           - { get: version, passed: [rc], params: {bump: final} }
-          - { get: git,     passed: [bump-blobs], trigger: true }
+          - { get: git,     passed: [rc] }
       - task: release
         config:
           image: docker:///starkandwayne/concourse
@@ -187,6 +152,70 @@ jobs:
         - put: s3
           params:
             from:  gh/artifacts/.*-(.*).tgz
+
+  - name: spruce
+    public: true
+    plan:
+    - aggregate:
+      - { get: git }
+      - { get: spruce, trigger: true }
+    - task: update-spruce
+      config:
+        image: docker:///starkandwayne/concourse
+        platform: linux
+        inputs:
+        - name: git
+        - name: spruce
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          RELEASE_DIR:      spruce
+          BLOB:             spruce
+          BLOB_BINARY:      spruce-linux-amd64
+          BLOB_DESTINATION: spruce/spruce
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:       (( grab meta.github.branch ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+  - name: genesis
+    public: true
+    plan:
+    - aggregate:
+      - { get: git }
+      - { get: genesis, trigger: true }
+    - task: update-genesis
+      config:
+        image: docker:///starkandwayne/concourse
+        platform: linux
+        inputs:
+        - name: git
+        - name: genesis
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          RELEASE_DIR:      genesis
+          BLOB:             genesis
+          BLOB_BINARY:      genesis
+          BLOB_DESTINATION: genesis/genesis
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:       (( grab meta.github.branch ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+
 
 resource_types:
   - name: slack-notification
@@ -249,4 +278,11 @@ resources:
     source:
       user: geofffranks
       repository: spruce
+      access_token: (( grab meta.github.access_token ))
+
+  - name: genesis
+    type: github-release
+    source:
+      user: starkandwayne
+      repository: genesis
       access_token: (( grab meta.github.access_token ))
