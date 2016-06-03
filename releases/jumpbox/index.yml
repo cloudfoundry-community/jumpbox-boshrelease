@@ -14,4 +14,6 @@ builds:
     version: 4.0.3
   09f8a496-c36f-493e-890c-f5cff5e6cfb4:
     version: 4.0.4
+  5b6fab0b-af0f-4530-9f90-a329b188d728:
+    version: 4.0.5
 format-version: '2'

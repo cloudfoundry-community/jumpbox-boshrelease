@@ -1,0 +1,70 @@
+---
+packages:
+- name: bosh-init
+  version: 2d3c1455659e5b31d33058439810a241769f67b4
+  fingerprint: 2d3c1455659e5b31d33058439810a241769f67b4
+  sha1: 9cb7c482eb84b20bcf7ac4471d393d6ecf38a763
+  dependencies: []
+- name: cf
+  version: c9fd9d5db2a1528ff966cd68cb7af627d13cd6de
+  fingerprint: c9fd9d5db2a1528ff966cd68cb7af627d13cd6de
+  sha1: 9ebf2621b1aa093af7360f00ead4dd63d6a3dcfa
+  dependencies: []
+- name: genesis
+  version: b6edca84048d88c4e7403ac224326c4773df8fe5
+  fingerprint: b6edca84048d88c4e7403ac224326c4773df8fe5
+  sha1: 9e66d0820a211df375cce021a0b1fd003da964f3
+  dependencies: []
+- name: golang
+  version: 7bddc02ea4a7cc8f325253cea9dbe01ab6ea8129
+  fingerprint: 7bddc02ea4a7cc8f325253cea9dbe01ab6ea8129
+  sha1: 8a38a65a4115ebcb8a9e5d931b2355dd91481ded
+  dependencies: []
+- name: ruby-gems
+  version: 17f5bc29e65ddeb73ec29afb6b4e37c5bec3b855
+  fingerprint: 17f5bc29e65ddeb73ec29afb6b4e37c5bec3b855
+  sha1: 6d58ef8d86d0b043674f822e073303be9546b858
+  dependencies: []
+- name: safe
+  version: baf6d60f487db0711a1278bc7e7cbd33b78db3b2
+  fingerprint: baf6d60f487db0711a1278bc7e7cbd33b78db3b2
+  sha1: 7ca024bff23ab30bd59d973ae2ade56a465cfc7c
+  dependencies: []
+- name: shield
+  version: 4f06b4fb194aff6536112c67faea3ad5305aec16
+  fingerprint: 4f06b4fb194aff6536112c67faea3ad5305aec16
+  sha1: fdcec08b1bce7e2e75b62fe3812abacc994005f3
+  dependencies: []
+- name: spiff
+  version: 12ae5af612be8ca6aeef58bf41d8301cc955370c
+  fingerprint: 12ae5af612be8ca6aeef58bf41d8301cc955370c
+  sha1: 976176298fea314336682491b98c21beca08447f
+  dependencies: []
+- name: spruce
+  version: d4fd8f21cd395b1cf79d267162bd8859977ddc23
+  fingerprint: d4fd8f21cd395b1cf79d267162bd8859977ddc23
+  sha1: 007ed4cafe774bd648790740b2a2be6ecfc9cd14
+  dependencies: []
+- name: vault
+  version: f7f89f54928a9d4759552bdde04369831cda9772
+  fingerprint: f7f89f54928a9d4759552bdde04369831cda9772
+  sha1: d51c849a96f17695ad9cf266127518536d07f480
+  dependencies: []
+- name: yaml2json
+  version: 312414234cde359af708495728d635e50a96189d
+  fingerprint: 312414234cde359af708495728d635e50a96189d
+  sha1: 6c45c2089814c238a198c1da8da74cc4ecd3e9e8
+  dependencies: []
+jobs:
+- name: jumpbox
+  version: 19ae9d821ec132c994e7b0b70f6c97f66f74e9ce
+  fingerprint: 19ae9d821ec132c994e7b0b70f6c97f66f74e9ce
+  sha1: b2631f3a337d1d1f08f994f4197cd988421605ac
+license:
+  version: a00ab0d4170cb74ed8f464700c229556099d14b8
+  fingerprint: a00ab0d4170cb74ed8f464700c229556099d14b8
+  sha1: 793c69b8e755bd63916a9c9ac99bb02d74764c3b
+commit_hash: 21012f61
+uncommitted_changes: true
+name: jumpbox
+version: 4.0.5
