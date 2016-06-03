@@ -31,27 +31,31 @@ mkdir -p blobs/$(dirname ${BLOB_DESTINATION})
 cp ../${RELEASE_DIR}/${BLOB_BINARY} blobs/${BLOB_DESTINATION}
 bosh -n upload blobs
 rm config/private.yml
-
-cat <<EOF >>ci/release_notes.md
-
-##### ${BLOB}
-Bumped ${BLOB} to v${VERSION}
-EOF
 popd
 
-# GIT!
-if [[ -z $(git config --global user.email) ]]; then
-  git config --global user.email "ci@starkandwayne.com"
-fi
-if [[ -z $(git config --global user.name) ]]; then
-  git config --global user.name "CI Bot"
-fi
+if [[ -n "$(git status --porcelain)" ]]; then
+  pushd ${REPO_ROOT}
+  cat <<EOF >>ci/release_notes.md
 
-(cd ${REPO_ROOT}
- git merge --no-edit ${BRANCH}
- git add -A
- git status
- git commit -m "Bumped ${BLOB} to v${VERSION}")
+  ##### ${BLOB}
+  Bumped ${BLOB} to v${VERSION}
+EOF
+  popd
+
+  # GIT!
+  if [[ -z $(git config --global user.email) ]]; then
+    git config --global user.email "ci@starkandwayne.com"
+  fi
+  if [[ -z $(git config --global user.name) ]]; then
+    git config --global user.name "CI Bot"
+  fi
+
+  (cd ${REPO_ROOT}
+   git merge --no-edit ${BRANCH}
+   git add -A
+   git status
+   git commit -m "Bumped ${BLOB} to v${VERSION}")
+fi
 
 # so that future steps in the pipeline can push our changes
 cp -a ${REPO_ROOT} ${REPO_OUT}
