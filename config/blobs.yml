@@ -1,8 +1,8 @@
 ---
 bosh-init/bosh-init:
-  object_id: f632546f-e503-42e8-a48f-125a69f30847
-  sha: 16f8f7705748f8ef349d2a1d0e54c9bc463b24b2
-  size: 13065056
+  object_id: 8a4aa22c-5118-4cb0-889e-962dbfbcd07e
+  sha: 7284ab6ac28289c6dafc6f3e4048564423aab77a
+  size: 14658552
 cf/cf.tgz:
   object_id: f8c4f9a2-7767-4909-840a-fa55ec0c3f5b
   sha: ad1782a564c5bf47270e1bfbe0fdd1298394a1d0
