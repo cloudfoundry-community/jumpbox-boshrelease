@@ -32,6 +32,6 @@ vault/vault.gz:
   sha: c4d9ec11309877885bab68d3a1df6c80f63a8159
   size: 8966609
 safe/safe:
-  object_id: 7b370b3f-1a18-4c0e-b9a4-96d0285df446
-  sha: 0975f0c724d54fb01b24356f55e6771c336267ce
-  size: 8575032
+  object_id: d0de2ed5-ca75-42e5-8b14-183f0fa0659b
+  sha: 73f3b381f79f4293d2dac955f6dee769ed4b6b57
+  size: 8622032
