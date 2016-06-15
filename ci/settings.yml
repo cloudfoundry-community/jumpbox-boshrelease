@@ -16,3 +16,185 @@ meta:
   slack:
     webhook: (( vault "secret/pipelines/jumpbox-boshrelease/slack:webhook" ))
     channel: "#cf-community-pipeline"
+    blob_success:  '(( concat "$BUILD_PIPELINE_NAME: New version of $BUILD_JOB_NAME was detected, and updated in master. <" meta.url "/pipelines/$BUILD_PIPELINE_NAME| Cut a new release?>" ))'
+    blob_failure:  '(( concat "$BUILD_PIPELINE_NAME: :concourse-fail: <" meta.url "/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME| Failed to update the blob for $BUILD_JOB_NAME>" ))'
+
+groups:
+  - name: blobs
+    jobs:
+    - spruce
+    - genesis
+    - safe
+
+jobs:
+  - name: spruce
+    public: true
+    plan:
+    - aggregate:
+      - { get: git }
+      - { get: spruce, trigger: true }
+    - task: update-spruce
+      config:
+        image: docker:///starkandwayne/concourse
+        platform: linux
+        inputs:
+        - name: git
+        - name: spruce
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          RELEASE_DIR:      spruce
+          BLOB:             spruce
+          BLOB_BINARY:      spruce-linux-amd64
+          BLOB_DESTINATION: spruce/spruce
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:       (( grab meta.github.branch ))
+      on_failure:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_failure ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_success ))
+      on_failure:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_failure ))
+  - name: genesis
+    public: true
+    plan:
+    - aggregate:
+      - { get: git }
+      - { get: genesis, trigger: true }
+    - task: update-genesis
+      config:
+        image: docker:///starkandwayne/concourse
+        platform: linux
+        inputs:
+        - name: git
+        - name: genesis
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          RELEASE_DIR:      genesis
+          BLOB:             genesis
+          BLOB_BINARY:      genesis
+          BLOB_DESTINATION: genesis/genesis
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:       (( grab meta.github.branch ))
+      on_failure:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_failure ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_failure:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_failure ))
+  - name: safe
+    public: true
+    plan:
+    - aggregate:
+      - { get: git }
+      - { get: safe, trigger: true }
+    - task: update-safe
+      config:
+        image: docker:///starkandwayne/concourse
+        platform: linux
+        inputs:
+        - name: git
+        - name: safe
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          RELEASE_DIR:      safe
+          BLOB:             safe
+          BLOB_BINARY:      safe-linux-amd64
+          BLOB_DESTINATION: safe/safe
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:       (( grab meta.github.branch ))
+      on_failure:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_failure ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_success ))
+      on_failure:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_failure ))
+
+resources:
+  - name: spruce
+    type: github-release
+    source:
+      user: geofffranks
+      repository: spruce
+      access_token: (( grab meta.github.access_token ))
+
+  - name: genesis
+    type: github-release
+    source:
+      user: starkandwayne
+      repository: genesis
+      access_token: (( grab meta.github.access_token ))
+
+  - name: safe
+    type: github-release
+    source:
+      user: jhunt
+      repository: safe
+      access_token: (( grab meta.github.access_token ))
