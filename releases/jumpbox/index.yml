@@ -20,4 +20,6 @@ builds:
     version: 4.0.6
   1f8c6d7c-8377-4c1f-9061-a440bfcb62d1:
     version: 4.0.7
+  f3f6057f-b1ef-4b08-bd0b-321c778e3e30:
+    version: 4.0.8
 format-version: '2'
