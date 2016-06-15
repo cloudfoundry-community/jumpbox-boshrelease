@@ -40,7 +40,7 @@ meta:
     blob_failure:  '(( concat ":concourse-fail: <" meta.url "/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME| Failed to update the blob for $BUILD_JOB_NAME>" ))'
     build_failure: '(( concat ":concourse-fail: <" meta.url "/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME| Failed to ship a new bosh release. :sad-panda:>" ))'
     blob_success:  '(( concat "New version of $BUILD_JOB_NAME was detected, and updated in master. <" meta.url "/pipelines/$BUILD_PIPELINE_NAME| Cut a new release?>" ))'
-    test_failure:  '(( concat ":concourse-fail: <" meta.url "/pipelines/$BUILD_PIPELINE_NAME/jos/$BUILD_JOB_NAME/builds/$BUILD_NAME| Tests failed!>" ))'
+    test_failure:  '(( concat ":concourse-fail: <" meta.url "/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME| Tests failed!>" ))'
     channel:       (( param "Please specify the channel (#name) or user (@user) to send messages to" ))
     username:      concourse
     icon:          http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
