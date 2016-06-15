@@ -1,6 +1,6 @@
 ---
 meta:
-  name: jumpbox-boshrelease
+  name: jumpbox
   url: https://ci.vsphere.starkandwayne.com/
   target: sw
   aws:
