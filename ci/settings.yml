@@ -13,11 +13,12 @@ meta:
     access_token: (( vault "secret/pipelines/jumpbox-boshrelease/github:token" ))
   bosh-lite:
     target: https://10.58.111.44:25555
+    deployment: jumpbox-warden
   slack:
     webhook: (( vault "secret/pipelines/jumpbox-boshrelease/slack:webhook" ))
     channel: "#cf-community-pipeline"
     blob_success:  '(( concat "$BUILD_PIPELINE_NAME: New version of $BUILD_JOB_NAME was detected, and updated in master. <" meta.url "/pipelines/$BUILD_PIPELINE_NAME| Cut a new release?>" ))'
-    blob_failure:  '(( concat "$BUILD_PIPELINE_NAME: :concourse-fail: <" meta.url "/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME| Failed to update the blob for $BUILD_JOB_NAME>" ))'
+    blob_failure:  '(( concat "$BUILD_PIPELINE_NAME: :airplane_arriving: <" meta.url "/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME| Failed to update the blob for $BUILD_JOB_NAME>" ))'
 
 groups:
   - name: blobs

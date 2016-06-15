@@ -13,6 +13,7 @@
 
 meta:
   name:     (( param "Please name your pipeline" ))
+  release:  (( grab meta.name ))
   target:   (( param "Please identify the name of the target Concourse CI" ))
   url:      (( param "Please specify the full url of the target Concourse CI" ))
   pipeline: (( concat meta.name "-boshrelease" ))
@@ -31,14 +32,15 @@ meta:
     access_token: (( param "Please generate a Personal Access Token to be used for creating github releases (do you have a ci-bot?)" ))
 
   bosh-lite:
-    target:   (( param "Please specify the BOSH target URI for the bosh-lite to run test deployments against" ))
-    username: admin
-    password: admin
+    target:     (( param "Please specify the BOSH target URI for the bosh-lite to run test deployments against" ))
+    deployment: (( param "Please specify the name of the local bosh-lite (warden) deployment" ))
+    username:   admin
+    password:   admin
 
   slack:
     webhook:       (( param "Please specify your Slack Incoming Webhook Integration URL" ))
-    build_failure: '(( concat "$BUILD_PIPELINE_NAME: :concourse-fail: <" meta.url "/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME| Failed to ship a new bosh release. :sad-panda:>" ))'
-    test_failure:  '(( concat "$BUILD_PIPELINE_NAME: :concourse-fail: <" meta.url "/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME| Tests failed!>" ))'
+    build_failure: '(( concat "$BUILD_PIPELINE_NAME: :airplane_arriving: <" meta.url "/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME| Failed to ship a new bosh release. :sad-panda:>" ))'
+    test_failure:  '(( concat "$BUILD_PIPELINE_NAME: :airplane_arriving: <" meta.url "/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME| Tests failed!>" ))'
     channel:       (( param "Please specify the channel (#name) or user (@user) to send messages to" ))
     username:      concourse
     icon:          http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
@@ -58,8 +60,7 @@ jobs:
     serial: true
     plan:
       - aggregate:
-          - { get: git }
-          - { get: changes, trigger: true }
+        - { get: git, trigger: true }
       - task: testflight
         config:
           platform: linux
@@ -74,7 +75,7 @@ jobs:
             BOSH_LITE_TARGET:     (( grab meta.bosh-lite.target ))
             BOSH_LITE_USERNAME:   (( grab meta.bosh-lite.username ))
             BOSH_LITE_PASSWORD:   (( grab meta.bosh-lite.password ))
-            BOSH_LITE_DEPLOYMENT: (( concat "ci-" meta.pipeline ))
+            BOSH_LITE_DEPLOYMENT: (( grab meta.bosh-lite.deployment ))
         on_failure:
           put: notify
           params:
@@ -127,7 +128,7 @@ jobs:
           params:
             REPO_ROOT:    git
             VERSION_FROM: version/number
-            RELEASE_NAME: (( concat meta.name " BOSH Release" ))
+            RELEASE_NAME: (( concat meta.release " BOSH Release" ))
             RELEASE_ROOT: gh
             REPO_OUT:     pushme
             BRANCH:       (( grab meta.github.branch ))
@@ -135,7 +136,7 @@ jobs:
             BOSH_LITE_TARGET:     (( grab meta.bosh-lite.target ))
             BOSH_LITE_USERNAME:   (( grab meta.bosh-lite.username ))
             BOSH_LITE_PASSWORD:   (( grab meta.bosh-lite.password ))
-            BOSH_LITE_DEPLOYMENT: (( concat "ci-" meta.pipeline ))
+            BOSH_LITE_DEPLOYMENT: (( grab meta.bosh-lite.deployment ))
 
             AWS_ACCESS_KEY:       (( grab meta.aws.access_key ))
             AWS_SECRET_KEY:       (( grab meta.aws.secret_key ))
@@ -147,37 +148,22 @@ jobs:
             icon_url: (( grab meta.slack.icon ))
             text:     (( grab meta.slack.test_failure ))
 
-      - aggregate:
-        - put: version
-          params:
-            bump: patch
-        - put: git
-          params:
-            rebase: true
-            repository: pushme/git
-          on_failure:
-            put: notify
-            params:
-              channel:  (( grab meta.slack.channel ))
-              username: (( grab meta.slack.username ))
-              icon_url: (( grab meta.slack.icon ))
-              text:     (( grab meta.slack.test_failure ))
-        - put: github
-          params:
-            name:   gh/name
-            tag:    gh/tag
-            body:   gh/notes.md
-            globs: [gh/artifacts/*]
-          on_failure:
-            put: notify
-            params:
-              channel:  (( grab meta.slack.channel ))
-              username: (( grab meta.slack.username ))
-              icon_url: (( grab meta.slack.icon ))
-              text:     (( grab meta.slack.test_failure ))
-        - put: s3
-          params:
-            file:  (( concat "gh/artifacts/" meta.name "-*.tgz" ))
+      - put: git
+        params:
+          rebase: true
+          repository: pushme/git
+      - put: s3
+        params:
+          file:  (( concat "gh/artifacts/" meta.name "-*.tgz" ))
+      - put: github
+        params:
+          name:   gh/name
+          tag:    gh/tag
+          body:   gh/notes.md
+          globs: [gh/artifacts/*]
+      - put: version
+        params:
+          bump: patch
 
 resource_types:
   - name: slack-notification
@@ -192,18 +178,6 @@ resources:
       uri:         (( grab meta.github.uri ))
       branch:      (( grab meta.github.branch ))
       private_key: (( grab meta.github.private_key ))
-  - name: changes
-    type: git
-    source:
-      uri:         (( grab meta.github.uri ))
-      branch:      (( grab meta.github.branch ))
-      private_key: (( grab meta.github.private_key ))
-    paths:
-      - src/**/*
-      - jobs/**/*
-      - packages/**/*
-      - config/blobs.yml
-      - templates/**/*
 
   - name: version
     type: semver
