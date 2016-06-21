@@ -91,7 +91,7 @@ case $1 in
     cp /var/vcap/packages/cf/bin/cf /usr/local/bin/cf
     cp /var/vcap/packages/spruce/bin/spruce /usr/local/bin/spruce
     cp /var/vcap/packages/genesis/bin/genesis /usr/local/bin/genesis
-    cp /var/vcap/packages/shield/bin/shield /usr/local/bin/shield
+    cp /var/vcap/packages/shield-cli/bin/shield /usr/local/bin/shield
     cp /var/vcap/packages/bosh-init/bin/bosh-init /usr/local/bin/bosh-init
     cp /var/vcap/packages/yaml2json/bin/yaml2json /usr/local/bin/yaml2json
     cp /var/vcap/packages/safe/bin/safe /usr/local/bin/safe
