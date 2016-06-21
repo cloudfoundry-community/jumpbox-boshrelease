@@ -9,7 +9,7 @@ packages:
 - yaml2json
 - golang
 - bosh-init
-- shield
+- shield-cli
 - spiff
 - vault
 templates:

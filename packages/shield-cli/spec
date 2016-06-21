@@ -1,5 +1,5 @@
 ---
-name: shield
+name: shield-cli
 dependencies: []
 files:
 - shield/shield
