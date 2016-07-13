@@ -10,3 +10,6 @@ Bumped safe to v0.0.18
 
 ##### safe
 Bumped safe to v0.0.19
+
+##### cf
+Bumped cf cli to v6.20.0 
