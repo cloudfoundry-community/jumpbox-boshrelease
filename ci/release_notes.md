@@ -12,3 +12,6 @@ Bumped safe to v0.0.23
 
 ##### spruce
 Bumped spruce to v1.8.0
+
+##### spruce
+Bumped spruce to v1.8.1
