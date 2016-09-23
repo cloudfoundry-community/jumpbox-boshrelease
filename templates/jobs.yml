@@ -19,4 +19,7 @@ jobs:
 
 networks: (( merge ))
 
-properties: {}
+properties:
+  jumpbox:
+    env:
+      FOO: BAR

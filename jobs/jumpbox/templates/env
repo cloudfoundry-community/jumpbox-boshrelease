@@ -1,0 +1,5 @@
+## jumpbox env
+<% env = p('jumpbox.env', {})
+   env.keys.sort.each do |key|
+%><%= key.to_s %>="<%= env[key].gsub('"', '\\"') %>"
+<% end %>

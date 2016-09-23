@@ -12,8 +12,11 @@ packages:
 - shield-cli
 - spiff
 - vault
+
 templates:
   bin/jumpbox_ctl: bin/jumpbox_ctl
+  env:             env
+
 properties:
   jumpbox.hostname:
     description: "Hostname to set on the jumpbox"
@@ -34,3 +37,10 @@ properties:
         ssh_keys:
           - ssh-rsa AAAAB3NzaC1yabcd
           - ssh-rsa AAAAB3NzaC1y1234
+
+  jumpbox.env:
+    default: {}
+    description: |-
+      Additional environment variables to set for all users, as well as the start up scripts.
+      This can be used for setting site-wide HTTP proxy configuration.
+      Specified as a map of NAME: VALUE

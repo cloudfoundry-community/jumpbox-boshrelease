@@ -70,6 +70,10 @@ EOF
 }
 
 set -e
+source /var/vcap/jobs/jumpbox/env
+grep -q "## jumpbox env" /etc/environment || \
+  cat /var/vcap/jobs/jumpbox/env >> /etc/environment
+
 case $1 in
 
   start)
