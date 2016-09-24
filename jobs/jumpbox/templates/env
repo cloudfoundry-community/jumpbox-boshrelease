@@ -1,5 +1,11 @@
 ## jumpbox env
 <% env = p('jumpbox.env', {})
    env.keys.sort.each do |key|
-%><%= key.to_s %>="<%= env[key].gsub('"', '\\"') %>"
+%>export <%= key.to_s %>="<%= env[key].gsub('"', '\\"') %>"
 <% end %>
+
+## automatic PATH updates
+for p in $(find -L /var/vcap/packages -type f -size 0 -name '.autoenv' | sort); do
+  PATH=$PATH:${p%/.autoenv}
+done
+export PATH

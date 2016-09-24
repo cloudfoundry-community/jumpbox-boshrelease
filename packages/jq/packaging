@@ -8,9 +8,10 @@ CPUS=$(grep -c ^processor /proc/cpuinfo)
 # $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
 export HOME=/var/vcap
 
-BIN=shield
-mkdir ${BOSH_INSTALL_TARGET}/bin
-cp ${BIN}/${BIN} ${BOSH_INSTALL_TARGET}/bin
-chmod 755 ${BOSH_INSTALL_TARGET}/bin/${BIN}
+tar -xzvf jq/jq-1.5.tar.gz
+cd jq-1.5
+./configure --prefix=${BOSH_INSTALL_TARGET}
+make -j${CPUS} LDFLAGS=-all-static
+make install
 
 touch ${BOSH_INSTALL_TARGET}/bin/.autoenv

@@ -70,16 +70,16 @@ EOF
 }
 
 set -e
-source /var/vcap/jobs/jumpbox/env
-grep -q "## jumpbox env" /etc/environment || \
-  cat /var/vcap/jobs/jumpbox/env >> /etc/environment
+rm -f /etc/profile.d/jumpbox.sh
+cp /var/vcap/jobs/jumpbox/env /etc/profile.d/jumpbox.sh
+source /etc/profile.d/jumpbox.sh
 
 case $1 in
 
   start)
     log "Installing/Updating system packages we desire"
     apt-get update
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes jq git tree tmux pwgen unzip telnet wget curl sqlite3 vim vim-nox vim-runtime
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes git tree tmux pwgen unzip telnet wget curl sqlite3 vim vim-nox vim-runtime
 
     log "Creating persistent home container"
     mkdir -p /var/vcap/store/jumpbox/home

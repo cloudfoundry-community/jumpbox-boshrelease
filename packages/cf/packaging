@@ -12,3 +12,5 @@ BIN=cf
 mkdir ${BOSH_INSTALL_TARGET}/bin
 tar -xzf ${BIN}/${BIN}.tgz -C ${BOSH_INSTALL_TARGET}/bin
 chmod 755 ${BOSH_INSTALL_TARGET}/bin/${BIN}
+
+touch ${BOSH_INSTALL_TARGET}/bin/.autoenv

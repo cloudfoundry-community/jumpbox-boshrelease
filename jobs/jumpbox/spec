@@ -1,6 +1,7 @@
 ---
 name: jumpbox
 packages:
+- jq
 - ruby-gems
 - cf
 - spruce
