@@ -2,17 +2,7 @@
 name: jumpbox
 packages:
 - jumpbox
-- ruby-gems
-- cf
-- spruce
-- genesis
-- safe
-- yaml2json
 - golang
-- bosh-init
-- shield-cli
-- spiff
-- vault
 
 templates:
   bin/jumpbox_ctl: bin/jumpbox_ctl

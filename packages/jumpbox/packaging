@@ -9,6 +9,22 @@ CPUS=$(grep -c ^processor /proc/cpuinfo)
 # $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
 export HOME=/var/vcap
 
+mkdir ${BOSH_INSTALL_TARGET}/bin
+for BIN in bosh-init/bosh-init \
+           genesis/genesis     \
+           ruby-gems/installer \
+           safe/safe           \
+           shield/shield       \
+           spiff/spiff         \
+           spruce/spruce       \
+           yaml2json/yaml2json
+do
+  cp ${BIN} ${BOSH_INSTALL_TARGET}/bin
+done
+
+tar -xzf cf/cf.tgz -C ${BOSH_INSTALL_TARGET}/bin
+gunzip -c vault/vault.gz > ${BOSH_INSTALL_TARGET}/bin/vault
+chmod 0755 ${BOSH_INSTALL_TARGET}/bin/*
 
 # CURL
 (tar -xzvf jumpbox/curl-7.50.3.tar.gz

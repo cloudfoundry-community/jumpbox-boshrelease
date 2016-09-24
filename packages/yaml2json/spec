@@ -1,5 +1,0 @@
----
-name: yaml2json
-dependencies: []
-files:
-- yaml2json/yaml2json

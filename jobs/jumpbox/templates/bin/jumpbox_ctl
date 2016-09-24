@@ -87,17 +87,6 @@ case $1 in
         ln -s /var/vcap/packages/golang ${global_go}
     fi
 
-    log "Installing common utilities to /usr/local/bin"
-    cp /var/vcap/packages/cf/bin/cf /usr/local/bin/cf
-    cp /var/vcap/packages/spruce/bin/spruce /usr/local/bin/spruce
-    cp /var/vcap/packages/genesis/bin/genesis /usr/local/bin/genesis
-    cp /var/vcap/packages/shield-cli/bin/shield /usr/local/bin/shield
-    cp /var/vcap/packages/bosh-init/bin/bosh-init /usr/local/bin/bosh-init
-    cp /var/vcap/packages/yaml2json/bin/yaml2json /usr/local/bin/yaml2json
-    cp /var/vcap/packages/safe/bin/safe /usr/local/bin/safe
-    cp /var/vcap/packages/vault/bin/vault /usr/local/bin/vault
-    cp /var/vcap/packages/spiff/bin/spiff /usr/local/bin/spiff
-
     log "Setting hostname to <%= p('jumpbox.hostname') %>"
     echo "<%= p('jumpbox.hostname') %>" > /etc/hostname
     hostname -b -F /etc/hostname

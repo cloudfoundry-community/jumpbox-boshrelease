@@ -1,5 +1,0 @@
----
-name: genesis
-dependencies: []
-files:
-- genesis/genesis
