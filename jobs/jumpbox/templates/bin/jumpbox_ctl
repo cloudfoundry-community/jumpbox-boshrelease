@@ -79,7 +79,7 @@ case $1 in
   start)
     log "Installing/Updating system packages we desire"
     apt-get update
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes git unzip telnet sqlite3 vim vim-nox vim-runtime
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes git unzip telnet sqlite3
 
     log "Creating persistent home container"
     mkdir -p /var/vcap/store/jumpbox/home

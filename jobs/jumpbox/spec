@@ -7,6 +7,7 @@ packages:
 - pwgen
 - curl
 - wget
+- vim
 - ruby-gems
 - cf
 - spruce
