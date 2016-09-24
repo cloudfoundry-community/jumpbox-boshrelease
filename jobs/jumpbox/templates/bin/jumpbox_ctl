@@ -103,7 +103,7 @@ case $1 in
     newuser "<%= user['name'] %>" \
         "<%= user['shell'] %>" \
         "<%= user['env'] %>" \
-        "<%= user['setup_script'] || '/var/vcap/packages/ruby-gems/bin/installer' %>"<% if !(user['ssh_keys'] || []).empty? %> \<% end %>
+        "<%= user['setup_script'] || '/var/vcap/packages/jumpbox/setup' %>"<% if !(user['ssh_keys'] || []).empty? %> \<% end %>
        <% (user['ssh_keys'] || []).each do |k| %> "<%= k %>"<% end %>
 <% end %>
 

@@ -33,10 +33,21 @@ properties:
 
 ### Packages installed
 
-- spiff (1.0.6)
-- bosh (1.2922.0)
-- uaac (1.3.1)
-- cf (6.11.1)
-- bosh-bootstrap (0.16.2)
-- bosh-workspace (0.9.0.rc4)
-- ruby (2.1.6)
+- bosh-init
+- cf
+- curl
+- genesis (latest and greatest!)
+- git
+- jq
+- pwgen
+- safe (latest and greatest!)
+- shield
+- spiff
+- spruce (latest and greatest!)
+- tmux
+- tree
+- unzip
+- vault
+- vim
+- wget
+- zip

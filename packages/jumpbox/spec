@@ -2,17 +2,20 @@
 name: jumpbox
 dependencies: []
 files:
-    # bosh-init
-  - bosh-init/bosh-init
+  - jumpbox/setup
 
-    # cf cli
-  - cf/cf.tgz
+    # pre-compiled binaries / scripts
+  - jumpbox/bins/bosh-init
+  - jumpbox/bins/cf
+  - jumpbox/bins/genesis
+  - jumpbox/bins/safe
+  - jumpbox/bins/shield
+  - jumpbox/bins/spiff
+  - jumpbox/bins/spruce
+  - jumpbox/bins/vault
 
     # curl
   - jumpbox/curl-7.50.3.tar.gz
-
-    # genesis
-  - genesis/genesis
 
     # git
   - jumpbox/git-2.10.0.tar.gz
@@ -23,21 +26,6 @@ files:
     # pwgen
   - jumpbox/pwgen-2.07.tar.gz
 
-    # ruby-gems
-  - ruby-gems/installer
-
-    # safe
-  - safe/safe
-
-    # shield cli
-  - shield/shield
-
-    # spiff
-  - spiff/spiff
-
-    # spruce
-  - spruce/spruce
-
     # tmux
   - jumpbox/libevent-2.0.22-stable.tar.gz
   - jumpbox/tmux-2.2.tar.gz
@@ -45,17 +33,11 @@ files:
     # tree
   - jumpbox/tree-1.7.0.tar.gz
 
-    # vault
-  - vault/vault.gz
-
     # vim
   - jumpbox/vim-7.4.tar.bz2
 
     # wget
   - jumpbox/wget-1.18.tar.gz
-
-    # yaml2json
-  - yaml2json/yaml2json
 
     # zip
   - jumpbox/zip30.tar.gz

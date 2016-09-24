@@ -51,7 +51,7 @@ jobs:
           RELEASE_DIR:      spruce
           BLOB:             spruce
           BLOB_BINARY:      spruce-linux-amd64
-          BLOB_DESTINATION: spruce/spruce
+          BLOB_DESTINATION: jumpbox/bins/spruce
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
           AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
           BRANCH:       (( grab meta.github.branch ))
@@ -103,7 +103,7 @@ jobs:
           RELEASE_DIR:      genesis
           BLOB:             genesis
           BLOB_BINARY:      genesis
-          BLOB_DESTINATION: genesis/genesis
+          BLOB_DESTINATION: jumpbox/bins/genesis
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
           AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
           BRANCH:       (( grab meta.github.branch ))
@@ -148,7 +148,7 @@ jobs:
           RELEASE_DIR:      safe
           BLOB:             safe
           BLOB_BINARY:      safe-linux-amd64
-          BLOB_DESTINATION: safe/safe
+          BLOB_DESTINATION: jumpbox/bins/safe
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
           AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
           BRANCH:       (( grab meta.github.branch ))
