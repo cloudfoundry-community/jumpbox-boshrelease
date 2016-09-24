@@ -1,0 +1,5 @@
+---
+name: wget
+dependencies: []
+files:
+- wget/wget-1.18.tar.gz

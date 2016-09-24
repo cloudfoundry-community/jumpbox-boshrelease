@@ -6,6 +6,7 @@ packages:
 - tmux
 - pwgen
 - curl
+- wget
 - ruby-gems
 - cf
 - spruce
