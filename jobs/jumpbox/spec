@@ -3,6 +3,7 @@ name: jumpbox
 packages:
 - jq
 - tree
+- tmux
 - ruby-gems
 - cf
 - spruce
