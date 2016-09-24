@@ -4,6 +4,7 @@ packages:
 - jq
 - tree
 - tmux
+- pwgen
 - ruby-gems
 - cf
 - spruce
