@@ -77,10 +77,6 @@ source /etc/profile.d/jumpbox.sh
 case $1 in
 
   start)
-    log "Installing/Updating system packages we desire"
-    apt-get update
-    DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes git
-
     log "Creating persistent home container"
     mkdir -p /var/vcap/store/jumpbox/home
     log "Fixing permissions on /tmp"

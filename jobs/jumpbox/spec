@@ -9,6 +9,7 @@ packages:
 - wget
 - vim
 - zip
+- git
 - ruby-gems
 - cf
 - spruce
