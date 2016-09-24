@@ -8,6 +8,7 @@ packages:
 - curl
 - wget
 - vim
+- zip
 - ruby-gems
 - cf
 - spruce
