@@ -1,5 +1,0 @@
----
-name: jq
-dependencies: []
-files:
-- jq/jq-1.5.tar.gz

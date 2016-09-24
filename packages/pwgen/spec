@@ -1,5 +1,0 @@
----
-name: pwgen
-dependencies: []
-files:
-- pwgen/pwgen-2.07.tar.gz

@@ -1,0 +1,32 @@
+---
+name: jumpbox
+dependencies: []
+files:
+    # curl
+  - jumpbox/curl-7.50.3.tar.gz
+
+    # git
+  - jumpbox/git-2.10.0.tar.gz
+
+    # jq
+  - jumpbox/jq-1.5.tar.gz
+
+    # pwgen
+  - jumpbox/pwgen-2.07.tar.gz
+
+    # tmux
+  - jumpbox/libevent-2.0.22-stable.tar.gz
+  - jumpbox/tmux-2.2.tar.gz
+
+    # tree
+  - jumpbox/tree-1.7.0.tar.gz
+
+    # vim
+  - jumpbox/vim-7.4.tar.bz2
+
+    # wget
+  - jumpbox/wget-1.18.tar.gz
+
+    # zip
+  - jumpbox/zip30.tar.gz
+  - jumpbox/unzip60.tar.gz

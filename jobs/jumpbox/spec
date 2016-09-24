@@ -1,15 +1,7 @@
 ---
 name: jumpbox
 packages:
-- jq
-- tree
-- tmux
-- pwgen
-- curl
-- wget
-- vim
-- zip
-- git
+- jumpbox
 - ruby-gems
 - cf
 - spruce

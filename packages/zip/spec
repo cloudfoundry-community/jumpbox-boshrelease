@@ -1,6 +1,0 @@
----
-name: zip
-dependencies: []
-files:
-- zip/zip30.tar.gz
-- zip/unzip60.tar.gz

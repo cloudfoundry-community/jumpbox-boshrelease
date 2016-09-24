@@ -5,7 +5,6 @@
 <% end %>
 
 ## automatic PATH updates
-for p in $(find -L /var/vcap/packages -type f -size 0 -name '.autoenv' | sort); do
-  PATH=$PATH:${p%/.autoenv}
-done
-export PATH
+export PATH=$PATH:/var/vcap/package/jumpbox/bin
+export LD_LIBRARY_PATH=/var/vcap/packages/jumpbox/lib
+export MANPATH=/usr/share/man:/var/vcap/packages/jumpbox/share/man:/var/vcap/packages/jumpbox/man

@@ -1,0 +1,98 @@
+#!/bin/bash
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+# Detect # of CPUs so make jobs can be parallelized
+CPUS=$(grep -c ^processor /proc/cpuinfo)
+ # Available variables
+# $BOSH_COMPILE_TARGET - where this package & spec'd source files are available
+# $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
+export HOME=/var/vcap
+
+
+# CURL
+(tar -xzvf jumpbox/curl-7.50.3.tar.gz
+cd curl-7.50.3
+./configure --prefix=${BOSH_INSTALL_TARGET}
+make -j${CPUS}
+make install) &
+
+# GIT
+(tar -xzvf jumpbox/git-2.10.0.tar.gz
+ cd git-2.10.0
+ ./configure --prefix=${BOSH_INSTALL_TARGET}
+ make -j${CPUS} all
+ make install) &
+
+# JQ
+(tar -xzvf jumpbox/jq-1.5.tar.gz
+ cd jq-1.5
+ ./configure --prefix=${BOSH_INSTALL_TARGET}
+ make -j${CPUS} LDFLAGS=-all-static
+ make install) &
+
+# PWGEN
+(tar -xzvf jumpbox/pwgen-2.07.tar.gz
+ cd pwgen-2.07
+ ./configure --prefix=${BOSH_INSTALL_TARGET}
+ make -j${CPUS}
+ make install) &
+
+# TMUX
+(tar -xzvf jumpbox/libevent-2.0.22-stable.tar.gz
+ (cd libevent-2.0.22-stable
+  ./configure --prefix=/usr --disable-shared
+  make -j${CPUS}
+  make install)
+
+ tar -xzvf jumpbox/tmux-2.2.tar.gz
+ cd tmux-2.2
+ ./configure --prefix=${BOSH_INSTALL_TARGET} \
+             --enable-static
+ make -j${CPUS}
+ make install) &
+
+# TREE
+(tar -xzvf jumpbox/tree-1.7.0.tar.gz
+ cd tree-1.7.0
+ sed -i "s|prefix = /usr|prefix = ${BOSH_INSTALL_TARGET}|" Makefile
+ make -j${CPUS}
+ make install) &
+
+# VIM
+(tar -xjvf jumpbox/vim-7.4.tar.bz2
+ cd vim74
+ ./configure --prefix=${BOSH_INSTALL_TARGET}
+ make -j${CPUS}
+ make install) &
+
+ # WGET
+(tar -xzvf jumpbox/wget-1.18.tar.gz
+ cd wget-1.18
+ ./configure --prefix=${BOSH_INSTALL_TARGET}
+ make -j${CPUS}
+ make install) &
+
+ # ZIP
+(tar -xzvf jumpbox/zip30.tar.gz
+ cd zip30
+ make prefix=${BOSH_INSTALL_TARGET} \
+      -f unix/Makefile \
+      -j${CPUS} \
+      generic
+ make prefix=${BOSH_INSTALL_TARGET} \
+      -f unix/Makefile \
+      install) &
+
+ # UNZIP
+(tar -xzvf jumpbox/unzip60.tar.gz
+ cd unzip60
+ make prefix=${BOSH_INSTALL_TARGET} \
+      -f unix/Makefile \
+      -j${CPUS} \
+      generic
+ make prefix=${BOSH_INSTALL_TARGET} \
+      -f unix/Makefile \
+      install) &
+
+wait
