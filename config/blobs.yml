@@ -1,37 +1,81 @@
 ---
-bosh-init/bosh-init:
-  object_id: 8a4aa22c-5118-4cb0-889e-962dbfbcd07e
-  sha: 7284ab6ac28289c6dafc6f3e4048564423aab77a
-  size: 14658552
-cf/cf.tgz:
-  object_id: 5dc790ac-d326-44ca-a964-4897669c5106
-  sha: 6abdf962082329939008b77176b8a57d3ae4f884
-  size: 6461018
-genesis/genesis:
-  object_id: fa0f4966-637e-4518-9c45-44ae68f26f52
-  sha: ec4f3e04713a9032864082e57d0f5e58d4260f62
-  size: 96312
 golang_1.5/go1.5.3.linux-amd64.tar.gz:
   object_id: 5d8b0264-6ad9-405e-961f-4449dd9a180f
   sha: c5377eca4837968d043b681f00a852a262f0f5f6
   size: 80147269
-shield/shield:
-  object_id: 0a9aad0f-e1e4-401d-9d72-0312a48b384f
-  sha: 34d3dd2619ab3daa5639791caa6c8e70d842a6f2
-  size: 8175536
-spiff/spiff:
-  object_id: e0038f67-ce28-4164-a73c-8337cd0969f1
-  sha: 7489aa87ad7f5b3b774fc8a03ccda65860b1374c
-  size: 5063744
-spruce/spruce:
-  object_id: a7df7f21-e8a0-4ea4-b3a8-ad976617cc91
-  sha: 233fa7fc416e1213c63711eb7c3f0b94f000d131
-  size: 10594008
-vault/vault.gz:
-  object_id: 67ac8265-b123-47e5-8f9b-abe72de9bbc7
-  sha: c4d9ec11309877885bab68d3a1df6c80f63a8159
-  size: 8966609
-safe/safe:
-  object_id: 4aa12d72-f283-4afe-aae5-5bd7b88375b6
+jumpbox/bins/bosh-init:
+  object_id: 744322bb-be75-43a2-92ca-f5353bd2ec2b
+  sha: 7284ab6ac28289c6dafc6f3e4048564423aab77a
+  size: 14658552
+jumpbox/bins/cf:
+  object_id: a2a1e811-1ca3-4a9e-8280-9ed821f11246
+  sha: f137e5d4d22823f68361a8e9e6b4bd362aedd83e
+  size: 23264768
+jumpbox/bins/genesis:
+  object_id: 86501725-a48e-47cd-89e3-5ce844fa44a0
+  sha: ec4f3e04713a9032864082e57d0f5e58d4260f62
+  size: 96312
+jumpbox/bins/safe:
+  object_id: 74d00c59-bbac-47f4-8572-32428dc651f5
   sha: 2b1b9d62921882d1c8b5af884bc514d31111b2f8
   size: 1248
+jumpbox/bins/shield:
+  object_id: 0fe0d6e1-8545-43d9-a84f-938594598963
+  sha: 34d3dd2619ab3daa5639791caa6c8e70d842a6f2
+  size: 8175536
+jumpbox/bins/spiff:
+  object_id: eefcc937-c44a-4298-a56d-5e7259137c7c
+  sha: 7489aa87ad7f5b3b774fc8a03ccda65860b1374c
+  size: 5063744
+jumpbox/bins/spruce:
+  object_id: 9a913e74-358b-4923-9b48-7daf49b054a0
+  sha: 233fa7fc416e1213c63711eb7c3f0b94f000d131
+  size: 10594008
+jumpbox/bins/vault:
+  object_id: 69b6532c-4cbc-4b46-bdc4-fdf1e1625af9
+  sha: 507f1c2051d39ab571756aee560b79489ffcabf4
+  size: 39822560
+jumpbox/curl-7.50.3.tar.gz:
+  object_id: dab8c17e-f200-423e-8421-27c80bcaa15d
+  sha: be0065afc76a3d8568f5f78d8efddadb6310f9d7
+  size: 8908593
+jumpbox/git-2.10.0.tar.gz:
+  object_id: 8cbf7d51-f1f3-4e7d-a519-f5609bb5a7bc
+  sha: 2d588afe7adb11ea11e0787c4a2f01329a0f2f55
+  size: 6048363
+jumpbox/jq-1.5.tar.gz:
+  object_id: 68bdc70f-d6a7-4f31-b29b-e1da48c81371
+  sha: 6eef3705ac0a322e8aa0521c57ce339671838277
+  size: 739309
+jumpbox/libevent-2.0.22-stable.tar.gz:
+  object_id: a1541bd8-921a-4c62-9971-19260c2fde62
+  sha: a586882bc93a208318c70fc7077ed8fca9862864
+  size: 854987
+jumpbox/pwgen-2.07.tar.gz:
+  object_id: 84046d87-6931-41cb-afb0-c806acc8dfeb
+  sha: 51180f9cd5530d79eea18b2443780dec4ec5ea43
+  size: 53513
+jumpbox/tmux-2.2.tar.gz:
+  object_id: 645ddc79-20dd-4145-8ee8-e39c57539ea4
+  sha: 5ed1430bc7ef44c227e64e9401c686573dd0791a
+  size: 466852
+jumpbox/tree-1.7.0.tar.gz:
+  object_id: 14f6d45c-aaeb-4dc3-89c9-5ff370553d49
+  sha: 35bd212606e6c5d60f4d5062f4a59bb7b7b25949
+  size: 47082
+jumpbox/unzip60.tar.gz:
+  object_id: 7317d283-62f1-40d3-851a-10418da85106
+  sha: abf7de8a4018a983590ed6f5cbd990d4740f8a22
+  size: 1376845
+jumpbox/vim-7.4.tar.bz2:
+  object_id: f109912f-1ea4-4e05-b467-fbb2f93f30b9
+  sha: 601abf7cc2b5ab186f40d8790e542f86afca86b7
+  size: 9843297
+jumpbox/wget-1.18.tar.gz:
+  object_id: 4e1e8e75-739f-48b8-aff5-ad9b0073dd65
+  sha: 28a82e7de2eed38516c7d6e172ec7b9e43dc6c66
+  size: 3865525
+jumpbox/zip30.tar.gz:
+  object_id: f46a1f21-a9e9-415a-9e2d-8b8303fe1659
+  sha: c9f4099ecf2772b53c2dd4a8e508064ce015d182
+  size: 1118845
