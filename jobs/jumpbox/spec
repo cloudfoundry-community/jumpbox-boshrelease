@@ -2,6 +2,7 @@
 name: jumpbox
 packages:
 - jq
+- tree
 - ruby-gems
 - cf
 - spruce
