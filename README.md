@@ -33,21 +33,21 @@ properties:
 
 ### Packages installed
 
-- bosh-init
-- cf
-- curl
+- bosh-init 0.0.92-3ee9292
+- cf 6.20
+- curl 7.50.3
 - genesis (latest and greatest!)
-- git
-- jq
-- pwgen
+- git 2.10.0
+- jq 1.5
+- pwgen 2.07
 - safe (latest and greatest!)
 - shield
-- spiff
+- spiff 1.0.7
 - spruce (latest and greatest!)
-- tmux
-- tree
-- unzip
-- vault
-- vim
-- wget
-- zip
+- tmux 2.2
+- tree 1.7.0
+- unzip 6.0
+- vault 0.5.2
+- vim 7.4
+- wget 1.18
+- zip 3.0
