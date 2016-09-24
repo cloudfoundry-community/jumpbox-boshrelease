@@ -34,4 +34,6 @@ builds:
     version: 4.0.17
   83e0cbc4-9afe-401f-aefb-60d1525e2c72:
     version: 4.0.18
+  ac5fd399-a844-47c3-8b64-74d1460ae551:
+    version: 4.1.0
 format-version: '2'
