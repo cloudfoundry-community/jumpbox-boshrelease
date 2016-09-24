@@ -5,6 +5,7 @@ packages:
 - tree
 - tmux
 - pwgen
+- curl
 - ruby-gems
 - cf
 - spruce

@@ -1,0 +1,5 @@
+---
+name: curl
+dependencies: []
+files:
+- curl/curl-7.50.3.tar.gz
