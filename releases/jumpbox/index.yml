@@ -38,4 +38,6 @@ builds:
     version: 4.1.0
   6d3043f1-02fb-45d8-8d5f-fbfbb2f4fb27:
     version: 4.1.1
+  bb418305-ac71-4ba3-922a-93b3f2752aa1:
+    version: 4.1.2
 format-version: '2'
