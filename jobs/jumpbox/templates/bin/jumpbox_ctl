@@ -98,6 +98,13 @@ case $1 in
     fi
 <% end %>
 
+    log "Setting up sudoers to allow certain environment variables to not be reset"
+    for var in http_proxy https_proxy ftp_proxy no_proxy EDITOR; do
+    if ! grep '^Defaults env_keep' /etc/sudoers | grep -q "${var}"; then
+            echo "Defaults env_keep += \"${var}\"" >> /etc/sudoers
+        fi
+    done
+
 <% p('jumpbox.users').each do |user| %>
 # jumpbox.users[<%= user['name'] %>
     newuser "<%= user['name'] %>" \
