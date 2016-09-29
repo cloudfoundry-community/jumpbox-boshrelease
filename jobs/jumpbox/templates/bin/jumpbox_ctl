@@ -53,18 +53,18 @@ newuser() {
        export HOME=${home}
        export USER=${user}
        [ -x ./install ] && ./install || true)
+    fi
+  fi
 
-      log "Running setup script ('${setup_script}') from inside of ${home}/env, as ${user} with HOME=${home}"
-      (sudo -iu ${user} bash -c "[ -x ${setup_script} ] && ${setup_script} || true" )
+  log "Running setup script ('${setup_script}') from inside of ${home}/env, as ${user} with HOME=${home}"
+  (sudo -iu ${user} bash -c "[ -x ${setup_script} ] && ${setup_script} || true" )
 
-      log "Setting up golang for ${user}"
-      mkdir ${home}/go
-      cat >>${home}/.bashrc << EOF
+  log "Setting up golang for ${user}"
+  mkdir ${home}/go
+  cat >>${home}/.bashrc << EOF
 export GOPATH=${home}/go
 export PATH=\${PATH}:${global_go}/bin:\${GOPATH}/bin
 EOF
-    fi
-  fi
 
   chown -R ${user} ${home}
 }
