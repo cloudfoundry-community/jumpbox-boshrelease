@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash --login
 
 # install RVM
 if [[ ! -f ~/.rvmrc ]]; then
@@ -15,5 +15,5 @@ fi
 # install ruby
 
 rvm install ruby-2.3
-
+rvm --default use 2.3
 gem install --no-ri --no-rdoc bosh_cli bosh-workspace cf-uaac
