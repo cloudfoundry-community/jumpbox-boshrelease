@@ -16,8 +16,8 @@ jumpbox/bins/genesis:
   sha: 5b7a9d12fb316a78b47738ce4d545845df4ee23f
   size: 101500
 jumpbox/bins/safe:
-  object_id: 74d00c59-bbac-47f4-8572-32428dc651f5
-  sha: 2b1b9d62921882d1c8b5af884bc514d31111b2f8
+  object_id: 81b20d37-142e-4f08-beb2-5b9679666491
+  sha: b3a5d4310982cc5f11f9bebfbd9ee7eafa30a931
   size: 1248
 jumpbox/bins/shield:
   object_id: 0fe0d6e1-8545-43d9-a84f-938594598963
