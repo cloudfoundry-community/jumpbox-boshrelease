@@ -16,6 +16,9 @@ newuser() {
   home="/var/vcap/store/jumpbox/home/${user}"
   [ -z ${shell} ] && shell="/bin/bash"
 
+  log "Ensuring non-root users are allowed to ping"
+  chmod u+s /bin/ping
+
   log "Setting up user ${user}"
   if ! grep -q "^${user}:" /etc/passwd; then
     log "User ${user} does not exist; adding"
