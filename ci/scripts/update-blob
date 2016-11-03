@@ -28,7 +28,11 @@ blobstore:
 EOF
 
 mkdir -p blobs/$(dirname ${BLOB_DESTINATION})
-cp ../${RELEASE_DIR}/${BLOB_BINARY} blobs/${BLOB_DESTINATION}
+if [[ ${BLOB_BINARY} =~ ^http ]]; then
+	curl -Lsk $(printf ${BLOB_BINARY} ${VERSION}) -o blobs/${BLOB_DESTINATION}
+else
+	cp ../${RELEASE_DIR}/${BLOB_BINARY} blobs/${BLOB_DESTINATION}
+fi
 bosh -n upload blobs
 rm config/private.yml
 popd
