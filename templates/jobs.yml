@@ -23,3 +23,10 @@ properties:
   jumpbox:
     env:
       FOO: BAR
+    users:
+      - name: alice
+      - name: bob
+      - name: eve
+        shell: /bin/sh
+    delete:
+      - chris

@@ -1,3 +1,14 @@
+## New Features
+
+- Provisioning should work better now, since there is a daemon
+  process watching the box and "patching things up"
+- Accounts that were built by previous jumpbox manifests, but are
+  not currently in the manifest, will be disabled, and their home
+  directories renamed.  This allows administrators to manage
+  account lifecycles more easily.
+- A new `jumpbox.delete` property allows accounts to be deleted
+  from the jumpbox, but only those that had been provisioned by
+  the manifest.
 
 ##### spruce
 Bumped spruce to v1.8.2

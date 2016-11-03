@@ -6,6 +6,7 @@ packages:
 
 templates:
   bin/jumpbox_ctl: bin/jumpbox_ctl
+  bin/watcher:     bin/watcher
   env:             env
 
 properties:
@@ -24,7 +25,6 @@ properties:
       - name: jhunt
         shell: /bin/bash
         env: https://github.com/jhunt/devbox-env.git  # specifies a git environment to clone
-        setup_script: /path/to/setup/script           # runs a script as the user, after cloning the above repo
         ssh_keys:
           - ssh-rsa AAAAB3NzaC1yabcd
           - ssh-rsa AAAAB3NzaC1y1234
@@ -35,3 +35,10 @@ properties:
       Additional environment variables to set for all users, as well as the start up scripts.
       This can be used for setting site-wide HTTP proxy configuration.
       Specified as a map of NAME: VALUE
+
+  jumpbox.delete:
+    default: []
+    description: |-
+      A list of users to delete, specified via account name.
+      By default, users that are removed from the BOSH deployment manifest will be deactivated
+      on the jumpbox deployment, but their files will be retained for reference / forensics.

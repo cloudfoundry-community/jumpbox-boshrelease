@@ -1,0 +1,227 @@
+#!/bin/bash
+exec </dev/null >>/var/vcap/sys/log/jumpbox.log 2>&1
+
+#
+# watcher is a small shell-daemon that regularly checks
+# the state of the jumpbox and attempts to remedy any
+# problems it sees with respect to things like sudoers
+# configuration, users, system configs, etc.
+#
+
+# Set during the first iteration of the watch loop, but
+# unset in all subsequent iterations.	This is useful for
+# providing good diagnostics for operators troubleshooting
+# the jumpbox via `monit restart`
+FIRSTRUN=1
+
+JUMPBOX_HOME=/var/vcap/store/jumpbox/home
+JUMPBOX_GO=/usr/local/go
+JUMPBOX_HOSTNAME="<%= p('jumpbox.hostname') %>"
+
+# Things that only get logged on the first run-through
+log1() {
+	if [[ $FIRSTRUN == 1 ]]; then
+		log $*
+	fi
+}
+
+# Things that only get logged on subsequent run-throughs
+logn() {
+	if [[ $FIRSTRUN != 1 ]]; then
+		log $*
+	fi
+}
+
+# Things that get logged on all run-throughs
+log() {
+	echo >&2 "[$(date +'%Y%m%d %HH%MM.%SS')] jumpbox[$$]: " $*
+}
+
+provision() {
+	local user=$1  ; shift
+	local shell=$1 ; shift
+	local repo=$1  ; shift
+	local setup=$1 ; shift
+
+	home="${JUMPBOX_HOME}/${user}"
+	[ -z ${shell} ] && shell="/bin/bash"
+
+	log1 "Setting up user ${user}"
+	if ! grep -q "^${user}:" /etc/passwd; then
+		logn "User ${user} does not exist; adding"
+		/usr/sbin/useradd -m -d ${home} -s ${shell} ${user}
+	fi
+	mkdir -p ${home}
+	/usr/sbin/usermod --expiredate -1 ${user}
+
+	log1 "Setting up sudoers access for ${user}"
+	if ! grep -q "^${user} " /etc/sudoers; then
+		logn "Access not found; configuring ${user} with NOPASSWD:ALL access"
+		(echo; echo "${user} ALL=(ALL:ALL) NOPASSWD:ALL") >> /etc/sudoers
+		chmod 0400 /etc/sudoers
+	fi
+
+	if [[ $# -gt 0 ]]; then
+		log1 "Setting up ${user} SSH authorized keys"
+		mkdir -p ${home}/.ssh
+		chmod 0700 ${home}/.ssh
+		touch ${home}/.ssh/authorized_keys
+		for key in "$@"; do
+			if ! grep -q "^$key$" ${home}/.ssh/authorized_keys; then
+				logn "Configuring new SSH authorized key for ${user}"
+				echo "$key" >> ${home}/.ssh/authorized_keys
+			fi
+		done
+	fi
+	chown -R ${user} ${home}
+
+	if [[ -n "${repo}" ]]; then
+		log1 "Setting up ${user} environment"
+		if [[ ! -d ${home}/env ]]; then
+			logn "Environment repo ${home}/env not found; cloning from upstream"
+			git clone ${repo} ${home}/env
+
+			logn "Running install script from inside of ${home}/env, as ${user} with HOME=${home}"
+			(cd ${home}/env
+			 export HOME=${home}
+			 export USER=${user}
+			 [ -x ./install ] && ./install || true)
+		fi
+	fi
+
+	if [[ ! -f ${home}/.jumpbox ]]; then
+		log1 "Running setup script ('${setup}') from inside of ${home}/env, as ${user} with HOME=${home}"
+		(sudo -iu ${user} bash -c "[ -x ${setup} ] && ${setup} || true" )
+		touch ${home}/.jumpbox
+	fi
+
+	if [[ ! -d ${home}/go ]]; then
+		log1 "Setting up Go runtime for ${user}"
+		mkdir ${home}/go
+		cat >>${home}/.bashrc << EOF
+export GOPATH=${home}/go
+export PATH=\${PATH}:${global_go}/bin:\${GOPATH}/bin
+EOF
+	fi
+
+	chown -R ${user} ${home}
+}
+
+deactivate() {
+	local user=$1
+	local today=$(date +%YMD)
+
+	local to="${JUMPBOX_HOME}/.${user}.${today}"
+	log "Deactivating user $user"
+	if [[ -d ${to} ]]; then
+		log "ERROR: Cannot move ~$user to '${to}': already exists"
+		stat $to
+		log "SKIPPING USER DEACTIVATION"
+		return
+	fi
+
+	log "Locking ${user} account (via expiration date)"
+	/usr/sbin/usermod --expiredate 1 ${user}
+	log "Moving home directory ~${user} to ${to}"
+	mv ${JUMPBOX_HOME}/${user} ${to}
+}
+
+remove() {
+	user=$1
+	home=$(getent passwd ${user} | cut -d: -f6)
+	if [[ $home == "" ]]; then
+		return
+	fi
+	if [[ $home != ${JUMPBOX_HOME}/${user} ]]; then
+		log "Cannot remove user ${user} - not provisioned by the jumpbox release..."
+		return
+	fi
+	log "Removing user ${user}"
+	log "Cleaning up old any old home directories"
+	rm -rf ${JUMPBOX_HOME}/${user}/ \
+	       ${JUMPBOX_HOME}/.${user}.*
+	log "Deleting user account from system databases"
+	/usr/sbin/userdel -r ${user}
+}
+
+while true; do
+	log1 "Setting up ${JUMPBOX_HOME} base directory"
+	if [[ ! -d ${JUMPBOX_HOME} ]]; then
+		logn "${JUMPBOX_HOME} not found; fixing"
+		mkdir -p ${JUMPBOX_HOME}
+	fi
+
+	log1 "Setting permissions on /tmp to 1777"
+	chmod 1777 /tmp
+
+	log1 "Ensuring non-root users are allowed to ping"
+	chmod u+s /bin/ping
+
+	log1 "Setting up system-wide Go runtime at ${JUMPBOX_GO}"
+	if [[ ! -e $JUMPBOX_GO ]]; then
+		logn "${JUMPBOX_GO} not linked to /var/vcap/packages/golang; fixing"
+		ln -s /var/vcap/packages/golang ${JUMPBOX_GO}
+	fi
+
+	log1 "Setting hostname to ${JUMPBOX_HOSTNAME}"
+	if [[ $(cat /etc/hostname) != ${JUMPBOX_HOSTNAME} ]]; then
+		logn "Hostname (via /etc/hostname) not set to ${JUMPBOX_HOSTNAME}; fixing"
+		echo ${JUMPBOX_HOSTNAME} > /etc/hostname
+		hostname -b -F /etc/hostname
+	fi
+
+	log1 "Seting up /etc/hosts DNS overrides"
+	if ! grep -q "^127.0.0.1 ${JUMPBOX_HOSTNAME}\$" /etc/hosts; then
+		logn "Entry '127.0.0.1 ${JUMPBOX_HOSTNAME}' not found in /etc/hosts; fixing"
+		sed -i -e 's/^127.0.0.1//' /etc/hosts
+		echo "127.0.0.1 ${JUMPBOX_HOSTNAME}" >> /etc/hosts
+	fi
+<% p('jumpbox.hosts').each do |line| %>
+	if ! grep -q '^<%= line %>$' /etc/hosts; then
+		logn "Entry '<%= line %>' not found in /etc/hosts; fixing"
+		echo "<%= line %>" >> /etc/hosts
+	fi
+<% end %>
+
+	log1 "Setting up sudoers to allow certain environment variables to pass through"
+	for var in http_proxy https_proxy ftp_proxy no_proxy EDITOR; do
+		if ! grep '^Defaults env_keep' /etc/sudoers | grep -q "${var}"; then
+			logn "Environment variable '${var}' not set to env_keep in /etc/sudoers; fixing"
+			echo "Defaults env_keep += \"${var}\"" >> /etc/sudoers
+		fi
+	done
+
+	log1 "Setting up jumpbox users"
+	declare -A users
+	pushd ${JUMPBOX_HOME} >/dev/null 2>&1
+	for user in *; do
+		# deleted users are moved to be hidden directories
+		if [[ -d ${user}/ ]]; then
+			users[$user]=1
+		fi
+	done
+	popd >/dev/null
+<% p('jumpbox.users').each do |user| %>
+	unset users["<%= user['name'] %>"]
+	# jumpbox.users[<%= user['name'] %>
+	provision "<%= user['name'] %>" \
+	          "<%= user['shell'] %>" \
+	          "<%= user['env'] %>" \
+	          "<%= user['setup_script'] || '/var/vcap/packages/jumpbox/setup' %>"<% if !(user['ssh_keys'] || []).empty? %> \<% end %>
+	          <% (user['ssh_keys'] || []).each do |k| %> "<%= k %>"<% end %>
+<% end %>
+
+<% p('jumpbox.delete', []).each do |user| %>
+	unset users["<%= user %>"]
+	remove "<%= user %>"
+<% end %>
+
+	for user in ${!users[@]}; do
+		deactivate ${user}
+	done
+
+
+	log1 "Complete.  Will verify / fix every 5 minutes"
+	FIRSTRUN=0
+	sleep 300 # try again in 5 minutes
+done
