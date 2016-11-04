@@ -253,7 +253,7 @@ resources:
   - name: safe # {{{
     type: github-release
     source:
-      user: jhunt
+      user: starkandwayne
       repository: safe
       access_token: (( grab meta.github.access_token ))
   # }}}
