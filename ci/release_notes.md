@@ -24,3 +24,6 @@ Bumped genesis to v1.5.6
 
 ##### genesis
 Bumped genesis to v1.5.7
+
+##### cf
+Bumped cf to v6.22.2
