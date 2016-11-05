@@ -2,6 +2,9 @@
 
 - Provisioning should work better now, since there is a daemon
   process watching the box and "patching things up"
+- Per-user setup is now handled on a per-user basis, via a
+  one-time setup script embedded in their ~/.bashrc / ~/.zshrc
+  profiles.  This should greatly speed up provisioning.
 - Accounts that were built by previous jumpbox manifests, but are
   not currently in the manifest, will be disabled, and their home
   directories renamed.  This allows administrators to manage

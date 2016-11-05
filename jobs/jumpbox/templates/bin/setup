@@ -1,0 +1,84 @@
+#!/bin/bash
+
+if [[ -z ${USER} ]]; then
+	echo >&2 "No \$USER set; highly suspcious"
+	exit 1
+fi
+if [[ -z ${HOME} || ! -d ${HOME} ]]; then
+	echo >&2 "\$HOME ($HOME) is highly suspicious"
+	exit 1
+fi
+
+################################################################################
+
+if [[ -f ${HOME}/.jumpbox ]]; then
+	exit 0
+fi
+
+cat <<EOF
+
+Hello, ${USER}!
+
+It appears that this is the first time you've logged into this
+jumpbox installation.  Before you can fully take advantage of
+all the goodies we've deployed here for you, we need to do some
+per-user configuration and setup.
+
+This may take a while.
+
+Shall we perform this configuration process now?
+EOF
+echo -n "[yes/no]: "
+read YESNO
+case ${YESNO} in
+(no|n)
+	cat <<EOF
+OK.
+
+Be careful, though, as some bits of functionality (like the
+BOSH command-line interface) may not work properly, or at all,
+until you go through this one-time setup and configuration.
+
+
+EOF
+	exit 0
+	;;
+esac
+
+################################################################################
+
+if [[ -f ${HOME}/.repo && ! -d ${HOME}/env ]]; then
+	repo=$(cat ${HOME}/.repo)
+	echo "Setting up your personal environment, from ${repo}"
+	git clone ${repo} ${HOME}/env
+	(cd ${HOME}/env ; [ -x ./install ] && ./install || true)
+	echo "-----------------------------------------------------------"
+	echo ; echo
+fi
+
+################################################################################
+
+if [[ ! -d ${HOME}/go ]]; then
+	echo "Setting up Go runtime environment"
+	mkdir ${HOME}/go
+	cat >>${HOME}/.bashrc << EOF
+export GOPATH=${HOME}/go
+export PATH=\${PATH}:/var/vcap/packages/golang/bin:\${GOPATH}/bin
+EOF
+	cat >>${HOME}/.zshrc << EOF
+export GOPATH=${HOME}/go
+export PATH=\${PATH}:/var/vcap/packages/golang/bin:\${GOPATH}/bin
+EOF
+	echo "-----------------------------------------------------------"
+	echo ; echo
+fi
+
+################################################################################
+
+if [[ ! -f ${HOME}/.jumpbox ]]; then
+	echo "Setting up your jumpbox environment"
+	/var/vcap/packages/jumpbox/setup
+	touch ${HOME}/.jumpbox
+	echo "-----------------------------------------------------------"
+	echo ; echo
+fi

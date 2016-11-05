@@ -41,7 +41,6 @@ provision() {
 	local user=$1  ; shift
 	local shell=$1 ; shift
 	local repo=$1  ; shift
-	local setup=$1 ; shift
 
 	home="${JUMPBOX_HOME}/${user}"
 	[ -z ${shell} ] && shell="/bin/bash"
@@ -73,37 +72,21 @@ provision() {
 			fi
 		done
 	fi
-	chown -R ${user} ${home}
 
 	if [[ -n "${repo}" ]]; then
-		log1 "Setting up ${user} environment"
-		if [[ ! -d ${home}/env ]]; then
-			logn "Environment repo ${home}/env not found; cloning from upstream"
-			git clone ${repo} ${home}/env
-
-			logn "Running install script from inside of ${home}/env, as ${user} with HOME=${home}"
-			(cd ${home}/env
-			 export HOME=${home}
-			 export USER=${user}
-			 [ -x ./install ] && ./install || true)
-		fi
+		echo "${repo}" > ${home}/.repo
+	else
+		rm ${home}/.repo
 	fi
-
-	if [[ ! -f ${home}/.jumpbox ]]; then
-		log1 "Running setup script ('${setup}') from inside of ${home}/env, as ${user} with HOME=${home}"
-		(sudo -iu ${user} bash -c "[ -x ${setup} ] && ${setup} || true" )
-		touch ${home}/.jumpbox
+	log1 "Configuring user to run one-time setup at next login"
+	if ! grep -q /var/vcap/jobs/jumpbox/bin/setup ${home}/.bashrc; then
+		logn "Setting up ${user} ~/.bashrc to run one-time setup"
+		echo "/var/vcap/jobs/jumpbox/bin/setup" >> ${home}/.bashrc
 	fi
-
-	if [[ ! -d ${home}/go ]]; then
-		log1 "Setting up Go runtime for ${user}"
-		mkdir ${home}/go
-		cat >>${home}/.bashrc << EOF
-export GOPATH=${home}/go
-export PATH=\${PATH}:${global_go}/bin:\${GOPATH}/bin
-EOF
+	if ! grep -q /var/vcap/jobs/jumpbox/bin/setup ${home}/.zshrc; then
+		logn "Setting up ${user} ~/.zshrc to run one-time setup"
+		echo "/var/vcap/jobs/jumpbox/bin/setup" >> ${home}/.zshrc
 	fi
-
 	chown -R ${user} ${home}
 }
 
@@ -206,8 +189,7 @@ while true; do
 	# jumpbox.users[<%= user['name'] %>
 	provision "<%= user['name'] %>" \
 	          "<%= user['shell'] %>" \
-	          "<%= user['env'] %>" \
-	          "<%= user['setup_script'] || '/var/vcap/packages/jumpbox/setup' %>"<% if !(user['ssh_keys'] || []).empty? %> \<% end %>
+	          "<%= user['env'] %>" <% if !(user['ssh_keys'] || []).empty? %> \<% end %>
 	          <% (user['ssh_keys'] || []).each do |k| %> "<%= k %>"<% end %>
 <% end %>
 
