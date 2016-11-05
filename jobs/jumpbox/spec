@@ -8,12 +8,17 @@ templates:
   bin/jumpbox_ctl: bin/jumpbox_ctl
   bin/watcher:     bin/watcher
   bin/setup:       bin/setup
+  config/banner:   config/banner
   env:             env
 
 properties:
   jumpbox.hostname:
     description: "Hostname to set on the jumpbox"
     default: "jumpbox.local"
+
+  jumpbox.banner:
+    description: "A login banner, or MoTD, to display to users when they log in"
+    defafult: nil
 
   jumpbox.hosts:
     description: "A list of entries to append to /etc/hosts"

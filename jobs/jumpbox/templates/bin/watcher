@@ -128,6 +128,16 @@ remove() {
 }
 
 while true; do
+	log1 "Setting up jumpbox banner"
+	if [[ -d /etc/update-motd.d && ! -f /etc/update-motd.d/99-banner ]]; then
+		cat >/etc/update-motd.d/99-banner <<EOF
+#!/bin/sh
+cat /var/vcap/jobs/jumpbox/config/banner
+EOF
+		chmod 0755 /etc/update-motd.d/99-banner
+		run-parts --lsbsysinit /etc/update-motd.d > /run/motd.dynamic
+	fi
+
 	log1 "Setting up ${JUMPBOX_HOME} base directory"
 	if [[ ! -d ${JUMPBOX_HOME} ]]; then
 		logn "${JUMPBOX_HOME} not found; fixing"
