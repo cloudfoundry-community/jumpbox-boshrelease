@@ -5,6 +5,6 @@
 <% end %>
 
 ## automatic PATH updates
-export PATH=$PATH:/var/vcap/packages/jumpbox/bin
+export PATH=/var/vcap/packages/jumpbox/bin:$PATH
 export LD_LIBRARY_PATH=/var/vcap/packages/jumpbox/lib
 export MANPATH=/usr/share/man:/var/vcap/packages/jumpbox/share/man:/var/vcap/packages/jumpbox/man

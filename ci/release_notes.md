@@ -19,6 +19,12 @@
 - You can now set the jumpbox login banner, via `jumpbox.banner`
   It's got a spiffy default too!
 
+## Improvements
+
+- Default `$PATH` now puts the jumpbox package bin directory
+  first, so that release-provided software like `curl` and `vim`
+  takes precedence over system versions.
+
 ##### spruce
 Bumped spruce to v1.8.2
 
