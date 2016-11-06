@@ -25,6 +25,8 @@
   first, so that release-provided software like `curl` and `vim`
   takes precedence over system versions.
 
+- New sane default configuration for `vim` and `tmux`
+
 ##### spruce
 Bumped spruce to v1.8.2
 

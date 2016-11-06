@@ -67,6 +67,7 @@ make install) &
  cd tmux-2.2
  ./configure --prefix=${BOSH_INSTALL_TARGET} \
              --enable-static
+ sed -i 's@#define TMUX_CONF.*@#define TMUX_CONF "'${BOSH_INSTALL_TARGET}'/etc/tmux.conf"@' tmux.h
  make -j${CPUS}
  make install) &
 
@@ -124,3 +125,5 @@ make install) &
       install) &
 
 wait
+cp jumpbox/vimrc     ${BOSH_INSTALL_TARGET}/share/vim/vimrc
+cp jumpbox/tmux.conf ${BOSH_INSTALL_TARGET}/etc/tmux.conf

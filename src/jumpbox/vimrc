@@ -1,0 +1,125 @@
+" ~/.vimrc - Vim Runtime Control file
+
+" UTF-8 is awesome
+set encoding=utf-8
+set fileencodings=utf-8
+setglobal fileencoding=utf-8
+
+" viminfo - remember all the things!
+"   '10   remember marks for last 10 files
+"   "100       ... last 100 lines (per register)
+"   :20        ... last 20 commands
+"   %          ... list of buffers
+"   n     Where to save viminfo data
+"
+set viminfo='10,\"100,:20,%,n~/.viminfo
+set nocompatible
+
+" case matters
+if exists("+nocompatible")
+	set nofileignorecase
+endif
+
+" handle looooong lines in YAML files
+set maxmempattern=8192
+
+" Tabs are 4 columns wide, and use the TAB character
+set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+
+" Disable all sorts of bells and visual alerts
+set visualbell t_vb=
+set novisualbell
+
+" Autoindent, I love you
+filetype indent on
+set autoindent
+
+" Allow backspace / delete in insert mode
+set backspace=start,eol,indent
+
+" Add 'o' formatoption to continue comment characters during F2/F3
+set formatoptions=tcqo
+
+" Turn on search term highlighting
+set hlsearch
+
+" Print representations of trailing spaces, tabs and end-of-line
+highlight SpecialKey ctermfg=DarkGray
+highlight NonText    ctermfg=DarkGray
+set listchars=tab:\\-,trail:.,eol:$
+set list
+
+" Show line numbers in Dark Gray, and use as little space
+" as possible on the left margin for displaying them.
+set number
+set numberwidth=1
+highlight LineNr ctermfg=DarkGray
+
+" Turn on syntax higlighting on a dark background.
+" Some update must have turned this off, jrh - 2008-11-28
+syntax on
+set background=dark
+
+" Turn on modeline processing, so we can force certain vim
+" parameters when we don't match an autocommand.
+set modeline
+
+" Turn on marker foldmethod, to make things easier
+set foldmethod=marker
+
+" Turn off stupid cindent rules, until I can figure out
+" how to customize them to my coding style.
+set nocindent
+
+set laststatus=2
+set stl=[%n]\ file:%-50F\ %y%r%m\ byte:0x%B%=line:%l:%c/%L\ %p%%
+
+set nowildmenu
+set wildmode=longest,list
+
+"################################################################################
+"#### AUTOCOMMANDS ##############################################################
+
+if has("autocmd")
+  " Jump to last cursor position, per ~/.viminfo
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
+  " Wrap text in git commit message at 72 characters, as I type.
+  au BufNewFile,BufRead *.git/COMMIT_EDITMSG    set tw=72 wrap | call setpos('.', [0, 1, 1, 0])
+
+  " Treat *.tt as HTML
+  au BufNewFile,BufRead *.tt                    set ft=html
+
+  " Treat *.tt as HTML
+  au BufNewFile,BufRead *.jst                   set ft=atlas
+
+  " Treat *.md as Markdown
+  au BufNewFile,BufRead *.md                    set ft=markdown tw=66
+
+  au BufNewFile,BufRead *.scm                   set ft=scheme et
+
+  " Treat *.1 as man page source files
+  au BufNewFile,BufRead *.1,*.2,*.3,*.4,*.5,*.6,*.7,*.8,*.9 set ft=nroff
+
+  " Treat *.ya?ml as YAML
+  au BufNewFile,BufRead *.yml                   set ft=yaml et ts=2 sts=2 sw=2
+  au BufNewFile,BufRead *.yaml                  set ft=yaml et ts=2 sts=2 sw=2
+
+  " Rubyists practice the heresy of spaces-over-tabs
+  au BufNewFile,BufRead *.rb                    set et ts=2 sts=2 sw=2
+
+  " Always set cursor position to 0,0 for git commit messages
+  au FileType gitcommit call setpos('.', [0, 1, 1, 0])
+
+  au BufNewFile *.t 0r ~/.vim/templates/test.t
+  au BufNewFile *.t set ft=perl
+
+  " Handle Bash-specific syntax for modelines that set ft=bash
+  function! BashSyntax()
+    if &ft == "bash"
+      let b:is_bash=1
+      set ft=sh
+    endif
+  endfunction
+  au FileType * call BashSyntax()
+endif
