@@ -1,0 +1,72 @@
+#!/bin/bash
+## jumpbox system-wide bashrc
+export PS1=$(echo '[\[\e[1;33m\t\e[0m\]] \[\e[1;32m\]\u@\h\[\e[0m\] \[\e[1;34m\]\w\[\e[0m\]\n\[\e[1;34m\]\$ \[\e[0m\]')
+
+################################################################################
+###########################################  site-specific environment variables
+<% env = p('jumpbox.env', {})
+   env.keys.sort.each do |key|
+%>export <%= key.to_s %>="<%= env[key].gsub('"', '\\"') %>"
+<% end %>
+
+################################################################################
+#####################################################  env vars you get for free
+
+export GOPATH=${HOME}/go
+export PATH=/var/vcap/packages/jumpbox/bin:$PATH:/var/vcap/bosh/bin:/var/vcap/packages/golang/bin:${GOPATH}/bin
+export LD_LIBRARY_PATH=/var/vcap/packages/jumpbox/lib
+export MANPATH=/usr/share/man:/var/vcap/packages/jumpbox/share/man:/var/vcap/packages/jumpbox/man
+
+################################################################################
+#######################################################  one-time per-user setup
+
+if [[ ${UID} -ne 0 && ! -f ${HOME}/.jumpbox && -z ${TMUX} ]]; then
+	cat <<EOF
+
+Hello, ${USER}!
+
+It appears that this is the first time you've logged into this
+jumpbox installation.  Before you can fully take advantage of
+all the goodies we've deployed here for you, we need to do some
+per-user configuration and setup.
+
+This may take a while.
+
+Shall we perform this configuration process now?
+EOF
+	echo -n "[yes/no]: "
+	read YESNO
+	case ${YESNO} in
+	(no|n)
+		cat <<EOF
+OK.
+
+Be careful, though, as some bits of functionality (like the
+BOSH command-line interface) may not work properly, or at all,
+until you go through this one-time setup and configuration.
+
+
+EOF
+		;;
+	(*)
+		if [[ -f ${HOME}/.repo && ! -d ${HOME}/env ]]; then
+			repo=$(cat ${HOME}/.repo)
+			echo "Setting up your personal environment, from ${repo}"
+			git clone ${repo} ${HOME}/env
+			(cd ${HOME}/env ; [ -x ./install ] && ./install || true)
+			echo "-----------------------------------------------------------"
+			echo ; echo
+		fi
+
+		echo "Setting up your jumpbox environment"
+		mkdir -p ${GOPATH}
+		/var/vcap/packages/jumpbox/setup
+		touch ${HOME}/.jumpbox
+		echo "-----------------------------------------------------------"
+		echo ; echo
+	esac
+fi
+
+################################################################################
+##########################################################  site-specific policy
+<%= p('jumpbox.bashrc') %>

@@ -76,16 +76,7 @@ provision() {
 	if [[ -n "${repo}" ]]; then
 		echo "${repo}" > ${home}/.repo
 	else
-		rm ${home}/.repo
-	fi
-	log1 "Configuring user to run one-time setup at next login"
-	if ! grep -q /var/vcap/jobs/jumpbox/bin/setup ${home}/.bashrc; then
-		logn "Setting up ${user} ~/.bashrc to run one-time setup"
-		echo "/var/vcap/jobs/jumpbox/bin/setup" >> ${home}/.bashrc
-	fi
-	if ! grep -q /var/vcap/jobs/jumpbox/bin/setup ${home}/.zshrc; then
-		logn "Setting up ${user} ~/.zshrc to run one-time setup"
-		echo "/var/vcap/jobs/jumpbox/bin/setup" >> ${home}/.zshrc
+		rm -f ${home}/.repo
 	fi
 	chown -R ${user} ${home}
 }

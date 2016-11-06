@@ -7,9 +7,8 @@ packages:
 templates:
   bin/jumpbox_ctl: bin/jumpbox_ctl
   bin/watcher:     bin/watcher
-  bin/setup:       bin/setup
   config/banner:   config/banner
-  env:             env
+  config/bashrc:   config/bashrc
 
 properties:
   jumpbox.hostname:
@@ -35,6 +34,13 @@ properties:
           - ssh-rsa AAAAB3NzaC1yabcd
           - ssh-rsa AAAAB3NzaC1y1234
 
+  jumpbox.delete:
+    default: []
+    description: |-
+      A list of users to delete, specified via account name.
+      By default, users that are removed from the BOSH deployment manifest will be deactivated
+      on the jumpbox deployment, but their files will be retained for reference / forensics.
+
   jumpbox.env:
     default: {}
     description: |-
@@ -42,9 +48,8 @@ properties:
       This can be used for setting site-wide HTTP proxy configuration.
       Specified as a map of NAME: VALUE
 
-  jumpbox.delete:
-    default: []
+  jumpbox.bashrc:
+    default: ''
     description: |-
-      A list of users to delete, specified via account name.
-      By default, users that are removed from the BOSH deployment manifest will be deactivated
-      on the jumpbox deployment, but their files will be retained for reference / forensics.
+      Additional bash startup commands, to be included verbatim in the system-wide configuration.
+      This can be used to provide additional conveniences or implement site-wide policy.
