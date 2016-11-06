@@ -1,6 +1,7 @@
 #!/bin/bash
 ## jumpbox system-wide bashrc
 export PS1=$(echo '[\[\e[1;33m\t\e[0m\]] \[\e[1;32m\]\u@\h\[\e[0m\] \[\e[1;34m\]\w\[\e[0m\]\n\[\e[1;34m\]\$ \[\e[0m\]')
+umask 002
 
 ################################################################################
 ###########################################  site-specific environment variables
@@ -20,11 +21,7 @@ export MANPATH=/usr/share/man:/var/vcap/packages/jumpbox/share/man:/var/vcap/pac
 ################################################################################
 #######################################################  one-time per-user setup
 
-if [[ -z ${DONT_RUN_INITIAL_SETUP} \
-   && ${UID} -ne 0                 \
-   && ! -f ${HOME}/.jumpbox        \
-   && -z ${TMUX} ]]
-then
+if [[ ${HOME} =~ ^/u/ && ! -f ${HOME}/.jumpbox && -z ${TMUX} ]]; then
 	cat <<EOF
 
 Hello, ${USER}!

@@ -12,3 +12,7 @@
   same across BOSH recreates and VM resurrection, so that people
   don't lose ownership to files outside their home directories due
   to UID/GID re-assignment.
+
+- One-time per-user setup is now no longer triggered for the
+  `vcap` user, or for any of the temporary accounts created for
+  `bosh ssh` sessions.
