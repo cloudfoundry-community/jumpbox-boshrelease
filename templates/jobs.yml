@@ -9,13 +9,13 @@ update:
   serial: false
 
 jobs:
-  - name: jumpbox_z1
+  - name: jumpbox
     instances: 1
     templates:
       - { release: jumpbox, name: jumpbox }
     networks:
       - name: jumpbox1
-    resource_pool: small_z1
+    resource_pool: small
     persistent_disk: 10240
 
   - name: acceptance-tests
@@ -26,7 +26,7 @@ jobs:
       - { release: jumpbox, name: jumpbox }
     networks:
       - name: jumpbox1
-    resource_pool: small_z1
+    resource_pool: small
 
 properties:
   jumpbox:

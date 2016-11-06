@@ -19,6 +19,6 @@ update:
   serial: false
 
 resource_pools:
-  - name: small_z1
+  - name: small
     network: jumpbox1
     stemcell: (( grab meta.stemcell ))
