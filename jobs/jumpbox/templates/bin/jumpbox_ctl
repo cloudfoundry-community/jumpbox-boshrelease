@@ -16,6 +16,15 @@ chown vcap:vcap $(dirname $pidfile)
 case $1 in
   start)
     echo $$ > $pidfile
+
+    if [[ ! -d /var/vcap/store/jumpbox/hostkeys ]]; then
+      mkdir -p /var/vcap/store/jumpbox/hostkeys
+      cp /etc/ssh/*key* /var/vcap/store/jumpbox/hostkeys
+    else
+      cp /var/vcap/store/jumpbox/hostkeys/*key* /etc/ssh
+      service ssh reload
+    fi
+
     exec $watcher
     ;;
 
