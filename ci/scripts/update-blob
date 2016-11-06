@@ -28,8 +28,12 @@ blobstore:
 EOF
 
 mkdir -p blobs/$(dirname ${BLOB_DESTINATION})
-if [[ ${BLOB_BINARY} =~ ^http ]]; then
-	curl -Lsk $(printf ${BLOB_BINARY} ${VERSION}) -o blobs/${BLOB_DESTINATION}
+if [[ ${BLOB_SOURCE:-} =~ ^http ]]; then
+	if [[ ${BLOB_SOURCE} =~ .tgz$ ]]; then
+		curl -Lsk $(printf ${BLOB_SOURCE} ${VERSION}) | tar -xzO ${BLOB_BINARY} > blobs/${BLOB_DESTINATION}
+	else
+		curl -Lsk $(printf ${BLOB_SOURCE} ${VERSION}) > blobs/${BLOB_DESTINATION}
+	fi
 else
 	cp ../${RELEASE_DIR}/${BLOB_BINARY} blobs/${BLOB_DESTINATION}
 fi

@@ -203,7 +203,8 @@ jobs:
           REPO_OUT:         pushme
           RELEASE_DIR:      cf
           BLOB:             cf
-          BLOB_BINARY:      https://cli.run.pivotal.io/stable?release=linux64-binary&version=%s&source=github-rel
+          BLOB_SOURCE:      https://cli.run.pivotal.io/stable?release=linux64-binary&version=%s&source=github-rel&x=.tgz
+          BLOB_BINARY:      cf
           BLOB_DESTINATION: jumpbox/bins/cf
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
           AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
