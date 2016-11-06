@@ -1,5 +1,8 @@
 #!/bin/bash
 
+if [[ -n ${TMUX} ]]; then
+	exit 0
+fi
 if [[ -z ${USER} ]]; then
 	echo >&2 "No \$USER set; highly suspcious"
 	exit 1
