@@ -20,7 +20,11 @@ export MANPATH=/usr/share/man:/var/vcap/packages/jumpbox/share/man:/var/vcap/pac
 ################################################################################
 #######################################################  one-time per-user setup
 
-if [[ ${UID} -ne 0 && ! -f ${HOME}/.jumpbox && -z ${TMUX} ]]; then
+if [[ -z ${DONT_RUN_INITIAL_SETUP} \
+   && ${UID} -ne 0                 \
+   && ! -f ${HOME}/.jumpbox        \
+   && -z ${TMUX} ]]
+then
 	cat <<EOF
 
 Hello, ${USER}!

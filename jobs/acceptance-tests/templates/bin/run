@@ -1,11 +1,6 @@
 #!/bin/bash
-
-set -e # exit immediately if a simple command exits with a non-zero status
-set -u # report the usage of uninitialized variables
-
-# Setup env vars and folders for the webapp_ctl script
-source /var/vcap/jobs/acceptance-tests/helpers/ctl_setup.sh 'acceptance-tests'
-source /var/vcap/jobs/jumpbox/env
+set -e
+source /var/vcap/jobs/jumpbox/config/bashrc
 
 EXITSTATUS=0
 
@@ -19,6 +14,7 @@ check() {
 		echo -e "\e[1;32mOK\e[0m"
 		$* | sed -e 's/^/  /g'
 	fi
+	echo
 }
 
 check bosh-init -v
@@ -35,10 +31,11 @@ check git --version
 check pwgen 16 1
 check tmux -V
 check tree --version
-vim --version
-wget --version
-zip -v
-unzip -v
+check vim --version
+check wget --version
+check zip -v
+check unzip -v
+check go version
 
 echo
 echo "--------------------------------------------------"
