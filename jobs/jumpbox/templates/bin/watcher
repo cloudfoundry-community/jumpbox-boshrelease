@@ -72,6 +72,7 @@ provision() {
 				echo "$key" >> ${home}/.ssh/authorized_keys
 			fi
 		done
+		chmod 0600 ${home}/.ssh/authorized_keys
 	fi
 
 	if [[ -n "${repo}" ]]; then
