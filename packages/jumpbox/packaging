@@ -8,6 +8,7 @@ CPUS=$(grep -c ^processor /proc/cpuinfo)
 # $BOSH_COMPILE_TARGET - where this package & spec'd source files are available
 # $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
 export HOME=/var/vcap
+n=0 # how many jobs have we spun in parallel?
 
 cp -a jumpbox/setup ${BOSH_INSTALL_TARGET}/setup
 chmod 0755 ${BOSH_INSTALL_TARGET}/setup
@@ -20,10 +21,11 @@ chmod 0755 ${BOSH_INSTALL_TARGET}/bin/*
 # https://curl.haxx.se/download.html
 # https://curl.haxx.se/download/curl-7.50.3.tar.gz
 (tar -xzvf jumpbox/curl-7.50.3.tar.gz
-cd curl-7.50.3
-./configure --prefix=${BOSH_INSTALL_TARGET}
-make -j${CPUS}
-make install) &
+ cd curl-7.50.3
+ ./configure --prefix=${BOSH_INSTALL_TARGET}
+ make -j${CPUS}
+ make install) &
+n=$((n + 1))
 
 # GIT
 # https://www.kernel.org/pub/software/scm/git
@@ -33,6 +35,7 @@ make install) &
  ./configure --prefix=${BOSH_INSTALL_TARGET}
  make -j${CPUS} all
  make install) &
+n=$((n + 1))
 
 # JQ
 # https://github.com/stedolan/jq/releases
@@ -42,6 +45,7 @@ make install) &
  ./configure --prefix=${BOSH_INSTALL_TARGET}
  make -j${CPUS} LDFLAGS=-all-static
  make install) &
+n=$((n + 1))
 
 # PWGEN
 # https://sourceforge.net/projects/pwgen
@@ -51,6 +55,7 @@ make install) &
  ./configure --prefix=${BOSH_INSTALL_TARGET}
  make -j${CPUS}
  make install) &
+n=$((n + 1))
 
 # TMUX
 # http://libevent.org/
@@ -70,6 +75,7 @@ make install) &
  sed -i 's@#define TMUX_CONF.*@#define TMUX_CONF "'${BOSH_INSTALL_TARGET}'/etc/tmux.conf"@' tmux.h
  make -j${CPUS}
  make install) &
+n=$((n + 1))
 
 # TREE
 # http://mama.indstate.edu/users/ice/tree/
@@ -79,6 +85,7 @@ make install) &
  sed -i "s|prefix = /usr|prefix = ${BOSH_INSTALL_TARGET}|" Makefile
  make -j${CPUS}
  make install) &
+n=$((n + 1))
 
 # VIM
 # http://www.vim.org/sources.php
@@ -88,6 +95,7 @@ make install) &
  ./configure --prefix=${BOSH_INSTALL_TARGET}
  make -j${CPUS}
  make install) &
+n=$((n + 1))
 
 # WGET
 # http://ftp.gnu.org/gnu/wget/
@@ -97,6 +105,7 @@ make install) &
  ./configure --prefix=${BOSH_INSTALL_TARGET}
  make -j${CPUS}
  make install) &
+n=$((n + 1))
 
 # ZIP
 # http://www.linuxfromscratch.org/blfs/view/svn/general/zip.html
@@ -110,6 +119,7 @@ make install) &
  make prefix=${BOSH_INSTALL_TARGET} \
       -f unix/Makefile \
       install) &
+n=$((n + 1))
 
 # UNZIP
 # http://www.linuxfromscratch.org/blfs/view/svn/general/unzip.html
@@ -123,7 +133,12 @@ make install) &
  make prefix=${BOSH_INSTALL_TARGET} \
       -f unix/Makefile \
       install) &
+n=$((n + 1))
 
-wait
+while [[ $n -gt 0 ]]; do
+	wait -n
+	n=$((n - 1))
+done
+
 cp jumpbox/vimrc     ${BOSH_INSTALL_TARGET}/share/vim/vimrc
 cp jumpbox/tmux.conf ${BOSH_INSTALL_TARGET}/etc/tmux.conf
