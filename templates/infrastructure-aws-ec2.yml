@@ -1,11 +1,10 @@
 meta:
-  environment: (( merge ))
-  dns_root: (( merge ))
-  security_groups: (( merge ))
+  dns_root: (( param "Please specify a root DNS name" ))
+  security_groups: (( param "Please define Security Groups" ))
   persistent_disk: 4096
 
   stemcell:
-    name: bosh-aws-xen-ubuntu
+    name: bosh-aws-xen-ubuntu-trusty-go_agent
     version: latest
 
 jobs:
@@ -13,7 +12,7 @@ jobs:
     instances: 1
     networks:
       - name: jumpbox1
-    persistent_disk: (( meta.persistent_disk ))
+    persistent_disk: (( grab meta.persistent_disk ))
 
 
 compilation:
@@ -32,4 +31,4 @@ networks:
   - name: jumpbox1
     type: dynamic
     cloud_properties:
-      security_groups: (( meta.security_groups ))
+      security_groups: (( grab meta.security_groups ))
