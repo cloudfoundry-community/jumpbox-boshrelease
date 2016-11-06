@@ -7,3 +7,8 @@
 - SSH Host Keys will now persist across VM recreation, so you can
   start trusting your SSH Host Key mismatch warnings again, and
   maybe even re-enable strict host key checking!
+
+- Some UNIX trickery was added to ensure that UID/GIDs stayed the
+  same across BOSH recreates and VM resurrection, so that people
+  don't lose ownership to files outside their home directories due
+  to UID/GID re-assignment.

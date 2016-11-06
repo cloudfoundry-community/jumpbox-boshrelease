@@ -15,6 +15,7 @@ exec </dev/null >>/var/vcap/sys/log/jumpbox.log 2>&1
 FIRSTRUN=1
 
 JUMPBOX_HOME=/var/vcap/store/jumpbox/home
+JUMPBOX_ETC=/var/vcap/store/jumpbox/etc
 JUMPBOX_GO=/usr/local/go
 JUMPBOX_HOSTNAME="<%= p('jumpbox.hostname') %>"
 
@@ -119,6 +120,10 @@ remove() {
 }
 
 while true; do
+	if [[ -d ${JUMPBOX_ETC} ]]; then
+		cp -a ${JUMPBOX_ETC}/* /etc/
+	fi
+
 	log1 "Setting up jumpbox banner"
 	if [[ -d /etc/update-motd.d && ! -f /etc/update-motd.d/99-banner ]]; then
 		cat >/etc/update-motd.d/99-banner <<EOF
@@ -208,6 +213,8 @@ EOF
 		deactivate ${user}
 	done
 
+	mkdir -p ${JUMPBOX_ETC}
+	cp -a /etc/passwd /etc/*shadow /etc/group ${JUMPBOX_ETC}/
 
 	log1 "Complete.  Will verify / fix every 5 minutes"
 	FIRSTRUN=0
