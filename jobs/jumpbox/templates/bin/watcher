@@ -48,7 +48,7 @@ provision() {
 	log1 "Setting up user ${user}"
 	if ! grep -q "^${user}:" /etc/passwd; then
 		logn "User ${user} does not exist; adding"
-		/usr/sbin/useradd -m -d ${home} -s ${shell} ${user}
+		/usr/sbin/useradd -m -d /u/${user} -s ${shell} ${user}
 	fi
 	mkdir -p ${home}
 	/usr/sbin/usermod --expiredate -1 ${user}
@@ -133,6 +133,11 @@ EOF
 	if [[ ! -d ${JUMPBOX_HOME} ]]; then
 		logn "${JUMPBOX_HOME} not found; fixing"
 		mkdir -p ${JUMPBOX_HOME}
+	fi
+	if [[ ! -L /u ]]; then
+		logn "Fixing symlink /u -> ${JUMPBOX_HOME}"
+		rm -f /u
+		ln -sf ${JUMPBOX_HOME} /u
 	fi
 
 	log1 "Setting permissions on /tmp to 1777"
