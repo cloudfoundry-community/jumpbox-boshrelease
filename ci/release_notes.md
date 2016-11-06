@@ -25,3 +25,6 @@ Bumped safe to v0.0.26
 
 ##### safe
 Bumped safe to v0.0.27
+
+##### cf
+Bumped cf to v6.22.2
