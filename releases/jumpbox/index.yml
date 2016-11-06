@@ -46,4 +46,6 @@ builds:
     version: 4.1.4
   74bcef7c-baa2-4c15-9b01-ad754bb91b8b:
     version: 4.1.5
+  2ec9eaaf-dd25-4834-9042-56ff421b7ff9:
+    version: 4.2.0
 format-version: '2'
