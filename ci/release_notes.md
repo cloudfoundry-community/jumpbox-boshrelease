@@ -27,6 +27,11 @@
 
 - New sane default configuration for `vim` and `tmux`
 
+- New `acceptance-tests` job for verifying the viability of the
+  Jumpbox BOSH release itself.  This will be used in our CI
+  pipelines moving forward, to ensure that all utilities work
+  out of the box.
+
 ##### spruce
 Bumped spruce to v1.8.2
 

@@ -1,0 +1,46 @@
+#!/bin/bash
+
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+# Setup env vars and folders for the webapp_ctl script
+source /var/vcap/jobs/acceptance-tests/helpers/ctl_setup.sh 'acceptance-tests'
+source /var/vcap/jobs/jumpbox/env
+
+EXITSTATUS=0
+
+check() {
+	name=$1
+	echo -en "Checking \e[1;35m${name}\e[0m... "
+	if ! $* >/dev/null 2>&1; then
+		echo -e "\e[1;31mFAILED!\e[0m"
+		EXITSTATUS=1
+	else
+		echo -e "\e[1;32mOK\e[0m"
+		$* | sed -e 's/^/  /g'
+	fi
+}
+
+check bosh-init -v
+check cf --version
+check genesis version
+check safe version
+# WHA?  there is no shield version command?
+#check shield version
+check spiff -v
+check spruce -v
+check vault -v
+check curl --version
+check git --version
+check pwgen 16 1
+check tmux -V
+check tree --version
+vim --version
+wget --version
+zip -v
+unzip -v
+
+echo
+echo "--------------------------------------------------"
+echo "Errand acceptance-tests is complete; exit status $EXITSTATUS"
+exit $EXITSTATUS
