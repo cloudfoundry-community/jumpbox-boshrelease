@@ -16,3 +16,9 @@
 - One-time per-user setup is now no longer triggered for the
   `vcap` user, or for any of the temporary accounts created for
   `bosh ssh` sessions.
+
+## Bug Fixes
+
+- Handle utilities that don't send their version information to
+  standard output, like `safe`.  Redirecting stderr makes the
+  output of the errand look muuuuuuch nicer.

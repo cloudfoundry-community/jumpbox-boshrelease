@@ -12,7 +12,7 @@ check() {
 		EXITSTATUS=1
 	else
 		echo -e "\e[1;32mOK\e[0m"
-		$* | sed -e 's/^/  /g'
+		$* 2>&1 | sed -e 's/^/  /g'
 	fi
 	echo
 }
