@@ -19,3 +19,6 @@
   Jumpbox BOSH release itself.  This will be used in our CI
   pipelines moving forward, to ensure that all utilities work
   out of the box.
+
+##### safe
+Bumped safe to v0.0.26
