@@ -27,7 +27,11 @@ blobstore:
     secret_access_key: ${AWS_SECRET_KEY}
 EOF
 
-mkdir -p blobs/$(dirname ${BLOB_DESTINATION})
+if [[ ${BLOB_DESTINATION:${#BLOB_DESTINATION}-1:1} == "/" ]]; then
+	mkdir -p blobs/${BLOB_DESTINATION}
+else
+	mkdir -p blobs/$(dirname ${BLOB_DESTINATION})
+fi
 if [[ ${BLOB_SOURCE:-} =~ ^http ]]; then
 	if [[ ${BLOB_SOURCE} =~ .tgz$ ]]; then
 		curl -Lsk $(printf ${BLOB_SOURCE} ${VERSION}) | tar -xzO ${BLOB_BINARY} > blobs/${BLOB_DESTINATION}
@@ -37,7 +41,7 @@ if [[ ${BLOB_SOURCE:-} =~ ^http ]]; then
 else
   # https://github.com/concourse/github-release-resource#in-fetch-assets-from-a-release
   # removing github release artifacts, to enable glob based copying for BLOB_BINARY
-  rm ../${RELEASE_DIR}/tag ../${RELEASE_DIR}/body ../${RELEASE_DIR}/version
+  rm ../${RELEASE_DIR}/tag ../${RELEASE_DIR}/body ../${RELEASE_DIR}/version # blame gfranks for this crappy hack
 	cp ../${RELEASE_DIR}/${BLOB_BINARY} blobs/${BLOB_DESTINATION}
 fi
 bosh -n upload blobs

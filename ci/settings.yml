@@ -260,7 +260,7 @@ jobs:
           RELEASE_DIR:      cloudfoundry-utils
           BLOB:             cloudfoundry-utils
           BLOB_BINARY:      '*'
-          BLOB_DESTINATION: jumpbox/cloudfoundry-utils
+          BLOB_DESTINATION: jumpbox/cloudfoundry-utils/
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
           AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
           BRANCH:           (( grab meta.github.branch ))
