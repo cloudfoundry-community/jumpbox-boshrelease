@@ -28,6 +28,7 @@ groups:
     - genesis
     - safe
     - cf
+    - cloudfoundry-utils
 
 jobs:
   - name: spruce # {{{
