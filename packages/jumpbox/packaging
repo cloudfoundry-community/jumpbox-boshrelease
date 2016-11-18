@@ -15,6 +15,7 @@ chmod 0755 ${BOSH_INSTALL_TARGET}/setup
 
 mkdir ${BOSH_INSTALL_TARGET}/bin
 cp -a jumpbox/bins/* ${BOSH_INSTALL_TARGET}/bin
+cp -a jumpbox/cloudfoundry-utils/* ${BOSH_INSTALL_TARGET}/bin
 chmod 0755 ${BOSH_INSTALL_TARGET}/bin/*
 
 # CURL

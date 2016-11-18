@@ -35,6 +35,9 @@ if [[ ${BLOB_SOURCE:-} =~ ^http ]]; then
 		curl -Lsk $(printf ${BLOB_SOURCE} ${VERSION}) > blobs/${BLOB_DESTINATION}
 	fi
 else
+  # https://github.com/concourse/github-release-resource#in-fetch-assets-from-a-release
+  # removing github release artifacts, to enable glob based copying for BLOB_BINARY
+  rm ../${RELEASE_DIR}/tag ../${RELEASE_DIR}/body ../${RELEASE_DIR}/version
 	cp ../${RELEASE_DIR}/${BLOB_BINARY} blobs/${BLOB_DESTINATION}
 fi
 bosh -n upload blobs

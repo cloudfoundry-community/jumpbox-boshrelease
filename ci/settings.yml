@@ -236,6 +236,59 @@ jobs:
           icon_url: (( grab meta.slack.icon ))
           text:     (( grab meta.slack.blob_failure ))
   # }}}
+  - name: cloudfoundry-utils # {{{
+    public: true
+    plan:
+    - aggregate:
+      - { get: git }
+      - { get: cloudfoundry-utils, trigger: true }
+    - task: update-cloudfoundry-utils
+      config:
+        image: docker:///starkandwayne/concourse
+        platform: linux
+        inputs:
+        - name: git
+        - name: cloudfoundry-utils
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          RELEASE_DIR:      cloudfoundry-utils
+          BLOB:             cloudfoundry-utils
+          BLOB_BINARY:      '*'
+          BLOB_DESTINATION: jumpbox/cloudfoundry-utils
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:           (( grab meta.github.branch ))
+      on_failure:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_failure ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_success ))
+      on_failure:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_failure ))
+  # }}}
 
 resources:
   - name: spruce # {{{
@@ -264,5 +317,12 @@ resources:
     source:
       user: cloudfoundry
       repository: cli
+      access_token: (( grab meta.github.access_token ))
+  # }}}
+  - name: cloudfoundry-utils # {{{
+    type: github-release
+    source:
+      user: starkandwayne
+      repository: cloudfoundry-utils
       access_token: (( grab meta.github.access_token ))
   # }}}

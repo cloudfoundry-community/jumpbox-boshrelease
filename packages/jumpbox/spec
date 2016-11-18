@@ -13,6 +13,7 @@ files:
   - jumpbox/bins/spiff
   - jumpbox/bins/spruce
   - jumpbox/bins/vault
+  - jumpbox/cloudfoundry-utils/*
 
     # curl
   - jumpbox/curl-7.50.3.tar.gz
