@@ -7,3 +7,6 @@ Bumped safe to v0.0.28
 
 ##### spruce
 Bumped spruce to v1.8.4
+
+##### spruce
+Bumped spruce to v1.8.5
