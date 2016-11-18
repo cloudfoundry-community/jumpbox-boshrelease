@@ -79,3 +79,31 @@ jumpbox/zip30.tar.gz:
   object_id: f46a1f21-a9e9-415a-9e2d-8b8303fe1659
   sha: c9f4099ecf2772b53c2dd4a8e508064ce015d182
   size: 1118845
+jumpbox/cloudfoundry-utils/cert_generator:
+  object_id: f2d07b02-3927-4015-9bc6-922cd41cf2ce
+  sha: 853eb37ad3c9ffa7e5dc88ca3dbc5b55c6c0be1a
+  size: 6667
+jumpbox/cloudfoundry-utils/cf-app-env-json:
+  object_id: 4e7ffcc2-5331-4d87-8a4b-13c2d61dc89c
+  sha: b5b76fe615821b8ebbdfb626fc2b8ee48341e3db
+  size: 610
+jumpbox/cloudfoundry-utils/cf-apps-for-route:
+  object_id: 65921c66-da29-4317-a02e-12108b8801b5
+  sha: 353eeead0e21cc8a0a02c652aa07c6c8edb0daa6
+  size: 2456
+jumpbox/cloudfoundry-utils/cf-list-org-names:
+  object_id: 03d55938-3d91-4459-8ada-5a513db689b3
+  sha: 4f5903caa03ec1c384790b6ee8b1cf3da054892a
+  size: 472
+jumpbox/cloudfoundry-utils/cf-services-for-broker:
+  object_id: a0e7a71e-ca61-4e15-9378-694636316435
+  sha: adceb1b4d7b3b86ba831318d5a7f27f8cce28934
+  size: 4761
+jumpbox/cloudfoundry-utils/cf-verify:
+  object_id: 0fc4b29c-cd90-48ef-89b4-70bcdfed4561
+  sha: 8944c5834b65ccb82255a18755142a96018240cb
+  size: 3820
+jumpbox/cloudfoundry-utils/release-differ:
+  object_id: d4c6986b-b1fa-4584-8c6c-86ccb5a9eddf
+  sha: 87bfb4ffafafc9ec2c98069590c55cd8e3e7980c
+  size: 2199
