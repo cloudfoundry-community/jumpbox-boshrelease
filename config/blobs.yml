@@ -28,9 +28,9 @@ jumpbox/bins/spiff:
   sha: 7489aa87ad7f5b3b774fc8a03ccda65860b1374c
   size: 5063744
 jumpbox/bins/spruce:
-  object_id: 64446e11-2782-46ca-b843-29cbcd47c777
-  sha: 4beb8d9775e2e81fa9815732f6a5af0dc9062262
-  size: 8344196
+  object_id: a5dc3a51-fa1b-4ca0-8338-ac6944a434fa
+  sha: 52750e1c288bc4f243fe2306a4d5ec33490a0b98
+  size: 8344266
 jumpbox/bins/vault:
   object_id: 69b6532c-4cbc-4b46-bdc4-fdf1e1625af9
   sha: 507f1c2051d39ab571756aee560b79489ffcabf4
