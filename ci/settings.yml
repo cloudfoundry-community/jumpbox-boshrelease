@@ -289,7 +289,7 @@ jobs:
           username: (( grab meta.slack.username ))
           icon_url: (( grab meta.slack.icon ))
           text:     (( grab meta.slack.blob_failure ))
-  # }}}
+   # }}}
 
 resources:
   - name: spruce # {{{
@@ -323,7 +323,7 @@ resources:
   - name: cloudfoundry-utils # {{{
     type: github-release
     source:
-      user: starkandwayne
+      user: cloudfoundry-community
       repository: cloudfoundry-utils
       access_token: (( grab meta.github.access_token ))
   # }}}
