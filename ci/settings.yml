@@ -1,7 +1,7 @@
 ---
 meta:
   name: jumpbox
-  url: https://ci.vsphere.starkandwayne.com/
+  url: https://ci.starkandwayne.com/
   target: sw
   test-errand: acceptance-tests
   aws:
