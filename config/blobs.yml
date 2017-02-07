@@ -107,3 +107,7 @@ jumpbox/cloudfoundry-utils/release-differ:
   object_id: d4c6986b-b1fa-4584-8c6c-86ccb5a9eddf
   sha: 87bfb4ffafafc9ec2c98069590c55cd8e3e7980c
   size: 2199
+jumpbox/bins/terraform:
+  object_id: 7f80b216-fcd7-4e5b-855f-bc7db5cca507
+  sha: 07772a350cac3a3cb8791d778a6f470c30118ae1
+  size: 93508352

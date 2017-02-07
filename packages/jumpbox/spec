@@ -13,6 +13,7 @@ files:
   - jumpbox/bins/spiff
   - jumpbox/bins/spruce
   - jumpbox/bins/vault
+  - jumpbox/bins/terraform
   - jumpbox/cloudfoundry-utils/*
 
     # curl
