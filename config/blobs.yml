@@ -111,3 +111,7 @@ jumpbox/bins/terraform:
   object_id: 7f80b216-fcd7-4e5b-855f-bc7db5cca507
   sha: 07772a350cac3a3cb8791d778a6f470c30118ae1
   size: 93508352
+jumpbox/bins/certstrap:
+  object_id: 6050fa1f-105b-4ddb-8074-224e149b5c83
+  sha: 1fa8434399124dd0b17c20c0c90bc34fb0ba16bf
+  size: 5493848
