@@ -32,9 +32,9 @@ jumpbox/bins/spruce:
   sha: 9ad38c8aadd2e8686c626cbea5c038c4825cfaa0
   size: 8622195
 jumpbox/bins/vault:
-  object_id: 69b6532c-4cbc-4b46-bdc4-fdf1e1625af9
-  sha: 507f1c2051d39ab571756aee560b79489ffcabf4
-  size: 39822560
+  object_id: 31e80403-d6ec-45ee-a70d-f228db9a3006
+  sha: def3abd675437e7e263057387be6952795b42a95
+  size: 54735435
 jumpbox/curl-7.50.3.tar.gz:
   object_id: dab8c17e-f200-423e-8421-27c80bcaa15d
   sha: be0065afc76a3d8568f5f78d8efddadb6310f9d7
