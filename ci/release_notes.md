@@ -7,3 +7,6 @@ Bumped Vault CLI to v0.6.5
 
 ##### certstrap
 Added certstrap to Jumpbox
+
+##### safe
+Bumped safe to v0.0.30
