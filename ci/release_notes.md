@@ -10,3 +10,6 @@ Added certstrap to Jumpbox
 
 ##### safe
 Bumped safe to v0.0.30
+
+##### safe
+Bumped safe to v0.1.0
