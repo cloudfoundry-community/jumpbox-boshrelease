@@ -115,3 +115,7 @@ jumpbox/bins/certstrap:
   object_id: 6050fa1f-105b-4ddb-8074-224e149b5c83
   sha: 1fa8434399124dd0b17c20c0c90bc34fb0ba16bf
   size: 5493848
+jumpbox/bins/tmate:
+  object_id: 3253b6dc-3e45-4dd2-b6ce-deb1147b853b
+  sha: 7dae88002cfc9686fa90e1535e17a2eae22407ea
+  size: 2748936
