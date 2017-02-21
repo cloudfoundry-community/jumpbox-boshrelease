@@ -1,3 +1,5 @@
+## Bug Fix
+- Fixes https://github.com/cloudfoundry-community/jumpbox-boshrelease/issues/24. Allows ssh on stemcells >=3363.
 
 ##### cf
 Bumped cf to v6.24.0
