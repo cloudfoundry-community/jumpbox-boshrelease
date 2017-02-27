@@ -186,6 +186,11 @@ EOF
 		fi
 	done
 
+	log1 "Adding the bosh-sshers group if not present"
+	if ! grep -q "^bosh_sshers" /etc/group; then
+		groupadd bosh_sshers
+	fi
+
 	log1 "Setting up jumpbox users"
 	declare -A users
 	pushd ${JUMPBOX_HOME} >/dev/null 2>&1

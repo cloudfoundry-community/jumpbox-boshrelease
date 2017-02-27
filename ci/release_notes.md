@@ -1,3 +1,7 @@
+# Bugfixes
+
+Made jumpbox-boshrelease backwards compatible with older stemcells
+
 ##### tmate
 Added tmate 2.2.1
 
