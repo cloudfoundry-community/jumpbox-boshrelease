@@ -60,4 +60,6 @@ builds:
     version: 4.2.5
   22f9c8a9-d08e-4d1e-9c57-ddf4ffc61c1b:
     version: 4.2.6
+  e93bd0fd-ffad-4907-b9a6-4ccadd8bd4fe:
+    version: 4.2.7
 format-version: '2'
