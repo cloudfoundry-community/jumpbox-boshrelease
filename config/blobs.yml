@@ -8,9 +8,9 @@ jumpbox/bins/bosh-init:
   sha: 7284ab6ac28289c6dafc6f3e4048564423aab77a
   size: 14658552
 jumpbox/bins/cf:
-  object_id: 9456b369-006b-4f4c-9680-e7bd84ecc258
-  sha: 900b984f53dd8759e764653223a7c68ad990e33d
-  size: 22325723
+  object_id: 85ef487f-b7f6-43a6-b038-dc2a50643460
+  sha: f083d7db7fafc5744596594f94c20f220e578ed4
+  size: 13924992
 jumpbox/bins/genesis:
   object_id: 3d865507-4a4a-4e84-883d-7f2e6c1d4e1e
   sha: 3f38be17bd179a083aa900be6d634120652eb1b2
