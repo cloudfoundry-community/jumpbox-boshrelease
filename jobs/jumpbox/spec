@@ -17,7 +17,7 @@ properties:
 
   jumpbox.banner:
     description: "A login banner, or MoTD, to display to users when they log in"
-    defafult: nil
+    default: nil
 
   jumpbox.hosts:
     description: "A list of entries to append to /etc/hosts"
