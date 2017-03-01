@@ -119,3 +119,7 @@ jumpbox/bins/tmate:
   object_id: 3253b6dc-3e45-4dd2-b6ce-deb1147b853b
   sha: 7dae88002cfc9686fa90e1535e17a2eae22407ea
   size: 2748936
+jumpbox/vim-8.0.0386.tar.gz:
+  object_id: e0bd5753-1931-420f-ad98-d7aa7a937a3d
+  sha: 59b7649b1a057d49860fdc99e4b91401253abc88
+  size: 13000882
