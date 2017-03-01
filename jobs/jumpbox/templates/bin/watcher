@@ -76,7 +76,14 @@ provision() {
 	fi
 
 	if [[ -n "${repo}" ]]; then
-		echo "${repo}" > ${home}/.repo
+		if [[ ! -f ${home}/.repo ]]; then
+			touch ${home}/.repo
+		fi
+
+		old_repo=$(cat ${home}/.repo)
+		if [[ "${repo}" != "${old_repo}" ]]; then
+			echo "${repo}" > ${home}/.repo
+		fi
 	else
 		rm -f ${home}/.repo
 	fi
