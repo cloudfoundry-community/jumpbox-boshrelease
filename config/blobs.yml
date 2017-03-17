@@ -123,3 +123,7 @@ jumpbox/vim-8.0.0386.tar.gz:
   object_id: e0bd5753-1931-420f-ad98-d7aa7a937a3d
   sha: 59b7649b1a057d49860fdc99e4b91401253abc88
   size: 13000882
+jumpbox/bins/nats:
+  object_id: 698b0c19-976d-4161-81f3-03b859fe55ff
+  sha: 39f00b44c10e332df5f0bff518c1aa2a4dc74792
+  size: 7040936
