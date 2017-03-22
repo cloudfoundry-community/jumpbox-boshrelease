@@ -4,9 +4,9 @@ golang_1.5/go1.5.3.linux-amd64.tar.gz:
   sha: c5377eca4837968d043b681f00a852a262f0f5f6
   size: 80147269
 jumpbox/bins/bosh-init:
-  object_id: 744322bb-be75-43a2-92ca-f5353bd2ec2b
-  sha: 7284ab6ac28289c6dafc6f3e4048564423aab77a
-  size: 14658552
+  object_id: cb2b768c-b66f-4335-b97f-bb7ab80e1bf0
+  sha: 7c8c42641900d60d4bab24488de25cdcba0cb4a8
+  size: 11873378
 jumpbox/bins/cf:
   object_id: 85ef487f-b7f6-43a6-b038-dc2a50643460
   sha: f083d7db7fafc5744596594f94c20f220e578ed4
