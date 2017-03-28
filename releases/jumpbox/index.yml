@@ -68,4 +68,6 @@ builds:
     version: 4.2.9
   3b23632f-f429-4b77-a4b5-4c74c7d11955:
     version: 4.2.10
+  b7f6e61d-9a2c-4ef7-b39f-672d82744e5e:
+    version: 4.2.11
 format-version: '2'
