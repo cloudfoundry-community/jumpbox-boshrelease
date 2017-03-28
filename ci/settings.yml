@@ -27,6 +27,7 @@ groups:
     - spruce
     - genesis
     - safe
+    - esuf
     - cf
     - cloudfoundry-utils
 
@@ -154,6 +155,59 @@ jobs:
           BLOB:             safe
           BLOB_BINARY:      safe-linux-amd64
           BLOB_DESTINATION: jumpbox/bins/safe
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:       (( grab meta.github.branch ))
+      on_failure:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_failure ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_success ))
+      on_failure:
+        put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text:     (( grab meta.slack.blob_failure ))
+  # }}}
+  - name: esuf # {{{
+    public: true
+    plan:
+    - aggregate:
+      - { get: git }
+      - { get: esuf, trigger: true }
+    - task: update-safe
+      config:
+        image: docker:///starkandwayne/concourse
+        platform: linux
+        inputs:
+        - name: git
+        - name: esuf
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          RELEASE_DIR:      esuf
+          BLOB:             esuf
+          BLOB_BINARY:      esuf-linux-amd64
+          BLOB_DESTINATION: jumpbox/bins/esuf
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
           AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
           BRANCH:       (( grab meta.github.branch ))
@@ -311,6 +365,13 @@ resources:
     source:
       user: starkandwayne
       repository: safe
+      access_token: (( grab meta.github.access_token ))
+  # }}}
+  - name: esuf # {{{
+    type: github-release
+    source:
+      user: starkandwayne
+      repository: esuf
       access_token: (( grab meta.github.access_token ))
   # }}}
   - name: cf # {{{
