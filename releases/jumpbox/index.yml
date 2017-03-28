@@ -70,4 +70,6 @@ builds:
     version: 4.2.10
   b7f6e61d-9a2c-4ef7-b39f-672d82744e5e:
     version: 4.2.11
+  a2764368-e963-41e3-bcfc-646d7d23e296:
+    version: 4.2.12
 format-version: '2'
