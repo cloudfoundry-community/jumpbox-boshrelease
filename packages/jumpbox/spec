@@ -6,14 +6,19 @@ files:
 
     # pre-compiled binaries / scripts
   - jumpbox/bins/bosh-init
+  - jumpbox/bins/bosh2
+  - jumpbox/bins/certstrap
   - jumpbox/bins/cf
+  - jumpbox/bins/esuf
   - jumpbox/bins/genesis
+  - jumpbox/bins/nats
   - jumpbox/bins/safe
   - jumpbox/bins/shield
   - jumpbox/bins/spiff
   - jumpbox/bins/spruce
-  - jumpbox/bins/vault
   - jumpbox/bins/terraform
+  - jumpbox/bins/tmate
+  - jumpbox/bins/vault
   - jumpbox/cloudfoundry-utils/*
 
     # curl
