@@ -93,7 +93,7 @@ provision() {
 
 deactivate() {
 	local user=$1
-	local today=$(date +%YMD)
+	local today=$(date +%Y%M%D.%H%M%S)
 
 	local to="${JUMPBOX_HOME}/.${user}.${today}"
 	log "Deactivating user $user"
