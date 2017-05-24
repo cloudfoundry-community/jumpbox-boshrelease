@@ -80,4 +80,6 @@ builds:
     version: 4.2.15
   f2db6e0c-d31f-4e9d-82e9-19732f7cb745:
     version: 4.2.16
+  9463f98a-906f-40c9-be4b-0e95f1089e63:
+    version: 4.2.17
 format-version: '2'
