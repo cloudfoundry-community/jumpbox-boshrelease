@@ -40,7 +40,7 @@ jobs:
       - { get: spruce, trigger: true }
     - task: update-spruce
       config:
-        image: docker:///starkandwayne/concourse
+        rootfs_uri: docker:///starkandwayne/concourse
         platform: linux
         inputs:
         - name: git
@@ -93,7 +93,7 @@ jobs:
       - { get: genesis, trigger: true }
     - task: update-genesis
       config:
-        image: docker:///starkandwayne/concourse
+        rootfs_uri: docker:///starkandwayne/concourse
         platform: linux
         inputs:
         - name: git
@@ -139,7 +139,7 @@ jobs:
       - { get: safe, trigger: true }
     - task: update-safe
       config:
-        image: docker:///starkandwayne/concourse
+        rootfs_uri: docker:///starkandwayne/concourse
         platform: linux
         inputs:
         - name: git
@@ -192,7 +192,7 @@ jobs:
       - { get: esuf, trigger: true }
     - task: update-safe
       config:
-        image: docker:///starkandwayne/concourse
+        rootfs_uri: docker:///starkandwayne/concourse
         platform: linux
         inputs:
         - name: git
@@ -245,7 +245,7 @@ jobs:
       - { get: cf, trigger: true }
     - task: update-cf
       config:
-        image: docker:///starkandwayne/concourse
+        rootfs_uri: docker:///starkandwayne/concourse
         platform: linux
         inputs:
         - name: git
@@ -299,7 +299,7 @@ jobs:
       - { get: cloudfoundry-utils, trigger: true }
     - task: update-cloudfoundry-utils
       config:
-        image: docker:///starkandwayne/concourse
+        rootfs_uri: docker:///starkandwayne/concourse
         platform: linux
         inputs:
         - name: git
