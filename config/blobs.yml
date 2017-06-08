@@ -128,9 +128,9 @@ jumpbox/bins/nats:
   sha: 39f00b44c10e332df5f0bff518c1aa2a4dc74792
   size: 7040936
 jumpbox/bins/esuf:
-  object_id: 037a63e7-aeee-4b83-a813-9e43bc6ab3b9
-  sha: f7f58ad9c7b0ba58938c92fa3f1805cddb3ba5bd
-  size: 7297124
+  object_id: 7902014e-2f9c-4add-9e90-2fc00514f919
+  sha: 73979dd7fcb704a0994d55c416340d2d3bcf16df
+  size: 7305569
 jumpbox/bins/bosh2:
   object_id: 15f013a0-12a2-4843-aba1-d5b79406dde8
   sha: f23c3aecec999cfda93a3123ccc724f09856a5c9
