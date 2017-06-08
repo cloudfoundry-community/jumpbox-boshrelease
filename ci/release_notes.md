@@ -7,3 +7,6 @@ Bumped spruce to v1.10.0
 
 ##### esuf
 Bumped esuf to v0.1.2
+
+##### bosh2
+Bumped bosh2 to v2.0.23
