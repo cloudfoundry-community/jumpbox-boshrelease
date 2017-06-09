@@ -10,3 +10,6 @@ Bumped esuf to v0.1.2
 
 ##### bosh2
 Bumped bosh2 to v2.0.23
+
+##### cf
+Bumped cf to v6.27.0
