@@ -13,3 +13,6 @@ Bumped bosh2 to v2.0.23
 
 ##### cf
 Bumped cf to v6.27.0
+
+##### genesis
+Bumped genesis to v2.0.0
