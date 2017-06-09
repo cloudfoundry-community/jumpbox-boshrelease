@@ -82,4 +82,6 @@ builds:
     version: 4.2.16
   9463f98a-906f-40c9-be4b-0e95f1089e63:
     version: 4.2.17
+  fb98f41d-3373-42cf-a74d-ae3ca499d6b5:
+    version: 4.2.18
 format-version: '2'
