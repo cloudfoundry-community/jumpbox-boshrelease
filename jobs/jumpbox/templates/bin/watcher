@@ -228,7 +228,10 @@ EOF
 	done
 
 	mkdir -p ${JUMPBOX_ETC}
-	cp -a /etc/passwd /etc/*shadow /etc/group ${JUMPBOX_ETC}/
+	if [ "$(ls -A ${JUMPBOX_ETC})" ]; then
+            cp -a /etc/passwd /etc/*shadow /etc/group ${JUMPBOX_ETC}/
+        fi
+	
 
 	log1 "Complete.  Will verify / fix every 5 minutes"
 	FIRSTRUN=0
