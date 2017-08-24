@@ -40,8 +40,11 @@ jobs:
       - { get: spruce, trigger: true }
     - task: update-spruce
       config:
-        rootfs_uri: docker:///starkandwayne/concourse
         platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image ))
         inputs:
         - name: git
         - name: spruce
@@ -93,8 +96,11 @@ jobs:
       - { get: genesis, trigger: true }
     - task: update-genesis
       config:
-        rootfs_uri: docker:///starkandwayne/concourse
         platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image ))
         inputs:
         - name: git
         - name: genesis
@@ -139,8 +145,11 @@ jobs:
       - { get: safe, trigger: true }
     - task: update-safe
       config:
-        rootfs_uri: docker:///starkandwayne/concourse
         platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image ))
         inputs:
         - name: git
         - name: safe
@@ -192,8 +201,11 @@ jobs:
       - { get: esuf, trigger: true }
     - task: update-safe
       config:
-        rootfs_uri: docker:///starkandwayne/concourse
         platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image ))
         inputs:
         - name: git
         - name: esuf
@@ -245,8 +257,11 @@ jobs:
       - { get: cf, trigger: true }
     - task: update-cf
       config:
-        rootfs_uri: docker:///starkandwayne/concourse
         platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image ))
         inputs:
         - name: git
         - name: cf
@@ -299,8 +314,11 @@ jobs:
       - { get: cloudfoundry-utils, trigger: true }
     - task: update-cloudfoundry-utils
       config:
-        rootfs_uri: docker:///starkandwayne/concourse
         platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image ))
         inputs:
         - name: git
         - name: cloudfoundry-utils
