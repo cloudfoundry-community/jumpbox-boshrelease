@@ -98,4 +98,6 @@ builds:
     version: 4.2.24
   4dcc30b6-1493-47ff-849d-f6f3560321d4:
     version: 4.3.0
+  d1575f26-a653-411d-915f-7179de8f217f:
+    version: 4.3.1
 format-version: '2'
