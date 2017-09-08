@@ -34,10 +34,10 @@ properties:
 ### Packages installed
 
 - bosh-init 0.0.92-3ee9292
-- cf 6.20
+- cf 6.30
 - curl 7.50.3
 - genesis (latest and greatest!)
-- git 2.10.0
+- git 2.14.1
 - jq 1.5
 - pwgen 2.07
 - safe (latest and greatest!)
