@@ -1,137 +1,136 @@
----
 golang_1.5/go1.5.3.linux-amd64.tar.gz:
+  size: 80147269
   object_id: 5d8b0264-6ad9-405e-961f-4449dd9a180f
   sha: c5377eca4837968d043b681f00a852a262f0f5f6
-  size: 80147269
 jumpbox/bins/bosh-init:
+  size: 11873378
   object_id: cb2b768c-b66f-4335-b97f-bb7ab80e1bf0
   sha: 7c8c42641900d60d4bab24488de25cdcba0cb4a8
-  size: 11873378
-jumpbox/bins/cf:
-  object_id: fdf9adc3-af9c-4b9f-96b7-1be04b9bf15f
-  sha: 6b053a5c8c94cde13c328185fce5326530c5bf83
-  size: 16236608
-jumpbox/bins/genesis:
-  object_id: ac85745c-fb4a-44ab-9766-5064d560f71c
-  sha: dba0ff87dbcf5d57d9ba78456963b9794d344f05
-  size: 338114
-jumpbox/bins/safe:
-  object_id: c4ad58dc-e28b-4928-ba5d-1a234ef70458
-  sha: 5aedfeac247eeaf82475f18b0f983d0594b15a8a
-  size: 7643919
-jumpbox/bins/shield:
-  object_id: 0fe0d6e1-8545-43d9-a84f-938594598963
-  sha: 34d3dd2619ab3daa5639791caa6c8e70d842a6f2
-  size: 8175536
-jumpbox/bins/spiff:
-  object_id: eefcc937-c44a-4298-a56d-5e7259137c7c
-  sha: 7489aa87ad7f5b3b774fc8a03ccda65860b1374c
-  size: 5063744
-jumpbox/bins/spruce:
-  object_id: 47c520a2-fd9f-4542-b6b9-04bd0137d2c4
-  sha: 01d01beccaf22b543b897492054c7724b9ca3196
-  size: 9351299
-jumpbox/bins/vault:
-  object_id: a7d6df95-8bc5-4090-950d-35d349557801
-  sha: 39f140b287ac8b0df513aa4ceb6c50b800b8ce66
-  size: 59959512
-jumpbox/curl-7.50.3.tar.gz:
-  object_id: dab8c17e-f200-423e-8421-27c80bcaa15d
-  sha: be0065afc76a3d8568f5f78d8efddadb6310f9d7
-  size: 8908593
-jumpbox/git-2.14.1.tar.gz:
-  object_id: 35a33b21-0dac-44c2-60de-2e12f4b5f8b6
-  sha: e173270a5f224078e3f6c639937da5bd84045225
-  size: 6987933
-jumpbox/jq-1.5.tar.gz:
-  object_id: 68bdc70f-d6a7-4f31-b29b-e1da48c81371
-  sha: 6eef3705ac0a322e8aa0521c57ce339671838277
-  size: 739309
-jumpbox/libevent-2.0.22-stable.tar.gz:
-  object_id: a1541bd8-921a-4c62-9971-19260c2fde62
-  sha: a586882bc93a208318c70fc7077ed8fca9862864
-  size: 854987
-jumpbox/pwgen-2.07.tar.gz:
-  object_id: 84046d87-6931-41cb-afb0-c806acc8dfeb
-  sha: 51180f9cd5530d79eea18b2443780dec4ec5ea43
-  size: 53513
-jumpbox/tmux-2.2.tar.gz:
-  object_id: 645ddc79-20dd-4145-8ee8-e39c57539ea4
-  sha: 5ed1430bc7ef44c227e64e9401c686573dd0791a
-  size: 466852
-jumpbox/tree-1.7.0.tar.gz:
-  object_id: 14f6d45c-aaeb-4dc3-89c9-5ff370553d49
-  sha: 35bd212606e6c5d60f4d5062f4a59bb7b7b25949
-  size: 47082
-jumpbox/unzip60.tar.gz:
-  object_id: 7317d283-62f1-40d3-851a-10418da85106
-  sha: abf7de8a4018a983590ed6f5cbd990d4740f8a22
-  size: 1376845
-jumpbox/vim-7.4.tar.bz2:
-  object_id: f109912f-1ea4-4e05-b467-fbb2f93f30b9
-  sha: 601abf7cc2b5ab186f40d8790e542f86afca86b7
-  size: 9843297
-jumpbox/wget-1.18.tar.gz:
-  object_id: 4e1e8e75-739f-48b8-aff5-ad9b0073dd65
-  sha: 28a82e7de2eed38516c7d6e172ec7b9e43dc6c66
-  size: 3865525
-jumpbox/zip30.tar.gz:
-  object_id: f46a1f21-a9e9-415a-9e2d-8b8303fe1659
-  sha: c9f4099ecf2772b53c2dd4a8e508064ce015d182
-  size: 1118845
-jumpbox/cloudfoundry-utils/cert_generator:
-  object_id: f2d07b02-3927-4015-9bc6-922cd41cf2ce
-  sha: 853eb37ad3c9ffa7e5dc88ca3dbc5b55c6c0be1a
-  size: 6667
-jumpbox/cloudfoundry-utils/cf-app-env-json:
-  object_id: 4e7ffcc2-5331-4d87-8a4b-13c2d61dc89c
-  sha: b5b76fe615821b8ebbdfb626fc2b8ee48341e3db
-  size: 610
-jumpbox/cloudfoundry-utils/cf-apps-for-route:
-  object_id: 65921c66-da29-4317-a02e-12108b8801b5
-  sha: 353eeead0e21cc8a0a02c652aa07c6c8edb0daa6
-  size: 2456
-jumpbox/cloudfoundry-utils/cf-list-org-names:
-  object_id: 03d55938-3d91-4459-8ada-5a513db689b3
-  sha: 4f5903caa03ec1c384790b6ee8b1cf3da054892a
-  size: 472
-jumpbox/cloudfoundry-utils/cf-services-for-broker:
-  object_id: a0e7a71e-ca61-4e15-9378-694636316435
-  sha: adceb1b4d7b3b86ba831318d5a7f27f8cce28934
-  size: 4761
-jumpbox/cloudfoundry-utils/cf-verify:
-  object_id: 0fc4b29c-cd90-48ef-89b4-70bcdfed4561
-  sha: 8944c5834b65ccb82255a18755142a96018240cb
-  size: 3820
-jumpbox/cloudfoundry-utils/release-differ:
-  object_id: d4c6986b-b1fa-4584-8c6c-86ccb5a9eddf
-  sha: 87bfb4ffafafc9ec2c98069590c55cd8e3e7980c
-  size: 2199
-jumpbox/bins/terraform:
-  object_id: 7f80b216-fcd7-4e5b-855f-bc7db5cca507
-  sha: 07772a350cac3a3cb8791d778a6f470c30118ae1
-  size: 93508352
+jumpbox/bins/bosh2:
+  size: 27338226
+  object_id: 3e4c370d-fcbc-4926-422a-6d7c95ec0abe
+  sha: 61033a0869547d687c09ea866fe4f6ce16e020fd
 jumpbox/bins/certstrap:
+  size: 5493848
   object_id: 6050fa1f-105b-4ddb-8074-224e149b5c83
   sha: 1fa8434399124dd0b17c20c0c90bc34fb0ba16bf
-  size: 5493848
-jumpbox/bins/tmate:
-  object_id: 3253b6dc-3e45-4dd2-b6ce-deb1147b853b
-  sha: 7dae88002cfc9686fa90e1535e17a2eae22407ea
-  size: 2748936
-jumpbox/vim-8.0.0386.tar.gz:
-  object_id: e0bd5753-1931-420f-ad98-d7aa7a937a3d
-  sha: 59b7649b1a057d49860fdc99e4b91401253abc88
-  size: 13000882
-jumpbox/bins/nats:
-  object_id: 698b0c19-976d-4161-81f3-03b859fe55ff
-  sha: 39f00b44c10e332df5f0bff518c1aa2a4dc74792
-  size: 7040936
+jumpbox/bins/cf:
+  size: 16236608
+  object_id: fdf9adc3-af9c-4b9f-96b7-1be04b9bf15f
+  sha: 6b053a5c8c94cde13c328185fce5326530c5bf83
 jumpbox/bins/esuf:
+  size: 7305569
   object_id: 7902014e-2f9c-4add-9e90-2fc00514f919
   sha: 73979dd7fcb704a0994d55c416340d2d3bcf16df
-  size: 7305569
-jumpbox/bins/bosh2:
-  object_id: 6ae91104-9122-44cc-8761-f380a2c16228
-  sha: 2c22556ab2aee6da659beda7110e28c77bc0ab2a
-  size: 19594095
+jumpbox/bins/genesis:
+  size: 338114
+  object_id: ac85745c-fb4a-44ab-9766-5064d560f71c
+  sha: dba0ff87dbcf5d57d9ba78456963b9794d344f05
+jumpbox/bins/nats:
+  size: 7040936
+  object_id: 698b0c19-976d-4161-81f3-03b859fe55ff
+  sha: 39f00b44c10e332df5f0bff518c1aa2a4dc74792
+jumpbox/bins/safe:
+  size: 7643919
+  object_id: c4ad58dc-e28b-4928-ba5d-1a234ef70458
+  sha: 5aedfeac247eeaf82475f18b0f983d0594b15a8a
+jumpbox/bins/shield:
+  size: 8175536
+  object_id: 0fe0d6e1-8545-43d9-a84f-938594598963
+  sha: 34d3dd2619ab3daa5639791caa6c8e70d842a6f2
+jumpbox/bins/spiff:
+  size: 5063744
+  object_id: eefcc937-c44a-4298-a56d-5e7259137c7c
+  sha: 7489aa87ad7f5b3b774fc8a03ccda65860b1374c
+jumpbox/bins/spruce:
+  size: 9351299
+  object_id: 47c520a2-fd9f-4542-b6b9-04bd0137d2c4
+  sha: 01d01beccaf22b543b897492054c7724b9ca3196
+jumpbox/bins/terraform:
+  size: 93508352
+  object_id: 7f80b216-fcd7-4e5b-855f-bc7db5cca507
+  sha: 07772a350cac3a3cb8791d778a6f470c30118ae1
+jumpbox/bins/tmate:
+  size: 2748936
+  object_id: 3253b6dc-3e45-4dd2-b6ce-deb1147b853b
+  sha: 7dae88002cfc9686fa90e1535e17a2eae22407ea
+jumpbox/bins/vault:
+  size: 59959512
+  object_id: a7d6df95-8bc5-4090-950d-35d349557801
+  sha: 39f140b287ac8b0df513aa4ceb6c50b800b8ce66
+jumpbox/cloudfoundry-utils/cert_generator:
+  size: 6667
+  object_id: f2d07b02-3927-4015-9bc6-922cd41cf2ce
+  sha: 853eb37ad3c9ffa7e5dc88ca3dbc5b55c6c0be1a
+jumpbox/cloudfoundry-utils/cf-app-env-json:
+  size: 610
+  object_id: 4e7ffcc2-5331-4d87-8a4b-13c2d61dc89c
+  sha: b5b76fe615821b8ebbdfb626fc2b8ee48341e3db
+jumpbox/cloudfoundry-utils/cf-apps-for-route:
+  size: 2456
+  object_id: 65921c66-da29-4317-a02e-12108b8801b5
+  sha: 353eeead0e21cc8a0a02c652aa07c6c8edb0daa6
+jumpbox/cloudfoundry-utils/cf-list-org-names:
+  size: 472
+  object_id: 03d55938-3d91-4459-8ada-5a513db689b3
+  sha: 4f5903caa03ec1c384790b6ee8b1cf3da054892a
+jumpbox/cloudfoundry-utils/cf-services-for-broker:
+  size: 4761
+  object_id: a0e7a71e-ca61-4e15-9378-694636316435
+  sha: adceb1b4d7b3b86ba831318d5a7f27f8cce28934
+jumpbox/cloudfoundry-utils/cf-verify:
+  size: 3820
+  object_id: 0fc4b29c-cd90-48ef-89b4-70bcdfed4561
+  sha: 8944c5834b65ccb82255a18755142a96018240cb
+jumpbox/cloudfoundry-utils/release-differ:
+  size: 2199
+  object_id: d4c6986b-b1fa-4584-8c6c-86ccb5a9eddf
+  sha: 87bfb4ffafafc9ec2c98069590c55cd8e3e7980c
+jumpbox/curl-7.50.3.tar.gz:
+  size: 8908593
+  object_id: dab8c17e-f200-423e-8421-27c80bcaa15d
+  sha: be0065afc76a3d8568f5f78d8efddadb6310f9d7
+jumpbox/git-2.14.1.tar.gz:
+  size: 6987933
+  object_id: 35a33b21-0dac-44c2-60de-2e12f4b5f8b6
+  sha: e173270a5f224078e3f6c639937da5bd84045225
+jumpbox/jq-1.5.tar.gz:
+  size: 739309
+  object_id: 68bdc70f-d6a7-4f31-b29b-e1da48c81371
+  sha: 6eef3705ac0a322e8aa0521c57ce339671838277
+jumpbox/libevent-2.0.22-stable.tar.gz:
+  size: 854987
+  object_id: a1541bd8-921a-4c62-9971-19260c2fde62
+  sha: a586882bc93a208318c70fc7077ed8fca9862864
+jumpbox/pwgen-2.07.tar.gz:
+  size: 53513
+  object_id: 84046d87-6931-41cb-afb0-c806acc8dfeb
+  sha: 51180f9cd5530d79eea18b2443780dec4ec5ea43
+jumpbox/tmux-2.2.tar.gz:
+  size: 466852
+  object_id: 645ddc79-20dd-4145-8ee8-e39c57539ea4
+  sha: 5ed1430bc7ef44c227e64e9401c686573dd0791a
+jumpbox/tree-1.7.0.tar.gz:
+  size: 47082
+  object_id: 14f6d45c-aaeb-4dc3-89c9-5ff370553d49
+  sha: 35bd212606e6c5d60f4d5062f4a59bb7b7b25949
+jumpbox/unzip60.tar.gz:
+  size: 1376845
+  object_id: 7317d283-62f1-40d3-851a-10418da85106
+  sha: abf7de8a4018a983590ed6f5cbd990d4740f8a22
+jumpbox/vim-7.4.tar.bz2:
+  size: 9843297
+  object_id: f109912f-1ea4-4e05-b467-fbb2f93f30b9
+  sha: 601abf7cc2b5ab186f40d8790e542f86afca86b7
+jumpbox/vim-8.0.0386.tar.gz:
+  size: 13000882
+  object_id: e0bd5753-1931-420f-ad98-d7aa7a937a3d
+  sha: 59b7649b1a057d49860fdc99e4b91401253abc88
+jumpbox/wget-1.18.tar.gz:
+  size: 3865525
+  object_id: 4e1e8e75-739f-48b8-aff5-ad9b0073dd65
+  sha: 28a82e7de2eed38516c7d6e172ec7b9e43dc6c66
+jumpbox/zip30.tar.gz:
+  size: 1118845
+  object_id: f46a1f21-a9e9-415a-9e2d-8b8303fe1659
+  sha: c9f4099ecf2772b53c2dd4a8e508064ce015d182
