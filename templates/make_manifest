@@ -59,7 +59,7 @@ if [[ -z ${STEMCELL} ]]; then
   echo
   echo "Uploading latest $DIRECTOR_CPI/$STEMCELL_OS stemcell..."
   echo " (from ${STEMCELL_URL})"
-  bosh -e $environemt upload stemcell $STEMCELL_URL
+  bosh -e $environment upload-stemcell $STEMCELL_URL
 fi
 STEMCELL=${STEMCELL:-$(latest_uploaded_stemcell)}
 
