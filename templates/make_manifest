@@ -6,13 +6,19 @@ template_prefix="jumpbox"
 STEMCELL_OS=${STEMCELL_OS:-ubuntu}
 
 infrastructure=$1
+environment=$2
 
 fail() {
 	echo >&2 $*
 }
 
 if [[ "$infrastructure" != "aws-ec2" && "$infrastructure" != "warden" ]] ; then
-  fail "usage: ./make_manifest <aws-ec2|warden>"
+  fail "usage: ./make_manifest <aws-ec2|warden> <environment>"
+  exit 1
+fi
+
+if [[ -z  "${environment// }"  ]] ; then
+  fail "usage: ./make_manifest <aws-ec2|warden> <environment>"
   exit 1
 fi
 
@@ -28,10 +34,10 @@ esac
 
 shift
 
-BOSH_STATUS=$(bosh status)
-DIRECTOR_UUID=$(echo "$BOSH_STATUS" | grep UUID | awk '{print $2}')
-DIRECTOR_CPI=$(echo "$BOSH_STATUS" | grep CPI | awk '{print $2}' | sed -e 's/_cpi//')
-DIRECTOR_NAME=$(echo "$BOSH_STATUS" | grep Name | awk '{print $2}')
+BOSH_STATUS=$(bosh -e $environment env)
+DIRECTOR_UUID=$(echo "$bosh_STATUS" | sed -n '2p')
+DIRECTOR_CPI=$(echo "$BOSH_STATUS" | sed -n '4p')
+DIRECTOR_NAME=$(echo "$BOSH_STATUS" | sed -n '1p')
 NAME=$template_prefix-$infrastructure
 
 if [[ $infrastructure = "warden" && ${infrastructure} != "warden" ]]; then
@@ -45,7 +51,7 @@ if [[ $infrastructure = "aws-ec2" && ${DIRECTOR_CPI} != "aws" ]]; then
 fi
 
 function latest_uploaded_stemcell {
-  echo $(bosh stemcells | grep bosh | grep $STEMCELL_OS | awk -F'|' '{ print $2, $3 }' | sort -nr -k2 | head -n1 | awk '{ print $1 }')
+  echo $(bosh -e $environment stemcells | grep bosh | grep $STEMCELL_OS | awk -F'|' '{ print $2, $3 }' | sort -nr -k2 | head -n1 | awk '{ print $1 }')
 }
 
 STEMCELL=${STEMCELL:-$(latest_uploaded_stemcell)}
@@ -53,7 +59,7 @@ if [[ -z ${STEMCELL} ]]; then
   echo
   echo "Uploading latest $DIRECTOR_CPI/$STEMCELL_OS stemcell..."
   echo " (from ${STEMCELL_URL})"
-  bosh upload stemcell $STEMCELL_URL
+  bosh -e $environemt upload stemcell $STEMCELL_URL
 fi
 STEMCELL=${STEMCELL:-$(latest_uploaded_stemcell)}
 
@@ -79,5 +85,5 @@ spruce merge --prune meta \
   $tmpdir/stub-with-uuid.yml \
   $* > $tmpdir/$NAME-manifest.yml
 
-bosh deployment $tmpdir/$NAME-manifest.yml
-bosh status
+bosh -e $environment deployment $tmpdir/$NAME-manifest.yml
+bosh -e $environment env
