@@ -16,3 +16,6 @@ Bumped cf to v6.32.0
 
 ##### safe
 Bumped safe to v0.4.3
+
+##### nmap
+Added nmap at v7.60

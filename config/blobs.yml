@@ -135,3 +135,7 @@ jumpbox/zip30.tar.gz:
   size: 1118845
   object_id: f46a1f21-a9e9-415a-9e2d-8b8303fe1659
   sha: c9f4099ecf2772b53c2dd4a8e508064ce015d182
+jumpbox/nmap-7.60.tar.bz2:
+  object_id: 8fc5b06a-43c1-444e-9863-e6e1b0aa5d07
+  sha: 5d36a55ce772ec24f7f50ab52780f932ee20529f
+  size: 10394925

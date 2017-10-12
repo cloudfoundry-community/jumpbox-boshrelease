@@ -51,3 +51,6 @@ files:
     # zip
   - jumpbox/zip30.tar.gz
   - jumpbox/unzip60.tar.gz
+
+    # nmap
+  - jumpbox/nmap-7.60.tar.bz2
