@@ -135,6 +135,16 @@ n=$((n + 1))
       install) &
 n=$((n + 1))
 
+# NMAP
+# https://nmap.org
+# https://nmap.org/dist/nmap-7.60.tar.bz2
+(tar -xjvf jumpbox/nmap-7.60.tar.bz2
+  cd nmap-7.60
+  ./configure
+  make prefix=${BOSH_INSTALL_TARGET} -j${CPUS}
+  make prefix=${BOSH_INSTALL_TARGET} install) &
+n=$((n + 1))
+
 while [[ $n -gt 0 ]]; do
 	wait -n
 	n=$((n - 1))
