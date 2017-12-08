@@ -110,4 +110,6 @@ builds:
     version: 4.3.5
   a467bb04-1bab-497d-8b45-54e2eec38508:
     version: 4.3.6
+  7095c3cd-3857-47d1-b3e4-5e4e9195b637:
+    version: 4.3.7
 format-version: '2'
