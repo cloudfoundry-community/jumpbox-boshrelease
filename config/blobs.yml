@@ -24,9 +24,9 @@ jumpbox/bins/esuf:
   object_id: 7902014e-2f9c-4add-9e90-2fc00514f919
   sha: 73979dd7fcb704a0994d55c416340d2d3bcf16df
 jumpbox/bins/genesis:
-  object_id: 14bdbdf0-7a6c-4782-8c9c-f4b9aff33a3a
-  sha: 125b72953fb31aa37a081f61741cb29884b6069f
-  size: 373137
+  object_id: 5a96824f-1de7-447f-b9b1-a45337113066
+  sha: 4251784487aebfddec734d6567f1295636bbcd89
+  size: 373294
 jumpbox/bins/nats:
   size: 7040936
   object_id: 698b0c19-976d-4161-81f3-03b859fe55ff
