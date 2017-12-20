@@ -6,7 +6,7 @@ files:
 
     # pre-compiled binaries / scripts
   - jumpbox/bins/bosh-init
-  - jumpbox/bins/bosh2
+  - jumpbox/bins/bosh
   - jumpbox/bins/certstrap
   - jumpbox/bins/cf
   - jumpbox/bins/esuf
