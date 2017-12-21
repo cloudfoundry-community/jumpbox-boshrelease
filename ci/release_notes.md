@@ -12,3 +12,6 @@ Bumped Ruby to 2.4 for cf-uaac
 
 ##### safe
 Bumped safe to v0.6.2
+
+##### spruce
+Bumped spruce to v1.14.0
