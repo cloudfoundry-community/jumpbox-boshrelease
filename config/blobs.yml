@@ -1,3 +1,4 @@
+---
 golang_1.5/go1.5.3.linux-amd64.tar.gz:
   size: 80147269
   object_id: 5d8b0264-6ad9-405e-961f-4449dd9a180f
@@ -31,9 +32,9 @@ jumpbox/bins/nats:
   object_id: 698b0c19-976d-4161-81f3-03b859fe55ff
   sha: 39f00b44c10e332df5f0bff518c1aa2a4dc74792
 jumpbox/bins/safe:
+  object_id: efa72cae-7228-4694-8797-2e3f0d623f51
+  sha: 29840baa0669be72a051df1967a346e43c2156af
   size: 7841177
-  object_id: 31e6fe65-8f6e-45ae-82f2-f69a868c8d4d
-  sha: 6acf88ea4dfeda1a80b2bbc6c8841651821f82b8
 jumpbox/bins/shield:
   size: 8175536
   object_id: 0fe0d6e1-8545-43d9-a84f-938594598963
