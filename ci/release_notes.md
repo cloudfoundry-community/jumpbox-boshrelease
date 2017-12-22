@@ -15,3 +15,6 @@ Bumped safe to v0.6.2
 
 ##### spruce
 Bumped spruce to v1.14.0
+
+##### terraform
+Bumped terraform to v0.10.7
