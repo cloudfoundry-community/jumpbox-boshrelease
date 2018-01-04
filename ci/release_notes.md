@@ -18,3 +18,6 @@ Bumped spruce to v1.14.0
 
 ##### terraform
 Bumped terraform to v0.10.7
+
+##### genesis
+Bumped genesis to v2.3.3
