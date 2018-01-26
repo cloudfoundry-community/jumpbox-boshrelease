@@ -120,4 +120,6 @@ builds:
     version: 4.3.10
   d3196789-0688-449e-9c8b-862c1010e21a:
     version: 4.3.11
+  816b4a4c-3b1b-4c6d-a09e-5a95a8dfd130:
+    version: 4.3.12
 format-version: '2'
