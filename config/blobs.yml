@@ -44,8 +44,8 @@ jumpbox/bins/spiff:
   object_id: eefcc937-c44a-4298-a56d-5e7259137c7c
   sha: 7489aa87ad7f5b3b774fc8a03ccda65860b1374c
 jumpbox/bins/spruce:
-  object_id: 1e667f27-b8d6-463e-bd88-8e7658432885
-  sha: 336fd8ae559f077ca4c4d7ad1d0a14d6e7c7fcc2
+  object_id: 15aeb42c-302f-4571-9037-12dec9498e05
+  sha: acda97b0f9db7883a0f45a8aef842cd6d4686ad9
   size: 9590977
 jumpbox/bins/terraform:
   object_id: 21c8a668-1426-4d5f-98d8-615d13bea308
