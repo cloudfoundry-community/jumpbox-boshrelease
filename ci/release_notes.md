@@ -13,3 +13,6 @@ Bumped spruce to v1.15.3
 
 ##### spruce
 Bumped spruce to v1.16.0
+
+##### genesis
+Bumped genesis to v2.4.2
