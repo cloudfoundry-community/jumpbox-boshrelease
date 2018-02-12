@@ -48,16 +48,6 @@ n=$((n + 1))
  make install) &
 n=$((n + 1))
 
-# PWGEN
-# https://sourceforge.net/projects/pwgen
-# http://downloads.sourceforge.net/project/pwgen/pwgen/2.07/pwgen-2.07.tar.gz
-(tar -xzvf jumpbox/pwgen-2.07.tar.gz
- cd pwgen-2.07
- ./configure --prefix=${BOSH_INSTALL_TARGET}
- make -j${CPUS}
- make install) &
-n=$((n + 1))
-
 # TMUX
 # http://libevent.org/
 # https://github.com/libevent/libevent/releases/download/release-2.0.22-stable/libevent-2.0.22-stable.tar.gz
