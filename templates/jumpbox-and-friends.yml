@@ -1,0 +1,54 @@
+---
+name: "jumpbox-and-friends"
+
+stemcells:
+- alias: default
+  os: ubuntu-trusty
+  version: latest
+
+releases:
+  - name: jumpbox
+    version: latest
+  - name: toolbelt
+    version: latest
+
+update:
+  canaries: 1
+  max_in_flight: 50
+  canary_watch_time: 1000-30000
+  update_watch_time: 1000-30000
+  serial: false
+
+instance_groups:
+- azs:
+  - z1
+  name: jumpbox
+  instances: 1
+  stemcell: default
+  vm_type: medium
+  networks:
+    - name: default
+  jobs:
+    - name: jumpbox
+      instances: 1
+      release: jumpbox
+    - name: toolbelt
+      release: toolbelt
+    - name: toolbelt-mysql-client
+      release: toolbelt
+    - name: acceptance-tests
+      lifecycle: errand
+      instances: 1
+      release: jumpbox
+
+properties:
+  jumpbox:
+    env:
+      FOO: BAR
+    users:
+      - name: alice
+      - name: bob
+      - name: eve
+        shell: /bin/sh
+    delete:
+      - chris
