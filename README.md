@@ -23,8 +23,8 @@ properties:
                                        # and runs `./install` from inside the repo, as
                                        # the user
       setup_script: /path/to/script    # runs after account creation, and environment
-                                       # installation. the default value runs a script 
-                                       # to set up rvm and install some ruby gems we 
+                                       # installation. the default value runs a script
+                                       # to set up rvm and install some ruby gems we
                                        # find useful
       ssh_keys:
       - ssh-rsa my-key-here            # adds an ssh-key to the users authorized keys file
@@ -39,7 +39,6 @@ properties:
 - genesis (latest and greatest!)
 - git 2.14.1
 - jq 1.5
-- pwgen 2.07
 - safe (latest and greatest!)
 - shield
 - spiff 1.0.7

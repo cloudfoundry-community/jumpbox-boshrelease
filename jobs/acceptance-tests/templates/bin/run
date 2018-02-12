@@ -24,11 +24,9 @@ check safe version
 # WHA?  there is no shield version command?
 #check shield version
 check spiff -v
-check spruce -v
 check vault -v
 check curl --version
 check git --version
-check pwgen 16 1
 check tmux -V
 check tree --version
 check vim --version
