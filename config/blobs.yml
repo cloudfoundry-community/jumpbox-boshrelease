@@ -1,4 +1,3 @@
----
 golang_1.5/go1.5.3.linux-amd64.tar.gz:
   size: 80147269
   object_id: 5d8b0264-6ad9-405e-961f-4449dd9a180f
@@ -16,24 +15,24 @@ jumpbox/bins/certstrap:
   object_id: 6050fa1f-105b-4ddb-8074-224e149b5c83
   sha: 1fa8434399124dd0b17c20c0c90bc34fb0ba16bf
 jumpbox/bins/cf:
+  size: 16844480
   object_id: 80f21d95-85c1-42f1-b7c9-5a3434862671
   sha: aece4d2b6faee6ee8cd54ce1b2b170c3ef32f5ce
-  size: 16844480
 jumpbox/bins/esuf:
   size: 7305569
   object_id: 7902014e-2f9c-4add-9e90-2fc00514f919
   sha: 73979dd7fcb704a0994d55c416340d2d3bcf16df
 jumpbox/bins/genesis:
+  size: 403533
   object_id: 79fd4f18-c5c0-4bfa-aebc-527a6fb770be
   sha: c3604ca3a972d53a3871f2cfef076eadcdadbe5e
-  size: 403533
 jumpbox/bins/nats:
   size: 7040936
   object_id: 698b0c19-976d-4161-81f3-03b859fe55ff
   sha: 39f00b44c10e332df5f0bff518c1aa2a4dc74792
 jumpbox/bins/safe:
-  object_id: efa72cae-7228-4694-8797-2e3f0d623f51
-  sha: 29840baa0669be72a051df1967a346e43c2156af
+  object_id: 6bb3f81c-8699-4b47-b8eb-488f1838ff33
+  sha: 43ee4f27f99c758dc2ff6a0c1781d208fde5a88d
   size: 7841177
 jumpbox/bins/shield:
   size: 8175536
@@ -43,14 +42,10 @@ jumpbox/bins/spiff:
   size: 5063744
   object_id: eefcc937-c44a-4298-a56d-5e7259137c7c
   sha: 7489aa87ad7f5b3b774fc8a03ccda65860b1374c
-jumpbox/bins/spruce:
-  object_id: e1e84a54-9c52-4eae-809f-445220a84955
-  sha: 548e51cd37a1ad3a1286237287ab69741c5c41ac
-  size: 9590977
 jumpbox/bins/terraform:
+  size: 55358048
   object_id: 21c8a668-1426-4d5f-98d8-615d13bea308
   sha: 740453274030f6e8be341be27dc349619f929f90
-  size: 55358048
 jumpbox/bins/tmate:
   size: 2748936
   object_id: 3253b6dc-3e45-4dd2-b6ce-deb1147b853b
@@ -103,10 +98,6 @@ jumpbox/libevent-2.0.22-stable.tar.gz:
   size: 854987
   object_id: a1541bd8-921a-4c62-9971-19260c2fde62
   sha: a586882bc93a208318c70fc7077ed8fca9862864
-jumpbox/pwgen-2.07.tar.gz:
-  size: 53513
-  object_id: 84046d87-6931-41cb-afb0-c806acc8dfeb
-  sha: 51180f9cd5530d79eea18b2443780dec4ec5ea43
 jumpbox/tmux-2.2.tar.gz:
   size: 466852
   object_id: 645ddc79-20dd-4145-8ee8-e39c57539ea4
