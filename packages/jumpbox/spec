@@ -15,7 +15,6 @@ files:
   - jumpbox/bins/safe
   - jumpbox/bins/shield
   - jumpbox/bins/spiff
-  - jumpbox/bins/spruce
   - jumpbox/bins/terraform
   - jumpbox/bins/tmate
   - jumpbox/bins/vault
@@ -29,9 +28,6 @@ files:
 
     # jq
   - jumpbox/jq-1.5.tar.gz
-
-    # pwgen
-  - jumpbox/pwgen-2.07.tar.gz
 
     # tmux
   - jumpbox/libevent-2.0.22-stable.tar.gz
