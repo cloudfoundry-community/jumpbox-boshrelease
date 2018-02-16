@@ -34,8 +34,3 @@ check wget --version
 check zip -v
 check unzip -v
 check go version
-
-echo
-echo "--------------------------------------------------"
-echo "Errand acceptance-tests is complete; exit status $EXITSTATUS"
-exit $EXITSTATUS

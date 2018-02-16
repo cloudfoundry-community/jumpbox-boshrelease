@@ -1,5 +1,5 @@
 ---
-name: acceptance-tests
+name: inventory
 packages:
   - jumpbox
   - golang

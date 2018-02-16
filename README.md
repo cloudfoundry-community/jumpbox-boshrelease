@@ -30,6 +30,12 @@ properties:
       - ssh-rsa my-key-here            # adds an ssh-key to the users authorized keys file
 ```
 
+## Taking Inventory
+
+The `inventory` job is an errand you can colocate on your
+jumpboxen.  It will display information about the software
+installed on the instance, versions, etc.
+
 
 ### Packages installed
 
