@@ -53,3 +53,7 @@ properties:
     description: |-
       Additional bash startup commands, to be included verbatim in the system-wide configuration.
       This can be used to provide additional conveniences or implement site-wide policy.
+
+  jumpbox.setup.enabled:
+    default: true
+    description: "enable or disbale the setup that will install rvm (only disable this if you don't have internet access)"    

@@ -65,7 +65,9 @@ EOF
 
 		echo "Setting up your jumpbox environment"
 		mkdir -p ${GOPATH}
-		/var/vcap/packages/jumpbox/setup
+		<% if p('jumpbox.setup.enabled') %>
+		  /var/vcap/packages/jumpbox/setup
+		<% end %>
 		touch ${HOME}/.jumpbox
 		echo "-----------------------------------------------------------"
 		echo ; echo
