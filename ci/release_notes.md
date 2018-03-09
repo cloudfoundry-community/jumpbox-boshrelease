@@ -7,3 +7,6 @@ Bumped genesis to v2.5.2
 
 ##### safe
 Bumped safe to v0.6.4
+
+##### cf
+Bumped cf to v6.35.0
