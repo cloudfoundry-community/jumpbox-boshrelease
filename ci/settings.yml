@@ -12,9 +12,14 @@ meta:
     repo:  jumpbox-boshrelease
     private_key:  (( vault "secret/pipelines/jumpbox-boshrelease/github:private" ))
     access_token: (( vault "secret/pipelines/jumpbox-boshrelease/github:token" ))
+  git:
+    email: ci@starkandwayne.com
+    name:  Stark & Wayne CI Bot
   bosh-lite:
     target: https://10.58.111.44:25555
-    deployment: jumpbox-warden
+    username: (( vault "secret/bosh-lites/lite44/users/admin:username" ))
+    password: (( vault "secret/bosh-lites/lite44/users/admin:password" ))
+    cacert:   (( vault "secret/bosh-lites/lite44/certs:rootCA.pem" ))
   slack:
     webhook: (( vault "secret/pipelines/jumpbox-boshrelease/slack:webhook" ))
     channel: "#cf-community-pipeline"
