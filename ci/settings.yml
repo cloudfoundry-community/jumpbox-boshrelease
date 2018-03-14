@@ -1,30 +1,39 @@
 ---
 meta:
   name: jumpbox
-  url: https://ci.starkandwayne.com/
   target: sw
   test-errand: inventory
-  aws:
-    access_key: (( vault "secret/aws/cfcommunity:access" ))
-    secret_key: (( vault "secret/aws/cfcommunity:secret" ))
-  github:
-    owner: cloudfoundry-community
-    repo:  jumpbox-boshrelease
-    private_key:  (( vault "secret/pipelines/jumpbox-boshrelease/github:private" ))
-    access_token: (( vault "secret/pipelines/jumpbox-boshrelease/github:token" ))
+  url: https://ci.starkandwayne.com/
+
+  manifest:
+    path: ci/manifest.yml
+
   git:
     email: ci@starkandwayne.com
     name:  Stark & Wayne CI Bot
+
   bosh-lite:
     target: https://10.58.111.44:25555
     username: (( vault "secret/bosh-lites/lite44/users/admin:username" ))
     password: (( vault "secret/bosh-lites/lite44/users/admin:password" ))
     cacert:   (( vault "secret/bosh-lites/lite44/certs:rootCA.pem" ))
+
+  aws:
+    access_key: (( vault "secret/aws/cfcommunity:access" ))
+    secret_key: (( vault "secret/aws/cfcommunity:secret" ))
+
+  github:
+    owner:        cloudfoundry-community
+    repo:         jumpbox-boshrelease
+    branch:       master
+    private_key:  (( vault "secret/pipelines/jumpbox-boshrelease/github:private" ))
+    access_token: (( vault "secret/pipelines/jumpbox-boshrelease/github:token" ))
+
   slack:
-    webhook: (( vault "secret/pipelines/jumpbox-boshrelease/slack:webhook" ))
-    channel: "#cf-community-pipeline"
-    blob_success:  '(( concat "$BUILD_PIPELINE_NAME: New version of $BUILD_JOB_NAME was detected, and updated in master. <" meta.url "/pipelines/$BUILD_PIPELINE_NAME| Cut a new release?>" ))'
-    blob_failure:  '(( concat "$BUILD_PIPELINE_NAME: :airplane_arriving: <" meta.url "/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME| Failed to update the blob for $BUILD_JOB_NAME>" ))'
+    webhook:      (( vault "secret/pipelines/jumpbox-boshrelease/slack:webhook" ))
+    channel:      "#cf-community-pipeline"
+    blob_success: '(( concat "$BUILD_PIPELINE_NAME: New version of $BUILD_JOB_NAME was detected, and updated in master. <" meta.url "/pipelines/$BUILD_PIPELINE_NAME| Cut a new release?>" ))'
+    blob_failure: '(( concat "$BUILD_PIPELINE_NAME: :airplane_arriving: <" meta.url "/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME| Failed to update the blob for $BUILD_JOB_NAME>" ))'
 
 groups:
   - name: blobs
