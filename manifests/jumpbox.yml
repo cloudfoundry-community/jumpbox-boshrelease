@@ -1,0 +1,41 @@
+name: jumpbox-ci
+
+instance_groups:
+- name: jumpbox
+  instances: 1
+  azs:       [z1]
+  vm_type:   default
+  stemcell:  default
+  networks:
+    - name: default
+  jobs:
+    - { release: jumpbox, name: jumpbox }
+    - { release: jumpbox, name: inventory }
+
+properties:
+  jumpbox:
+    env:
+      FOO: BAR
+    users:
+      - name: alice
+      - name: bob
+      - name: eve
+        shell: /bin/sh
+    delete:
+      - chris
+
+update:
+  canaries: 0
+  max_in_flight: 1
+  serial: true
+  canary_watch_time: 1000-120000
+  update_watch_time: 1000-120000
+
+stemcells:
+- alias: default
+  os: ubuntu-trusty
+  version: latest
+- name: jumpbox
+  version: 4.4.2
+  url: https://github.com/cloudfoundry-community/jumpbox-boshrelease/releases/download/v4.4.2/jumpbox-4.4.2.tgz
+  sha1: 722b6c40e36b7f71517bfa1aec0062e8daca1f9f

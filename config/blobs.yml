@@ -16,25 +16,25 @@ jumpbox/bins/certstrap:
   object_id: 6050fa1f-105b-4ddb-8074-224e149b5c83
   sha: 1fa8434399124dd0b17c20c0c90bc34fb0ba16bf
 jumpbox/bins/cf:
-  size: 16844480
-  object_id: 80f21d95-85c1-42f1-b7c9-5a3434862671
-  sha: aece4d2b6faee6ee8cd54ce1b2b170c3ef32f5ce
+  object_id: b4d5ff72-14b0-4ac8-ba8a-b7a4ba7ac949
+  sha: 3636f49b368332550e2b85035b7b6389120f1b8b
+  size: 16379808
 jumpbox/bins/esuf:
   size: 7305569
   object_id: 7902014e-2f9c-4add-9e90-2fc00514f919
   sha: 73979dd7fcb704a0994d55c416340d2d3bcf16df
 jumpbox/bins/genesis:
-  object_id: df7c6c97-c51a-43ff-a77d-10ec7b181e43
-  sha: 746e5780be271d90e9e4c70a767d8398e4deba90
-  size: 404170
+  object_id: a58f7ee6-be1e-479d-ad15-2f9c1993af04
+  sha: 25da1c4d46fca496ba08d4fbac127cd02bd36bd6
+  size: 408450
 jumpbox/bins/nats:
   size: 7040936
   object_id: 698b0c19-976d-4161-81f3-03b859fe55ff
   sha: 39f00b44c10e332df5f0bff518c1aa2a4dc74792
 jumpbox/bins/safe:
-  object_id: 6bb3f81c-8699-4b47-b8eb-488f1838ff33
-  sha: 43ee4f27f99c758dc2ff6a0c1781d208fde5a88d
-  size: 7841177
+  object_id: 044f493b-8288-4c5c-bf2d-97bff56f5417
+  sha: f78f782d8eaa4c57fb9b3003f6fbae1757f02372
+  size: 7853787
 jumpbox/bins/shield:
   size: 8175536
   object_id: 0fe0d6e1-8545-43d9-a84f-938594598963
