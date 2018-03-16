@@ -35,6 +35,8 @@ stemcells:
 - alias: default
   os: ubuntu-trusty
   version: latest
+
+releases:
 - name: jumpbox
   version: 4.4.2
   url: https://github.com/cloudfoundry-community/jumpbox-boshrelease/releases/download/v4.4.2/jumpbox-4.4.2.tgz
