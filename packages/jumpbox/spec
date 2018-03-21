@@ -8,6 +8,8 @@ files:
   - jumpbox/bins/bosh-init
   - jumpbox/bins/bosh
   - jumpbox/bins/certstrap
+  - jumpbox/bins/credhub
+  - jumpbox/bins/fly
   - jumpbox/bins/cf
   - jumpbox/bins/esuf
   - jumpbox/bins/genesis

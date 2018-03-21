@@ -19,10 +19,18 @@ jumpbox/bins/cf:
   object_id: b4d5ff72-14b0-4ac8-ba8a-b7a4ba7ac949
   sha: 3636f49b368332550e2b85035b7b6389120f1b8b
   size: 16379808
+jumpbox/bins/credhub:
+  size: 9730875
+  object_id: ae9adbcb-fc8c-4c9a-6cb7-9868775a0f5c
+  sha: ec7d4e5dbbe9d3f5364929ac435e1ae5b94b1393
 jumpbox/bins/esuf:
   size: 7305569
   object_id: 7902014e-2f9c-4add-9e90-2fc00514f919
   sha: 73979dd7fcb704a0994d55c416340d2d3bcf16df
+jumpbox/bins/fly:
+  size: 16036735
+  object_id: 214b5ab1-1351-4369-6925-9f120c48c59f
+  sha: 87afcc6f09ccda7bd49d350ee574b6ac8c9e145c
 jumpbox/bins/genesis:
   object_id: a58f7ee6-be1e-479d-ad15-2f9c1993af04
   sha: 25da1c4d46fca496ba08d4fbac127cd02bd36bd6
