@@ -40,10 +40,11 @@ log() {
 }
 
 provision() {
-	local user=$1  ; shift
-	local shell=$1 ; shift
-	local repo=$1  ; shift
-	local pass=$1  ; shift
+	local user=$1   ; shift
+	local groups=$1 ; shift
+	local shell=$1  ; shift
+	local repo=$1   ; shift
+	local pass=$1   ; shift
 
 	home="${JUMPBOX_HOME}/${user}"
 	[ -z ${shell} ] && shell="/bin/bash"
@@ -51,9 +52,10 @@ provision() {
 	log1 "Setting up user ${user}"
 	if ! grep -q "^${user}:" /etc/passwd; then
 		logn "User ${user} does not exist; adding"
-		/usr/sbin/useradd -m -d /u/${user} -s ${shell} -g staff -G bosh_sshers,bosh_sudoers ${user}
+		/usr/sbin/useradd -m -d /u/${user} -s ${shell} -g staff -G "${groups}" ${user}
 	fi
 	if [[ -n ${pass} ]]; then
+		pass=$(echo "$pass" | sed -e 's@/@\\/@g')
 		sed -i -e "s/^${user}:[^:]*:/${user}:${pass}:/" /etc/shadow
 	else
 		sed -i -e "s/^${user}:[^:]*:/${user}:!:/" /etc/shadow
@@ -159,6 +161,20 @@ EOF
 	log1 "Ensuring non-root users are allowed to ping"
 	chmod u+s /bin/ping
 
+	log1 "Re-configuring PAM authentication"
+	cat >/etc/pam.d/common-password <<EOF
+password    [success=1 default=ignore]  pam_unix.so      obscure sha512
+password    requisite                   pam_deny.so
+password    required                    pam_permit.so
+session     required                    pam_lastlog.so   showfailed
+EOF
+	cat >/etc/pam.d/common-auth <<EOF
+auth        [success=1 default=ignore]  pam_unix.so
+auth        requisite                   pam_deny.so
+auth        required                    pam_permit.so
+auth        optional                    pam_cap.so
+EOF
+
 	log1 "Setting up system-wide Go runtime at ${JUMPBOX_GO}"
 	if [[ ! -e $JUMPBOX_GO ]]; then
 		logn "${JUMPBOX_GO} not linked to /var/vcap/packages/golang; fixing"
@@ -224,13 +240,14 @@ EOF
 	done
 	popd >/dev/null
 <% p('jumpbox.users').each do |user| %>
-	unset users["<%= user['name'] %>"]
+	unset users['<%= user['name'] %>']
 	# jumpbox.users[<%= user['name'] %>
-	provision "<%= user['name'] %>" \
-	          "<%= user['shell'] %>" \
-	          "<%= user['env'] %>" \
-	          "<%= user['passwd'] %>" <% if !(user['ssh_keys'] || []).empty? %> \<% end %>
-	          <% (user['ssh_keys'] || []).each do |k| %> "<%= k %>"<% end %>
+	provision '<%= user['name'] %>' \
+	          'bosh_sshers<%= !user.has_key?("sudo") || user["sudo"] ? ",bosh_sudoers" : "" %>' \
+	          '<%= user['shell'] %>' \
+	          '<%= user['env'] %>' \
+	          '<%= user['password'] %>' <% if !(user['ssh_keys'] || []).empty? %> \<% end %>
+	          <% (user['ssh_keys'] || []).each do |k| %> '<%= k %>'<% end %>
 <% end %>
 
 <% p('jumpbox.delete', []).each do |user| %>

@@ -36,6 +36,9 @@ with the `-o` option to `bosh deploy`:
       - ssh-rsa my-key-here           # adds an ssh-key to the users authorized keys file
 ```
 
+If you don't want a user to have sudo access, set `sudo: no` on
+their user account, and they will not be granted it.
+
 ## Taking Inventory
 
 The `inventory` job is an errand you can colocate on your
