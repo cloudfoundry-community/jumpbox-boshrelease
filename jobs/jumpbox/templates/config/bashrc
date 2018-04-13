@@ -25,7 +25,8 @@ export MANPATH=/usr/share/man:/var/vcap/packages/jumpbox/share/man:/var/vcap/pac
 ################################################################################
 #######################################################  one-time per-user setup
 
-if [[ ${HOME} =~ ^/u/ && ! -f ${HOME}/.jumpbox && -z ${TMUX} ]]; then
+DO_ONE_TIME_SETUP=<%= p('jumpbox.one_time_setup', true) ? 'yes' : 'no' %>
+if [[ ${HOME} =~ ^/u/ && ${DO_ONE_TIME_SETUP} == "yes" && ! -f ${HOME}/.jumpbox && -z ${TMUX} ]]; then
 	cat <<EOF
 
 Hello, ${USER}!

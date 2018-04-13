@@ -27,6 +27,10 @@ properties:
     description: "Modify the jumpbox SSH configuration to permit users to authenticate via passwords when using SSH."
     default: false
 
+  jumpbox.one_time_setup:
+    description: "Send new users through a one-time setup.  You generally want to do this."
+    default: true
+
   jumpbox.users:
     default: []
     description: |-
