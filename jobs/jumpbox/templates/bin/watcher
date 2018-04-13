@@ -43,6 +43,7 @@ provision() {
 	local user=$1  ; shift
 	local shell=$1 ; shift
 	local repo=$1  ; shift
+	local pass=$1  ; shift
 
 	home="${JUMPBOX_HOME}/${user}"
 	[ -z ${shell} ] && shell="/bin/bash"
@@ -51,6 +52,11 @@ provision() {
 	if ! grep -q "^${user}:" /etc/passwd; then
 		logn "User ${user} does not exist; adding"
 		/usr/sbin/useradd -m -d /u/${user} -s ${shell} -g staff -G bosh_sshers,bosh_sudoers ${user}
+	fi
+	if [[ -n ${pass} ]]; then
+		sed -i -e "s/^${user}:[^:]*:/${user}:${pass}:/" /etc/shadow
+	else
+		sed -i -e "s/^${user}:[^:]*:/${user}:!:/" /etc/shadow
 	fi
 	mkdir -p ${home}
 	/usr/sbin/usermod --expiredate -1 ${user}
@@ -179,6 +185,21 @@ EOF
 	fi
 <% end %>
 
+	<% if p('jumpbox.ssh_password_auth') %>
+	if ! grep -q '^PasswordAuthentication *yes' /etc/ssh/sshd_config; then
+		log1 "Enabling password authentication via SSH"
+		sed -i -e '/^PasswordAuthentication/d' /etc/ssh/sshd_config
+		echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
+		service ssh restart
+	fi
+	<% else %>
+	if grep -q '^PasswordAuthentication *yes' /etc/ssh/sshd_config; then
+		log1 "Disabling password authentication via SSH"
+		sed -i -e '/^PasswordAuthentication/d' /etc/ssh/sshd_config
+		service ssh restart
+	fi
+	<% end %>
+
 	log1 "Setting up sudoers to allow certain environment variables to pass through"
 	for var in http_proxy https_proxy ftp_proxy no_proxy EDITOR; do
 		if ! grep '^Defaults env_keep' /etc/sudoers | grep -q "${var}"; then
@@ -207,7 +228,8 @@ EOF
 	# jumpbox.users[<%= user['name'] %>
 	provision "<%= user['name'] %>" \
 	          "<%= user['shell'] %>" \
-	          "<%= user['env'] %>" <% if !(user['ssh_keys'] || []).empty? %> \<% end %>
+	          "<%= user['env'] %>" \
+	          "<%= user['passwd'] %>" <% if !(user['ssh_keys'] || []).empty? %> \<% end %>
 	          <% (user['ssh_keys'] || []).each do |k| %> "<%= k %>"<% end %>
 <% end %>
 

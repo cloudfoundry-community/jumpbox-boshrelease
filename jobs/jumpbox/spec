@@ -23,6 +23,10 @@ properties:
     description: "A list of entries to append to /etc/hosts"
     default: []
 
+  jumpbox.ssh_password_auth:
+    description: "Modify the jumpbox SSH configuration to permit users to authenticate via passwords when using SSH."
+    default: false
+
   jumpbox.users:
     default: []
     description: |-
