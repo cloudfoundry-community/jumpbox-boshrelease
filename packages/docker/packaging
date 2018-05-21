@@ -11,6 +11,8 @@ BRIDGE_UTILS_VERSION=`ls -r docker/bridge-utils-*.tar.gz | sed 's/docker\/bridge
 DOCKER_VERSION=`ls -r docker/docker-*.tgz | sed 's/docker\/docker-\(.*\)\.tgz/\1/' | head -1`
 
 # Extract Autoconf package
+# https://www.gnu.org/software/autoconf/autoconf.html
+# https://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz
 echo "Extracting Autoconf ${AUTOCONF_VERSION}..."
 tar xzvf ${BOSH_COMPILE_TARGET}/docker/autoconf-${AUTOCONF_VERSION}.tar.gz
 if [[ $? != 0 ]] ; then
@@ -19,6 +21,8 @@ if [[ $? != 0 ]] ; then
 fi
 
 # Extract bridge-utils package
+# http://www.linuxfromscratch.org/blfs/view/7.10/basicnet/bridge-utils.html
+# http://sourceforge.net/projects/bridge/files/bridge/bridge-utils-1.5.tar.gz
 echo "Extracting bridge-utils ${BRIDGE_UTILS_VERSION}..."
 tar xzvf ${BOSH_COMPILE_TARGET}/docker/bridge-utils-${BRIDGE_UTILS_VERSION}.tar.gz
 if [[ $? != 0 ]] ; then
@@ -46,6 +50,8 @@ make -j${CPUS}
 make install
 
 # Extract docker package
+# https://www.docker.com
+# https://download.docker.com/linux/static/test/x86_64/docker-17.12.1-ce.tgz
 echo "Extracting docker ${DOCKER_VERSION}..."
 tar xzvf ${BOSH_COMPILE_TARGET}/docker/docker-${DOCKER_VERSION}.tgz
 if [[ $? != 0 ]] ; then
