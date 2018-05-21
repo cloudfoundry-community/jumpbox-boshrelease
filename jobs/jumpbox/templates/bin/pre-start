@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+# force ssh logins into the docker container unless the user is jumpbox or is coming from a bosh ssh session
+if ! grep -e 'ForceCommand' /etc/ssh/sshd_config -q; then
+    echo "Match User *,!jumpbox,!bosh_*" >> /etc/ssh/sshd_config
+    echo "  ForceCommand /var/vcap/jobs/jumpbox/bin/jumpbox" >> /etc/ssh/sshd_config
+    service ssh restart
+fi

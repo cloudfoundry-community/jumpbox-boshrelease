@@ -10,12 +10,13 @@ instance_groups:
     - name: default
   jobs:
     - { release: jumpbox, name: jumpbox }
-    - { release: jumpbox, name: inventory }
+    - { release: jumpbox, name: docker }
 
 properties:
-  jumpbox:
+  docker:
     env:
       FOO: BAR
+  jumpbox:
     users:
       - name: alice
       - name: bob

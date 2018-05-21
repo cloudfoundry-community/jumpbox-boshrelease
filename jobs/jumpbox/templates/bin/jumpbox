@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# set -ex
+PATH=${PATH}:/var/vcap/packages/docker/bin/
+export DOCKER_HOST=unix:///var/vcap/sys/run/docker/docker.sock
+
+volume=''
+<% if_p('docker.volume') do |volume| -%>
+volume="-v <%= p('docker.volume') %>:<%= p('docker.mount') %>"
+<% end -%>
+
+command=''
+<% if_p('docker.command') do |command| -%>
+command="<%= p('docker.command') %>"
+<% end -%>
+
+image=$(grep $USER /var/vcap/jobs/jumpbox/config/userimages | cut -f2 -d:)
+
+docker run -i --user "<%= p('docker.user')%>" --env-file /var/vcap/jobs/jumpbox/config/env -t $volume "$image" $command

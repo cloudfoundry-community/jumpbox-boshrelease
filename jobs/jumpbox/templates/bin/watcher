@@ -1,12 +1,11 @@
 #!/bin/bash
-exec </dev/null >>/var/vcap/sys/log/jumpbox.log 2>&1
+exec </dev/null >>/var/vcap/sys/log/watcher.log 2>&1
 umask 022
 
 #
 # watcher is a small shell-daemon that regularly checks
 # the state of the jumpbox and attempts to remedy any
-# problems it sees with respect to things like sudoers
-# configuration, users, system configs, etc.
+# problems it sees with respect to things like users.
 #
 
 # Set during the first iteration of the watch loop, but
@@ -17,7 +16,6 @@ FIRSTRUN=1
 
 JUMPBOX_HOME=/var/vcap/store/jumpbox/home
 JUMPBOX_ETC=/var/vcap/store/jumpbox/etc
-JUMPBOX_GO=/usr/local/go
 JUMPBOX_HOSTNAME="<%= p('jumpbox.hostname') %>"
 
 # Things that only get logged on the first run-through
@@ -43,7 +41,6 @@ provision() {
 	local user=$1   ; shift
 	local groups=$1 ; shift
 	local shell=$1  ; shift
-	local repo=$1   ; shift
 	local pass=$1   ; shift
 
 	home="${JUMPBOX_HOME}/${user}"
@@ -77,18 +74,6 @@ provision() {
 		chmod 0600 ${home}/.ssh/authorized_keys
 	fi
 
-	if [[ -n "${repo}" ]]; then
-		if [[ ! -f ${home}/.repo ]]; then
-			touch ${home}/.repo
-		fi
-
-		old_repo=$(cat ${home}/.repo)
-		if [[ "${repo}" != "${old_repo}" ]]; then
-			echo "${repo}" > ${home}/.repo
-		fi
-	else
-		rm -f ${home}/.repo
-	fi
 	chown -R ${user} ${home}
 }
 
@@ -134,16 +119,6 @@ while true; do
 		cp -a ${JUMPBOX_ETC}/* /etc/
 	fi
 
-	log1 "Setting up jumpbox banner"
-	if [[ -d /etc/update-motd.d && ! -f /etc/update-motd.d/99-banner ]]; then
-		cat >/etc/update-motd.d/99-banner <<EOF
-#!/bin/sh
-cat /var/vcap/jobs/jumpbox/config/banner
-EOF
-		chmod 0755 /etc/update-motd.d/99-banner
-		run-parts --lsbsysinit /etc/update-motd.d > /run/motd.dynamic
-	fi
-
 	log1 "Setting up ${JUMPBOX_HOME} base directory"
 	if [[ ! -d ${JUMPBOX_HOME} ]]; then
 		logn "${JUMPBOX_HOME} not found; fixing"
@@ -175,12 +150,6 @@ auth        required                    pam_permit.so
 auth        optional                    pam_cap.so
 EOF
 
-	log1 "Setting up system-wide Go runtime at ${JUMPBOX_GO}"
-	if [[ ! -e $JUMPBOX_GO ]]; then
-		logn "${JUMPBOX_GO} not linked to /var/vcap/packages/golang; fixing"
-		ln -s /var/vcap/packages/golang ${JUMPBOX_GO}
-	fi
-
 	log1 "Setting hostname to ${JUMPBOX_HOSTNAME}"
 	if [[ $(cat /etc/hostname) != ${JUMPBOX_HOSTNAME} ]]; then
 		logn "Hostname (via /etc/hostname) not set to ${JUMPBOX_HOSTNAME}; fixing"
@@ -194,13 +163,6 @@ EOF
 		sed -i -e 's/^127.0.0.1//' /etc/hosts
 		echo "127.0.0.1 ${JUMPBOX_HOSTNAME}" >> /etc/hosts
 	fi
-<% p('jumpbox.hosts').each do |line| %>
-	if ! grep -q '^<%= line %>$' /etc/hosts; then
-		logn "Entry '<%= line %>' not found in /etc/hosts; fixing"
-		echo "<%= line %>" >> /etc/hosts
-	fi
-<% end %>
-
 	<% if p('jumpbox.ssh_password_auth') %>
 	if ! grep -q '^PasswordAuthentication *yes' /etc/ssh/sshd_config; then
 		log1 "Enabling password authentication via SSH"
@@ -215,14 +177,6 @@ EOF
 		service ssh restart
 	fi
 	<% end %>
-
-	log1 "Setting up sudoers to allow certain environment variables to pass through"
-	for var in http_proxy https_proxy ftp_proxy no_proxy EDITOR; do
-		if ! grep '^Defaults env_keep' /etc/sudoers | grep -q "${var}"; then
-			logn "Environment variable '${var}' not set to env_keep in /etc/sudoers; fixing"
-			echo "Defaults env_keep += \"${var}\"" >> /etc/sudoers
-		fi
-	done
 
 	log1 "Adding the bosh-sshers group if not present"
 	if ! grep -q "^bosh_sshers" /etc/group; then
@@ -242,10 +196,11 @@ EOF
 <% p('jumpbox.users').each do |user| %>
 	unset users['<%= user['name'] %>']
 	# jumpbox.users[<%= user['name'] %>
+  <% group_list = "bosh_sshers"
+	   if user.has_key?("groups") then group_list += "," + user["groups"] end %>
 	provision '<%= user['name'] %>' \
-	          'bosh_sshers<%= !user.has_key?("sudo") || user["sudo"] ? ",bosh_sudoers" : "" %>' \
+	          '<%= group_list %>' \
 	          '<%= user['shell'] %>' \
-	          '<%= user['env'] %>' \
 	          '<%= user['password'] %>' <% if !(user['ssh_keys'] || []).empty? %> \<% end %>
 	          <% (user['ssh_keys'] || []).each do |k| %> '<%= k %>'<% end %>
 <% end %>

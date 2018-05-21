@@ -2,11 +2,7 @@
 exec </dev/null >>/var/vcap/sys/log/jumpbox.log 2>&1
 
 set -e
-rm -f /etc/profile.d/jumpbox.sh
-rm -f /etc/skel/.bashrc
-cp /var/vcap/jobs/jumpbox/config/bashrc /etc/bash.bashrc
 
-source /var/vcap/jobs/jumpbox/config/bashrc
 pidfile=/var/vcap/sys/run/jumpbox/watcher.pid
 watcher=/var/vcap/jobs/jumpbox/bin/watcher
 

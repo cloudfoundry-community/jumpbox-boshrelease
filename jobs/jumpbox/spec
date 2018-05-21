@@ -1,67 +1,65 @@
 ---
 name: jumpbox
-packages:
-- jumpbox
-- golang
 
 templates:
-  bin/jumpbox_ctl: bin/jumpbox_ctl
-  bin/watcher:     bin/watcher
-  config/banner:   config/banner
-  config/bashrc:   config/bashrc
+  bin/jumpbox: bin/jumpbox
+  bin/watcher: bin/watcher
+  bin/watcher_ctl: bin/watcher_ctl
+  bin/pre-start: bin/pre-start
+  bin/post-start: bin/post-start
+  bin/dockerpull: bin/dockerpull
+  bin/dockerpull_ctl: bin/dockerpull_ctl
+  config/env: config/env
+  config/userimages: config/userimages
+
+packages: []
 
 properties:
+  docker.image:
+    description: The default docker image you want to use for the user containers
+    default: cfcommunity/jumpbox
+  docker.volume:
+    description: The docker volume you want to use for the user containers, optional
+    example: homedirs
+  docker.mount:
+    description: Where the docker volume should be mounted, if defined
+    default: /home
+  docker.pull_interval: 
+    decription: How often, in seconds, to check for a new version of the image. Defaults to zero which means it only runs once per deploy or monit restart.
+    default: 0 
+  docker.command:
+    description: The command you want to execute when you run the container, like /bin/bash
+    example: /bin/bash
+  docker.user:
+    description: User to use inside the container
+    default: root
+  docker.env:
+    description: Environment variable available to all containers
+    example: |
+      FOO: BAR
   jumpbox.hostname:
     description: "Hostname to set on the jumpbox"
     default: "jumpbox.local"
-
-  jumpbox.banner:
-    description: "A login banner, or MoTD, to display to users when they log in"
-    default: nil
-
-  jumpbox.hosts:
-    description: "A list of entries to append to /etc/hosts"
-    default: []
-
   jumpbox.ssh_password_auth:
     description: "Modify the jumpbox SSH configuration to permit users to authenticate via passwords when using SSH."
     default: false
-
-  jumpbox.one_time_setup:
-    description: "Send new users through a one-time setup.  You generally want to do this."
-    default: true
-
   jumpbox.users:
     default: []
     description: |-
-      List of users to create
+      List of users to create on the jumpbox. You can override the default image here on a per-user basis if you want.
       - name: jhunt
-        shell: /bin/bash
-        env: https://github.com/jhunt/devbox-env.git  # specifies a git environment to clone
+        image: jhunt/jumpbox
         ssh_keys:
           - ssh-rsa AAAAB3NzaC1yabcd
           - ssh-rsa AAAAB3NzaC1y1234
-
+      - name: dbishop
+        ssh_keys:
+          - ssh-rsa AAAAB3NzaC1yefgh
+          - ssh-rsa AAAAB3NzaC1y5678
   jumpbox.delete:
     default: []
     description: |-
-      A list of users to delete, specified via account name.
-      By default, users that are removed from the BOSH deployment manifest will be deactivated
-      on the jumpbox deployment, but their files will be retained for reference / forensics.
+        A list of users to delete, specified via account name.
+        By default, users that are removed from the BOSH deployment manifest will be deactivated
+        on the jumpbox deployment, but their files will be retained for reference / forensics.
 
-  jumpbox.env:
-    default: {}
-    description: |-
-      Additional environment variables to set for all users, as well as the start up scripts.
-      This can be used for setting site-wide HTTP proxy configuration.
-      Specified as a map of NAME: VALUE
-
-  jumpbox.bashrc:
-    default: ''
-    description: |-
-      Additional bash startup commands, to be included verbatim in the system-wide configuration.
-      This can be used to provide additional conveniences or implement site-wide policy.
-
-  jumpbox.setup.enabled:
-    default: true
-    description: "enable or disbale the setup that will install rvm (only disable this if you don't have internet access)"    

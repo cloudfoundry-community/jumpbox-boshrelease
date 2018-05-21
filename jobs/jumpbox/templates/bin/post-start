@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+PATH=${PATH}:/var/vcap/packages/docker/bin/
+export DOCKER_HOST=unix:///var/vcap/sys/run/docker/docker.sock
+
+# This script does nothing if there are no volumes configured.
+<% if_p('docker.volume') do |volume| -%>
+# Create the docker volume if one is configured. This is idempotent.
+docker volume create <%= p('docker.volume') %>
+<% end -%>

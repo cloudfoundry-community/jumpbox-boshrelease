@@ -1,5 +1,12 @@
+check process dockerpull
+  with pidfile /var/vcap/sys/run/jumpbox/dockerpull.pid
+  start program "/var/vcap/jobs/jumpbox/bin/dockerpull_ctl start"
+  stop program "/var/vcap/jobs/jumpbox/bin/dockerpull_ctl stop"
+  group vcap
+  depends on docker
+
 check process watcher
   with pidfile /var/vcap/sys/run/jumpbox/watcher.pid
-  start program "/var/vcap/jobs/jumpbox/bin/jumpbox_ctl start"
-  stop program "/var/vcap/jobs/jumpbox/bin/jumpbox_ctl stop"
+  start program "/var/vcap/jobs/jumpbox/bin/watcher_ctl start"
+  stop program "/var/vcap/jobs/jumpbox/bin/watcher_ctl stop"
   group vcap

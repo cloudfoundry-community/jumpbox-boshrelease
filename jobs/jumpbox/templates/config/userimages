@@ -1,0 +1,3 @@
+<% p('jumpbox.users', []).each do |user| -%>
+<%= user['name'] %>:<%= user['image'].to_s.empty? ? p('docker.image') : user['image'] %>
+<% end -%>

@@ -1,4 +1,18 @@
----
+ctop/ctop-0.5.1-linux-amd64:
+  size: 5667856
+  sha: 891ceca493b5dba65b855db09acb1c6d692210ea
+docker/aufs-tools_20120411-3_amd64.deb:
+  size: 91762
+  sha: 2dfc1fe386cd3f05ac7e0b4ebcf3ebc8a7f3b04d
+docker/autoconf-2.69.tar.gz:
+  size: 1927468
+  sha: 562471cbcb0dd0fa42a76665acf0dbb68479b78a
+docker/bridge-utils-1.5.tar.gz:
+  size: 33472
+  sha: 1f71b6f22f5d2b6d21e146f4ac20820ad42e58ee
+docker/docker-17.12.1-ce.tgz:
+  size: 34243887
+  sha: 9dd0d19312640460671352930eb44b1692441d95
 golang_1.5/go1.5.3.linux-amd64.tar.gz:
   size: 80147269
   object_id: 5d8b0264-6ad9-405e-961f-4449dd9a180f
@@ -16,9 +30,9 @@ jumpbox/bins/certstrap:
   object_id: 6050fa1f-105b-4ddb-8074-224e149b5c83
   sha: 1fa8434399124dd0b17c20c0c90bc34fb0ba16bf
 jumpbox/bins/cf:
+  size: 16379808
   object_id: b4d5ff72-14b0-4ac8-ba8a-b7a4ba7ac949
   sha: 3636f49b368332550e2b85035b7b6389120f1b8b
-  size: 16379808
 jumpbox/bins/credhub:
   size: 9730875
   object_id: ae9adbcb-fc8c-4c9a-6cb7-9868775a0f5c
@@ -32,17 +46,17 @@ jumpbox/bins/fly:
   object_id: 214b5ab1-1351-4369-6925-9f120c48c59f
   sha: 87afcc6f09ccda7bd49d350ee574b6ac8c9e145c
 jumpbox/bins/genesis:
+  size: 408450
   object_id: a58f7ee6-be1e-479d-ad15-2f9c1993af04
   sha: 25da1c4d46fca496ba08d4fbac127cd02bd36bd6
-  size: 408450
 jumpbox/bins/nats:
   size: 7040936
   object_id: 698b0c19-976d-4161-81f3-03b859fe55ff
   sha: 39f00b44c10e332df5f0bff518c1aa2a4dc74792
 jumpbox/bins/safe:
+  size: 7853787
   object_id: 044f493b-8288-4c5c-bf2d-97bff56f5417
   sha: f78f782d8eaa4c57fb9b3003f6fbae1757f02372
-  size: 7853787
 jumpbox/bins/shield:
   size: 8175536
   object_id: 0fe0d6e1-8545-43d9-a84f-938594598963
