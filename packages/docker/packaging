@@ -51,7 +51,8 @@ make install
 
 # Extract docker package
 # https://www.docker.com
-# https://download.docker.com/linux/static/test/x86_64/docker-17.12.1-ce.tgz
+# https://download.docker.com/linux/static/test/x86_64/docker-17.09.1-ce.tgz
+# Using this version until https://github.com/docker/for-linux/issues/219 is fixed
 echo "Extracting docker ${DOCKER_VERSION}..."
 tar xzvf ${BOSH_COMPILE_TARGET}/docker/docker-${DOCKER_VERSION}.tgz
 if [[ $? != 0 ]] ; then
