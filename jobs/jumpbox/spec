@@ -27,12 +27,6 @@ properties:
   docker.pull_interval: 
     decription: How often, in seconds, to check for a new version of the image. Defaults to zero which means it only runs once per deploy or monit restart.
     default: 0 
-  docker.command:
-    description: The command you want to execute when you run the container, like /bin/bash
-    example: /bin/bash
-  docker.user:
-    description: User to use inside the container
-    default: root
   docker.env:
     description: Environment variable available to all containers
     example: |
