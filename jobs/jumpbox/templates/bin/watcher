@@ -195,8 +195,7 @@ EOF
 	popd >/dev/null
 <% p('jumpbox.users').each do |user| %>
 	unset users['<%= user['name'] %>']
-	# jumpbox.users[<%= user['name'] %>
-  <% group_list = "bosh_sshers"
+  <% group_list = "bosh_sshers,vcap"
 	   if user.has_key?("groups") then group_list += "," + user["groups"] end %>
 	provision '<%= user['name'] %>' \
 	          '<%= group_list %>' \

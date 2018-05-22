@@ -19,8 +19,8 @@ properties:
     description: The default docker image you want to use for the user containers
     default: cfcommunity/jumpbox
   docker.volume:
-    description: The docker volume you want to use for the user containers, optional
-    example: homedirs
+    description: The docker volume you want to use for the user containers.
+    default: homedirs
   docker.mount:
     description: Where the docker volume should be mounted, if defined
     default: /home

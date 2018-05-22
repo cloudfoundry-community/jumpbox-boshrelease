@@ -1,0 +1,4 @@
+---
+- type: replace
+  path: /instance_groups/name=jumpbox/jobs/name=jumpbox/properties/docker?/env
+  value: ((docker_env))

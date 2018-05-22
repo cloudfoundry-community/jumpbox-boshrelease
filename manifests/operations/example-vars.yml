@@ -1,0 +1,31 @@
+# Required, in order to access the jumpbox
+# NOTE: to allow users in with a password, you must use the allow_password.yml ops file
+jumpbox_users:
+	- name: alice
+		ssh-rsa: AAAAB3NzaC1yabcd
+	- name: bob
+		password: $6$xxxxxxYYYYYYYYYYY
+		sudo: true
+
+# Change the default docker image
+# docker_image.yml
+default_docker_image: busybox
+
+# Check for updates to the docker image every 10 minutes
+# pull_interval.yml
+docker_pull_interval: 600
+
+# Set environment variables inside the docker container
+# docker_environment.yml
+docker_env:
+  FOO: BAR
+  BOZ: BAZ
+
+# To delete users from the jumpbox
+# delete_users.yml
+delete_users:
+  - chris
+
+# To set the jumpbox hostname
+# set_hostname.yml
+jumpbox_hostname: myjumpbox.example.com
