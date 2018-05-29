@@ -1,3 +1,6 @@
 
 # genesis
 Bumped genesis to v2.6.0
+
+# safe
+Bumped safe to v0.8.1
