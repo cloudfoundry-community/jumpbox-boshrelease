@@ -18,26 +18,25 @@ header() {
 	echo
 }
 
-: ${REPO_ROOT:?required}
-: ${RELEASE_ROOT:?required}
-: ${REPO_OUT:?required}
-: ${BRANCH:?required}
-: ${GITHUB_OWNER:?required}
-: ${VERSION_FROM:?required}
-: ${AWS_ACCESS_KEY:?required}
-: ${AWS_SECRET_KEY:?required}
-: ${GIT_EMAIL:?required}
-: ${GIT_NAME:?required}
+bail() {
+	echo >&2 $* "  Did you misconfigure Concourse?"
+	exit 2
+}
 
-if [[ ! -f ${VERSION_FROM} ]]; then
-  echo >&2 "Version file (${VERSION_FROM}) not found.  Did you misconfigure Concourse?"
-  exit 2
-fi
+test -n "${REPO_ROOT:-}"      || bail "REPO_ROOT must be set to the full path to the Git repository."
+test -n "${RELEASE_ROOT:-}"   || bail "RELEASE_ROOT must be set to the output directory where release artifacts should go."
+test -n "${REPO_OUT:-}"       || bail "REPO_OUT must be set to the output directory where the Git working copy should be moved to."
+test -n "${BRANCH:-}"         || bail "BRANCH must be set to the git branch you pulled the Git repository from."
+test -n "${GITHUB_OWNER:-}"   || bail "GITHUB_OWNER must be set to the name of the Github user or organization that owns the Git repository."
+test -n "${VERSION_FROM:-}"   || bail "VERSION_FROM must be set to the path of the input version file."
+test -n "${AWS_ACCESS_KEY:-}" || bail "AWS_ACCESS_KEY must be set to your AWS access key ID (AKI) to use for uploading release artifacts to S3."
+test -n "${AWS_SECRET_KEY:-}" || bail "AWS_SECRET_KEY must be set to your AWS secret key to use for uploading release artifacts to S3."
+test -n "${GIT_EMAIL:-}"      || bail "GIT_EMAIL must be set to an email address to use for Git commits."
+test -n "${GIT_NAME:-}"       || bail "GIT_NAME must be set to something; it will be used for Git commits."
+
+test -f "${VERSION_FROM}"     || bail "Version file (${VERSION_FROM}) not found."
 VERSION=$(cat ${VERSION_FROM})
-if [[ -z ${VERSION} ]]; then
-  echo >&2 "Version file (${VERSION_FROM}) was empty.  Did you misconfigure Concourse?"
-  exit 2
-fi
+test -n "${VERSION}"          || bail "Version file (${VERSION_FROM}) was empty."
 
 if [[ ! -f ${REPO_ROOT}/ci/release_notes.md ]]; then
   echo >&2 "ci/release_notes.md not found.  Did you forget to write them?"

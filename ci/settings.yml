@@ -57,7 +57,8 @@ jobs:
         image_resource:
           type: docker-image
           source:
-            repository: (( grab meta.image ))
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
         inputs:
         - name: git
         - name: genesis
@@ -69,7 +70,7 @@ jobs:
           REPO_ROOT:        git
           REPO_OUT:         pushme
           RELEASE_DIR:      genesis
-          BLOB:             genesis
+          BLOB_NAME:        genesis
           BLOB_BINARY:      genesis
           BLOB_DESTINATION: jumpbox/bins/genesis
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
@@ -106,7 +107,8 @@ jobs:
         image_resource:
           type: docker-image
           source:
-            repository: (( grab meta.image ))
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
         inputs:
         - name: git
         - name: safe
@@ -118,7 +120,7 @@ jobs:
           REPO_ROOT:        git
           REPO_OUT:         pushme
           RELEASE_DIR:      safe
-          BLOB:             safe
+          BLOB_NAME:        safe
           BLOB_BINARY:      safe-linux-amd64
           BLOB_DESTINATION: jumpbox/bins/safe
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
@@ -162,7 +164,8 @@ jobs:
         image_resource:
           type: docker-image
           source:
-            repository: (( grab meta.image ))
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
         inputs:
         - name: git
         - name: esuf
@@ -174,7 +177,7 @@ jobs:
           REPO_ROOT:        git
           REPO_OUT:         pushme
           RELEASE_DIR:      esuf
-          BLOB:             esuf
+          BLOB_NAME:        esuf
           BLOB_BINARY:      esuf-linux-amd64
           BLOB_DESTINATION: jumpbox/bins/esuf
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
@@ -218,7 +221,8 @@ jobs:
         image_resource:
           type: docker-image
           source:
-            repository: (( grab meta.image ))
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
         inputs:
         - name: git
         - name: cf
@@ -230,8 +234,7 @@ jobs:
           REPO_ROOT:        git
           REPO_OUT:         pushme
           RELEASE_DIR:      cf
-          BLOB:             cf
-          BLOB_SOURCE:      https://cli.run.pivotal.io/stable?release=linux64-binary&version=%s&source=github-rel&x=.tgz
+          BLOB_NAME:        cf
           BLOB_BINARY:      cf
           BLOB_DESTINATION: jumpbox/bins/cf
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
@@ -275,7 +278,8 @@ jobs:
         image_resource:
           type: docker-image
           source:
-            repository: (( grab meta.image ))
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
         inputs:
         - name: git
         - name: cloudfoundry-utils
@@ -287,7 +291,7 @@ jobs:
           REPO_ROOT:        git
           REPO_OUT:         pushme
           RELEASE_DIR:      cloudfoundry-utils
-          BLOB:             cloudfoundry-utils
+          BLOB_NAME:        cloudfoundry-utils
           BLOB_BINARY:      '*'
           BLOB_DESTINATION: jumpbox/cloudfoundry-utils/
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))

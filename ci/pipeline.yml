@@ -60,7 +60,7 @@ meta:
     upset_moji:    ":sad_panda:"
     channel:       (( param "Please specify the channel (#name) or user (@user) to send messages to" ))
     username:      concourse
-    icon:          https://cl.ly/2F421Y300u07/concourse-logo-blue-transparent.png
+    icon:          http://cl.ly/image/3e1h0H3H2s0P/concourse-logo.png
     fail_url: '(( concat "<" meta.url "/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME| Concourse Failure! " meta.slack.upset_moji ">" ))'
 
 groups:
@@ -70,11 +70,8 @@ groups:
       - testflight-pr
       - rc
       - shipit
-  - name: versioning
-    jobs:
       - major
       - minor
-      - patch
 
 jobs:
   - name: testflight
@@ -267,20 +264,6 @@ jobs:
           icon_url: (( grab meta.slack.icon ))
           text:    '(( concat meta.slack.fail_url " " meta.pipeline ": minor job failed" ))'
 
-  - name: patch
-    public: true
-    plan:
-    - do:
-      - { get: version, trigger: false, params: {bump: patch} }
-      - { put: version,                 params: {file: version/number} }
-      on_failure:
-        put: notify
-        params:
-          channel:  (( grab meta.slack.channel ))
-          username: (( grab meta.slack.username ))
-          icon_url: (( grab meta.slack.icon ))
-          text:    '(( concat meta.slack.fail_url " " meta.pipeline ": patch job failed" ))'
-
   - name: major
     public: true
     plan:
@@ -393,7 +376,7 @@ resources:
 
   - name: git-pull-requests
     type: pull-request
-    check_every: 15m # Required due to API throttling.
+    check_every: 15m # avoid Github API rate-limiting
     source:
       access_token: (( grab meta.github.access_token ))
       private_key:  (( grab meta.github.private_key ))
