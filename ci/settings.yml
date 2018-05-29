@@ -240,6 +240,7 @@ jobs:
           REPO_ROOT:        git
           REPO_OUT:         pushme
           RELEASE_DIR:      cf
+          BLOB_SOURCE:      https://cli.run.pivotal.io/stable?release=linux64-binary&version=%s&source=github-rel&x=.tgz
           BLOB_DIR:         cf
           BLOB_NAME:        cf
           BLOB_BINARY:      cf

@@ -26,6 +26,15 @@ if [[ ! -z $blobs_to_remove ]]; then
   echo "$blobs_to_remove" | xargs -L1 bosh2 remove-blob
 fi
 
+if [[ ${BLOB_SOURCE:-} =~ ^http ]]; then
+  echo "fetching blob from upstream $(printf ${BLOB_SOURCE} ${VERSION}) ..."
+  if [[ ${BLOB_SOURCE} =~ .tgz$ ]]; then
+    curl -Lsk $(printf ${BLOB_SOURCE} ${VERSION}) | tar -xzO ${BLOB_BINARY} > ../${BLOB_DIR}/${BLOB_BINARY}
+  else
+    curl -Lsk $(printf ${BLOB_SOURCE} ${VERSION}) > ../${BLOB_DIR}/${BLOB_BINARY}
+  fi
+fi
+
 # expand ${VERSION} env var into file path
 eval "blob_destination=${BLOB_DESTINATION}"
 if [[ "$BLOB_BINARY" == "*" ]]; then
