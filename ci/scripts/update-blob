@@ -35,6 +35,9 @@ if [[ ${BLOB_SOURCE:-} =~ ^http ]]; then
   fi
 fi
 
+# remove things that github-release puts in the directory that we don't want.
+rm -f ../${RELEASE_DIR}/tag ../${RELEASE_DIR}/body ../${RELEASE_DIR}/version
+
 # expand ${VERSION} env var into file path
 eval "blob_destination=${BLOB_DESTINATION}"
 if [[ "$BLOB_BINARY" == "*" ]]; then
