@@ -70,9 +70,11 @@ jobs:
           REPO_ROOT:        git
           REPO_OUT:         pushme
           RELEASE_DIR:      genesis
+          BLOB_DIR:         genesis
           BLOB_NAME:        genesis
           BLOB_BINARY:      genesis
           BLOB_DESTINATION: jumpbox/bins/genesis
+          BLOB_CLEANUP:     jumpbox/bins/genesis
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
           AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
           BRANCH:       (( grab meta.github.branch ))
@@ -120,9 +122,11 @@ jobs:
           REPO_ROOT:        git
           REPO_OUT:         pushme
           RELEASE_DIR:      safe
+          BLOB_DIR:         safe
           BLOB_NAME:        safe
           BLOB_BINARY:      safe-linux-amd64
           BLOB_DESTINATION: jumpbox/bins/safe
+          BLOB_CLEANUP:     jumpbox/bins/safe
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
           AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
           BRANCH:       (( grab meta.github.branch ))
@@ -177,9 +181,11 @@ jobs:
           REPO_ROOT:        git
           REPO_OUT:         pushme
           RELEASE_DIR:      esuf
+          BLOB_DIR:         esuf
           BLOB_NAME:        esuf
           BLOB_BINARY:      esuf-linux-amd64
           BLOB_DESTINATION: jumpbox/bins/esuf
+          BLOB_CLEANUP:     jumpbox/bins/esuf
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
           AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
           BRANCH:       (( grab meta.github.branch ))
@@ -234,9 +240,11 @@ jobs:
           REPO_ROOT:        git
           REPO_OUT:         pushme
           RELEASE_DIR:      cf
+          BLOB_DIR:         cf
           BLOB_NAME:        cf
           BLOB_BINARY:      cf
           BLOB_DESTINATION: jumpbox/bins/cf
+          BLOB_CLEANUP:     jumpbox/bins/cf
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
           AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
           BRANCH:           (( grab meta.github.branch ))
@@ -291,9 +299,11 @@ jobs:
           REPO_ROOT:        git
           REPO_OUT:         pushme
           RELEASE_DIR:      cloudfoundry-utils
+          BLOB_DIR:         cloudfoundry-utils
           BLOB_NAME:        cloudfoundry-utils
           BLOB_BINARY:      '*'
           BLOB_DESTINATION: jumpbox/cloudfoundry-utils/
+          BLOB_CLEANUP:     jumpbox/cloudfoundry-utils/*
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
           AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
           BRANCH:           (( grab meta.github.branch ))

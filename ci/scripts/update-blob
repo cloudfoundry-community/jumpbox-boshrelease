@@ -28,7 +28,14 @@ fi
 
 # expand ${VERSION} env var into file path
 eval "blob_destination=${BLOB_DESTINATION}"
-bosh2 add-blob ../${BLOB_DIR}/${BLOB_BINARY} "${blob_destination}"
+if [[ "$BLOB_BINARY" == "*" ]]; then
+  for blob_src in ../${BLOB_DIR}/${BLOB_BINARY}; do
+    base=${blob_src##*/}
+    bosh2 add-blob "${blob_src}" "${blob_destination}/${base}"
+  done
+else
+  bosh2 add-blob "../${BLOB_DIR}/${BLOB_BINARY}" "${blob_destination}"
+fi
 bosh2 -n upload-blobs
 rm config/private.yml
 popd
