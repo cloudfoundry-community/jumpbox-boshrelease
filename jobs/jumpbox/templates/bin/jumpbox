@@ -8,6 +8,9 @@ volume=''
 <% if_p('docker.volume') do |volume| -%>
 volume="-v <%= p('docker.volume') %>:<%= p('docker.mount') %>"
 <% end -%>
+<% if_p('docker.shared') do |shared| -%>
+volume="$volume -v shared:/home/shared"
+<% end -%>
 
 image=$(grep $USER /var/vcap/jobs/jumpbox/config/userimages | cut -f2 -d:)
 

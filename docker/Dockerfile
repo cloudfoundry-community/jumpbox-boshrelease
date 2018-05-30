@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 MAINTAINER James Hunt <jhunt@starkandwayne.com>
 
 #===============
@@ -79,20 +79,30 @@ RUN wget -q --no-check-certificate -O stable.tgz "https://cli.run.pivotal.io/sta
 RUN wget -q -O /usr/local/bin/fly --no-check-certificate https://github.com/concourse/concourse/releases/download/v${FLY_VERSION}/fly_linux_amd64 \
   && chmod +x /usr/local/bin/fly
 
-#=============================
+#============
 # Install Om
-#==============================
+#============
 RUN wget -q -O /usr/local/bin/om --no-check-certificate https://github.com/pivotal-cf/om/releases/download/${OM_VERSION}/om-linux \
   && chmod +x /usr/local/bin/om
 
-#============================
+#==========================
 # terraform
 # https://www.terraform.io
-#===========================
+#==========================
 RUN wget -q --no-check-certificate https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
   && unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
   && mv terraform /usr/local/bin \
   && chmod +x /usr/local/bin/terraform \
   && rm terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 
+
+#======================================
+# Add a non-root user and shared space
+#======================================
+
+RUN groupadd -r jumpbox && useradd --no-log-init -m -d /home/jumpbox -g jumpbox jumpbox && \
+    mkdir /home/shared && chown jumpbox:jumpbox /home/shared
+
+USER jumpbox
+WORKDIR /home/jumpbox
 CMD /bin/bash
