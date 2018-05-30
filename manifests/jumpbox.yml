@@ -10,12 +10,14 @@ instance_groups:
   networks:
     - name: default
   jobs:
-    - { release: jumpbox, name: jumpbox }
-    - { release: jumpbox, name: docker }
+    - release: jumpbox
+      name: jumpbox
+      properties:
+        jumpbox:
+          users: ((jumpbox_users))
+    - release: jumpbox
+      name: docker
 
-properties:
-  jumpbox:
-    users: ((jumpbox_users))
 
 update:
   canaries: 0
