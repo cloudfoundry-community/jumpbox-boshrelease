@@ -45,7 +45,7 @@ RUN wget -q -O /usr/local/bin/spruce --no-check-certificate http://github.com/ge
 #=============
 # bosh-cli v2
 #=============
-RUN wget -q -O /usr/local/bin/bosh-cli --no-check-certificate https://s3.amazonaws.com/bosh-cli-artifacts/bosh-cli-${BOSH_CLI_V2_VERSION}-linux-amd64 \
+RUN wget -q -O /usr/local/bin/bosh --no-check-certificate https://s3.amazonaws.com/bosh-cli-artifacts/bosh-cli-${BOSH_CLI_V2_VERSION}-linux-amd64 \
   && chmod +x /usr/local/bin/bosh
 
 #=============================
