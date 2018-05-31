@@ -12,6 +12,6 @@ volume="-v <%= p('docker.volume') %>:<%= p('docker.mount') %>"
 volume="$volume -v shared:/home/shared"
 <% end -%>
 
-image=$(grep $USER /var/vcap/jobs/jumpbox/config/userimages | cut -f2 -d:)
+image=$(grep "^$USER:" /var/vcap/jobs/jumpbox/config/userimages | cut -f2 -d:)
 
 docker run -it --env-file /var/vcap/jobs/jumpbox/config/env $volume "$image"
