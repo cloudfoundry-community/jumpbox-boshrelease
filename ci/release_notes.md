@@ -25,3 +25,6 @@ Bumped genesis to v2.6.2
 
 # genesis
 Bumped genesis to v2.6.3
+
+# genesis
+Bumped genesis to v2.6.4
