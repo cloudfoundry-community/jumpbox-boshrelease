@@ -53,6 +53,8 @@ provision() {
 	if ! grep -q "^${user}:" /etc/passwd; then
 		logn "User ${user} does not exist; adding"
 		/usr/sbin/useradd -m -d /u/${user} -s ${shell} -g staff -G "${groups}" ${user}
+	else
+		/usr/sbin/usermod -a -G "${groups}" "${user}"
 	fi
 	if [[ -n ${pass} ]]; then
 		pass=$(echo "$pass" | sed -e 's@/@\\/@g')
