@@ -59,9 +59,9 @@ jumpbox/bins/tmate:
   object_id: 3253b6dc-3e45-4dd2-b6ce-deb1147b853b
   sha: 7dae88002cfc9686fa90e1535e17a2eae22407ea
 jumpbox/bins/vault:
-  size: 59959512
-  object_id: a7d6df95-8bc5-4090-950d-35d349557801
-  sha: 39f140b287ac8b0df513aa4ceb6c50b800b8ce66
+  size: 85734099
+  object_id: 776aec93-754d-44a4-4262-12efa2e68844
+  sha: d0e1eedba1570e9eae59eccdb2f2ba640acff49a
 jumpbox/cloudfoundry-utils//cert_generator:
   size: 6667
   object_id: 6f486e4d-b5e5-4e52-5d49-dfeeb9f61be4
