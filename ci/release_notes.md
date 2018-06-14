@@ -6,3 +6,6 @@
 # Software Updates
 
 * Bumped vault to v0.9.6
+
+# genesis
+Bumped genesis to v2.6.5
