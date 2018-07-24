@@ -10,3 +10,8 @@ export DOCKER_HOST=unix:///var/vcap/sys/run/docker/docker.sock
 # Create the docker volume if one is configured. This is idempotent.
 docker volume create <%= p('docker.volume') %>
 <% end -%>
+<% if_p('docker.shared') do |shared| -%>
+docker volume create shared
+chgrp docker /var/vcap/store/docker/docker/volumes/shared /var/vcap/store/docker/docker/volumes /var/vcap/store/docker/docker
+chmod g+rx /var/vcap/store/docker/docker/volumes/shared /var/vcap/store/docker/docker/volumes /var/vcap/store/docker/docker
+<% end -%>
