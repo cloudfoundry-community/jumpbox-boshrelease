@@ -19,6 +19,8 @@ JUMPBOX_HOME=/var/vcap/store/jumpbox/home
 JUMPBOX_ETC=/var/vcap/store/jumpbox/etc
 JUMPBOX_GO=/usr/local/go
 JUMPBOX_HOSTNAME="<%= p('jumpbox.hostname') %>"
+WATCHER=/var/vcap/jobs/jumpbox/bin/watcher
+WATCHER_MTIME_START=$(/usr/bin/stat --format=%Y ${WATCHER})
 
 # Things that only get logged on the first run-through
 log1() {
@@ -132,6 +134,11 @@ remove() {
 }
 
 while true; do
+	WATCHER_MTIME_NOW=$(/usr/bin/stat --format=%Y ${WATCHER})
+	if [[ ${WATCHER_MTIME_NOW} -gt ${WATCHER_MTIME_START} ]]; then
+		exec ${WATCHER}
+	fi
+
 	if [[ -d ${JUMPBOX_ETC} ]]; then
 		cp -a ${JUMPBOX_ETC}/* /etc/
 	fi
