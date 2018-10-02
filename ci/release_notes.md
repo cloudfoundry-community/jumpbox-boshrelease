@@ -49,3 +49,6 @@ Bumped esuf to v0.1.2
 
 # genesis
 Bumped genesis to v2.6.12
+
+# safe
+Bumped safe to v0.9.7
