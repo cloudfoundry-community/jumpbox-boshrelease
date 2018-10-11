@@ -64,31 +64,35 @@ jumpbox/bins/vault:
   sha: d0e1eedba1570e9eae59eccdb2f2ba640acff49a
 jumpbox/cloudfoundry-utils//cert_generator:
   size: 6667
-  object_id: 6f486e4d-b5e5-4e52-5d49-dfeeb9f61be4
+  object_id: 87a07bb8-50d5-4f04-4cef-3746e79dba76
   sha: 853eb37ad3c9ffa7e5dc88ca3dbc5b55c6c0be1a
 jumpbox/cloudfoundry-utils//cf-app-env-json:
   size: 610
-  object_id: 29c467f4-e510-483b-6f27-3e5dbe0d8c15
+  object_id: a21b0a73-1e8b-472b-7835-b27cb28dcf89
   sha: b5b76fe615821b8ebbdfb626fc2b8ee48341e3db
 jumpbox/cloudfoundry-utils//cf-apps-for-route:
   size: 2456
-  object_id: 9dc554d8-a7a1-4d21-6bf5-411302c5cdda
+  object_id: 89c7e05e-b54e-4376-6147-fc6e6f81da98
   sha: 353eeead0e21cc8a0a02c652aa07c6c8edb0daa6
 jumpbox/cloudfoundry-utils//cf-list-org-names:
   size: 472
-  object_id: beecb0ba-27d8-4c0e-4154-e6b75270bf9f
+  object_id: ee24abf7-335a-46b4-5898-1d89b5dfaf90
   sha: 4f5903caa03ec1c384790b6ee8b1cf3da054892a
 jumpbox/cloudfoundry-utils//cf-services-for-broker:
   size: 4761
-  object_id: 34a0de15-356a-4098-68b8-1a5f789223ef
+  object_id: fd942438-4323-47d5-6df8-2923e73540ce
   sha: adceb1b4d7b3b86ba831318d5a7f27f8cce28934
 jumpbox/cloudfoundry-utils//cf-verify:
   size: 3820
-  object_id: 80aa87da-af3a-49d6-4612-3fc2ae7eb750
+  object_id: 752fb9d9-7c01-46cf-45d7-03355c88d3cf
   sha: 8944c5834b65ccb82255a18755142a96018240cb
+jumpbox/cloudfoundry-utils//commit_sha:
+  size: 40
+  object_id: 6faadf93-8a27-484f-47a2-ce65d29ad793
+  sha: f44dbdc4ade1d5f62684eaf707d7494a37cb2e6a
 jumpbox/cloudfoundry-utils//release-differ:
   size: 2199
-  object_id: cd6bbda1-3beb-4193-75d6-5979be360861
+  object_id: 3ba4d4c4-7b4c-4e66-61f0-275eed2737a3
   sha: 87bfb4ffafafc9ec2c98069590c55cd8e3e7980c
 jumpbox/curl-7.50.3.tar.gz:
   size: 8908593
