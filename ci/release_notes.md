@@ -58,3 +58,6 @@ Bumped cf to v6.40.0
 
 # cloudfoundry-utils
 Bumped cloudfoundry-utils to v1.0.0
+
+# safe
+Bumped safe to v0.9.8
