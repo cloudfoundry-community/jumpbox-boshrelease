@@ -23,7 +23,7 @@ EOF
 
 blobs_to_remove=$(spruce json config/blobs.yml | jq -r "keys[] | select(test(\"${BLOB_CLEANUP}\"))")
 if [[ ! -z $blobs_to_remove ]]; then
-  echo "$blobs_to_remove" | xargs -L1 bosh2 remove-blob
+  echo "$blobs_to_remove" | xargs -L1 bosh remove-blob
 fi
 
 if [[ ${BLOB_SOURCE:-} =~ ^http ]]; then
@@ -43,12 +43,12 @@ eval "blob_destination=${BLOB_DESTINATION}"
 if [[ "$BLOB_BINARY" == "*" ]]; then
   for blob_src in ../${BLOB_DIR}/${BLOB_BINARY}; do
     base=${blob_src##*/}
-    bosh2 add-blob "${blob_src}" "${blob_destination}/${base}"
+    bosh add-blob "${blob_src}" "${blob_destination}/${base}"
   done
 else
-  bosh2 add-blob "../${BLOB_DIR}/${BLOB_BINARY}" "${blob_destination}"
+  bosh add-blob "../${BLOB_DIR}/${BLOB_BINARY}" "${blob_destination}"
 fi
-bosh2 -n upload-blobs
+bosh -n upload-blobs
 rm config/private.yml
 popd
 
