@@ -5,4 +5,4 @@ Bumped terraform-cli to 0.11.11
 Bumped concourse-fly-cli to v4.2.2
 
 # credhub-cli
-Bumped credhub-cli to v1.9.6
+Bumped credhub-cli to v1.7.7
