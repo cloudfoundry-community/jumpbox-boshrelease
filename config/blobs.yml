@@ -98,10 +98,10 @@ jumpbox/curl-7.50.3.tar.gz:
   size: 8908593
   object_id: dab8c17e-f200-423e-8421-27c80bcaa15d
   sha: be0065afc76a3d8568f5f78d8efddadb6310f9d7
-jumpbox/git-2.14.1.tar.gz:
-  size: 6987933
-  object_id: 35a33b21-0dac-44c2-60de-2e12f4b5f8b6
-  sha: e173270a5f224078e3f6c639937da5bd84045225
+jumpbox/git-2.19.2.tar.gz:
+  size: 7720555
+  object_id: a7379311-68ec-416d-5d3d-405dedf37e77
+  sha: e29334e9c8c9c3897a594684c9ac36afc9c4fdd7
 jumpbox/jq-1.5.tar.gz:
   size: 739309
   object_id: 68bdc70f-d6a7-4f31-b29b-e1da48c81371
