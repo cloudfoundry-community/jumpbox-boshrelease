@@ -13,6 +13,7 @@ files:
   - jumpbox/bins/cf
   - jumpbox/bins/esuf
   - jumpbox/bins/genesis
+  - jumpbox/bins/jq
   - jumpbox/bins/nats
   - jumpbox/bins/safe
   - jumpbox/bins/shield
@@ -27,9 +28,6 @@ files:
 
     # git
   - jumpbox/git-2.19.2.tar.gz
-
-    # jq
-  - jumpbox/jq-1.5.tar.gz
 
     # tmux
   - jumpbox/libevent-2.0.22-stable.tar.gz

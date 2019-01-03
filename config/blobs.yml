@@ -34,6 +34,10 @@ jumpbox/bins/genesis:
   size: 189586
   object_id: b4f1a73a-bd84-42e2-5352-403ef6a66ef4
   sha: 9e8a50165cecffb0314d260737ca0234a2030532
+jumpbox/bins/jq:
+  size: 3027945
+  object_id: d2d8fb46-86fb-4df8-4b84-3da06ffda574
+  sha: d8e36831c3c94bb58be34dd544f44a6c6cb88568
 jumpbox/bins/nats:
   size: 7040936
   object_id: 698b0c19-976d-4161-81f3-03b859fe55ff
@@ -102,10 +106,6 @@ jumpbox/git-2.19.2.tar.gz:
   size: 7720555
   object_id: a7379311-68ec-416d-5d3d-405dedf37e77
   sha: e29334e9c8c9c3897a594684c9ac36afc9c4fdd7
-jumpbox/jq-1.5.tar.gz:
-  size: 739309
-  object_id: 68bdc70f-d6a7-4f31-b29b-e1da48c81371
-  sha: 6eef3705ac0a322e8aa0521c57ce339671838277
 jumpbox/libevent-2.0.22-stable.tar.gz:
   size: 854987
   object_id: a1541bd8-921a-4c62-9971-19260c2fde62

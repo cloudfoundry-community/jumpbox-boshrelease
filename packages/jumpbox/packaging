@@ -38,16 +38,6 @@ n=$((n + 1))
  make install) &
 n=$((n + 1))
 
-# JQ
-# https://github.com/stedolan/jq/releases
-# https://github.com/stedolan/jq/releases/download/jq-1.5/jq-1.5.tar.gz
-(tar -xzvf jumpbox/jq-1.5.tar.gz
- cd jq-1.5
- ./configure --prefix=${BOSH_INSTALL_TARGET}
- make -j${CPUS} LDFLAGS=-all-static
- make install) &
-n=$((n + 1))
-
 # TMUX
 # http://libevent.org/
 # https://github.com/libevent/libevent/releases/download/release-2.0.22-stable/libevent-2.0.22-stable.tar.gz
