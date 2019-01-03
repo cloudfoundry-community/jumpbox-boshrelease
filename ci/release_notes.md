@@ -1,8 +1,8 @@
-# terraform-cli
-Bumped terraform-cli to 0.11.11
+# Software Updates
 
-# concourse-fly-cli
-Bumped concourse-fly-cli to v4.2.2
-
-# credhub-cli
-Bumped credhub-cli to v1.7.7
+- *git* upgraded to 2.19.2 (Nov 2018)
+- *safe* upgraded to v0.9.9
+- *cf* upgraded to v6.41.0
+- *terraform* upgraded to 0.11.11
+- *fly* (concourse) upgraded to 4.2.2
+- *credhub* upgraded to 1.7.7
