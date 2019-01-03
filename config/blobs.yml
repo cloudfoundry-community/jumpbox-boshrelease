@@ -19,17 +19,17 @@ jumpbox/bins/cf:
   object_id: eb22c460-9139-4986-7ad7-af57e09a86c6
   sha: 85bec2e6ea2eb78379bd97975f30d8c7dbf5770d
 jumpbox/bins/credhub:
-  size: 9730875
-  object_id: ae9adbcb-fc8c-4c9a-6cb7-9868775a0f5c
-  sha: ec7d4e5dbbe9d3f5364929ac435e1ae5b94b1393
+  size: 9707378
+  object_id: d5bdf8e1-d4cf-49ba-5953-1c2182d6abee
+  sha: 474f29af45ebec8da4425f6b8c3db4b8cdcff76c
 jumpbox/bins/esuf:
   size: 7305569
   object_id: d02e9d51-4801-4232-57f3-bf1c0236070a
   sha: 73979dd7fcb704a0994d55c416340d2d3bcf16df
 jumpbox/bins/fly:
-  size: 16036735
-  object_id: 214b5ab1-1351-4369-6925-9f120c48c59f
-  sha: 87afcc6f09ccda7bd49d350ee574b6ac8c9e145c
+  size: 14045212
+  object_id: 4a942add-617a-4ea1-66a4-50b481b7e3aa
+  sha: 0502422d544f820ee07de7194758824af36f19ea
 jumpbox/bins/genesis:
   size: 189586
   object_id: b4f1a73a-bd84-42e2-5352-403ef6a66ef4
@@ -55,9 +55,9 @@ jumpbox/bins/spiff:
   object_id: eefcc937-c44a-4298-a56d-5e7259137c7c
   sha: 7489aa87ad7f5b3b774fc8a03ccda65860b1374c
 jumpbox/bins/terraform:
-  size: 55358048
-  object_id: 21c8a668-1426-4d5f-98d8-615d13bea308
-  sha: 740453274030f6e8be341be27dc349619f929f90
+  size: 89483552
+  object_id: f0c8112b-a7c3-4722-7f55-fb3bf204742c
+  sha: 8d62bbc6e6a13851e087d3d13bc65377375c35da
 jumpbox/bins/tmate:
   size: 2748936
   object_id: 3253b6dc-3e45-4dd2-b6ce-deb1147b853b
