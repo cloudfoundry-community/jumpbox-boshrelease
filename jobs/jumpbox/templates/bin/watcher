@@ -245,7 +245,7 @@ EOF
 	unset users['<%= user['name'] %>']
 	# jumpbox.users[<%= user['name'] %>
 	provision '<%= user['name'] %>' \
-	          'bosh_sshers<%= !user.has_key?("sudo") || user["sudo"] ? ",bosh_sudoers" : "" %>' \
+	          'vcap,bosh_sshers<%= !user.has_key?("sudo") || user["sudo"] ? ",bosh_sudoers" : "" %>' \
 	          '<%= user['shell'] %>' \
 	          '<%= user['env'] %>' \
 	          '<%= user['password'] %>' <% if !(user['ssh_keys'] || []).empty? %> \<% end %>

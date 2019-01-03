@@ -4,6 +4,9 @@
   64-bit Linux binary, and includes full regular expressions
   support.
 
+- New users are now added to the BOSH `vcap` group, in addition to
+  `staff`.
+
 # Software Updates
 
 - *terraform* upgraded to 0.11.11
