@@ -10,6 +10,9 @@
 - SSH authorized_keys files are refreshed after deployments if any
   changes were made
 
+- Added `--with-ssl=openssl` to wget configure to support installation 
+  on xenial (backwards compatible with trusty)
+
 # Changes
 
 - SSH Keys are now properly cleared if rotated or removed from the manifest. This makes the deployment manifest the source of truth for auth and ensures that when keys are removed from the manifest they are also removed as valid for the user.

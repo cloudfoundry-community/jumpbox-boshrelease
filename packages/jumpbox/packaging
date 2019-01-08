@@ -82,7 +82,7 @@ n=$((n + 1))
 # http://ftp.gnu.org/gnu/wget/wget-1.18.tar.gz
 (tar -xzvf jumpbox/wget-1.18.tar.gz
  cd wget-1.18
- ./configure --prefix=${BOSH_INSTALL_TARGET}
+ ./configure --prefix=${BOSH_INSTALL_TARGET} --with-ssl=openssl
  make -j${CPUS}
  make install) &
 n=$((n + 1))
