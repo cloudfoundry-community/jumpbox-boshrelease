@@ -4,8 +4,11 @@ instance_groups:
 - name: jumpbox
   instances: 1
   azs:       [z1]
-  vm_type:   default
   stemcell:  default
+  vm_resources:
+    cpu: 2
+    ram: 2048
+    ephemeral_disk_size: 40_960
   networks:
     - name: default
   jobs:
