@@ -35,8 +35,9 @@ update:
   update_watch_time: 1000-120000
 
 stemcells:
-- alias: default
-  os: ubuntu-trusty
+- alias:   default
+  os:      ubuntu-xenial
+           # minimum v170.x of Xenial REQUIRED
   version: latest
 
 releases:
