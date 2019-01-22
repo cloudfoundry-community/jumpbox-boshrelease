@@ -1,0 +1,52 @@
+---
+#
+#  This file contains version information for the
+#  components that are included in this BOSH release.
+#
+#  last updated: Tue Jan 22 09:49:04 EST 2019
+#
+
+includes:
+  ##############################
+  #
+  # compiled packages
+  #
+
+  curl: '7.63.0'
+
+  git: '2.20.1'
+
+  tmux:     '2.8'
+  libevent: '2.1.8'
+
+  tree: '1.7.0'
+
+  vim: '8.1.0789'
+
+  wget: '1.20'
+
+  zip: '3.0'
+
+  unzip: '6.0'
+
+  ##############################
+  #
+  # pre-compiled binaries
+  #
+
+  bosh: unknwn
+  bosh-init: unknwn
+  certstrap: unknwn
+  cf: unknwn
+  credhub: unknwn
+  esuf: unknwn
+  fly: unknwn
+  genesis: unknwn
+  jq: unknwn
+  nats: unknwn
+  safe: unknwn
+  shield: unknwn
+  spiff: unknwn
+  terraform: unknwn
+  tmate: unknwn
+  vault: unknwn

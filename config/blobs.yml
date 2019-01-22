@@ -1,7 +1,7 @@
-golang_1.5/go1.5.3.linux-amd64.tar.gz:
-  size: 80147269
-  object_id: 5d8b0264-6ad9-405e-961f-4449dd9a180f
-  sha: c5377eca4837968d043b681f00a852a262f0f5f6
+golang/go1.11.4.linux-amd64.tar.gz:
+  size: 126643341
+  object_id: 18a5e777-2d8d-4bac-72c1-ab01f14186f2
+  sha: 52bd8eb353a39138a2ddf053857a0fd13f1f176c
 jumpbox/bins/bosh:
   size: 27736768
   object_id: 1708b90f-6234-4720-41ac-ca886f1572c1
@@ -98,22 +98,22 @@ jumpbox/cloudfoundry-utils//release-differ:
   size: 2199
   object_id: 3ba4d4c4-7b4c-4e66-61f0-275eed2737a3
   sha: 87bfb4ffafafc9ec2c98069590c55cd8e3e7980c
-jumpbox/curl-7.50.3.tar.gz:
-  size: 8908593
-  object_id: dab8c17e-f200-423e-8421-27c80bcaa15d
-  sha: be0065afc76a3d8568f5f78d8efddadb6310f9d7
-jumpbox/git-2.19.2.tar.gz:
-  size: 7720555
-  object_id: a7379311-68ec-416d-5d3d-405dedf37e77
-  sha: e29334e9c8c9c3897a594684c9ac36afc9c4fdd7
-jumpbox/libevent-2.0.22-stable.tar.gz:
-  size: 854987
-  object_id: a1541bd8-921a-4c62-9971-19260c2fde62
-  sha: a586882bc93a208318c70fc7077ed8fca9862864
-jumpbox/tmux-2.2.tar.gz:
-  size: 466852
-  object_id: 645ddc79-20dd-4145-8ee8-e39c57539ea4
-  sha: 5ed1430bc7ef44c227e64e9401c686573dd0791a
+jumpbox/curl-7.63.0.tar.gz:
+  size: 4024015
+  object_id: d7215770-b813-458d-7099-8e80814c43b2
+  sha: b2cb51ac6451728dda191f307db30797629ca14d
+jumpbox/git-2.20.1.tar.gz:
+  size: 7962304
+  object_id: 2cf0a85d-350e-416d-4a01-cd6a9978fe6f
+  sha: 6439fb9afc9366f7bf1ddf8bfbe59998e0450ed3
+jumpbox/libevent-2.1.8-stable.tar.gz:
+  size: 1026485
+  object_id: 6ff08733-8696-43ac-7df5-bd0751fef1fd
+  sha: 2a1b8bb7a262d3fd0ed6a080a20991a6eed675ec
+jumpbox/tmux-2.8.tar.gz:
+  size: 491195
+  object_id: 96975804-9732-45a4-69d2-4fa8e76a6ab1
+  sha: 6a469769a242c95dc8aec443b436d4f8f279f517
 jumpbox/tree-1.7.0.tar.gz:
   size: 47082
   object_id: 14f6d45c-aaeb-4dc3-89c9-5ff370553d49
@@ -122,18 +122,14 @@ jumpbox/unzip60.tar.gz:
   size: 1376845
   object_id: 7317d283-62f1-40d3-851a-10418da85106
   sha: abf7de8a4018a983590ed6f5cbd990d4740f8a22
-jumpbox/vim-7.4.tar.bz2:
-  size: 9843297
-  object_id: f109912f-1ea4-4e05-b467-fbb2f93f30b9
-  sha: 601abf7cc2b5ab186f40d8790e542f86afca86b7
-jumpbox/vim-8.0.0386.tar.gz:
-  size: 13000882
-  object_id: e0bd5753-1931-420f-ad98-d7aa7a937a3d
-  sha: 59b7649b1a057d49860fdc99e4b91401253abc88
-jumpbox/wget-1.18.tar.gz:
-  size: 3865525
-  object_id: 4e1e8e75-739f-48b8-aff5-ad9b0073dd65
-  sha: 28a82e7de2eed38516c7d6e172ec7b9e43dc6c66
+jumpbox/vim-8.1.0789.tar.gz:
+  size: 14061297
+  object_id: d85b9def-f1bd-40e5-7708-4bb11d40f0df
+  sha: bfa10769ca8021316cade7811487f76060e804ab
+jumpbox/wget-1.20.tar.gz:
+  size: 4474641
+  object_id: 5a8f0603-97cc-4bc1-7f9e-ab2ef1f85577
+  sha: 467c0ec7dab302cf1826970c1925999d64a6ee9d
 jumpbox/zip30.tar.gz:
   size: 1118845
   object_id: f46a1f21-a9e9-415a-9e2d-8b8303fe1659
