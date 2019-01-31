@@ -5,7 +5,6 @@ files:
   - jumpbox/setup
 
     # pre-compiled binaries / scripts
-  - jumpbox/bins/bosh-init
   - jumpbox/bins/bosh
   - jumpbox/bins/certstrap
   - jumpbox/bins/credhub
