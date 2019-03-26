@@ -12,7 +12,7 @@ jumpbox/bins/certstrap:
   sha: 1fa8434399124dd0b17c20c0c90bc34fb0ba16bf
 jumpbox/bins/cf:
   size: 20485024
-  object_id: 4e67a344-163c-4bc8-58a4-41258d99e484
+  object_id: 049298d4-d4da-432f-5bb2-976c095c74ab
   sha: 1001b9f8e8a54c2c0f67d4cff34561082d746f9f
 jumpbox/bins/credhub:
   size: 9707378
