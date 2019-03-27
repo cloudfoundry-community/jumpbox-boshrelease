@@ -7,7 +7,6 @@
 #
 # author:  James Hunt <james@niftylogic.com>
 #          Dennis Bell <dennis.j.bell@gmail.com>
-# created: 2016-03-04
 
 need_command() {
   local cmd=${1:?need_command() - no command name given}
@@ -63,6 +62,13 @@ if [[ -z ${TARGET} ]]; then
   exit 1
 fi
 
+EXPOSED=$(spruce json .deploy.yml | jq -r '.meta.exposed // false')
+EXPOSE=expose
+if [[ ${EXPOSED} == "true" ]]; then
+  EXPOSE=hide
+fi
+
 set +x
-fly --target ${TARGET} set-pipeline     --pipeline ${PIPELINE} --config .deploy.yml
-fly --target ${TARGET} unpause-pipeline --pipeline ${PIPELINE}
+fly --target ${TARGET} set-pipeline       --pipeline ${PIPELINE} --config .deploy.yml
+fly --target ${TARGET} unpause-pipeline   --pipeline ${PIPELINE}
+fly --target ${TARGET} ${EXPOSE}-pipeline --pipeline ${PIPELINE}
