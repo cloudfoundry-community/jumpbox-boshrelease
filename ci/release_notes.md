@@ -1,0 +1,4 @@
+- *cf* upgraded to v6.43.0
+- *fly* (concourse) upgraded to 5.1.0
+- *bosh* upgraded to 5.5.0
+- *credhub* upgraded to 2.4.0
