@@ -6,3 +6,7 @@
 # genesis
 
 - Bumped genesis to v2.6.14
+
+# cloudfoundry-utils
+
+- Bumped cloudfoundry-utils to v1.0.0
