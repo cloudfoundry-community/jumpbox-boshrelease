@@ -10,3 +10,7 @@
 # cloudfoundry-utils
 
 - Bumped cloudfoundry-utils to v1.0.0
+
+# genesis
+
+- Bumped genesis to v2.6.13
