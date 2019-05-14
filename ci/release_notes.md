@@ -26,3 +26,7 @@
 # cf
 
 - Bumped cf to v6.44.1
+
+# genesis
+
+- Bumped genesis to v2.6.16
