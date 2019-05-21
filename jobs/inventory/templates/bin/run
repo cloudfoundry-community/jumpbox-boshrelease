@@ -17,13 +17,12 @@ check() {
 	echo
 }
 
-check bosh-init -v
+check bosh -v
 check cf --version
 check credhub --version
 check genesis version
 check safe version
-# WHA?  there is no shield version command?
-#check shield version
+check shield -v
 check spiff -v
 check vault -v
 check curl --version
