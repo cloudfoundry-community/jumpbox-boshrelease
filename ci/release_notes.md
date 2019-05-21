@@ -1,32 +1,8 @@
+# Software Updates
 
-# cf
-
-- Bumped cf to v6.44.0
-
-# genesis
-
-- Bumped genesis to v2.6.14
-
-# cloudfoundry-utils
-
-- Bumped cloudfoundry-utils to v1.0.0
-
-# genesis
-
-- Bumped genesis to v2.6.13
-
-# cf
-
-- Bumped cf to v6.44.0
-
-# genesis
-
-- Bumped genesis to v2.6.15
-
-# cf
-
-- Bumped cf to v6.44.1
-
-# genesis
-
-- Bumped genesis to v2.6.16
+- Upgraded `bosh` to 5.5.0
+- Upgraded `cf` to 6.44.1
+- Upgraded `cloudfoundry-utils` to 1.0.0
+- Upgraded `credhub` to v2.4.0
+- Upgraded `fly` to 5.1.0
+- Upgraded `genesis` to 2.6.16
