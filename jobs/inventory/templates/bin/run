@@ -17,6 +17,9 @@ check() {
 	echo
 }
 
+export HOME=/var/vcap/data/.home
+mkdir -p $HOME
+
 check bosh -v
 check cf --version
 check credhub --version
@@ -35,3 +38,5 @@ check wget --version
 check zip -v
 check unzip -v
 check go version
+
+exit $EXITSTATUS
