@@ -10,3 +10,7 @@
 # safe
 
 - Bumped safe to v1.2.1
+
+# safe
+
+- Bumped safe to v1.3.0
