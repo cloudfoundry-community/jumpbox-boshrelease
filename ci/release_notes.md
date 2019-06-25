@@ -14,3 +14,7 @@
 # safe
 
 - Bumped safe to v1.3.0
+
+# safe
+
+- Bumped safe to v1.3.0

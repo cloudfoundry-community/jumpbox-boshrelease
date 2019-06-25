@@ -40,7 +40,7 @@ jumpbox/bins/nats:
   sha: 39f00b44c10e332df5f0bff518c1aa2a4dc74792
 jumpbox/bins/safe:
   size: 10789908
-  object_id: 19384d57-4770-4864-6839-a155fe8d8b8b
+  object_id: b02d2eb4-bdd6-47f5-69ed-67cc13630e46
   sha: sha256:4fbb56ad24a92af843b923ab6ff06554bf467cf8bec259bca5c3f166035914d6
 jumpbox/bins/shield:
   size: 7831586
