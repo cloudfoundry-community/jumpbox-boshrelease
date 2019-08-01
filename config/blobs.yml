@@ -1,3 +1,7 @@
+/jumpbox/bins/bbr:
+  size: 21986236
+  object_id: 1fe9f4a7-89e9-48c5-7c12-5caf54529c83
+  sha: ee347a74f87780b6bd49271a2ecc27278db277f0
 golang/go1.11.4.linux-amd64.tar.gz:
   size: 126643341
   object_id: 18a5e777-2d8d-4bac-72c1-ab01f14186f2

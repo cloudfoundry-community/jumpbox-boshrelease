@@ -20,6 +20,7 @@ check() {
 export HOME=/var/vcap/data/.home
 mkdir -p $HOME
 
+check bbr version
 check bosh -v
 check cf --version
 check credhub --version
