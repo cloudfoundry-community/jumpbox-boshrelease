@@ -29,3 +29,7 @@
 # genesis
 
 - Bumped genesis to v2.6.17
+
+# esuf
+
+- Bumped esuf to v0.1.2
