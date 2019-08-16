@@ -382,7 +382,7 @@ resources:
   - name: genesis # {{{
     type: github-release
     source:
-      user: starkandwayne
+      user: genesis-community
       repository: genesis
       access_token: (( grab meta.github.access_token ))
   # }}}
