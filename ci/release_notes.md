@@ -10,3 +10,7 @@
 # cf
 
 - Bumped cf to v6.47.0
+
+# cf
+
+- Bumped cf to v6.47.1
