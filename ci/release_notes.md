@@ -22,3 +22,7 @@
 # cf
 
 - Bumped cf to v6.47.2
+
+# safe
+
+- Bumped safe to v1.4.1
