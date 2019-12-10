@@ -34,3 +34,7 @@
 # cf
 
 - Bumped cf to v6.48.0
+
+# safe
+
+- Bumped safe to v1.5.1
