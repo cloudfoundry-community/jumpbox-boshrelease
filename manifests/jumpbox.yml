@@ -1,4 +1,4 @@
-name: jumpbox-ci
+name: jumpbox
 
 instance_groups:
 - name: jumpbox
@@ -14,18 +14,6 @@ instance_groups:
   jobs:
     - { release: jumpbox, name: jumpbox }
     - { release: jumpbox, name: inventory }
-
-properties:
-  jumpbox:
-    env:
-      FOO: BAR
-    users:
-      - name: alice
-      - name: bob
-      - name: eve
-        shell: /bin/sh
-    delete:
-      - chris
 
 update:
   canaries: 0

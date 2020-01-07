@@ -1,0 +1,10 @@
+---
+# this is a BOSH Ops file, to be applied with the
+# `bosh deploy -o ...` command:
+- type: replace
+  path: /instance_groups/name=jumpbox/jobs/name=jumpbox/properties?/jumpbox?/users?/-
+  value:
+    name:  user
+    shell: /bin/bash
+    ssh_keys:
+      - ssh-ed25519 ...
