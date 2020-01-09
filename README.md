@@ -26,8 +26,33 @@ bosh -e <env> -d jumpbox deploy \
   manifests/jumpbox.yml
 ```
 
-If you don't want a user to have sudo access, set `sudo: no` on
-their user account, and they will not be granted it.
+The following keys have meaning, for each user account under the
+`jumpbox.users` parameter:
+
+  1. `name` (**Required**) - The username for the account.
+
+  2. `shell` - The full path to the user's interactive shell.
+     This needs to be an allowed shell (per stemcell config).
+     Defaults to `/bin/bash`.
+
+  3. `sudo` (true|false) - Whether or not grant this user the
+     ability to sudo as the root (or any other) user.
+     Defaults to `false`.
+
+  4. `password` - A (cleartext) password to set for the account.
+     By default, users are not able to authenticate via any
+     password (and should use `ssh_keys` instead).
+
+  5. `ssh_keys` - A YAML list of SSH keys, in the form
+     `algo key-data [comment]`.  Note that the comment
+     (usually in the form "username@some.host") is optional,
+     and has no bearing on the functionality of the key-based
+     authentication.
+
+  6. `env` - The URL of a git-clonable environment repo.
+     For an example of what you might put in such a repository,
+     see <https://github.com/jhunt/env>.
+     By default, no environment repository is assumed.
 
 ## Taking Inventory
 
