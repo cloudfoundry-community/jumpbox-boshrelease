@@ -6,10 +6,14 @@ golang/go1.11.4.linux-amd64.tar.gz:
   size: 126643341
   object_id: 18a5e777-2d8d-4bac-72c1-ab01f14186f2
   sha: 52bd8eb353a39138a2ddf053857a0fd13f1f176c
+jumpbox/bins/bbr:
+  size: 20153181
+  object_id: 4b79494c-ec48-4d38-705b-b99ecd11de4f
+  sha: 70a6d173e6dbcc88f851ba6b0855d009534dc029
 jumpbox/bins/bosh:
-  size: 29314269
-  object_id: cbb4253e-bf1f-416c-6125-6051e713a50f
-  sha: 8aa040751158c39cbbb8fa78e4c7a292eb8bff7d
+  size: 39821747
+  object_id: 543d90d6-37e0-4f07-41e5-2ffee4010aaf
+  sha: d3ab323ba5a848ef43a5655bc3a949e367c394e9
 jumpbox/bins/certstrap:
   size: 5493848
   object_id: 6050fa1f-105b-4ddb-8074-224e149b5c83
@@ -19,17 +23,17 @@ jumpbox/bins/cf:
   object_id: 8f9c6df6-6c9f-4e09-619b-a41343a0539f
   sha: sha256:20f3dc342703c9f34b05bc8ab219ca7114f017f4422ed856cba1714471cfdf90
 jumpbox/bins/credhub:
-  size: 10541593
-  object_id: 32e2317f-0652-48e0-7c94-5edafc92dc96
-  sha: d801fffa9e995abdd9e3a332cca3e76f0b505f0b
+  size: 11614150
+  object_id: 0de2a1e1-c3f9-43c9-5b7c-a36c09e8f495
+  sha: a2eafdc9383f3340aa57a5bb2f799c8f0091ad80
 jumpbox/bins/esuf:
   size: 7305569
   object_id: c2506b57-9ca5-4a7f-7716-88a27b124952
   sha: sha256:bf1167d997de732bbbc8ecbd9caf368af6a588c97041490fe3ccfe6d60cc6095
 jumpbox/bins/fly:
-  size: 17483867
-  object_id: 4c5ddcb2-0435-4885-59bd-cc7419eab24d
-  sha: 0e0c263a0f25a946ef9b6526a70285d164383cf4
+  size: 20726640
+  object_id: ff3024e1-0539-460c-7f34-d6093f6b82d5
+  sha: 393ac58a5812b76691f92203723cdf1803a9837a
 jumpbox/bins/genesis:
   size: 215392
   object_id: ac7c5b06-b045-49f3-439a-fb3520f9a295
