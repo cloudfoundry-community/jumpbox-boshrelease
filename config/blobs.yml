@@ -15,25 +15,25 @@ jumpbox/bins/certstrap:
   object_id: 6050fa1f-105b-4ddb-8074-224e149b5c83
   sha: 1fa8434399124dd0b17c20c0c90bc34fb0ba16bf
 jumpbox/bins/cf:
-  size: 21792000
-  object_id: ecc700e0-2e1c-4067-6a4d-9f1798cf6e24
-  sha: sha256:34bfe5b0cafc242f905129b0156362245a843bcbbd80e7d40c054394724eea0f
+  size: 21946368
+  object_id: 8f9c6df6-6c9f-4e09-619b-a41343a0539f
+  sha: sha256:20f3dc342703c9f34b05bc8ab219ca7114f017f4422ed856cba1714471cfdf90
 jumpbox/bins/credhub:
   size: 10541593
   object_id: 32e2317f-0652-48e0-7c94-5edafc92dc96
   sha: d801fffa9e995abdd9e3a332cca3e76f0b505f0b
 jumpbox/bins/esuf:
   size: 7305569
-  object_id: 0be72af5-e610-4a05-7ce8-438a32ae1358
-  sha: 73979dd7fcb704a0994d55c416340d2d3bcf16df
+  object_id: c2506b57-9ca5-4a7f-7716-88a27b124952
+  sha: sha256:bf1167d997de732bbbc8ecbd9caf368af6a588c97041490fe3ccfe6d60cc6095
 jumpbox/bins/fly:
   size: 17483867
   object_id: 4c5ddcb2-0435-4885-59bd-cc7419eab24d
   sha: 0e0c263a0f25a946ef9b6526a70285d164383cf4
 jumpbox/bins/genesis:
-  size: 1320
-  object_id: 7d27a420-4fd3-4684-4321-5eae8ab20d18
-  sha: sha256:f4f9bbfdee156b4ace69412cb69dd5fe5a009a2d70adab9a7d8a49fd0be1d157
+  size: 215392
+  object_id: ac7c5b06-b045-49f3-439a-fb3520f9a295
+  sha: sha256:8e9ec9b2c74bf6220a2c42eb2abc693d2fa3d8a7c32e343cbae1e7f9f885fd13
 jumpbox/bins/jq:
   size: 3027945
   object_id: d2d8fb46-86fb-4df8-4b84-3da06ffda574
@@ -43,9 +43,9 @@ jumpbox/bins/nats:
   object_id: 698b0c19-976d-4161-81f3-03b859fe55ff
   sha: 39f00b44c10e332df5f0bff518c1aa2a4dc74792
 jumpbox/bins/safe:
-  size: 10789908
-  object_id: b02d2eb4-bdd6-47f5-69ed-67cc13630e46
-  sha: sha256:4fbb56ad24a92af843b923ab6ff06554bf467cf8bec259bca5c3f166035914d6
+  size: 10837602
+  object_id: 8a3199cf-35e6-4ff8-61b3-71e0975b24e5
+  sha: sha256:c3c6d9cc26621b83e10c5760291163f4da7dd62f6e262594f88a2e2b27b4455a
 jumpbox/bins/shield:
   size: 7831586
   object_id: ecd77dc0-f374-423e-5ab9-c95b84659d7b

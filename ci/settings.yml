@@ -15,26 +15,26 @@ meta:
     email: ci@starkandwayne.com
 
   bosh-lite:
-    target: https://10.200.131.9:25555
-    username: admin
-    password: (( vault "secret/thunder/dome/bosh/users/admin:password" ))
-    cacert:   (( vault "secret/thunder/dome/bosh/ssl/ca:certificate" ))
+    target:   https://10.128.4.73:25555
+    username: ((thunder-dome.username))
+    password: ((thunder-dome.password))
+    cacert:   ((thunder-dome.ca-certificate))
 
   aws:
-    access_key: (( vault "secret/pipelines/aws/cf-community:access" ))
-    secret_key: (( vault "secret/pipelines/aws/cf-community:secret" ))
+    access_key: ((cfcommunity.access))
+    secret_key: ((cfcommunity.secret))
 
   github:
     owner:        cloudfoundry-community
     repo:         jumpbox-boshrelease
     branch:       master
-    private_key:  (( vault "secret/pipelines/github/starkandwayne/ci-bot:private" ))
-    access_token: (( vault "secret/pipelines/github/starkandwayne/ci-bot:access_token" ))
+    private_key:  ((starkandwayne-bot-github.private-key))
+    access_token: ((starkandwayne-bot-github.access-token))
 
   shout:
-    url:      http://10.200.131.1:7109
-    username: ops
-    password: (( vault "secret/buffalo/lab/concourse/shout/ops:password" ))
+    url:      http://10.128.4.65:7109
+    username: ((shout.username))
+    password: ((shout.password))
 
 groups:
   - name: blobs
@@ -49,7 +49,7 @@ jobs:
   - name: genesis # {{{
     public: true
     plan:
-    - aggregate:
+    - in_parallel:
       - { get: git }
       - { get: genesis, trigger: true }
     - task: update-genesis
@@ -115,7 +115,7 @@ jobs:
   - name: safe # {{{
     public: true
     plan:
-    - aggregate:
+    - in_parallel:
       - { get: git }
       - { get: safe, trigger: true }
     - task: update-safe
@@ -181,7 +181,7 @@ jobs:
   - name: esuf # {{{
     public: true
     plan:
-    - aggregate:
+    - in_parallel:
       - { get: git }
       - { get: esuf, trigger: true }
     - task: update-safe
@@ -247,7 +247,7 @@ jobs:
   - name: cf # {{{
     public: true
     plan:
-    - aggregate:
+    - in_parallel:
       - { get: git }
       - { get: cf, trigger: true }
     - task: update-cf
@@ -314,7 +314,7 @@ jobs:
   - name: cloudfoundry-utils # {{{
     public: true
     plan:
-    - aggregate:
+    - in_parallel:
       - { get: git }
       - { get: cloudfoundry-utils, trigger: true }
     - task: update-cloudfoundry-utils
@@ -382,7 +382,7 @@ resources:
   - name: genesis # {{{
     type: github-release
     source:
-      user: starkandwayne
+      user: genesis-community
       repository: genesis
       access_token: (( grab meta.github.access_token ))
   # }}}

@@ -1,4 +1,4 @@
-name: jumpbox-ci
+name: jumpbox
 
 instance_groups:
 - name: jumpbox
@@ -15,18 +15,6 @@ instance_groups:
     - { release: jumpbox, name: jumpbox }
     - { release: jumpbox, name: inventory }
 
-properties:
-  jumpbox:
-    env:
-      FOO: BAR
-    users:
-      - name: alice
-      - name: bob
-      - name: eve
-        shell: /bin/sh
-    delete:
-      - chris
-
 update:
   canaries: 0
   max_in_flight: 1
@@ -42,6 +30,6 @@ stemcells:
 
 releases:
 - name:    jumpbox
-  version: 4.6.0
-  url:     https://github.com/cloudfoundry-community/jumpbox-boshrelease/releases/download/v4.6.0/jumpbox-4.6.0.tgz
-  sha1:    c01f692f636e0432f23787d3c06194762bf6a151
+  version: 4.6.4
+  url:     https://github.com/cloudfoundry-community/jumpbox-boshrelease/releases/download/v4.6.4/jumpbox-4.6.4.tgz
+  sha1:    fd68368cc8237fb62edfb6649663bdc334318dfc
