@@ -29,3 +29,7 @@
 # safe
 
 - Bumped safe to v1.5.3
+
+# safe
+
+- Bumped safe to v1.5.4
