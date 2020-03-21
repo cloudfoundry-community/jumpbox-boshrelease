@@ -33,3 +33,7 @@
 # safe
 
 - Bumped safe to v1.5.4
+
+# genesis
+
+- Bumped genesis to v2.6.18
