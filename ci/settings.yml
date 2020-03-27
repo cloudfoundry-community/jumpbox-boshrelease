@@ -47,6 +47,7 @@ groups:
     - bosh-backup-and-restore
     - bosh-cli
     - credhub-cli
+    - fly
 
 jobs:
   - name: genesis # {{{
@@ -575,6 +576,71 @@ jobs:
           ok:      no
           link:    (( grab meta.shout.links.build ))
    # }}}
+  - name: fly # {{{
+    public: true
+    plan:
+    - in_parallel:
+      - { get: git }
+      - { get: concourse, trigger: true }
+    - task: update-fly
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+        - name: git
+        - name: concourse
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          BLOB_DIR:         concourse
+          BLOB_NAME:        fly
+          BLOB_BINARY:      fly-*-linux-amd64.tgz # Think .tgz is not working well here
+          BLOB_DESTINATION: jumpbox/bins/fly
+          BLOB_CLEANUP:     jumpbox/bins/fly
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:           (( grab meta.github.branch ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+   # }}}
 
 resources:
   - name: genesis # {{{
@@ -631,5 +697,12 @@ resources:
     source:
       user: cloudfoundry-incubator
       repository: credhub-cli
+      access_token: (( grab meta.github.access_token ))
+  # }}}
+  - name: fly # {{{
+    type: github-release
+    source:
+      user: concourse
+      repository: concourse
       access_token: (( grab meta.github.access_token ))
   # }}}
