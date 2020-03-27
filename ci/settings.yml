@@ -44,6 +44,7 @@ groups:
     - esuf
     - cf
     - cloudfoundry-utils
+    - bosh-backup-and-restore
 
 jobs:
   - name: genesis # {{{
@@ -377,6 +378,71 @@ jobs:
           ok:      no
           link:    (( grab meta.shout.links.build ))
    # }}}
+  - name: bosh-backup-and-restore # {{{
+    public: true
+    plan:
+    - in_parallel:
+      - { get: git }
+      - { get: bosh-backup-and-restore, trigger: true }
+    - task: update-bosh-backup-and-restore
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+        - name: git
+        - name: bosh-backup-and-restore
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          BLOB_DIR:         bosh-backup-and-restore
+          BLOB_NAME:        bbr
+          BLOB_BINARY:      bbr-*-linux-amd64
+          BLOB_DESTINATION: jumpbox/bins/bbr
+          BLOB_CLEANUP:     jumpbox/bins/bbr
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:           (( grab meta.github.branch ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+   # }}}
 
 resources:
   - name: genesis # {{{
@@ -412,5 +478,12 @@ resources:
     source:
       user: cloudfoundry-community
       repository: cloudfoundry-utils
+      access_token: (( grab meta.github.access_token ))
+  # }}}
+  - name: bosh-backup-and-restore # {{{
+    type: github-release
+    source:
+      user: cloudfoundry-incubator
+      repository: bosh-backup-and-restore
       access_token: (( grab meta.github.access_token ))
   # }}}
