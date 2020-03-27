@@ -46,6 +46,7 @@ groups:
     - cloudfoundry-utils
     - bosh-backup-and-restore
     - bosh-cli
+    - credhub-cli
 
 jobs:
   - name: genesis # {{{
@@ -509,6 +510,71 @@ jobs:
           ok:      no
           link:    (( grab meta.shout.links.build ))
    # }}}
+  - name: credhub-cli # {{{
+    public: true
+    plan:
+    - in_parallel:
+      - { get: git }
+      - { get: credhub-cli, trigger: true }
+    - task: update-credhub-cli
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+        - name: git
+        - name: credhub-cli
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          BLOB_DIR:         credhub-cli
+          BLOB_NAME:        credhub-cli
+          BLOB_BINARY:      credhub-linux-*.tgz # Think .tgz is not working well here
+          BLOB_DESTINATION: jumpbox/bins/credhub
+          BLOB_CLEANUP:     jumpbox/bins/credhub
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:           (( grab meta.github.branch ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+   # }}}
 
 resources:
   - name: genesis # {{{
@@ -558,5 +624,12 @@ resources:
     source:
       user: cloudfoundry
       repository: bosh-cli
+      access_token: (( grab meta.github.access_token ))
+  # }}}
+  - name: credhub-cli # {{{
+    type: github-release
+    source:
+      user: cloudfoundry-incubator
+      repository: credhub-cli
       access_token: (( grab meta.github.access_token ))
   # }}}
