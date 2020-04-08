@@ -19,9 +19,9 @@ jumpbox/bins/certstrap:
   object_id: 6050fa1f-105b-4ddb-8074-224e149b5c83
   sha: 1fa8434399124dd0b17c20c0c90bc34fb0ba16bf
 jumpbox/bins/cf:
-  size: 24633344
-  object_id: ba8ac42b-2e43-4769-6a40-41029fcf7c57
-  sha: sha256:d2357a12b6dc17746bee50e745b9a43221d8b7c384950fc1f04d82586ea6156e
+  size: 24682496
+  object_id: aea0ce4c-e361-4636-6f57-3bb86ef28110
+  sha: sha256:099a5a45c8817ad56222b9e5253282ba972ae4dfe639708d4e1d8360552ce162
 jumpbox/bins/credhub:
   size: 11614150
   object_id: 0de2a1e1-c3f9-43c9-5b7c-a36c09e8f495
