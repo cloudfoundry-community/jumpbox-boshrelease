@@ -20,9 +20,9 @@ chmod 0755 ${BOSH_INSTALL_TARGET}/bin/*
 
 # CURL
 # https://curl.haxx.se/download.html
-# https://curl.haxx.se/download/curl-7.63.0.tar.gz
-(tar -xzvf jumpbox/curl-7.63.0.tar.gz
- cd curl-7.63.0
+# https://curl.haxx.se/download/curl-7.69.1.tar.gz
+(tar -xzvf jumpbox/curl-7.69.1.tar.gz
+ cd curl-7.69.1
  ./configure --prefix=${BOSH_INSTALL_TARGET}
  make -j${CPUS}
  make install) &
@@ -30,9 +30,9 @@ n=$((n + 1))
 
 # GIT
 # https://www.kernel.org/pub/software/scm/git
-# https://www.kernel.org/pub/software/scm/git/git-2.20.1.tar.gz
-(tar -xzvf jumpbox/git-2.20.1.tar.gz
- cd git-2.20.1
+# https://www.kernel.org/pub/software/scm/git/git-2.26.0.tar.gz
+(tar -xzvf jumpbox/git-2.26.0.tar.gz
+ cd git-2.26.0
  ./configure --prefix=${BOSH_INSTALL_TARGET}
  make -j${CPUS} all
  make install) &
@@ -40,17 +40,17 @@ n=$((n + 1))
 
 # TMUX
 # http://libevent.org/
-# https://github.com/libevent/libevent/releases/download/release-2.1.8-stable/libevent-2.1.8-stable.tar.gz
+# https://github.com/libevent/libevent/releases/download/release-2.1.11-stable/libevent-2.1.11-stable.tar.gz
 # https://tmux.github.io/
-# https://github.com/tmux/tmux/releases/download/2.8/tmux-2.8.tar.gz
-(tar -xzvf jumpbox/libevent-2.1.8-stable.tar.gz
- (cd libevent-2.1.8-stable
+# https://github.com/tmux/tmux/releases/download/3.0a/tmux-3.0a.tar.gz
+(tar -xzvf jumpbox/libevent-2.1.11-stable.tar.gz
+ (cd libevent-2.1.11-stable
   ./configure --prefix=/usr --disable-shared
   make -j${CPUS}
   make install)
 
- tar -xzvf jumpbox/tmux-2.8.tar.gz
- cd tmux-2.8
+ tar -xzvf jumpbox/tmux-3.0a.tar.gz
+ cd tmux-3.0a
  ./configure --prefix=${BOSH_INSTALL_TARGET} \
              --enable-static
  sed -i 's@#define TMUX_CONF.*@#define TMUX_CONF "'${BOSH_INSTALL_TARGET}'/etc/tmux.conf"@' tmux.h
@@ -60,9 +60,9 @@ n=$((n + 1))
 
 # TREE
 # http://mama.indstate.edu/users/ice/tree/
-# ftp://mama.indstate.edu/linux/tree/tree-1.7.0.tgz
-(tar -xzvf jumpbox/tree-1.7.0.tar.gz
- cd tree-1.7.0
+# ftp://mama.indstate.edu/linux/tree/tree-1.8.0.tgz
+(tar -xzvf jumpbox/tree-1.8.0.tar.gz
+ cd tree-1.8.0
  sed -i "s|prefix = /usr|prefix = ${BOSH_INSTALL_TARGET}|" Makefile
  make -j${CPUS}
  make install) &
@@ -70,8 +70,8 @@ n=$((n + 1))
 
 # VIM
 # http://github.com/vim/vim/releases
-(tar -xzvf jumpbox/vim-8.1.0789.tar.gz
- cd vim-8.1.0789
+(tar -xzvf jumpbox/vim-8.2.0539.tar.gz
+ cd vim-8.2.0539
  ./configure --prefix=${BOSH_INSTALL_TARGET}
  make -j${CPUS}
  make install) &
@@ -79,9 +79,9 @@ n=$((n + 1))
 
 # WGET
 # http://ftp.gnu.org/gnu/wget/
-# http://ftp.gnu.org/gnu/wget/wget-1.20.tar.gz
-(tar -xzvf jumpbox/wget-1.20.tar.gz
- cd wget-1.20
+# https://ftp.gnu.org/gnu/wget/wget-1.20.3.tar.gz
+(tar -xzvf jumpbox/wget-1.20.3.tar.gz
+ cd wget-1.20.3
  ./configure --prefix=${BOSH_INSTALL_TARGET} --with-ssl=openssl
  make -j${CPUS}
  make install) &

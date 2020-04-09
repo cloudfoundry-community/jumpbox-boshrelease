@@ -1,43 +1,23 @@
-# bbr
-
-- Bumped BBR to 1.7.0
-
-# bosh
-
-- Bumped BOSH to v6.2.0
-
-# cf
-
-- Bumped cf to v6.49.0
-
-# credhub
-
-- Bumped credhub to 2.6.2
-
-# fly
-
+# Updates
+- Bumped BBR to 1.7.2
+- Bumped BOSH to v6.2.1
+- Bumped credhub to 2.7.0
 - Bumped fly to v5.8.0
-
-# safe
-
-- Bumped safe to v1.5.2
-
-# cf
-
-- Bumped cf to v6.50.0
-
-# safe
-
-- Bumped safe to v1.5.3
-
-# safe
-
 - Bumped safe to v1.5.4
-
-# genesis
-
 - Bumped genesis to v2.6.18
-
-# cf
-
 - Bumped cf to v6.51.0
+- Bumped go to v1.14.2
+- Bumped certstrap to v1.2.0
+- Bumped jq to v1.6
+- Bumped shield to v8.7.0
+- Bumped spiff to v1.4.0
+- Bumped terraform to v0.12.24
+- Bumped tmate to v2.4.0
+- Bumped vault to v1.4.0
+- Bumped curl to v7.69.1
+- Bumped git to v2.26.0
+- Bumped libevent to v2.1.11
+- Bumped tmux to v3.0a
+- Bumped tree to v1.8.0
+- Bumped vim to v8.2.0539
+- Bumped wget to v1.20.3

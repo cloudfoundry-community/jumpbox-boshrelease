@@ -24,25 +24,25 @@ files:
   - jumpbox/cloudfoundry-utils/*
 
     # curl
-  - jumpbox/curl-7.63.0.tar.gz
+  - jumpbox/curl-7.69.1.tar.gz
 
     # git
-  - jumpbox/git-2.20.1.tar.gz
+  - jumpbox/git-2.26.0.tar.gz
 
     # tmux
-  - jumpbox/libevent-2.1.8-stable.tar.gz
-  - jumpbox/tmux-2.8.tar.gz
+  - jumpbox/libevent-2.1.11-stable.tar.gz
+  - jumpbox/tmux-3.0a.tar.gz
   - jumpbox/tmux.conf
 
     # tree
-  - jumpbox/tree-1.7.0.tar.gz
+  - jumpbox/tree-1.8.0.tar.gz
 
     # vim
-  - jumpbox/vim-8.1.0789.tar.gz
+  - jumpbox/vim-8.2.0539.tar.gz
   - jumpbox/vimrc
 
     # wget
-  - jumpbox/wget-1.20.tar.gz
+  - jumpbox/wget-1.20.3.tar.gz
 
     # zip
   - jumpbox/zip30.tar.gz
