@@ -4,7 +4,7 @@
 - type: replace
   path: /instance_groups/name=jumpbox/jobs/name=jumpbox/properties?/jumpbox?/users?/-
   value:
-    name:  user
-    shell: /bin/bash
-    ssh_keys:
-      - ssh-ed25519 ...
+- name:    jumpbox
+  version: 4.7.0
+  url:     https://github.com/cloudfoundry-community/jumpbox-boshrelease/releases/download/v4.7.0/jumpbox-4.7.0.tgz
+  sha1:    3d5d9413e70c734cd5a115e04e4a7a809419fc91
