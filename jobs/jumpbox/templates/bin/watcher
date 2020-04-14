@@ -56,7 +56,7 @@ provision() {
 		logn "User ${user} does not exist; adding"
 		/usr/sbin/useradd -m -d /u/${user} -s ${shell} -g staff -G "${groups}" ${user}
 	else
-		/usr/sbin/usermod -a -G "${groups}" "${user}"
+		/usr/sbin/usermod -a -G "${groups}" -s "${shell}" "${user}"
 	fi
 	if [[ -n ${pass} ]]; then
 		pass=$(echo "$pass" | sed -e 's@/@\\/@g')
@@ -110,6 +110,7 @@ deactivate() {
 	log "Locking ${user} account (via expiration date)"
 	/usr/sbin/usermod --expiredate 1 ${user}
 	log "Moving home directory ~${user} to ${to}"
+	mkdir -p ${to}
 	mv ${JUMPBOX_HOME}/${user} ${to}
 }
 
@@ -119,7 +120,7 @@ remove() {
 	if [[ $home == "" ]]; then
 		return
 	fi
-	if [[ $home != ${JUMPBOX_HOME}/${user} ]]; then
+	if [[ $home != "/u/${user}" ]]; then
 		log "Cannot remove user ${user} - not provisioned by the jumpbox release..."
 		return
 	fi
