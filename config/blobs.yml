@@ -43,9 +43,9 @@ jumpbox/bins/nats:
   object_id: 1c724e5b-668d-4d0f-7896-f8892f5a92ca
   sha: sha256:3e353d9070798d35c334ebe8fc196988bac942c70cb1231bbc8e4e0c3077565e
 jumpbox/bins/safe:
-  size: 10781197
-  object_id: f36a2d92-b8bd-404c-6132-2e3559f1f305
-  sha: sha256:4e1dc5d12b2f0a348c6560598e125fa7c11b7df5c6387469ef6b5cca0654b9c1
+  size: 10811626
+  object_id: c10968ac-0bd8-45cd-6f52-e0521ec68790
+  sha: sha256:3eeee98c23b794531219ca853c1d360648abafc56eefd494c91e873065e8881d
 jumpbox/bins/shield:
   size: 9486663
   object_id: 9bd7829a-64c1-4e7d-5fe5-5d713cdd33c6
