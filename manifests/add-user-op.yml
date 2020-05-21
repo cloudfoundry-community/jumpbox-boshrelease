@@ -5,6 +5,6 @@
   path: /instance_groups/name=jumpbox/jobs/name=jumpbox/properties?/jumpbox?/users?/-
   value:
 - name:    jumpbox
-  version: 4.7.5
-  url:     https://github.com/cloudfoundry-community/jumpbox-boshrelease/releases/download/v4.7.5/jumpbox-4.7.5.tgz
-  sha1:    0f8a76ea4bc731e0c397da0773aa87475ce9f1b2
+  version: 4.7.6
+  url:     https://github.com/cloudfoundry-community/jumpbox-boshrelease/releases/download/v4.7.6/jumpbox-4.7.6.tgz
+  sha1:    9fb7167c9bd36fc0501694c18e208bf478ceb368
