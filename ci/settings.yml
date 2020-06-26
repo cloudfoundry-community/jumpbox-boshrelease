@@ -535,9 +535,11 @@ jobs:
         params:
           REPO_ROOT:        git
           REPO_OUT:         pushme
+          RELEASE_DIR:      credhub-cli
+          BLOB_SOURCE:      https://github.com/cloudfoundry-incubator/credhub-cli/releases/download/%s/credhub-linux-%s.tgz
           BLOB_DIR:         credhub-cli
           BLOB_NAME:        credhub-cli
-          BLOB_BINARY:      credhub-linux-*.tgz # Think .tgz is not working well here
+          BLOB_BINARY:      credhub
           BLOB_DESTINATION: jumpbox/bins/credhub
           BLOB_CLEANUP:     jumpbox/bins/credhub
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
