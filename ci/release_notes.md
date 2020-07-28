@@ -6,3 +6,7 @@
 # safe
 
 - Bumped safe to v1.5.7
+
+# cf
+
+- Bumped cf to v7.0.2
