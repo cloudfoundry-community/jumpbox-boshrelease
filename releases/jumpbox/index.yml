@@ -155,6 +155,8 @@ builds:
     version: 4.4.5
   e45d0331-2d85-4800-455a-8559dcb4012b:
     version: 4.5.1
+  e464c4a2-85c8-4dba-495b-e85db6156de5:
+    version: 4.7.8
   e93bd0fd-ffad-4907-b9a6-4ccadd8bd4fe:
     version: 4.2.7
   ef96c918-222f-49a7-bad0-5c67343574d0:
