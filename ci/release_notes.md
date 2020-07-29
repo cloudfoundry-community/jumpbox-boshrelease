@@ -10,3 +10,7 @@
 # cf
 
 - Bumped cf to v7.0.2
+
+# genesis
+
+- Bumped genesis to v2.7.11
