@@ -8,13 +8,14 @@
 # author:  James Hunt <james@niftylogic.com>
 
 set -eu
+# shellcheck disable=SC2034
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 header() {
   echo
   echo "###############################################"
   echo
-  echo $*
+  echo "$*"
   echo
 }
 
@@ -45,13 +46,13 @@ if [[ $envok != 0 ]]; then
   exit 1
 fi
 
-VERSION=$(cat ${BLOB_DIR}/version)
+VERSION="$(cat "${BLOB_DIR}/version")"
 
 ######
 ######
 ######
 header "Configuring blobstore (AWS)"
-pushd ${REPO_ROOT}
+pushd "${REPO_ROOT}"
 cat >config/private.yml <<EOF
 ---
 blobstore:
@@ -75,20 +76,22 @@ fi
 ######
 if [[ ${BLOB_SOURCE:-} =~ ^http ]]; then
   header "Fetching blobs from upstream"
-  echo "Fetching blob from upstream $(printf ${BLOB_SOURCE} ${VERSION}) ..."
+  # shellcheck disable=SC2059
+  BLOB_SRC_URL="$(printf "${BLOB_SOURCE}" "${VERSION}")"
+  echo "Fetching blob from upstream $BLOB_SRC_URL ..."
   if [[ ${BLOB_SOURCE} =~ .tgz$ ]]; then
-    curl -Lsk $(printf ${BLOB_SOURCE} ${VERSION}) | tar -xzO ${BLOB_BINARY} > ../${BLOB_DIR}/${BLOB_BINARY}
+    curl -Lsk "$BLOB_SRC_URL" | tar -xzO "${BLOB_SRC_BINARY:-"$BLOB_BINARY"}" > "../${BLOB_DIR}/${BLOB_BINARY}"
   else
-    curl -Lsk $(printf ${BLOB_SOURCE} ${VERSION}) > ../${BLOB_DIR}/${BLOB_BINARY}
+    curl -Lsk "$BLOB_SRC_URL"  > "../${BLOB_DIR}/${BLOB_BINARY}"
   fi
 fi
 
 # remove things that github-release puts in the directory that we don't want.
-rm -f ../${BLOB_DIR}/tag \
-      ../${BLOB_DIR}/body \
-      ../${BLOB_DIR}/version
+rm -f "../${BLOB_DIR}/tag" \
+      "../${BLOB_DIR}/body" \
+      "../${BLOB_DIR}/version"
 
-ls -lah ../${BLOB_DIR}
+ls -lah "../${BLOB_DIR}"
 
 ######
 ######
@@ -99,6 +102,7 @@ eval "blob_dst=${BLOB_DESTINATION}"
 if [[ "$BLOB_BINARY" == "*" ]]; then
   for blob_src in ../${BLOB_DIR}/${BLOB_BINARY}; do
     base=${blob_src##*/}
+    # shellcheck disable=2154
     bosh add-blob "${blob_src}" "${blob_dst}/${base}"
   done
 else
@@ -117,8 +121,8 @@ popd
 ######
 ######
 header "Commiting and pushing changes"
-if [[ -n "$(cd ${REPO_ROOT}; git status --porcelain)" ]]; then
-  pushd ${REPO_ROOT}
+if [[ -n "$(cd "${REPO_ROOT}"; git status --porcelain)" ]]; then
+  pushd "${REPO_ROOT}"
   cat >>ci/release_notes.md <<EOF
 
 # ${BLOB_NAME}
@@ -135,15 +139,15 @@ EOF
     git config --global user.name "CI Bot"
   fi
 
-  (cd ${REPO_ROOT}
-   git merge --no-edit ${BRANCH}
+  (cd "${REPO_ROOT}"
+   git merge --no-edit "${BRANCH}"
    git add -A
    git status
    git commit -m "Bumped ${BLOB_NAME} to v${VERSION}")
 fi
 
 # so that future steps in the pipeline can push our changes
-cp -a ${REPO_ROOT} ${REPO_OUT}
+cp -a "${REPO_ROOT}" "${REPO_OUT}"
 
 echo
 echo
