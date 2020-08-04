@@ -43,6 +43,7 @@ groups:
     - safe
     - esuf
     - cf
+    - cf7
     - cloudfoundry-utils
 
 jobs:
@@ -244,7 +245,7 @@ jobs:
           ok:      no
           link:    (( grab meta.shout.links.build ))
   # }}}
-  - name: cf6 # {{{
+  - name: cf # {{{
     public: true
     plan:
     - in_parallel:
@@ -260,7 +261,7 @@ jobs:
             tag:        (( grab meta.image.tag ))
         inputs:
         - name: git
-        - name: cf6
+        - name: cf
         outputs:
         - name: pushme
         run:
@@ -316,7 +317,7 @@ jobs:
     plan:
     - in_parallel:
       - { get: git }
-      - { get: cf, trigger: true }
+      - { get: cf7, trigger: true }
     - task: update-cf
       config:
         platform: linux
@@ -467,13 +468,13 @@ resources:
       repository: esuf
       access_token: (( grab meta.github.access_token ))
   # }}}
-  - name: cf6 # {{{
+  - name: cf # {{{
     type: github-release
     source:
       user: cloudfoundry
       repository: cli
       access_token: (( grab meta.github.access_token ))
-      tag_filter: "^v?(6\..*)"
+      tag_filter: "^v?(6\\..*)"
   # }}}
 
   - name: cf7 # {{{
@@ -482,7 +483,7 @@ resources:
       user: cloudfoundry
       repository: cli
       access_token: (( grab meta.github.access_token ))
-      tag_filter: "^v?(7\..*)"
+      tag_filter: "^v?(7\\..*)"
   # }}}
   - name: cloudfoundry-utils # {{{
     type: github-release
