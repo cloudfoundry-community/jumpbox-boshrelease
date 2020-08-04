@@ -244,7 +244,7 @@ jobs:
           ok:      no
           link:    (( grab meta.shout.links.build ))
   # }}}
-  - name: cf # {{{
+  - name: cf6 # {{{
     public: true
     plan:
     - in_parallel:
@@ -260,7 +260,7 @@ jobs:
             tag:        (( grab meta.image.tag ))
         inputs:
         - name: git
-        - name: cf
+        - name: cf6
         outputs:
         - name: pushme
         run:
@@ -272,10 +272,76 @@ jobs:
           BLOB_SOURCE:      https://cli.run.pivotal.io/stable?release=linux64-binary&version=%s&source=github-rel&x=.tgz
           BLOB_DIR:         cf
           BLOB_NAME:        cf
-          BLOB_SRC_BINARY:  cf7
           BLOB_BINARY:      cf
           BLOB_DESTINATION: jumpbox/bins/cf
           BLOB_CLEANUP:     jumpbox/bins/cf
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:           (( grab meta.github.branch ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+  # }}}
+  - name: cf7 # {{{
+    public: true
+    plan:
+    - in_parallel:
+      - { get: git }
+      - { get: cf, trigger: true }
+    - task: update-cf
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+        - name: git
+        - name: cf7
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          RELEASE_DIR:      cf7
+          BLOB_SOURCE:      https://cli.run.pivotal.io/stable?release=linux64-binary&version=%s&source=github-rel&x=.tgz
+          BLOB_DIR:         cf7
+          BLOB_NAME:        cf7
+          BLOB_BINARY:      cf7
+          BLOB_DESTINATION: jumpbox/bins/cf7
+          BLOB_CLEANUP:     jumpbox/bins/cf7
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
           AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
           BRANCH:           (( grab meta.github.branch ))
@@ -401,12 +467,22 @@ resources:
       repository: esuf
       access_token: (( grab meta.github.access_token ))
   # }}}
-  - name: cf # {{{
+  - name: cf6 # {{{
     type: github-release
     source:
       user: cloudfoundry
       repository: cli
       access_token: (( grab meta.github.access_token ))
+      tag_filter: "^v?(6\..*)"
+  # }}}
+
+  - name: cf7 # {{{
+    type: github-release
+    source:
+      user: cloudfoundry
+      repository: cli
+      access_token: (( grab meta.github.access_token ))
+      tag_filter: "^v?(7\..*)"
   # }}}
   - name: cloudfoundry-utils # {{{
     type: github-release
