@@ -10,3 +10,7 @@
 # cf7
 
 - Bumped cf7 to v7.0.2
+
+# cf
+
+- Bumped cf to v6.51.0
