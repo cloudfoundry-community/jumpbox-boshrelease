@@ -66,7 +66,7 @@ EOF
 ######
 ######
 header "Performing cleanup on old blobs"
-remove=$(spruce json config/blobs.yml | jq -r "keys[] | select(test(\"${BLOB_CLEANUP}\"))" | grep -w ${BLOB_CLEANUP})
+remove=$(spruce json config/blobs.yml | jq -r "keys[] | select(test(\"${BLOB_CLEANUP}\"))" | grep -w "${BLOB_CLEANUP}" || true)
 if [[ -n $remove ]]; then
   echo "$remove" | xargs -L1 bosh remove-blob
 fi
