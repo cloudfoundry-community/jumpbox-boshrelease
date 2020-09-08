@@ -516,7 +516,11 @@ jobs:
     plan:
     - in_parallel:
       - { get: git }
-      - { get: credhub-cli, trigger: true }
+      - get: credhub-cli
+        trigger: true
+        params:
+          globs:
+          - credhub-linux-*.tgz
     - task: update-credhub-cli
       config:
         platform: linux
@@ -583,7 +587,11 @@ jobs:
     plan:
     - in_parallel:
       - { get: git }
-      - { get: concourse, trigger: true }
+      - get: concourse
+        trigger: true
+        params:
+          globs:
+          - fly-*-linux-amd64.tgz
     - task: update-fly
       config:
         platform: linux
