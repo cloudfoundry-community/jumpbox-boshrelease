@@ -540,7 +540,6 @@ jobs:
           REPO_ROOT:        git
           REPO_OUT:         pushme
           RELEASE_DIR:      credhub-cli
-          BLOB_SOURCE:      https://github.com/cloudfoundry-incubator/credhub-cli/releases/download/%s/credhub-linux-%s.tgz
           BLOB_DIR:         credhub
           BLOB_NAME:        credhub
           BLOB_BINARY:      credhub
@@ -611,7 +610,6 @@ jobs:
           REPO_ROOT:        git
           REPO_OUT:         pushme
           BLOB_DIR:         concourse
-          BLOB_SOURCE:      https://github.com/concourse/concourse/releases/download/%s/fly-%s-linux-amd64.tgz # the file name does not include the v of the version name, can we get rid of that here? 
           BLOB_NAME:        fly
           BLOB_BINARY:      fly
           BLOB_DESTINATION: jumpbox/bins/fly
