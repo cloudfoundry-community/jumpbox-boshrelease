@@ -99,7 +99,7 @@ ls -lah "../${BLOB_DIR}"
 header "Updating blobs"
 # expand ${VERSION} env var into file path
 eval "blob_dst=${BLOB_DESTINATION}"
-if [[ "${BLOB_DIR}/${BLOB_BINARY}*.tgz" ]]; then
+if [[ -f "${BLOB_DIR}/${BLOB_BINARY}*.tgz" ]]; then
   tar zxf "${BLOB_DIR}/${BLOB_BINARY}*.tgz"
   bosh add-blob "${BLOB_DIR}/${BLOB_BINARY}" "${blob_dst}"
 elif [[ "$BLOB_BINARY" == "*" ]]; then
