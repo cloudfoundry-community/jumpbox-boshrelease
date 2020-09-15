@@ -2,7 +2,7 @@
 meta:
   name:    jumpbox
   release: Jumpbox
-  target:  pipes
+  target:  pipes@main
   url:     https://pipes.starkandwayne.com
 
   test-errand: inventory
@@ -608,7 +608,7 @@ jobs:
           REPO_ROOT:        git
           REPO_OUT:         pushme
           RELEASE_DIR:      credhub-cli
-          BLOB_DIR:         credhub
+          BLOB_DIR:         credhub-cli
           BLOB_NAME:        credhub
           BLOB_BINARY:      credhub*.tgz
           BLOB_DESTINATION: jumpbox/bins/credhub
