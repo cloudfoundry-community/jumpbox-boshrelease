@@ -610,7 +610,7 @@ jobs:
           RELEASE_DIR:      credhub-cli
           BLOB_DIR:         credhub
           BLOB_NAME:        credhub
-          BLOB_BINARY:      credhub
+          BLOB_BINARY:      credhub*.tgz
           BLOB_DESTINATION: jumpbox/bins/credhub
           BLOB_CLEANUP:     jumpbox/bins/credhub
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
@@ -679,7 +679,7 @@ jobs:
           REPO_OUT:         pushme
           BLOB_DIR:         concourse
           BLOB_NAME:        fly
-          BLOB_BINARY:      fly
+          BLOB_BINARY:      fly*.tgz
           BLOB_DESTINATION: jumpbox/bins/fly
           BLOB_CLEANUP:     jumpbox/bins/fly
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
@@ -786,7 +786,7 @@ resources:
       repository: credhub-cli
       access_token: (( grab meta.github.access_token ))
   # }}}
-  - name: fly # {{{
+  - name: concourse # {{{
     type: github-release
     source:
       user: concourse
