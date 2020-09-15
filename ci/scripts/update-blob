@@ -109,7 +109,7 @@ elif [[ "$BLOB_BINARY" == "*" ]]; then
     bosh add-blob "${blob_src}" "${blob_dst}/${base}"
   done
 else
-  bosh add-blob "../${BLOB_DIR}/${BLOB_BINARY}" "${blob_dst}"
+  bosh add-blob ../${BLOB_DIR}/${BLOB_BINARY} "${blob_dst}"
 fi
 
 ######
