@@ -45,6 +45,10 @@ groups:
     - cf
     - cf7
     - cloudfoundry-utils
+    - bosh-backup-and-restore
+    - bosh-cli
+    - credhub-cli
+    - fly
 
 jobs:
   - name: genesis # {{{
@@ -445,6 +449,275 @@ jobs:
           ok:      no
           link:    (( grab meta.shout.links.build ))
    # }}}
+  - name: bosh-backup-and-restore # {{{
+    public: true
+    plan:
+    - in_parallel:
+      - { get: git }
+      - { get: bosh-backup-and-restore, trigger: true }
+    - task: update-bosh-backup-and-restore
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+        - name: git
+        - name: bosh-backup-and-restore
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          BLOB_DIR:         bosh-backup-and-restore
+          BLOB_NAME:        bbr
+          BLOB_BINARY:      bbr-*-linux-amd64
+          BLOB_DESTINATION: jumpbox/bins/bbr
+          BLOB_CLEANUP:     jumpbox/bins/bbr
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:           (( grab meta.github.branch ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+   # }}}
+  - name: bosh-cli # {{{
+    public: true
+    plan:
+    - in_parallel:
+      - { get: git }
+      - { get: bosh-cli, trigger: true }
+    - task: update-bosh-cli
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+        - name: git
+        - name: bosh-cli
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          BLOB_DIR:         bosh-cli
+          BLOB_NAME:        bosh-cli
+          BLOB_BINARY:      bosh-cli-*-linux-amd64
+          BLOB_DESTINATION: jumpbox/bins/bosh
+          BLOB_CLEANUP:     jumpbox/bins/bosh
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:           (( grab meta.github.branch ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+   # }}}
+  - name: credhub-cli # {{{
+    public: true
+    plan:
+    - in_parallel:
+      - { get: git }
+      - get: credhub-cli
+        trigger: true
+        params:
+          globs:
+          - credhub-linux-*.tgz
+    - task: update-credhub-cli
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+        - name: git
+        - name: credhub-cli
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          RELEASE_DIR:      credhub-cli
+          BLOB_DIR:         credhub
+          BLOB_NAME:        credhub
+          BLOB_BINARY:      credhub
+          BLOB_DESTINATION: jumpbox/bins/credhub
+          BLOB_CLEANUP:     jumpbox/bins/credhub
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:           (( grab meta.github.branch ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+   # }}}
+  - name: fly # {{{
+    public: true
+    plan:
+    - in_parallel:
+      - { get: git }
+      - get: concourse
+        trigger: true
+        params:
+          globs:
+          - fly-*-linux-amd64.tgz
+    - task: update-fly
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+        - name: git
+        - name: concourse
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          BLOB_DIR:         concourse
+          BLOB_NAME:        fly
+          BLOB_BINARY:      fly
+          BLOB_DESTINATION: jumpbox/bins/fly
+          BLOB_CLEANUP:     jumpbox/bins/fly
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:           (( grab meta.github.branch ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+   # }}}
 
 resources:
   - name: genesis # {{{
@@ -490,5 +763,33 @@ resources:
     source:
       user: cloudfoundry-community
       repository: cloudfoundry-utils
+      access_token: (( grab meta.github.access_token ))
+  # }}}
+  - name: bosh-backup-and-restore # {{{
+    type: github-release
+    source:
+      user: cloudfoundry-incubator
+      repository: bosh-backup-and-restore
+      access_token: (( grab meta.github.access_token ))
+  # }}}
+  - name: bosh-cli # {{{
+    type: github-release
+    source:
+      user: cloudfoundry
+      repository: bosh-cli
+      access_token: (( grab meta.github.access_token ))
+  # }}}
+  - name: credhub-cli # {{{
+    type: github-release
+    source:
+      user: cloudfoundry-incubator
+      repository: credhub-cli
+      access_token: (( grab meta.github.access_token ))
+  # }}}
+  - name: fly # {{{
+    type: github-release
+    source:
+      user: concourse
+      repository: concourse
       access_token: (( grab meta.github.access_token ))
   # }}}
