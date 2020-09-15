@@ -9,8 +9,21 @@ instance_groups:
   networks:
     - name: default
   jobs:
-    - { release: jumpbox, name: jumpbox }
-    - { release: jumpbox, name: inventory }
+  - release: jumpbox
+    name: jumpbox
+    properties:
+      jumpbox:
+        env:
+          FOO: BAR
+        users:
+          - name: alice
+          - name: bob
+          - name: eve
+            shell: /bin/sh
+        delete:
+          - chris
+  - release: jumpbox
+    name: inventory
 
 properties:
   jumpbox:
