@@ -9,6 +9,7 @@ files:
   - jumpbox/bins/bosh
   - jumpbox/bins/certstrap
   - jumpbox/bins/credhub
+  - jumpbox/bins/spruce
   - jumpbox/bins/fly
   - jumpbox/bins/cf
   - jumpbox/bins/cf7
