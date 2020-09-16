@@ -102,7 +102,6 @@ eval "blob_dst=${BLOB_DESTINATION}"
 if [[ ${BLOB_DIR}/${BLOB_BINARY} == *".tgz" ]]; then
   echo "Unpacking TarGz"
   tar zxf ../${BLOB_DIR}/${BLOB_BINARY}
-  rm ../${BLOB_DIR}/*.tgz
   bosh add-blob ../${BLOB_DIR}/${BLOB_NAME} "${blob_dst}"
 elif [[ "$BLOB_BINARY" == "*" ]]; then
   for blob_src in ../${BLOB_DIR}/${BLOB_BINARY}; do
