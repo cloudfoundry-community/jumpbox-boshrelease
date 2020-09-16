@@ -14,9 +14,7 @@ fi
 
 # install ruby
 
-rvm install ruby-2.4
-rvm --default use 2.4
-gem install -N cf-uaac
+rvm install ruby-2.7
+rvm --default use 2.7
+gem install -N cf-uaac # TODO: move to uaa-cli https://github.com/cloudfoundry-incubator/uaa-cli
 
-# Uninstall BOSH v1 if it is installed
-gem uninstall -aIx bosh_cli bosh-workspace
