@@ -100,6 +100,7 @@ header "Updating blobs"
 # expand ${VERSION} env var into file path
 eval "blob_dst=${BLOB_DESTINATION}"
 if [[ -f ${BLOB_DIR}/${BLOB_BINARY}*.tgz ]]; then
+  echo "Unpacking TarGz"
   tar zxf ${BLOB_DIR}/${BLOB_BINARY}*.tgz
   rm *.tgz
   bosh add-blob "${BLOB_DIR}/${BLOB_NAME}" "${blob_dst}"
