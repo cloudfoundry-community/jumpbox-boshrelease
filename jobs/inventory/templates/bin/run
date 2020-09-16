@@ -24,6 +24,8 @@ check bbr version
 check bosh -v
 check cf --version
 check credhub --version
+check jq --version
+check spruce --version
 check genesis version
 check safe version
 check shield -v
