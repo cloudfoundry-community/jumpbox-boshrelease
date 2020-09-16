@@ -25,18 +25,6 @@ instance_groups:
   - release: jumpbox
     name: inventory
 
-properties:
-  jumpbox:
-    env:
-      FOO: BAR
-    users:
-      - name: alice
-      - name: bob
-      - name: eve
-        shell: /bin/sh
-    delete:
-      - chris
-
 update:
   canaries: 0
   max_in_flight: 1
