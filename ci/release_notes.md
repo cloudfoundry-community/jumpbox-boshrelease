@@ -6,3 +6,7 @@
 # fly
 
 - Bumped fly to v6.6.0
+
+# safe
+
+- Bumped safe to v1.5.8
