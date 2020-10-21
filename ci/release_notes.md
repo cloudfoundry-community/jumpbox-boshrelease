@@ -14,3 +14,7 @@
 # bosh-cli
 
 - Bumped bosh-cli to v6.4.1
+
+# genesis
+
+- Bumped genesis to v2.7.17
