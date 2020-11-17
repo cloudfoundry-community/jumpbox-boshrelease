@@ -1,0 +1,238 @@
+jobs:
+  - name: testflight
+    public: true
+    serial: true
+    plan:
+    - in_parallel:
+      - { get: git, trigger: true }
+    - task: testflight
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+          - { name: git }
+        run:
+          path: ./git/ci/scripts/testflight
+          args: []
+        params:
+          REPO_ROOT:            git
+          BOSH_ENVIRONMENT:     (( grab meta.bosh-lite.target ))
+          BOSH_CA_CERT:         (( grab meta.bosh-lite.cacert ))
+          BOSH_CLIENT:          (( grab meta.bosh-lite.username ))
+          BOSH_CLIENT_SECRET:   (( grab meta.bosh-lite.password ))
+          BOSH_DEPLOYMENT:      (( grab meta.bosh-lite.deployment ))
+          TEST_ERRAND:          (( grab meta.test-errands || meta.test-errand || ~ ))
+          AWS_ACCESS_KEY:       (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:       (( grab meta.aws.secret_key ))
+          MANIFEST_PATH:        (( grab meta.manifest.path ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: tests job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: tests job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+
+  - name: pre
+    public: true
+    serial: true
+    plan:
+    - do:
+      - in_parallel:
+          - { get: git,     trigger: true,  passed: [testflight] }
+          - { get: version, trigger: true }
+      - task: release-notes
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: (( grab meta.image.name ))
+              tag:        (( grab meta.image.tag ))
+          inputs:
+              - { name: git }
+          run:
+            path: sh
+            args:
+            - -ce
+            - |
+              cd git
+              if [ -f ci/release_notes.md ]; then
+                echo "######   RELEASE NOTES   ###############"
+                echo
+                cat ci/release_notes.md
+                echo
+                echo "########################################"
+                echo
+              else
+                echo "NO RELEASE NOTES HAVE BEEN WRITTEN"
+                echo "You *might* want to do that before"
+                echo "hitting (+) on that shipit job..."
+                echo
+              fi
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: release candidate job 'pre' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: release candidate job 'pre' failed (which is unusual).
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+
+  - name: rc
+    public: true
+    serial: true
+    plan:
+    - do:
+      - in_parallel:
+          - { get: git,     trigger: true,  passed: [pre] }
+          - { get: version, trigger: false, passed: [pre], params: {pre: rc} }
+      - put: version
+        params: {file: version/number}
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: release candidate job 'rc' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: release candidate job 'rc' failed (which is unusual).
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+
+  - name: minor
+    public: true
+    plan:
+    - do:
+      - { get: version, trigger: false, params: {bump: minor} }
+      - { put: version,                 params: {file: version/number} }
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: minor version bump job 'minor' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: minor version bump job 'minor' failed (which is unusual).
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+
+  - name: major
+    public: true
+    plan:
+    - do:
+      - { get: version, trigger: false, params: {bump: major} }
+      - { put: version,                 params: {file: version/number} }
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: major version bump job '$BUILD_JOB_NAME' succeeded.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: major version bump job '$BUILD_JOB_NAME' failed (which is unusual).
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+
+  - name: shipit
+    public: true
+    serial: true
+    plan:
+    - in_parallel:
+        - { get: version, passed: [rc], params: {bump: final} }
+        - { get: git,     passed: [rc] }
+    - task: release
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+          - name: version
+          - name: git
+        outputs:
+          - name: gh
+          - name: pushme
+          - name: notifications
+        run:
+          path: ./git/ci/scripts/shipit
+          args: []
+        params:
+          REPO_ROOT:      git
+          VERSION_FROM:   version/number
+          RELEASE_ROOT:   gh
+          REPO_OUT:       pushme
+          BRANCH:         (( grab meta.github.branch ))
+          GITHUB_OWNER:   (( grab meta.github.owner ))
+          GIT_EMAIL:      (( grab meta.git.email ))
+          GIT_NAME:       (( grab meta.git.name ))
+          AWS_ACCESS_KEY: (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY: (( grab meta.aws.secret_key ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+    - put: s3-tarball
+      params:
+        file:  (( concat "gh/artifacts/" meta.name "-*.tgz" ))
+    - put: github
+      params:
+        name:   gh/name
+        tag:    gh/tag
+        body:   gh/notes.md
+        globs: [gh/artifacts/*]
+    - put: version
+      params:
+        bump: patch
+    - in_parallel:
+      - put: notify
+        params:
+          method: announce
+          file: notifications/message
+          link: (( concat meta.github.uri "/releases" ))
+
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: release job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: release job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))

@@ -1,0 +1,737 @@
+jobs:
+  - name: genesis
+    public: true
+    plan:
+    - in_parallel:
+      - { get: git }
+      - { get: genesis, trigger: true }
+    - task: update-genesis
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+        - name: git
+        - name: genesis
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          RELEASE_DIR:      genesis
+          BLOB_DIR:         genesis
+          BLOB_NAME:        genesis
+          BLOB_BINARY:      genesis
+          BLOB_DESTINATION: jumpbox/bins/genesis
+          BLOB_CLEANUP:     jumpbox/bins/genesis
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:       (( grab meta.github.branch ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+
+  - name: safe
+    public: true
+    plan:
+    - in_parallel:
+      - { get: git }
+      - { get: safe, trigger: true }
+    - task: update-safe
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+        - name: git
+        - name: safe
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          RELEASE_DIR:      safe
+          BLOB_DIR:         safe
+          BLOB_NAME:        safe
+          BLOB_BINARY:      safe-linux-amd64
+          BLOB_DESTINATION: jumpbox/bins/safe
+          BLOB_CLEANUP:     jumpbox/bins/safe
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:       (( grab meta.github.branch ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+
+  - name: esuf
+    public: true
+    plan:
+    - in_parallel:
+      - { get: git }
+      - { get: esuf, trigger: true }
+    - task: update-safe
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+        - name: git
+        - name: esuf
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          RELEASE_DIR:      esuf
+          BLOB_DIR:         esuf
+          BLOB_NAME:        esuf
+          BLOB_BINARY:      esuf-linux-amd64
+          BLOB_DESTINATION: jumpbox/bins/esuf
+          BLOB_CLEANUP:     jumpbox/bins/esuf
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:       (( grab meta.github.branch ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+
+  - name: cf
+    public: true
+    plan:
+    - in_parallel:
+      - { get: git }
+      - { get: cf, trigger: true }
+    - task: update-cf
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+        - name: git
+        - name: cf
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          RELEASE_DIR:      cf
+          BLOB_SOURCE:      https://cli.run.pivotal.io/stable?release=linux64-binary&version=%s&source=github-rel&x=.tgz
+          BLOB_DIR:         cf
+          BLOB_NAME:        cf
+          BLOB_BINARY:      cf
+          BLOB_DESTINATION: jumpbox/bins/cf
+          BLOB_CLEANUP:     jumpbox/bins/cf
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:           (( grab meta.github.branch ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+
+  - name: cf7
+    public: true
+    plan:
+    - in_parallel:
+      - { get: git }
+      - { get: cf7, trigger: true }
+    - task: update-cf
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+        - name: git
+        - name: cf7
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          RELEASE_DIR:      cf7
+          BLOB_SOURCE:      https://cli.run.pivotal.io/stable?release=linux64-binary&version=%s&source=github-rel&x=.tgz
+          BLOB_DIR:         cf7
+          BLOB_NAME:        cf7
+          BLOB_BINARY:      cf7
+          BLOB_DESTINATION: jumpbox/bins/cf7
+          BLOB_CLEANUP:     jumpbox/bins/cf7
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:           (( grab meta.github.branch ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+
+  - name: cloudfoundry-utils
+    public: true
+    plan:
+    - in_parallel:
+      - { get: git }
+      - { get: cloudfoundry-utils, trigger: true }
+    - task: update-cloudfoundry-utils
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+        - name: git
+        - name: cloudfoundry-utils
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          RELEASE_DIR:      cloudfoundry-utils
+          BLOB_DIR:         cloudfoundry-utils
+          BLOB_NAME:        cloudfoundry-utils
+          BLOB_BINARY:      '*'
+          BLOB_DESTINATION: jumpbox/cloudfoundry-utils/
+          BLOB_CLEANUP:     jumpbox/cloudfoundry-utils/*
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:           (( grab meta.github.branch ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+
+  - name: bosh-backup-and-restore
+    public: true
+    plan:
+    - in_parallel:
+      - { get: git }
+      - { get: bosh-backup-and-restore, trigger: true }
+    - task: update-bosh-backup-and-restore
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+        - name: git
+        - name: bosh-backup-and-restore
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          BLOB_DIR:         bosh-backup-and-restore
+          BLOB_NAME:        bbr
+          BLOB_BINARY:      bbr-?.*-linux-amd64
+          BLOB_DESTINATION: jumpbox/bins/bbr
+          BLOB_CLEANUP:     jumpbox/bins/bbr
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:           (( grab meta.github.branch ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+
+  - name: bosh-cli
+    public: true
+    plan:
+    - in_parallel:
+      - { get: git }
+      - { get: bosh-cli, trigger: true }
+    - task: update-bosh-cli
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+        - name: git
+        - name: bosh-cli
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          BLOB_DIR:         bosh-cli
+          BLOB_NAME:        bosh-cli
+          BLOB_BINARY:      bosh-cli-*-linux-amd64
+          BLOB_DESTINATION: jumpbox/bins/bosh
+          BLOB_CLEANUP:     jumpbox/bins/bosh
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:           (( grab meta.github.branch ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+
+  - name: credhub-cli
+    public: true
+    plan:
+    - in_parallel:
+      - { get: git }
+      - get: credhub-cli
+        trigger: true
+        params:
+          globs:
+          - credhub-linux-*.tgz
+    - task: update-credhub-cli
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+        - name: git
+        - name: credhub-cli
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          RELEASE_DIR:      credhub-cli
+          BLOB_DIR:         credhub-cli
+          BLOB_NAME:        credhub
+          BLOB_BINARY:      credhub*.tgz
+          BLOB_DESTINATION: jumpbox/bins/credhub
+          BLOB_CLEANUP:     jumpbox/bins/credhub
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:           (( grab meta.github.branch ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+
+  - name: fly
+    public: true
+    plan:
+    - in_parallel:
+      - { get: git }
+      - get: concourse
+        trigger: true
+        params:
+          globs:
+          - fly-*-linux-amd64.tgz
+    - task: update-fly
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+        - name: git
+        - name: concourse
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          BLOB_DIR:         concourse
+          BLOB_NAME:        fly
+          BLOB_BINARY:      fly*.tgz
+          BLOB_DESTINATION: jumpbox/bins/fly
+          BLOB_CLEANUP:     jumpbox/bins/fly
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:           (( grab meta.github.branch ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+
+  - name: spruce
+    public: true
+    plan:
+    - in_parallel:
+      - { get: git }
+      - get: spruce
+        trigger: true
+        params:
+          globs:
+          - spruce-linux-amd64
+    - task: update-spruce
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+        - name: git
+        - name: spruce
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          BLOB_DIR:         spruce
+          BLOB_NAME:        spruce
+          BLOB_BINARY:      spruce-linux-amd64
+          BLOB_DESTINATION: jumpbox/bins/spruce
+          BLOB_CLEANUP:     jumpbox/bins/spruce
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:           (( grab meta.github.branch ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+    - put: git
+      params:
+        rebase: true
+        repository: pushme/git
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
+
