@@ -6,3 +6,7 @@
 # genesis
 
 - Bumped genesis to v2.7.19
+
+# genesis
+
+- Bumped genesis to v2.7.20
