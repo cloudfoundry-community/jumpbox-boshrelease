@@ -14,3 +14,7 @@
 # genesis
 
 - Bumped genesis to v2.7.24
+
+# credhub
+
+- Bumped credhub to v2.9.0
