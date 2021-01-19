@@ -10,3 +10,7 @@
 # bbr
 
 - Bumped bbr to v1.9.1
+
+# genesis
+
+- Bumped genesis to v2.7.28
