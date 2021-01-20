@@ -14,3 +14,7 @@
 # genesis
 
 - Bumped genesis to v2.7.28
+
+# safe
+
+- Bumped safe to v1.5.9
