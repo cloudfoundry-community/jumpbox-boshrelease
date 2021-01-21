@@ -30,6 +30,6 @@ stemcells:
 
 releases:
 - name:    jumpbox
-  version: 4.8.12
-  url:     https://github.com/cloudfoundry-community/jumpbox-boshrelease/releases/download/v4.8.12/jumpbox-4.8.12.tgz
-  sha1:    9afd1c01d8a11789a41d1199963d41c3494531ac
+  version: 4.8.13
+  url:     https://github.com/cloudfoundry-community/jumpbox-boshrelease/releases/download/v4.8.13/jumpbox-4.8.13.tgz
+  sha1:    371643355aeda9b6bf1a9c312e974098387ba5f4
