@@ -74,6 +74,7 @@ installed on the instance, versions, etc.
 - spiff 1.0.7
 - tmux 2.2
 - tree 1.7.0
+- terraform 0.13.6
 - unzip 6.0
 - vault 0.5.2
 - vim 7.4
