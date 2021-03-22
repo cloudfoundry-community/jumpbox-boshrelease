@@ -4,8 +4,8 @@ golang/go1.14.2.linux-amd64.tar.gz:
   sha: sha256:6272d6e940ecb71ea5636ddb5fab3933e087c1356173c61f4a803895e947ebb3
 jumpbox/bins/bbr:
   size: 13091130
-  object_id: 092e809b-d3b4-4a84-4bcb-ec43cfbc623e
-  sha: sha256:b3ef5da684d069fc5d933189636be66bedc52549b3002fbf95149df43539c1c6
+  object_id: eab6c6f8-54d2-457f-676c-723968cde438
+  sha: sha256:67b0610217ffdd5848e3280d792a70cb816cf99592329584154347e06949068f
 jumpbox/bins/bosh:
   size: 41709487
   object_id: aaf914d2-a26c-4336-748d-2d08127548c4
