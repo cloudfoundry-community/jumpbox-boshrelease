@@ -34,3 +34,7 @@
 # bosh-cli
 
 - Bumped bosh-cli to v6.4.3
+
+# safe
+
+- Bumped safe to v1.6.1
