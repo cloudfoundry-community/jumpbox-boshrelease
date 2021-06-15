@@ -50,3 +50,7 @@
 # genesis
 
 - Bumped genesis to v2.7.33
+
+# fly
+
+- Bumped fly to v7.3.2
