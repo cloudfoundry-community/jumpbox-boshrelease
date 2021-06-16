@@ -124,7 +124,7 @@ fi
 
 (cd ${REPO_ROOT}
  shopt -s nullglob
- for MANIFEST_PATH in manifests/*.yml; do
+ for MANIFEST_PATH in manifests/jumpbox.yml; do
    len=$(wc -l $MANIFEST_PATH | awk '{print $1}')
    head=$(head -n `expr $len - 4` $MANIFEST_PATH)
    cat > $MANIFEST_PATH <<EOF
