@@ -10,6 +10,10 @@ jumpbox/bins/bosh:
   size: 32204373
   object_id: 64ef6e19-3b5e-4c13-49dc-a680628cd4bc
   sha: sha256:c944dd694e5470686995c2365ac60c9ef06f655cab51994f7fefed4c89e764fb
+jumpbox/bins/boss:
+  size: 7201287
+  object_id: 98237ba8-e4ac-4143-4293-f3d9eb4f95ca
+  sha: sha256:3df6764e740c74579cfdee3b32eafc2fe46ce6c57996c4e6766abcef00399fb6
 jumpbox/bins/certstrap:
   size: 6191115
   object_id: 5e18df77-426d-49e1-794a-d3fd202d7034

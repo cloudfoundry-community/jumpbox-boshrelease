@@ -7,6 +7,7 @@ dev_releases
 blobs/*
 .blobs
 .dev_builds
+.envrc
 .vagrant
 .idea
 .DS_Store
