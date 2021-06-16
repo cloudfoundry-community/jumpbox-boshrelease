@@ -7,6 +7,7 @@ files:
     # pre-compiled binaries / scripts
   - jumpbox/bins/bbr
   - jumpbox/bins/bosh
+  - jumpbox/bins/boss
   - jumpbox/bins/certstrap
   - jumpbox/bins/credhub
   - jumpbox/bins/spruce

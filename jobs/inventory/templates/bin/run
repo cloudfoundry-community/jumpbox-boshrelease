@@ -22,6 +22,7 @@ mkdir -p $HOME
 
 check bbr version
 check bosh -v
+check boss -v
 check cf --version
 check credhub --version
 check jq --version
