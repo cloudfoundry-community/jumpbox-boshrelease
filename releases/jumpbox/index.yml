@@ -115,6 +115,8 @@ builds:
     version: 4.7.4
   89c46141-6dc2-4d67-9f74-6d274edaaeab:
     version: "1"
+  8b6f37f0-85db-4717-42dd-f4c324e85ca9:
+    version: 4.8.16
   8be78502-1fd4-40e9-74cc-1dc4f5a5435c:
     version: 4.8.3
   8d5cf2ee-fede-462a-82cf-29e20ec8c789:
