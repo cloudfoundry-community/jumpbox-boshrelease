@@ -238,7 +238,7 @@ EOF
 	fi
 
 	log1 "Setting up jumpbox users"
-	declare -A users
+	declare -Ag users
 	pushd ${JUMPBOX_HOME} >/dev/null 2>&1
 	for user in *; do
 		# deleted users are moved to be hidden directories
