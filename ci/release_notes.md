@@ -18,3 +18,7 @@
 # fly
 
 - Bumped fly to v7.4.0
+
+# genesis
+
+- Bumped genesis to v2.7.35
