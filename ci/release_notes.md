@@ -26,3 +26,7 @@
 # bosh-cli
 
 - Bumped bosh-cli to v6.4.5
+
+# cf7
+
+- Bumped cf7 to v7.3.0
