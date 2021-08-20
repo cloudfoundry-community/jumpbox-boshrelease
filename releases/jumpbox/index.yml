@@ -167,6 +167,8 @@ builds:
     version: 4.7.2
   bd8aa652-d1be-4463-9a35-52d47338f99e:
     version: 4.4.1
+  c82d7e5b-f515-466c-5e32-0aa78480a1df:
+    version: 4.8.17
   c8d0cb10-7775-4cfc-688e-535d14940ba5:
     version: 4.7.6
   cc749d03-3d81-48c5-7347-4f0d87fdb789:
