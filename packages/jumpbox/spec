@@ -13,6 +13,7 @@ files:
   - jumpbox/bins/fly
   - jumpbox/bins/cf
   - jumpbox/bins/cf7
+  - jumpbox/bins/cf8
   - jumpbox/bins/esuf
   - jumpbox/bins/genesis
   - jumpbox/bins/jq
