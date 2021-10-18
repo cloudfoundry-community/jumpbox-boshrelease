@@ -330,6 +330,54 @@ jobs:
           message: blob ingestion job '$BUILD_JOB_NAME' failed.
           ok:      no
           link:    (( grab meta.shout.links.build ))
+  - name: cf8
+    public: true
+    plan:
+    - in_parallel:
+      - { get: git }
+      - { get: cf8, trigger: true }
+    - task: update-cf
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: (( grab meta.image.name ))
+            tag:        (( grab meta.image.tag ))
+        inputs:
+        - name: git
+        - name: cf8
+        outputs:
+        - name: pushme
+        run:
+          path: ./git/ci/scripts/update-blob
+        params:
+          REPO_ROOT:        git
+          REPO_OUT:         pushme
+          RELEASE_DIR:      cf8
+          BLOB_SOURCE:      https://cli.run.pivotal.io/stable?release=linux64-binary&version=%s&source=github-rel&x=.tgz
+          BLOB_DIR:         cf8
+          BLOB_NAME:        cf8
+          BLOB_BINARY:      cf8
+          BLOB_DESTINATION: jumpbox/bins/cf8
+          BLOB_CLEANUP:     jumpbox/bins/cf8
+          AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
+          AWS_SECRET_KEY:   (( grab meta.aws.secret_key ))
+          BRANCH:           (( grab meta.github.branch ))
+      on_success:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' succeeded.
+          ok:      yes
+          link:    (( grab meta.shout.links.build ))
+      on_failure:
+        put: notify
+        params:
+          topic:   (( concat meta.shout.topic "-$BUILD_JOB_NAME" ))
+          message: blob ingestion job '$BUILD_JOB_NAME' failed.
+          ok:      no
+          link:    (( grab meta.shout.links.build ))
 
   - name: cloudfoundry-utils
     public: true
