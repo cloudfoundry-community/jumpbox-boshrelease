@@ -24,8 +24,7 @@ update:
 
 stemcells:
 - alias:   default
-  os:      ubuntu-xenial
-           # minimum v170.x of Xenial REQUIRED
+  os:      ubuntu-bionic
   version: latest
 
 releases:
