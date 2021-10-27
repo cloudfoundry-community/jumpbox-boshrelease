@@ -30,3 +30,7 @@
 # cf8
 
 - Bumped cf8 to v8.0.0
+
+# genesis
+
+- Bumped genesis to v2.8.2
