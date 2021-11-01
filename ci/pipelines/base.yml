@@ -71,8 +71,11 @@ groups:
       - pre
       - rc
       - shipit
+  - name: versioning
+    jobs:
       - major
       - minor
+      - patch
   - name: blobs
     jobs:
     - genesis
