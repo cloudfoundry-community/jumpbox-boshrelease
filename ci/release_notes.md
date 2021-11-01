@@ -38,3 +38,7 @@
 # bbr
 
 - Bumped bbr to v1.9.17
+
+# fly
+
+- Bumped fly to v7.6.0
