@@ -46,3 +46,7 @@
 # cf8
 
 - Bumped cf8 to v8.1.0
+
+# bosh-cli
+
+- Bumped bosh-cli to v6.4.11
