@@ -60,9 +60,9 @@ n=$((n + 1))
 
 # TREE
 # http://mama.indstate.edu/users/ice/tree/
-# ftp://mama.indstate.edu/linux/tree/tree-1.8.0.tgz
-(tar -xzvf jumpbox/tree-2.0.1.tar.gz
- cd tree-2.0.1
+# ftp://mama.indstate.edu/linux/tree/tree-2.0.2.tgz
+(tar -xzvf jumpbox/tree-2.0.2.tar.gz
+ cd tree-2.0.2
  sed -i "s|^PREFIX=.*|PREFIX=${BOSH_INSTALL_TARGET}|" Makefile
  make -j${CPUS}
  make install) &
