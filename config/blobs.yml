@@ -2,6 +2,9 @@ golang/go1.14.2.linux-amd64.tar.gz:
   size: 123658438
   object_id: 8545848e-eefe-43a3-6d0a-78f58af18417
   sha: sha256:6272d6e940ecb71ea5636ddb5fab3933e087c1356173c61f4a803895e947ebb3
+golang/go1.17.8.linux-amd64.tar.gz:
+  size: 22164160
+  sha: sha256:1a6981027aad32e14fcfe141eb31eb7ce0736925dc68c3eafb0e94dbad5ce1b3
 jumpbox/bins/bbr:
   size: 12920097
   object_id: b14414dd-fbad-4a82-6017-3011c61a1340
