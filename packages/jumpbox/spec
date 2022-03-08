@@ -45,7 +45,7 @@ files:
   - jumpbox/vimrc
 
     # wget
-  - jumpbox/wget-1.20.3.tar.gz
+  - jumpbox/wget-1.21.3.tar.gz
 
     # zip
   - jumpbox/zip30.tar.gz

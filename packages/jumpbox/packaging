@@ -79,9 +79,9 @@ n=$((n + 1))
 
 # WGET
 # http://ftp.gnu.org/gnu/wget/
-# https://ftp.gnu.org/gnu/wget/wget-1.20.3.tar.gz
-(tar -xzvf jumpbox/wget-1.20.3.tar.gz
- cd wget-1.20.3
+# https://ftp.gnu.org/gnu/wget/wget-1.21.3.tar.gz
+(tar -xzvf jumpbox/wget-1.21.3.tar.gz
+ cd wget-1.21.3
  ./configure --prefix=${BOSH_INSTALL_TARGET} --with-ssl=openssl
  make -j${CPUS}
  make install) &
