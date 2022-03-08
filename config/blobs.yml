@@ -121,6 +121,9 @@ jumpbox/git-2.26.0.tar.gz:
   size: 9276174
   object_id: b3c5fe48-70a2-4341-66da-bcb7fddc025b
   sha: sha256:aa168c2318e7187cd295a645f7370cc6d71a324aafc932f80f00c780b6a26bed
+jumpbox/git-2.35.1.tar.gz:
+  size: 10511581
+  sha: sha256:9845a37dd01f9faaa7d8aa2078399d3aea91b43819a5efea6e2877b0af09bd43
 jumpbox/libevent-2.1.11-stable.tar.gz:
   size: 1082234
   object_id: f31efe13-0239-4607-7222-73e52e93d04f
@@ -136,6 +139,9 @@ jumpbox/tree-1.8.0.tar.gz:
   size: 50286
   object_id: 6b9863a1-f5fd-4543-4b1a-eab8abf73ed5
   sha: sha256:715d5d4b434321ce74706d0dd067505bb60c5ea83b5f0b3655dae40aa6f9b7c2
+jumpbox/tree-2.0.2.tar.gz:
+  size: 57960
+  sha: sha256:7d693a1d88d3c4e70a73e03b8dbbdc12c2945d482647494f2f5bd83a479eeeaf
 jumpbox/unzip60.tar.gz:
   size: 1376845
   object_id: 7317d283-62f1-40d3-851a-10418da85106

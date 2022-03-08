@@ -31,8 +31,8 @@ n=$((n + 1))
 # GIT
 # https://www.kernel.org/pub/software/scm/git
 # https://www.kernel.org/pub/software/scm/git/git-2.26.0.tar.gz
-(tar -xzvf jumpbox/git-2.26.0.tar.gz
- cd git-2.26.0
+(tar -xzvf jumpbox/git-2.35.1.tar.gz
+ cd git-2.35.1
  ./configure --prefix=${BOSH_INSTALL_TARGET}
  make -j${CPUS} all
  make install) &
