@@ -49,8 +49,8 @@ n=$((n + 1))
   make -j${CPUS}
   make install)
 
- tar -xzvf jumpbox/tmux-3.0a.tar.gz
- cd tmux-3.0a
+ tar -xzvf jumpbox/tmux-3.2a.tar.gz
+ cd tmux-3.2a
  ./configure --prefix=${BOSH_INSTALL_TARGET} \
              --enable-static
  sed -i 's@#define TMUX_CONF.*@#define TMUX_CONF "'${BOSH_INSTALL_TARGET}'/etc/tmux.conf"@' tmux.h

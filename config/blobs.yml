@@ -138,6 +138,9 @@ jumpbox/tmux-3.0a.tar.gz:
   size: 546377
   object_id: b9b29ccd-f2fb-4e7c-6116-29a21aba0ecf
   sha: sha256:4ad1df28b4afa969e59c08061b45082fdc49ff512f30fc8e43217d7b0e5f8db9
+jumpbox/tmux-3.2a.tar.gz:
+  size: 648394
+  sha: sha256:551553a4f82beaa8dadc9256800bcc284d7c000081e47aa6ecbb6ff36eacd05f
 jumpbox/tree-1.8.0.tar.gz:
   size: 50286
   object_id: 6b9863a1-f5fd-4543-4b1a-eab8abf73ed5

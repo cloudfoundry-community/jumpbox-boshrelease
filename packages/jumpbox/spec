@@ -34,7 +34,7 @@ files:
 
     # tmux
   - jumpbox/libevent-2.1.12-stable.tar.gz
-  - jumpbox/tmux-3.0a.tar.gz
+  - jumpbox/tmux-3.2a.tar.gz
   - jumpbox/tmux.conf
 
     # tree
