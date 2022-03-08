@@ -70,8 +70,8 @@ n=$((n + 1))
 
 # VIM
 # http://github.com/vim/vim/releases
-(tar -xzvf jumpbox/vim-8.2.0539.tar.gz
- cd vim-8.2.0539
+(tar -xzvf jumpbox/vim-8.2.4528.tar.gz
+ cd vim-8.2.4528
  ./configure --prefix=${BOSH_INSTALL_TARGET}
  make -j${CPUS}
  make install) &

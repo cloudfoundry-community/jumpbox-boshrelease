@@ -41,7 +41,7 @@ files:
   - jumpbox/tree-2.0.1.tar.gz
 
     # vim
-  - jumpbox/vim-8.2.0539.tar.gz
+  - jumpbox/vim-8.2.4528.tar.gz
   - jumpbox/vimrc
 
     # wget
