@@ -21,8 +21,8 @@ chmod 0755 ${BOSH_INSTALL_TARGET}/bin/*
 # CURL
 # https://curl.haxx.se/download.html
 # https://curl.haxx.se/download/curl-7.69.1.tar.gz
-(tar -xzvf jumpbox/curl-7.69.1.tar.gz
- cd curl-7.69.1
+(tar -xzvf jumpbox/curl-7.81.0.tar.gz
+ cd curl-7.81.0
  ./configure --prefix=${BOSH_INSTALL_TARGET}
  make -j${CPUS}
  make install) &
@@ -43,8 +43,8 @@ n=$((n + 1))
 # https://github.com/libevent/libevent/releases/download/release-2.1.11-stable/libevent-2.1.11-stable.tar.gz
 # https://tmux.github.io/
 # https://github.com/tmux/tmux/releases/download/3.0a/tmux-3.0a.tar.gz
-(tar -xzvf jumpbox/libevent-2.1.11-stable.tar.gz
- (cd libevent-2.1.11-stable
+(tar -xzvf jumpbox/libevent-2.1.12-stable.tar.gz
+ (cd libevent-2.1.12-stable
   ./configure --prefix=/usr --disable-shared
   make -j${CPUS}
   make install)

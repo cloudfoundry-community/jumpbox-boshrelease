@@ -27,13 +27,13 @@ files:
   - jumpbox/cloudfoundry-utils/*
 
     # curl
-  - jumpbox/curl-7.69.1.tar.gz
+  - jumpbox/curl-7.81.0.tar.gz
 
     # git
   - jumpbox/git-2.26.0.tar.gz
 
     # tmux
-  - jumpbox/libevent-2.1.11-stable.tar.gz
+  - jumpbox/libevent-2.1.12-stable.tar.gz
   - jumpbox/tmux-3.0a.tar.gz
   - jumpbox/tmux.conf
 

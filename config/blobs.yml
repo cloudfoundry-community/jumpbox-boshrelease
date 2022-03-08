@@ -114,6 +114,9 @@ jumpbox/curl-7.69.1.tar.gz:
   size: 4131634
   object_id: de4401d2-dbd5-4366-53ab-94f8eea3cf21
   sha: sha256:01ae0c123dee45b01bbaef94c0bc00ed2aec89cb2ee0fd598e0d302a6b5e0a98
+jumpbox/curl-7.81.0.tar.gz:
+  size: 4188040
+  sha: sha256:ac8e1087711084548d788ef18b9b732c8de887457b81f616fc681d1044b32f98
 jumpbox/git-2.26.0.tar.gz:
   size: 9276174
   object_id: b3c5fe48-70a2-4341-66da-bcb7fddc025b
@@ -122,6 +125,9 @@ jumpbox/libevent-2.1.11-stable.tar.gz:
   size: 1082234
   object_id: f31efe13-0239-4607-7222-73e52e93d04f
   sha: sha256:a65bac6202ea8c5609fd5c7e480e6d25de467ea1917c08290c521752f147283d
+jumpbox/libevent-2.1.12-stable.tar.gz:
+  size: 1100847
+  sha: sha256:92e6de1be9ec176428fd2367677e61ceffc2ee1cb119035037a27d346b0403bb
 jumpbox/tmux-3.0a.tar.gz:
   size: 546377
   object_id: b9b29ccd-f2fb-4e7c-6116-29a21aba0ecf
