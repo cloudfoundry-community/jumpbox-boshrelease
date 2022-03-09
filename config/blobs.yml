@@ -4,6 +4,7 @@ golang/go1.14.2.linux-amd64.tar.gz:
   sha: sha256:6272d6e940ecb71ea5636ddb5fab3933e087c1356173c61f4a803895e947ebb3
 golang/go1.17.8.linux-amd64.tar.gz:
   size: 134902354
+  object_id: f7f706f7-aa75-4929-6910-3c0ef2021618
   sha: sha256:980e65a863377e69fd9b67df9d8395fd8e93858e7a24c9f55803421e453f4f99
 jumpbox/bins/bbr:
   size: 12920097
@@ -51,6 +52,7 @@ jumpbox/bins/jq:
   sha: sha256:af986793a515d500ab2d35f8d2aecd656e764504b789b66d7e1a0b727a124c44
 jumpbox/bins/nats:
   size: 7014586
+  object_id: b6a19bbf-5675-49bd-6995-2f044be4adba
   sha: sha256:3e353d9070798d35c334ebe8fc196988bac942c70cb1231bbc8e4e0c3077565e
 jumpbox/bins/safe:
   size: 9982119
@@ -58,6 +60,7 @@ jumpbox/bins/safe:
   sha: sha256:666a65837b34c60f96868f2b1e2c5fcf32aa3333a184ed3d36c2532654ffc4c0
 jumpbox/bins/shield:
   size: 8557697
+  object_id: eabe4e8b-7c92-4ed3-5708-35aec3a2a82d
   sha: sha256:a6dd76f36339f92af910f3e6a8ef82228eb1545dcba1021c2cf5ac8f834e46f9
 jumpbox/bins/spiff:
   size: 4808407
@@ -69,6 +72,7 @@ jumpbox/bins/spruce:
   sha: sha256:6224d344f07f9abb84c656f43fe1e3181b279fb4ce8309837bcd1b80aa82b327
 jumpbox/bins/terraform:
   size: 63262720
+  object_id: 74d2c27f-7dc7-4eb2-4538-a89835a402ed
   sha: sha256:ba86f524c64a97df436d541e67480607d0330ea27b23c3208316260189210151
 jumpbox/bins/tmate:
   size: 3135320
@@ -76,6 +80,7 @@ jumpbox/bins/tmate:
   sha: sha256:d2fff992e40ce18ff81b9a92fa1cb93a56fb5a82c1cc428204552d8dfa1bc04f
 jumpbox/bins/vault:
   size: 188378621
+  object_id: 8cd5b321-9288-4951-527a-322c3ab14630
   sha: sha256:6c27b822dbe38e530fafcf8e15ab197a14451f977b21f3cacf9e9e42e27da253
 jumpbox/cloudfoundry-utils//cert_generator:
   size: 6667
@@ -115,6 +120,7 @@ jumpbox/curl-7.69.1.tar.gz:
   sha: sha256:01ae0c123dee45b01bbaef94c0bc00ed2aec89cb2ee0fd598e0d302a6b5e0a98
 jumpbox/curl-7.81.0.tar.gz:
   size: 4188040
+  object_id: 42fb5db3-1f4c-40d9-7910-bea6567c0b44
   sha: sha256:ac8e1087711084548d788ef18b9b732c8de887457b81f616fc681d1044b32f98
 jumpbox/git-2.26.0.tar.gz:
   size: 9276174
@@ -122,6 +128,7 @@ jumpbox/git-2.26.0.tar.gz:
   sha: sha256:aa168c2318e7187cd295a645f7370cc6d71a324aafc932f80f00c780b6a26bed
 jumpbox/git-2.35.1.tar.gz:
   size: 10511581
+  object_id: d53ce71f-54b4-4e2e-7e82-15a1003de0d2
   sha: sha256:9845a37dd01f9faaa7d8aa2078399d3aea91b43819a5efea6e2877b0af09bd43
 jumpbox/libevent-2.1.11-stable.tar.gz:
   size: 1082234
@@ -129,6 +136,7 @@ jumpbox/libevent-2.1.11-stable.tar.gz:
   sha: sha256:a65bac6202ea8c5609fd5c7e480e6d25de467ea1917c08290c521752f147283d
 jumpbox/libevent-2.1.12-stable.tar.gz:
   size: 1100847
+  object_id: 853918f8-5529-47a8-7faf-2d68245d479d
   sha: sha256:92e6de1be9ec176428fd2367677e61ceffc2ee1cb119035037a27d346b0403bb
 jumpbox/tmux-3.0a.tar.gz:
   size: 546377
@@ -136,6 +144,7 @@ jumpbox/tmux-3.0a.tar.gz:
   sha: sha256:4ad1df28b4afa969e59c08061b45082fdc49ff512f30fc8e43217d7b0e5f8db9
 jumpbox/tmux-3.2a.tar.gz:
   size: 648394
+  object_id: c795d961-e908-4f28-7632-f7816d2a9cef
   sha: sha256:551553a4f82beaa8dadc9256800bcc284d7c000081e47aa6ecbb6ff36eacd05f
 jumpbox/tree-1.8.0.tar.gz:
   size: 50286
@@ -143,6 +152,7 @@ jumpbox/tree-1.8.0.tar.gz:
   sha: sha256:715d5d4b434321ce74706d0dd067505bb60c5ea83b5f0b3655dae40aa6f9b7c2
 jumpbox/tree-2.0.2.tar.gz:
   size: 57960
+  object_id: 7d13bfdf-29b5-43a6-4e84-d7bc537bdc46
   sha: sha256:7d693a1d88d3c4e70a73e03b8dbbdc12c2945d482647494f2f5bd83a479eeeaf
 jumpbox/unzip60.tar.gz:
   size: 1376845
@@ -154,6 +164,7 @@ jumpbox/vim-8.2.0539.tar.gz:
   sha: sha256:643c7a877f60d74bedb6297c7ed2b0ae0b9cdf764e522b0d6d754e17ee057af2
 jumpbox/vim-8.2.4528.tar.gz:
   size: 16185073
+  object_id: e1f8a296-40b3-44a3-6604-dd85f988b157
   sha: sha256:10a7e2b089697f247501c5f269536ae736d21d9dbc2065f2517cfb18bf7d7184
 jumpbox/wget-1.20.3.tar.gz:
   size: 4489249
@@ -161,6 +172,7 @@ jumpbox/wget-1.20.3.tar.gz:
   sha: sha256:31cccfc6630528db1c8e3a06f6decf2a370060b982841cfab2b8677400a5092e
 jumpbox/wget-1.21.3.tar.gz:
   size: 5079864
+  object_id: eba5bdf1-b13f-43ce-5eed-f0a7f9d502c9
   sha: sha256:5726bb8bc5ca0f6dc7110f6416e4bb7019e2d2ff5bf93d1ca2ffcc6656f220e5
 jumpbox/zip30.tar.gz:
   size: 1118845
