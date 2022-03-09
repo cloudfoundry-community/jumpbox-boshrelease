@@ -23,7 +23,7 @@ chmod 0755 ${BOSH_INSTALL_TARGET}/bin/*
 # https://curl.haxx.se/download/curl-7.69.1.tar.gz
 (tar -xzvf jumpbox/curl-7.81.0.tar.gz
  cd curl-7.81.0
- ./configure --prefix=${BOSH_INSTALL_TARGET}
+ ./configure --prefix=${BOSH_INSTALL_TARGET} --with-openssl
  make -j${CPUS}
  make install) &
 n=$((n + 1))
