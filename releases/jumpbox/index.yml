@@ -73,6 +73,8 @@ builds:
     version: "3"
   4dcc30b6-1493-47ff-849d-f6f3560321d4:
     version: 4.3.0
+  50a08610-bca5-4187-5cec-ed6367687d82:
+    version: 4.9.2
   519931f0-8d1b-4930-5562-3ae3b2345925:
     version: 4.4.2
   58f6b962-dd6c-4c3f-a006-422da6ea2047:
