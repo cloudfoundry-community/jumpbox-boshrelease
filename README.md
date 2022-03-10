@@ -63,20 +63,39 @@ installed on the instance, versions, etc.
 
 ### Packages installed
 
-- bosh-init 0.0.92-3ee9292
-- cf 6.30
-- curl 7.50.3
-- genesis (latest and greatest!)
-- git 2.14.1
+golang: 
+- go 1.17.8
+
+jumpbox:
+- curl 7.81.0
+- git 2.35.1
 - jq 1.5
-- safe (latest and greatest!)
-- shield
-- spiff 1.0.7
-- tmux 2.2
-- tree 1.7.0
-- terraform 0.13.6
+- tmux 3.2a
+  - libevent 2.1.12
+- tree 2.0.2
 - unzip 6.0
-- vault 0.5.2
-- vim 7.4
-- wget 1.18
+- vim 8.2.4528
+- wget 1.21.3
 - zip 3.0
+
+Precompiled binaries / scripts:
+- jumpbox/bins/
+  - bbr 1.9.25
+  - bosh 6.4.17
+  - certstrap 1.2.0
+  - credhub 2.9.3
+  - spruce 1.29.0
+  - fly 7.6.0
+  - cf 6.53.0
+  - cf7 7.4.0
+  - cf8 8.2.0
+  - esuf 0.1.2
+  - genesis 2.8.4
+  - jq 1.6
+  - nats 1.2.0
+  - safe 1.6.1
+  - shield 8.7.4
+  - spiff 1.0.8
+  - terraform 1.1.7
+  - tmate 2.4.0
+  - vault 1.9.4
