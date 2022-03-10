@@ -85,7 +85,7 @@ Precompiled binaries / scripts:
   - certstrap 1.2.0
   - credhub 2.9.3
   - spruce 1.29.0
-  - fly 7.6.0
+  - fly 7.7.0
   - cf 6.53.0
   - cf7 7.4.0
   - cf8 8.2.0
