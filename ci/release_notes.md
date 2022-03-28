@@ -10,3 +10,7 @@
 # genesis
 
 - Bumped genesis to v2.8.5
+
+# fly
+
+- Bumped fly to v7.7.1
