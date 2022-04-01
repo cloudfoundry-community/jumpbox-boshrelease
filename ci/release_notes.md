@@ -14,3 +14,7 @@
 # fly
 
 - Bumped fly to v7.7.1
+
+# bosh-cli
+
+- Bumped bosh-cli to v6.4.17
