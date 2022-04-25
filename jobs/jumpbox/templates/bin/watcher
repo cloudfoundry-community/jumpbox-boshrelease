@@ -10,7 +10,7 @@ umask 022
 #
 
 # Set during the first iteration of the watch loop, but
-# unset in all subsequent iterations.	This is useful for
+# unset in all subsequent iterations.  This is useful for
 # providing good diagnostics for operators troubleshooting
 # the jumpbox via `monit restart`
 FIRSTRUN=1
@@ -23,254 +23,235 @@ WATCHER=/var/vcap/jobs/jumpbox/bin/watcher
 WATCHER_MTIME_START=$(/usr/bin/stat --format=%Y ${WATCHER})
 
 # Things that only get logged on the first run-through
-log1() {
-	if [[ $FIRSTRUN == 1 ]]; then
-		log $*
-	fi
-}
+log1() { if [[ $FIRSTRUN == 1 ]]; then ; log $* ; fi ; }
 
 # Things that only get logged on subsequent run-throughs
-logn() {
-	if [[ $FIRSTRUN != 1 ]]; then
-		log $*
-	fi
-}
+logn() { if [[ $FIRSTRUN != 1 ]]; then log $* ; fi }
 
 # Things that get logged on all run-throughs
-log() {
-	echo >&2 "[$(date +'%Y%m%d %HH%MM.%SS')] jumpbox[$$]: " $*
+log() { echo >&2 "[$(date +'%Y%m%d %HH%MM.%SS')] jumpbox[$$]: " $* ; }
+
+sshd_configure() {
+  key=$1 ; value=$2
+  if ! grep -q '^${key} ${value}' /etc/ssh/sshd_config; then
+    log1 "/etc/ssh/sshd_config => ${key} ${value}"
+    sed -i -e '/^${key}/d' /etc/ssh/sshd_config
+    echo "${key} ${value}" >> /etc/ssh/sshd_config
+  fi
 }
 
 provision() {
-	local user=$1   ; shift
-	local groups=$1 ; shift
-	local shell=$1  ; shift
-	local repo=$1   ; shift
-	local pass=$1   ; shift
+  local user=$1   ; shift
+  local groups=$1 ; shift
+  local shell=$1  ; shift
+  local repo=$1   ; shift
+  local pass=$1   ; shift
 
-	home="${JUMPBOX_HOME}/${user}"
-	[ -z ${shell} ] && shell="/bin/bash"
+  home="${JUMPBOX_HOME}/${user}"
+  [[ -z ${shell} ]] && shell="/bin/bash"
 
-	log1 "Setting up user ${user}"
-	if ! grep -q "^${user}:" /etc/passwd; then
-		logn "User ${user} does not exist; adding"
-		/usr/sbin/useradd -m -d /u/${user} -s ${shell} -g staff -G "${groups}" ${user}
-	else
-		/usr/sbin/usermod -a -G "${groups}" -s "${shell}" "${user}"
-	fi
-	if [[ -n ${pass} ]]; then
-		pass=$(echo "$pass" | sed -e 's@/@\\/@g')
-		sed -i -e "s/^${user}:[^:]*:/${user}:${pass}:/" /etc/shadow
-	else
-		sed -i -e "s/^${user}:[^:]*:/${user}:!:/" /etc/shadow
-	fi
-	mkdir -p ${home}
-	/usr/sbin/usermod --expiredate -1 ${user}
+  log1 "Setting up user ${user}"
+  if ! grep -q "^${user}:" /etc/passwd; then
+    logn "User ${user} does not exist; adding"
+    /usr/sbin/useradd -m -d /u/${user} -s ${shell} -g staff -G "${groups}" ${user}
+  else
+    /usr/sbin/usermod -a -G "${groups}" -s "${shell}" "${user}"
+  fi
+  if [[ -n ${pass} ]]; then
+    pass=$(echo "$pass" | sed -e 's@/@\\/@g')
+    sed -i -e "s/^${user}:[^:]*:/${user}:${pass}:/" /etc/shadow
+  else
+    sed -i -e "s/^${user}:[^:]*:/${user}:!:/" /etc/shadow
+  fi
+  mkdir -p ${home}
+  /usr/sbin/usermod --expiredate -1 ${user}
 
-	if [[ $# -gt 0 ]]; then
-		log1 "Setting up ${user} SSH authorized keys"
-		mkdir -p ${home}/.ssh
-		chmod 0700 ${home}/.ssh
-		touch ${home}/.ssh/authorized_keys_new
-		for key in "$@"; do
-			echo "$key" >> ${home}/.ssh/authorized_keys_new
-		done
-		mv ${home}/.ssh/authorized_keys_new ${home}/.ssh/authorized_keys
-		chmod 0600 ${home}/.ssh/authorized_keys
-	fi
+  if [[ $# -gt 0 ]]; then
+    log1 "Setting up ${user} SSH authorized keys"
+    mkdir -p ${home}/.ssh
+    chmod 0700 ${home}/.ssh
+    touch ${home}/.ssh/authorized_keys_new
+    for key in "$@"; do
+      echo "$key" >> ${home}/.ssh/authorized_keys_new
+    done
+    mv ${home}/.ssh/authorized_keys_new ${home}/.ssh/authorized_keys
+    chmod 0600 ${home}/.ssh/authorized_keys
+  fi
 
-	if [[ -n "${repo}" ]]; then
-		if [[ ! -f ${home}/.repo ]]; then
-			touch ${home}/.repo
-		fi
+  if [[ -n "${repo}" ]]; then
+    [[ -f ${home}/.repo ]] || touch ${home}/.repo
 
-		old_repo=$(cat ${home}/.repo)
-		if [[ "${repo}" != "${old_repo}" ]]; then
-			echo "${repo}" > ${home}/.repo
-		fi
-	else
-		rm -f ${home}/.repo
-	fi
-	chown -R ${user} ${home}
+    old_repo=$(cat ${home}/.repo)
+    if [[ "${repo}" != "${old_repo}" ]]; then
+      echo "${repo}" > ${home}/.repo
+    fi
+  else
+    rm -f ${home}/.repo
+  fi
+  chown -R ${user} ${home}
 }
 
 deactivate() {
-	local user=$1
-	local today=$(date +%Y%M%D.%H%M%S)
+  local user=$1
+  local today=$(date +%Y%M%D.%H%M%S)
 
-	local to="${JUMPBOX_HOME}/.${user}.${today}"
-	log "Deactivating user $user"
-	if [[ -d ${to} ]]; then
-		log "ERROR: Cannot move ~$user to '${to}': already exists"
-		stat $to
-		log "SKIPPING USER DEACTIVATION"
-		return
-	fi
+  local to="${JUMPBOX_HOME}/.${user}.${today}"
+  log "Deactivating user $user"
+  if [[ -d ${to} ]]; then
+    log "ERROR: Cannot move ~$user to '${to}': already exists"
+    stat $to
+    log "SKIPPING USER DEACTIVATION"
+    return
+  fi
 
-	log "Locking ${user} account (via expiration date)"
-	/usr/sbin/usermod --expiredate 1 ${user}
-	log "Moving home directory ~${user} to ${to}"
-	mkdir -p ${to}
-	mv ${JUMPBOX_HOME}/${user} ${to}
+  log "Locking ${user} account (via expiration date)"
+  /usr/sbin/usermod --expiredate 1 ${user}
+  log "Moving home directory ~${user} to ${to}"
+  mkdir -p ${to}
+  mv ${JUMPBOX_HOME}/${user} ${to}
 }
 
 remove() {
-	user=$1
-	home=$(getent passwd ${user} | cut -d: -f6)
-	if [[ $home == "" ]]; then
-		return
-	fi
-	if [[ $home != "/u/${user}" ]]; then
-		log "Cannot remove user ${user} - not provisioned by the jumpbox release..."
-		return
-	fi
-	log "Removing user ${user}"
-	log "Cleaning up old any old home directories"
-	rm -rf ${JUMPBOX_HOME}/${user}/ \
-	       ${JUMPBOX_HOME}/.${user}.*
-	log "Deleting user account from system databases"
-	/usr/sbin/userdel -r ${user}
+  user=$1
+  home=$(getent passwd ${user} | cut -d: -f6)
+  [[ $home !== "" ]] || return
+  if [[ $home != "/u/${user}" ]]; then
+    log "Cannot remove user ${user} - not provisioned by the jumpbox release..."
+    return
+  fi
+  log "Removing user ${user}"
+  log "Cleaning up old any old home directories"
+  rm -rf ${JUMPBOX_HOME}/${user}/ \
+         ${JUMPBOX_HOME}/.${user}.*
+  log "Deleting user account from system databases"
+  /usr/sbin/userdel -r ${user}
 }
 
 while true; do
-	WATCHER_MTIME_NOW=$(/usr/bin/stat --format=%Y ${WATCHER})
-	if [[ ${WATCHER_MTIME_NOW} -gt ${WATCHER_MTIME_START} ]]; then
-		exec ${WATCHER}
-	fi
+  WATCHER_MTIME_NOW=$(/usr/bin/stat --format=%Y ${WATCHER})
+  if [[ ${WATCHER_MTIME_NOW} -gt ${WATCHER_MTIME_START} ]]; then
+    exec ${WATCHER}
+  fi
 
-	if [[ -d ${JUMPBOX_ETC} ]]; then
-		cp -a ${JUMPBOX_ETC}/* /etc/
-	fi
+  if [[ -d ${JUMPBOX_ETC} ]]; then cp -a ${JUMPBOX_ETC}/* /etc/ ; fi
 
-	log1 "Setting up jumpbox banner"
-	if [[ -d /etc/update-motd.d && ! -f /etc/update-motd.d/99-banner ]]; then
-		cat >/etc/update-motd.d/99-banner <<EOF
+  log1 "Setting up jumpbox banner"
+  if [[ -d /etc/update-motd.d && ! -f /etc/update-motd.d/99-banner ]]; then
+    cat >/etc/update-motd.d/99-banner <<EOF
 #!/bin/sh
 cat /var/vcap/jobs/jumpbox/config/banner
 EOF
-		chmod 0755 /etc/update-motd.d/99-banner
-		run-parts --lsbsysinit /etc/update-motd.d > /run/motd.dynamic
-	fi
+    chmod 0755 /etc/update-motd.d/99-banner
+    run-parts --lsbsysinit /etc/update-motd.d > /run/motd.dynamic
+  fi
 
-	log1 "Setting up ${JUMPBOX_HOME} base directory"
-	if [[ ! -d ${JUMPBOX_HOME} ]]; then
-		logn "${JUMPBOX_HOME} not found; fixing"
-		mkdir -p ${JUMPBOX_HOME}
-	fi
-	if [[ ! -L /u ]]; then
-		logn "Fixing symlink /u -> ${JUMPBOX_HOME}"
-		rm -f /u
-		ln -sf ${JUMPBOX_HOME} /u
-	fi
+  log1 "Setting up ${JUMPBOX_HOME} base directory"
+  if [[ ! -d ${JUMPBOX_HOME} ]]; then
+    logn "${JUMPBOX_HOME} not found; fixing"
+    mkdir -p ${JUMPBOX_HOME}
+  fi
+  if [[ ! -L /u ]]; then
+    logn "Fixing symlink /u -> ${JUMPBOX_HOME}"
+    rm -f /u
+    ln -sf ${JUMPBOX_HOME} /u
+  fi
 
-	log1 "Setting permissions on /tmp to 1777"
-	chmod 1777 /tmp
+  log1 "Setting permissions on /tmp to 1777"
+  chmod 1777 /tmp
 
-	log1 "Ensuring non-root users are allowed to ping"
-	chmod u+s /bin/ping
+  log1 "Ensuring non-root users are allowed to ping"
+  chmod u+s /bin/ping
 
-	log1 "Re-configuring PAM authentication"
-	cat >/etc/pam.d/common-password <<EOF
+  log1 "Re-configuring PAM authentication"
+  cat >/etc/pam.d/common-password <<EOF
 password    [success=1 default=ignore]  pam_unix.so      obscure sha512
 password    requisite                   pam_deny.so
 password    required                    pam_permit.so
 session     required                    pam_lastlog.so   showfailed
 EOF
-	cat >/etc/pam.d/common-auth <<EOF
+  cat >/etc/pam.d/common-auth <<EOF
 auth        [success=1 default=ignore]  pam_unix.so
 auth        requisite                   pam_deny.so
 auth        required                    pam_permit.so
 auth        optional                    pam_cap.so
 EOF
 
-	log1 "Setting up system-wide Go runtime at ${JUMPBOX_GO}"
-	if [[ ! -e $JUMPBOX_GO ]]; then
-		logn "${JUMPBOX_GO} not linked to /var/vcap/packages/golang; fixing"
-		ln -s /var/vcap/packages/golang ${JUMPBOX_GO}
-	fi
+  log1 "Setting up system-wide Go runtime at ${JUMPBOX_GO}"
+  if [[ ! -e $JUMPBOX_GO ]]; then
+    logn "${JUMPBOX_GO} not linked to /var/vcap/packages/golang; fixing"
+    ln -s /var/vcap/packages/golang ${JUMPBOX_GO}
+  fi
 
-	log1 "Setting hostname to ${JUMPBOX_HOSTNAME}"
-	if [[ $(cat /etc/hostname) != ${JUMPBOX_HOSTNAME} ]]; then
-		logn "Hostname (via /etc/hostname) not set to ${JUMPBOX_HOSTNAME}; fixing"
-		echo ${JUMPBOX_HOSTNAME} > /etc/hostname
-		hostname -b -F /etc/hostname
-	fi
+  log1 "Setting hostname to ${JUMPBOX_HOSTNAME}"
+  if [[ $(cat /etc/hostname) != ${JUMPBOX_HOSTNAME} ]]; then
+    logn "Hostname (via /etc/hostname) not set to ${JUMPBOX_HOSTNAME}; fixing"
+    echo ${JUMPBOX_HOSTNAME} > /etc/hostname
+    hostname -b -F /etc/hostname
+  fi
 
-	log1 "Seting up /etc/hosts DNS overrides"
-	if ! grep -q "^127.0.0.1 ${JUMPBOX_HOSTNAME}\$" /etc/hosts; then
-		logn "Entry '127.0.0.1 ${JUMPBOX_HOSTNAME}' not found in /etc/hosts; fixing"
-		sed -i -e 's/^127.0.0.1//' /etc/hosts
-		echo "127.0.0.1 ${JUMPBOX_HOSTNAME}" >> /etc/hosts
-	fi
+  log1 "Seting up /etc/hosts DNS overrides"
+  if ! grep -q "^127.0.0.1 ${JUMPBOX_HOSTNAME}\$" /etc/hosts; then
+    logn "Entry '127.0.0.1 ${JUMPBOX_HOSTNAME}' not found in /etc/hosts; fixing"
+    sed -i -e 's/^127.0.0.1//' /etc/hosts
+    echo "127.0.0.1 ${JUMPBOX_HOSTNAME}" >> /etc/hosts
+  fi
 <% p('jumpbox.hosts').each do |line| %>
-	if ! grep -q '^<%= line %>$' /etc/hosts; then
-		logn "Entry '<%= line %>' not found in /etc/hosts; fixing"
-		echo "<%= line %>" >> /etc/hosts
-	fi
+  if ! grep -q '^<%= line %>$' /etc/hosts; then
+    logn "Entry '<%= line %>' not found in /etc/hosts; fixing"
+    echo "<%= line %>" >> /etc/hosts
+  fi
 <% end %>
 
-	<% if p('jumpbox.ssh_password_auth') %>
-	if ! grep -q '^PasswordAuthentication *yes' /etc/ssh/sshd_config; then
-		log1 "Enabling password authentication via SSH"
-		sed -i -e '/^PasswordAuthentication/d' /etc/ssh/sshd_config
-		echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
-		service ssh restart
-	fi
-	<% else %>
-	if grep -q '^PasswordAuthentication *yes' /etc/ssh/sshd_config; then
-		log1 "Disabling password authentication via SSH"
-		sed -i -e '/^PasswordAuthentication/d' /etc/ssh/sshd_config
-		service ssh restart
-	fi
-	<% end %>
+  sshd_configure PasswordAuthentication <%= if p('jumpbox.ssh.password_auth') ? "yes" : "no" %>
+  sshd_configure AllowAgentForwarding <%= if p('jumpbox.ssh.allow_agent_forwarding') ? "yes" : "no" -%>
+  sshd_configure AllowTcpForwarding <%= if p('jumpbox.ssh.allow_tcp_forwarding') ? "yes" : "no" -%>
+  systemctl restart sshd.service # We assume bionic or later
 
-	log1 "Setting up sudoers to allow certain environment variables to pass through"
-	for var in http_proxy https_proxy ftp_proxy no_proxy EDITOR; do
-		if ! grep '^Defaults env_keep' /etc/sudoers | grep -q "${var}"; then
-			logn "Environment variable '${var}' not set to env_keep in /etc/sudoers; fixing"
-			echo "Defaults env_keep += \"${var}\"" >> /etc/sudoers
-		fi
-	done
+  log1 "Setting up sudoers to allow certain environment variables to pass through"
+  for var in http_proxy https_proxy ftp_proxy no_proxy EDITOR; do
+    if ! grep '^Defaults env_keep' /etc/sudoers | grep -q "${var}"; then
+      logn "Environment variable '${var}' not set to env_keep in /etc/sudoers; fixing"
+      echo "Defaults env_keep += \"${var}\"" >> /etc/sudoers
+    fi
+  done
 
-	log1 "Adding the bosh-sshers group if not present"
-	if ! grep -q "^bosh_sshers" /etc/group; then
-		groupadd bosh_sshers
-	fi
+  log1 "Adding the bosh-sshers group if not present"
+  grep -q "^bosh_sshers" /etc/group || groupadd bosh_sshers
 
-	log1 "Setting up jumpbox users"
-	declare -Ag users
-	pushd ${JUMPBOX_HOME} >/dev/null 2>&1
-	for user in *; do
-		# deleted users are moved to be hidden directories
-		if [[ -d ${user}/ ]]; then
-			users[$user]=1
-		fi
-	done
-	popd >/dev/null
+  log1 "Setting up jumpbox users"
+  declare -Ag users
+  pushd ${JUMPBOX_HOME} >/dev/null 2>&1
+  for user in *; do
+    # deleted users are moved to be hidden directories
+    if [[ -d ${user}/ ]]; then
+      users[$user]=1
+    fi
+  done
+  popd >/dev/null
 <% p('jumpbox.users').each do |user| %>
-	unset users['<%= user['name'] %>']
-	# jumpbox.users[<%= user['name'] %>
-	provision '<%= user['name'] %>' \
-	          'vcap,bosh_sshers<%= !user.has_key?("sudo") || user["sudo"] ? ",bosh_sudoers" : "" %>' \
-	          '<%= user['shell'] %>' \
-	          '<%= user['env'] %>' \
-	          '<%= user['password'] %>' <% if !(user['ssh_keys'] || []).empty? %> \<% end %>
-	          <% (user['ssh_keys'] || []).each do |k| %> '<%= k %>'<% end %>
+  unset users['<%= user['name'] %>']
+  # jumpbox.users[<%= user['name'] %>
+  provision '<%= user['name'] %>' \
+            'vcap,bosh_sshers<%= !user.has_key?("sudo") || user["sudo"] ? ",bosh_sudoers" : "" %>' \
+            '<%= user['shell'] %>' \
+            '<%= user['env'] %>' \
+            '<%= user['password'] %>' <% if !(user['ssh_keys'] || []).empty? %> \<% end %>
+            <% (user['ssh_keys'] || []).each do |k| %> '<%= k %>'<% end %>
 <% end %>
 
 <% p('jumpbox.delete', []).each do |user| %>
-	unset users["<%= user %>"]
-	remove "<%= user %>"
+  unset users["<%= user %>"]
+  remove "<%= user %>"
 <% end %>
 
-	for user in ${!users[@]}; do
-		deactivate ${user}
-	done
+  for user in ${!users[@]}; do
+    deactivate ${user}
+  done
 
-	mkdir -p ${JUMPBOX_ETC}
-	cp -a /etc/passwd /etc/*shadow /etc/group ${JUMPBOX_ETC}/
+  mkdir -p ${JUMPBOX_ETC}
+  cp -a /etc/passwd /etc/*shadow /etc/group ${JUMPBOX_ETC}/
 
-	log1 "Complete.  Will verify / fix every 5 minutes"
-	FIRSTRUN=0
-	sleep 300 # try again in 5 minutes
+  log1 "Complete.  Will verify / fix every 5 minutes"
+  FIRSTRUN=0
+  sleep 300 # try again in 5 minutes
 done

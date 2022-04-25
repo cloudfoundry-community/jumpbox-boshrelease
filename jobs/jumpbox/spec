@@ -23,9 +23,17 @@ properties:
     description: "A list of entries to append to /etc/hosts"
     default: []
 
-  jumpbox.ssh_password_auth:
-    description: "Modify the jumpbox SSH configuration to permit users to authenticate via passwords when using SSH."
+  jumpbox.ssh.password_auth:
+    description: "Configure SSHD to allow users to authenticate via passwords when using SSH."
     default: false
+
+  jumpbox.ssh.allow_agent_forwarding:
+    description: "Configure SSHD to allow agent forwarding."
+    default: true
+
+  jumpbox.ssh.allow_tcp_forwarding:
+    description: "Configure SSHD to allow TCP forwarding."
+    default: true
 
   jumpbox.one_time_setup:
     description: "Send new users through a one-time setup.  You generally want to do this."
@@ -65,3 +73,5 @@ properties:
   jumpbox.setup.enabled:
     default: true
     description: "enable or disbale the setup that will install rvm (only disable this if you don't have internet access)"    
+
+
