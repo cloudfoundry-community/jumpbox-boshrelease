@@ -74,4 +74,3 @@ properties:
     default: true
     description: "enable or disbale the setup that will install rvm (only disable this if you don't have internet access)"    
 
-
