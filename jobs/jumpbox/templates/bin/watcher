@@ -23,7 +23,7 @@ WATCHER=/var/vcap/jobs/jumpbox/bin/watcher
 WATCHER_MTIME_START=$(/usr/bin/stat --format=%Y ${WATCHER})
 
 # Things that only get logged on the first run-through
-log1() { if [[ $FIRSTRUN == 1 ]]; then ; log $* ; fi ; }
+log1() { if [[ $FIRSTRUN == 1 ]]; then log $* ; fi }
 
 # Things that only get logged on subsequent run-throughs
 logn() { if [[ $FIRSTRUN != 1 ]]; then log $* ; fi }
