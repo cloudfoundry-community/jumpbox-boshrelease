@@ -114,7 +114,7 @@ deactivate() {
 remove() {
   user=$1
   home=$(getent passwd ${user} | cut -d: -f6)
-  [[ $home !== "" ]] || return
+  [[ $home != "" ]] || return
   if [[ $home != "/u/${user}" ]]; then
     log "Cannot remove user ${user} - not provisioned by the jumpbox release..."
     return
