@@ -1,3 +1,6 @@
+# functional changes
+
+- Added jumpbox.ssh.allow_agent_forwarding and jumpbox.ssh.allow\_tcp\_forwarding configuration parameters.
 
 # cf8
 
