@@ -24,7 +24,7 @@ jumpbox/bins/cf7:
   sha: sha256:8bb5ab4bea5d2907ce7f02551ba1248e04f9cc11c578d13a7c7e2c2f2d00bb82
 jumpbox/bins/cf8:
   size: 24821760
-  object_id: c7ff1915-f1a6-4b18-4956-780297c4518d
+  object_id: fa7c89dc-fc47-4dc2-468a-1142b288afb6
   sha: sha256:202db39a011c82d3449c1c9752d604674e07d952efb2eb7804ba6b098b98d941
 jumpbox/bins/credhub:
   size: 8965059
