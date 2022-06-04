@@ -18,3 +18,7 @@
 # cf7
 
 - Bumped cf7 to v7.5.0
+
+# cf7
+
+- Bumped cf7 to v7.5.0
