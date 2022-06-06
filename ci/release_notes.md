@@ -22,3 +22,7 @@
 # cf7
 
 - Bumped cf7 to v7.5.0
+
+# fly
+
+- Bumped fly to v7.8.0
