@@ -36,8 +36,8 @@ jumpbox/bins/esuf:
   sha: sha256:bf1167d997de732bbbc8ecbd9caf368af6a588c97041490fe3ccfe6d60cc6095
 jumpbox/bins/fly:
   size: 69407479
-  object_id: 4e6c06c3-d154-4a3b-439e-ff19cc793503
-  sha: sha256:9436f2d6c24be1be0d223a656f7ebf0292a621c5743dd673e5174be01e373d2f
+  object_id: 4ae3cd4f-8c11-4cb2-47bd-1e186b2421c9
+  sha: sha256:d84fe673380143f5b44e3fb4c2e7162db674574d46feb859e67db2d6558935f6
 jumpbox/bins/genesis:
   size: 257048
   object_id: 059535ed-a9ff-47be-7d71-88c52a7a8d26
