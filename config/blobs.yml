@@ -66,20 +66,21 @@ jumpbox/bins/spruce:
   size: 24762847
   object_id: 59830633-2ae5-4f14-673b-75a17addba0d
   sha: sha256:6224d344f07f9abb84c656f43fe1e3181b279fb4ce8309837bcd1b80aa82b327
-jumpbox/bins/tmate:
-  size: 3135320
-  object_id: 1556169c-020e-44e4-5892-995890c24d99
-  sha: sha256:d2fff992e40ce18ff81b9a92fa1cb93a56fb5a82c1cc428204552d8dfa1bc04f
 jumpbox/bins/terraform:
   size: 63262720
   object_id: 74d2c27f-7dc7-4eb2-4538-a89835a402ed
   sha: sha256:ba86f524c64a97df436d541e67480607d0330ea27b23c3208316260189210151
+jumpbox/bins/tmate:
+  size: 3135320
+  object_id: 1556169c-020e-44e4-5892-995890c24d99
+  sha: sha256:d2fff992e40ce18ff81b9a92fa1cb93a56fb5a82c1cc428204552d8dfa1bc04f
 jumpbox/bins/vault:
   size: 188378621
   object_id: 8cd5b321-9288-4951-527a-322c3ab14630
   sha: sha256:6c27b822dbe38e530fafcf8e15ab197a14451f977b21f3cacf9e9e42e27da253
 jumpbox/bins/yq:
   size: 10160405
+  object_id: a43b7c03-11f9-44bd-4605-18614787ad1a
   sha: sha256:042f7462ec8378f8b0d3bac85d1b1a063b63beef5d8e3826bb2377294116ae90
 jumpbox/cloudfoundry-utils//cert_generator:
   size: 6667
