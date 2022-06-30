@@ -1,4 +1,4 @@
-
+add yq cli and update the blobs.yml
 # bbr
 
 - Bumped bbr to v1.9.31
