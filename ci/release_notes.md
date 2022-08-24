@@ -18,3 +18,7 @@
 # bbr
 
 - Bumped bbr to v1.9.37
+
+# safe
+
+- Bumped safe to v1.7.0
