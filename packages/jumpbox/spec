@@ -23,7 +23,7 @@ files:
   - jumpbox/bins/vault
   - jumpbox/bins/yq
   - jumpbox/cloudfoundry-utils/*
-	
+
     # curl
   - jumpbox/curl-7.81.0.tar.gz
 
