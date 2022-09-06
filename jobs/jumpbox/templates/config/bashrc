@@ -67,7 +67,7 @@ EOF
 		echo "Setting up your jumpbox environment"
 		mkdir -p ${GOPATH}
 		<% if p('jumpbox.setup.enabled') %>
-		  /var/vcap/packages/jumpbox/setup
+		  gem install -N cf-uaac
 		<% end %>
 		touch ${HOME}/.jumpbox
 		echo "-----------------------------------------------------------"

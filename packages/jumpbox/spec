@@ -2,8 +2,6 @@
 name: jumpbox
 dependencies: []
 files:
-  - jumpbox/setup
-
     # pre-compiled binaries / scripts
   - jumpbox/bins/bbr
   - jumpbox/bins/bosh
@@ -22,16 +20,18 @@ files:
   - jumpbox/bins/shield
   - jumpbox/bins/spiff
   - jumpbox/bins/terraform
-  - jumpbox/bins/tmate
   - jumpbox/bins/vault
   - jumpbox/bins/yq
   - jumpbox/cloudfoundry-utils/*
-
+	
     # curl
   - jumpbox/curl-7.81.0.tar.gz
 
     # git
   - jumpbox/git-2.35.1.tar.gz
+
+    # tmate
+  - jumpbox/tmate-2.4.0-static-linux-amd64.tar.xz
 
     # tmux
   - jumpbox/libevent-2.1.12-stable.tar.gz

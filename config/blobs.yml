@@ -70,10 +70,6 @@ jumpbox/bins/terraform:
   size: 63262720
   object_id: 74d2c27f-7dc7-4eb2-4538-a89835a402ed
   sha: sha256:ba86f524c64a97df436d541e67480607d0330ea27b23c3208316260189210151
-jumpbox/bins/tmate:
-  size: 3135320
-  object_id: 1556169c-020e-44e4-5892-995890c24d99
-  sha: sha256:d2fff992e40ce18ff81b9a92fa1cb93a56fb5a82c1cc428204552d8dfa1bc04f
 jumpbox/bins/vault:
   size: 188378621
   object_id: 8cd5b321-9288-4951-527a-322c3ab14630
@@ -126,6 +122,10 @@ jumpbox/libevent-2.1.12-stable.tar.gz:
   size: 1100847
   object_id: 853918f8-5529-47a8-7faf-2d68245d479d
   sha: sha256:92e6de1be9ec176428fd2367677e61ceffc2ee1cb119035037a27d346b0403bb
+jumpbox/tmate-2.4.0-static-linux-amd64.tar.xz:
+  size: 1252460
+  object_id: 3ca7259b-ea11-4b08-5a19-04857a12fee9
+  sha: sha256:6e503a1a3b0f9117bce6ff7cc30cf61bdc79e9b32d074cf96deb0264e067a60d
 jumpbox/tmux-3.2a.tar.gz:
   size: 648394
   object_id: c795d961-e908-4f28-7632-f7816d2a9cef

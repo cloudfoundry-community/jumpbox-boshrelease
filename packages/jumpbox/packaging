@@ -10,9 +10,6 @@ CPUS=$(grep -c ^processor /proc/cpuinfo)
 export HOME=/var/vcap
 n=0 # how many jobs have we spun in parallel?
 
-cp -a jumpbox/setup ${BOSH_INSTALL_TARGET}/setup
-chmod 0755 ${BOSH_INSTALL_TARGET}/setup
-
 mkdir ${BOSH_INSTALL_TARGET}/bin
 cp -a jumpbox/bins/* ${BOSH_INSTALL_TARGET}/bin
 cp -a jumpbox/cloudfoundry-utils/* ${BOSH_INSTALL_TARGET}/bin
@@ -36,6 +33,15 @@ n=$((n + 1))
  ./configure --prefix=${BOSH_INSTALL_TARGET}
  make -j${CPUS} all
  make install) &
+n=$((n + 1))
+
+# TMATE
+# https://tmate.io
+# https://github.com/tmate-io/tmate/releases/download/2.4.0/tmate-2.4.0-static-linux-amd64.tar.xz
+(tar -xf jumpbox/tmate-2.4.0-static-linux-amd64.tar.xz
+ cd tmate-2.4.0-static-linux-amd64
+ mv tmate ${BOSH_INSTALL_TARGET}/bin/
+) &
 n=$((n + 1))
 
 # TMUX

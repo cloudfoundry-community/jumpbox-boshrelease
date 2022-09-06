@@ -1,3 +1,0 @@
-#!/bin/bash --login
-
-gem install -N cf-uaac
