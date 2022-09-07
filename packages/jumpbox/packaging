@@ -15,6 +15,12 @@ cp -a jumpbox/bins/* ${BOSH_INSTALL_TARGET}/bin
 cp -a jumpbox/cloudfoundry-utils/* ${BOSH_INSTALL_TARGET}/bin
 chmod 0755 ${BOSH_INSTALL_TARGET}/bin/*
 
+# Set up vendored ruby
+# Based on: https://github.com/bosh-packages/ruby-release
+source /var/vcap/packages/ruby-3.0/bosh/compile.env
+bosh_bundle
+bosh_generate_runtime_env
+
 # CURL
 # https://curl.haxx.se/download.html
 # https://curl.haxx.se/download/curl-7.69.1.tar.gz
