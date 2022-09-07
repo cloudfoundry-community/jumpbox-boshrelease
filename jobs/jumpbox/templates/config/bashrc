@@ -67,6 +67,7 @@ EOF
 		echo "Setting up your jumpbox environment"
 		mkdir -p ${GOPATH}
 		<% if p('jumpbox.setup.enabled') %>
+		  source /var/vcap/packages/ruby-3.0/bosh/runtime.env
 		  gem install -N cf-uaac
 		<% end %>
 		touch ${HOME}/.jumpbox

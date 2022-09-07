@@ -1,6 +1,7 @@
 ---
 name: jumpbox
-dependencies: []
+dependencies:
+  - ruby-3.0
 files:
     # pre-compiled binaries / scripts
   - jumpbox/bins/bbr
