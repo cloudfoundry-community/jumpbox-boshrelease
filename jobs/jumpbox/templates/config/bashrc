@@ -68,6 +68,8 @@ EOF
 		echo "Setting up your jumpbox environment"
 		mkdir -p ${GOPATH}
 		<% if p('jumpbox.setup.enabled') %>
+		  export GEM_HOME=$HOME/.gem
+		  export GEM_PATH=$HOME/.gem
 		  gem install -N cf-uaac
 		<% end %>
 		touch ${HOME}/.jumpbox
