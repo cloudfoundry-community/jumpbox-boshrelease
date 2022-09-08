@@ -18,7 +18,7 @@ chmod 0755 ${BOSH_INSTALL_TARGET}/bin/*
 # Set up vendored ruby
 # Based on: https://github.com/bosh-packages/ruby-release
 source /var/vcap/packages/ruby-3.0/bosh/compile.env
-bosh_bundle
+#bosh_bundle
 bosh_generate_runtime_env
 
 # CURL
