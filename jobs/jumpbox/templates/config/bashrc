@@ -80,6 +80,8 @@ fi
 
 if [ -d "${HOME}/.gem/bin" ]; then
 	export PATH=${HOME}/.gem/bin:${PATH}
+	export GEM_HOME=$HOME/.gem
+	export GEM_PATH=$HOME/.gem
 fi
 
 ################################################################################
