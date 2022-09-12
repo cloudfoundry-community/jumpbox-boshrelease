@@ -26,3 +26,7 @@
 # credhub
 
 - Bumped credhub to v2.9.4
+
+# cf8
+
+- Bumped cf8 to v8.5.0
