@@ -30,3 +30,7 @@
 # cf8
 
 - Bumped cf8 to v8.5.0
+
+# bbr
+
+- Bumped bbr to v1.9.38
