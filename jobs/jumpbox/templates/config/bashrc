@@ -18,8 +18,10 @@ fi
 #####################################################  env vars you get for free
 
 export GOPATH=${HOME}/go
-export PATH=/var/vcap/bosh/bin:${GOPATH}/bin:${PATH}
-for p in /var/vcap/packages/*/{s,}bin; do case $p in (*toolbelt*) true ;; (*) export PATH="${p}:${PATH}" ;; esac done
+export PATH=/var/vcap/bosh/bin:/var/vcap/packages/golang/bin:${GOPATH}/bin:${PATH}
+export PATH=/var/vcap/packages/jumpbox/bin:/var/vcap/packages/openvpn/sbin:${PATH}
+# Add Ruby to path based on dynamic version
+for p in /var/vcap/packages/ruby-*/bin; do export PATH="${p}:${PATH}"; done
 export LD_LIBRARY_PATH=/var/vcap/packages/jumpbox/lib
 export MANPATH=/usr/share/man:/var/vcap/packages/jumpbox/share/man:/var/vcap/packages/jumpbox/man
 
