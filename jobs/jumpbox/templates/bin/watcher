@@ -71,11 +71,12 @@ provision() {
     mkdir -p ${home}/.ssh
     chmod 0700 ${home}/.ssh
     touch ${home}/.ssh/authorized_keys_new
+    chmod 0600 ${home}/.ssh/authorized_keys_new
+    chown ${user}: ${home}/.ssh/authorized_keys_new
     for key in "$@"; do
       echo "$key" >> ${home}/.ssh/authorized_keys_new
     done
     mv ${home}/.ssh/authorized_keys_new ${home}/.ssh/authorized_keys
-    chmod 0600 ${home}/.ssh/authorized_keys
   fi
 
   if [[ -n "${repo}" ]]; then
