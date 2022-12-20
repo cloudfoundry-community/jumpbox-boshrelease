@@ -66,3 +66,7 @@
 # credhub
 
 - Bumped credhub to v2.9.9
+
+# genesis
+
+- Bumped genesis to v2.8.7
