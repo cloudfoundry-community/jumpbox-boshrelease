@@ -70,3 +70,7 @@
 # genesis
 
 - Bumped genesis to v2.8.7
+
+# genesis
+
+- Bumped genesis to v2.8.8
