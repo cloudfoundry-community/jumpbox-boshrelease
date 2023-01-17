@@ -18,7 +18,10 @@ fi
 #####################################################  env vars you get for free
 
 export GOPATH=${HOME}/go
-export PATH=/var/vcap/packages/jumpbox/bin:$PATH:/var/vcap/bosh/bin:/var/vcap/packages/golang/bin:${GOPATH}/bin
+export PATH=/var/vcap/bosh/bin:/var/vcap/packages/golang/bin:${GOPATH}/bin:${PATH}
+export PATH=/var/vcap/packages/jumpbox/bin:/var/vcap/packages/openvpn/sbin:${PATH}
+# Add Ruby to path based on dynamic version
+for p in /var/vcap/packages/ruby-*/bin; do export PATH="${p}:${PATH}"; done
 export LD_LIBRARY_PATH=/var/vcap/packages/jumpbox/lib
 export MANPATH=/usr/share/man:/var/vcap/packages/jumpbox/share/man:/var/vcap/packages/jumpbox/man
 
@@ -67,12 +70,20 @@ EOF
 		echo "Setting up your jumpbox environment"
 		mkdir -p ${GOPATH}
 		<% if p('jumpbox.setup.enabled') %>
-		  /var/vcap/packages/jumpbox/setup
+			export GEM_HOME=$HOME/.gem
+			export GEM_PATH=$HOME/.gem
+		  gem install -N cf-uaac
 		<% end %>
 		touch ${HOME}/.jumpbox
 		echo "-----------------------------------------------------------"
 		echo ; echo
 	esac
+fi
+
+if [ -d "${HOME}/.gem/bin" ]; then
+	export PATH=${HOME}/.gem/bin:${PATH}
+	export GEM_HOME=$HOME/.gem
+	export GEM_PATH=$HOME/.gem
 fi
 
 ################################################################################

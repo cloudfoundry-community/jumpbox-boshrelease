@@ -70,6 +70,7 @@ jumpbox:
 - curl 7.81.0
 - git 2.35.1
 - jq 1.5
+- tmate 2.4.0
 - tmux 3.2a
   - libevent 2.1.12
 - tree 2.0.2
@@ -97,5 +98,4 @@ Precompiled binaries / scripts:
   - shield 8.7.4
   - spiff 1.0.8
   - terraform 1.1.7
-  - tmate 2.4.0
   - vault 1.9.4

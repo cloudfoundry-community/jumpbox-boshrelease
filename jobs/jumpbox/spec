@@ -3,6 +3,7 @@ name: jumpbox
 packages:
 - jumpbox
 - golang
+- ruby-3.0
 
 templates:
   bin/jumpbox_ctl: bin/jumpbox_ctl
