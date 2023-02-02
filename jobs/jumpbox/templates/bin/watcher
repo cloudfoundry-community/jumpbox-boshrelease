@@ -35,7 +35,7 @@ sshd_configure() {
   key=$1 ; value=$2
   if ! grep -q '^${key} ${value}' /etc/ssh/sshd_config; then
     log1 "/etc/ssh/sshd_config => ${key} ${value}"
-    sed -i -e '/^${key}/d' /etc/ssh/sshd_config
+    sed -i -e "/^${key}/d" /etc/ssh/sshd_config
     echo "${key} ${value}" >> /etc/ssh/sshd_config
   fi
 }
@@ -204,8 +204,8 @@ EOF
 <% end %>
 
   sshd_configure PasswordAuthentication <%= p('jumpbox.ssh.password_auth') == "true" ? "yes" : "no" %>
-  sshd_configure AllowAgentForwarding <%= p('jumpbox.ssh.allow_agent_forwarding') == "true" ? "yes" : "no" -%>
-  sshd_configure AllowTcpForwarding <%= p('jumpbox.ssh.allow_tcp_forwarding') == "true" ? "yes" : "no" -%>
+  sshd_configure AllowAgentForwarding <%= p('jumpbox.ssh.allow_agent_forwarding') ? "yes" : "no" %>
+  sshd_configure AllowTcpForwarding <%= p('jumpbox.ssh.allow_tcp_forwarding') ? "yes" : "no" %>
   systemctl restart sshd.service # We assume bionic or later
 
   log1 "Setting up sudoers to allow certain environment variables to pass through"
