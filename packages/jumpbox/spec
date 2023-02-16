@@ -31,7 +31,7 @@ files:
   - jumpbox/curl-7.81.0.tar.gz
 
     # git
-  - jumpbox/git-2.35.1.tar.gz
+  - jumpbox/git-2.35.7.tar.gz
 
     # tmux
   - jumpbox/libevent-2.1.12-stable.tar.gz

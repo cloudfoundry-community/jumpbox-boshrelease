@@ -118,10 +118,10 @@ jumpbox/curl-7.81.0.tar.gz:
   size: 4188040
   object_id: 42fb5db3-1f4c-40d9-7910-bea6567c0b44
   sha: sha256:ac8e1087711084548d788ef18b9b732c8de887457b81f616fc681d1044b32f98
-jumpbox/git-2.35.1.tar.gz:
-  size: 10511581
-  object_id: d53ce71f-54b4-4e2e-7e82-15a1003de0d2
-  sha: sha256:9845a37dd01f9faaa7d8aa2078399d3aea91b43819a5efea6e2877b0af09bd43
+jumpbox/git-2.35.7.tar.gz:
+  size: 10530007
+  object_id: b1f6c2f4-5089-44d0-4a0d-3e176cbb1d12
+  sha: sha256:fc849272a95cc7457091221a645fcd753b3b1984767ee3323fb6a0aa944bbcb4
 jumpbox/libevent-2.1.12-stable.tar.gz:
   size: 1100847
   object_id: 853918f8-5529-47a8-7faf-2d68245d479d
