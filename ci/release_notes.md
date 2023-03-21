@@ -110,3 +110,7 @@
 # esuf
 
 - Bumped esuf to v0.1.2
+
+# safe
+
+- Bumped safe to v1.8.0
