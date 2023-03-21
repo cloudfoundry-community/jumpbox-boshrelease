@@ -32,7 +32,7 @@ jumpbox/bins/credhub:
   sha: sha256:c01a93258c955e80d155470bb2fd9c13bf5b73aea95093e6c29ee574dfdad009
 jumpbox/bins/esuf:
   size: 7305569
-  object_id: c2506b57-9ca5-4a7f-7716-88a27b124952
+  object_id: 94d813c4-8015-491b-6184-b5e52c16747a
   sha: sha256:bf1167d997de732bbbc8ecbd9caf368af6a588c97041490fe3ccfe6d60cc6095
 jumpbox/bins/fly:
   size: 74509718

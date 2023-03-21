@@ -106,3 +106,7 @@
 # fly
 
 - Bumped fly to v7.9.1
+
+# esuf
+
+- Bumped esuf to v0.1.2
