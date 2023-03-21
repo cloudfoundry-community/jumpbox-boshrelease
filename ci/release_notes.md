@@ -102,3 +102,7 @@
 # cf8
 
 - Bumped cf8 to v8.6.1
+
+# fly
+
+- Bumped fly to v7.9.1
