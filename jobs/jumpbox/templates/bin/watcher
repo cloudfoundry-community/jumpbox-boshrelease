@@ -208,7 +208,7 @@ EOF
   sshd_configure AllowTcpForwarding <%= p('jumpbox.ssh.allow_tcp_forwarding') ? "yes" : "no" %>
   sshd_configure AllowTcpForwarding <%= p('jumpbox.ssh.allow_tcp_forwarding') ? "yes" : "no" %>
   sshd_configure ClientAliveInterval <%= p('jumpbox.ssh.client_alive_interval') %>
-  sshd_configure ClientAliveCountMax <%= p('jumpbox.ssh.client_alive_interval') %>
+  sshd_configure ClientAliveCountMax <%= p('jumpbox.ssh.client_alive_count_max') %>
 
   systemctl restart sshd.service # We assume bionic or later
 
