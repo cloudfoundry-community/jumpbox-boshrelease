@@ -53,3 +53,7 @@ Together these give a default session timeout of 1 hour.
 # esuf
 
 - Bumped esuf to v0.1.2
+
+# bbr
+
+- Bumped bbr to v1.9.46
