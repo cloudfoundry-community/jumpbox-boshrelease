@@ -45,3 +45,7 @@ Together these give a default session timeout of 1 hour.
 # fly
 
 - Bumped fly to v7.9.1
+
+# safe
+
+- Bumped safe to v1.9.0
