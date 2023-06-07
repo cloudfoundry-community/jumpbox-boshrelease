@@ -20,7 +20,7 @@ jumpbox/bins/cf:
   sha: sha256:6e349ba8146d9e907847e8b7a522fc89d105976fbc5b5f008888b529a4727d1a
 jumpbox/bins/cf7:
   size: 20570112
-  object_id: 09fd5ba5-8008-444c-5682-8323140575ca
+  object_id: 5d7d9aab-46d7-4239-654a-653f7ecd8558
   sha: sha256:9d5ed9460e35d69aecb1fb4a83b40ed301b4a6cd7343f2fa4391e4760eedfecb
 jumpbox/bins/cf8:
   size: 24645632
