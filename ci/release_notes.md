@@ -41,3 +41,7 @@ Together these give a default session timeout of 1 hour.
 # genesis
 
 - Bumped genesis to v2.8.9
+
+# fly
+
+- Bumped fly to v7.9.1
