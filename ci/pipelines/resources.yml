@@ -2,7 +2,7 @@ resource_types:
   - name: shout-notification
     type: docker-image
     source:
-      repository: huntprod/shout-resource
+      repository: registry.ops.scalecf.net/genesis-community/shout-resource
 
 resources:
   - name: git
@@ -57,14 +57,14 @@ resources:
   - name: safe
     type: github-release
     source:
-      user: starkandwayne
+      user: cloudfoundry-community
       repository: safe
       access_token: (( grab meta.github.access_token ))
 
   - name: esuf
     type: github-release
     source:
-      user: starkandwayne
+      user: cloudfoundry-community
       repository: esuf
       access_token: (( grab meta.github.access_token ))
 

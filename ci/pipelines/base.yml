@@ -25,7 +25,7 @@ meta:
     name:   (( param "Please provide the git name for automated commits" ))
 
   image:
-    name: starkandwayne/concourse
+    name: registry.ops.scalecf.net/genesis-community/concourse
     tag: latest
 
   aws:
