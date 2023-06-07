@@ -33,3 +33,7 @@ Together these give a default session timeout of 1 hour.
 # credhub
 
 - Bumped credhub to v2.9.16
+
+# bosh-cli
+
+- Bumped bosh-cli to v7.2.3
