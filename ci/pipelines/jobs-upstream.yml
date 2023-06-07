@@ -71,6 +71,8 @@ jobs:
     - in_parallel:
       - { get: git }
       - { get: safe, trigger: true }
+    - load_var: safe_version
+      file: safe/version
     - task: update-safe
       config:
         platform: linux
@@ -92,7 +94,7 @@ jobs:
           RELEASE_DIR:      safe
           BLOB_DIR:         safe
           BLOB_NAME:        safe
-          BLOB_BINARY:      safe-linux-amd64
+          BLOB_BINARY:      safe-((.:safe_version))-linux-amd64
           BLOB_DESTINATION: jumpbox/bins/safe
           BLOB_CLEANUP:     jumpbox/bins/safe
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
