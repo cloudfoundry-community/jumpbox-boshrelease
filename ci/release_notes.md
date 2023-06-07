@@ -17,3 +17,7 @@ Together these give a default session timeout of 1 hour.
 # cf8
 
 - Bumped cf8 to v8.6.1
+
+# bbr
+
+- Bumped bbr to v1.9.45
