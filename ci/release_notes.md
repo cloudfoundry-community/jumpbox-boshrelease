@@ -29,3 +29,7 @@ Together these give a default session timeout of 1 hour.
 # cloudfoundry-utils
 
 - Bumped cloudfoundry-utils to v1.0.0
+
+# credhub
+
+- Bumped credhub to v2.9.16
