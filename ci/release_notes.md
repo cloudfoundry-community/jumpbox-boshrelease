@@ -5,3 +5,7 @@ Enable configuration of jumpbox `/etc/ssh/sshd_config` parameters:
 
 Together these give a default session timeout of 1 hour.
 
+
+# cf
+
+- Bumped cf to v6.53.0
