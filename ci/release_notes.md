@@ -37,3 +37,7 @@ Together these give a default session timeout of 1 hour.
 # bosh-cli
 
 - Bumped bosh-cli to v7.2.3
+
+# genesis
+
+- Bumped genesis to v2.8.9
