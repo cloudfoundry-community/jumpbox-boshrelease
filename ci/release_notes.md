@@ -25,3 +25,7 @@ Together these give a default session timeout of 1 hour.
 # spruce
 
 - Bumped spruce to v1.30.2
+
+# cloudfoundry-utils
+
+- Bumped cloudfoundry-utils to v1.0.0
