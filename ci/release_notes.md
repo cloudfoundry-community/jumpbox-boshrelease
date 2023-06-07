@@ -13,3 +13,7 @@ Together these give a default session timeout of 1 hour.
 # cf7
 
 - Bumped cf7 to v7.6.0
+
+# cf8
+
+- Bumped cf8 to v8.6.1
