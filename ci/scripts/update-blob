@@ -62,9 +62,12 @@ blobstore:
     secret_access_key: ${AWS_SECRET_KEY}
 EOF
 
+### TODO: Fetch the source and if its already in use, skip the upgrade/upload
+
 ######
 ######
 ######
+
 header "Performing cleanup on old blobs"
 remove=$(spruce json config/blobs.yml | jq -r "keys[] | select(test(\"${BLOB_CLEANUP}\"))" | grep -w "${BLOB_CLEANUP}" || true)
 if [[ -n $remove ]]; then

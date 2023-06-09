@@ -64,7 +64,7 @@ fi
 
 EXPOSED=$(spruce json .deploy.yml | jq -r '.meta.exposed // false')
 EXPOSE=expose
-if [[ ${EXPOSED} == "true" ]]; then
+if [[ ${EXPOSED} == "false" ]]; then
   EXPOSE=hide
 fi
 
