@@ -33,15 +33,15 @@ properties:
 
   jumpbox.ssh.allow_tcp_forwarding:
     description: "Configure SSHD to allow TCP forwarding."
-    default: 1200
+    default: true
 
   jumpbox.ssh.client_alive_interval:
     description: "Configure SSHD to allow agent forwarding."
-    default: 3
+    default: 1200
 
   jumpbox.ssh.client_alive_count_max:
     description: "the number of client alive messages which are sent without getting any messages from the client"
-    default: true
+    default: 3
 
   jumpbox.one_time_setup:
     description: "Send new users through a one-time setup.  You generally want to do this."
