@@ -2,7 +2,7 @@
 name: jumpbox
 packages:
 - jumpbox
-- golang
+- golang-1-linux
 
 templates:
   bin/jumpbox_ctl: bin/jumpbox_ctl

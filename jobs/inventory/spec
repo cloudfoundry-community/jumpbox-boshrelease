@@ -2,7 +2,7 @@
 name: inventory
 packages:
   - jumpbox
-  - golang
+  - golang-1-linux
 
 templates:
   bin/run: bin/run
