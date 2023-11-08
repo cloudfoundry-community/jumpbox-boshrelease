@@ -34,3 +34,7 @@
 # fly
 
 - Bumped fly to v7.11.0
+
+# safe
+
+- Bumped safe to v1.9.0
