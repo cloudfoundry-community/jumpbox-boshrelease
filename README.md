@@ -63,37 +63,36 @@ installed on the instance, versions, etc.
 
 ### Packages installed
 
-golang: 
-- go 1.17.8
-
+golang-1-linux: 
+- go 1.latest (currently 1.21.4)
 jumpbox:
-- curl 7.81.0
+- curl (on stemcell, currently 7.81.0)
 - git 2.35.1
 - jq 1.5
 - tmux 3.2a
   - libevent 2.1.12
 - tree 2.0.2
-- unzip 6.0
-- vim 8.2.4528
+- vim (on stemcell, currently 8.2.4919)
 - wget 1.21.3
-- zip 3.0
+- zip (on stemcell, currently 3.0)
+- unzip (on stemcell, currently 6.0
 
 Precompiled binaries / scripts:
 - jumpbox/bins/
-  - bbr 1.9.25
-  - bosh 6.4.17
+  - bbr 1.9.53
+  - bosh 7.4.1
   - certstrap 1.2.0
-  - credhub 2.9.3
+  - credhub 2.9.22
   - spruce 1.29.0
-  - fly 7.7.0
+  - fly 7.11.0
   - cf 6.53.0
-  - cf7 7.4.0
-  - cf8 8.2.0
+  - cf7 7.7.4
+  - cf8 8.7.4
   - esuf 0.1.2
-  - genesis 2.8.4
+  - genesis 2.8.11
   - jq 1.6
   - nats 1.2.0
-  - safe 1.6.1
+  - safe 1.9.0
   - shield 8.7.4
   - spiff 1.0.8
   - terraform 1.1.7

@@ -18,16 +18,6 @@ cp -a jumpbox/bins/* ${BOSH_INSTALL_TARGET}/bin
 cp -a jumpbox/cloudfoundry-utils/* ${BOSH_INSTALL_TARGET}/bin
 chmod 0755 ${BOSH_INSTALL_TARGET}/bin/*
 
-# CURL
-# https://curl.haxx.se/download.html
-# https://curl.haxx.se/download/curl-7.69.1.tar.gz
-(tar -xzvf jumpbox/curl-7.81.0.tar.gz
- cd curl-7.81.0
- ./configure --prefix=${BOSH_INSTALL_TARGET} --with-openssl
- make -j${CPUS}
- make install) &
-n=$((n + 1))
-
 # GIT
 # https://www.kernel.org/pub/software/scm/git
 # https://www.kernel.org/pub/software/scm/git/git-2.35.7.tar.gz
@@ -68,14 +58,6 @@ n=$((n + 1))
  make install) &
 n=$((n + 1))
 
-# VIM
-# http://github.com/vim/vim/releases
-(tar -xzvf jumpbox/vim-8.2.4528.tar.gz
- cd vim-8.2.4528
- ./configure --prefix=${BOSH_INSTALL_TARGET}
- make -j${CPUS}
- make install) &
-n=$((n + 1))
 
 # WGET
 # http://ftp.gnu.org/gnu/wget/
@@ -87,33 +69,6 @@ n=$((n + 1))
  make install) &
 n=$((n + 1))
 
-# ZIP
-# http://www.linuxfromscratch.org/blfs/view/svn/general/zip.html
-# http://downloads.sourceforge.net/infozip/zip30.tar.gz
-(tar -xzvf jumpbox/zip30.tar.gz
- cd zip30
- make prefix=${BOSH_INSTALL_TARGET} \
-      -f unix/Makefile \
-      -j${CPUS} \
-      generic
- make prefix=${BOSH_INSTALL_TARGET} \
-      -f unix/Makefile \
-      install) &
-n=$((n + 1))
-
-# UNZIP
-# http://www.linuxfromscratch.org/blfs/view/svn/general/unzip.html
-# http://downloads.sourceforge.net/infozip/unzip60.tar.gz
-(tar -xzvf jumpbox/unzip60.tar.gz
- cd unzip60
- make prefix=${BOSH_INSTALL_TARGET} \
-      -f unix/Makefile \
-      -j${CPUS} \
-      generic
- make prefix=${BOSH_INSTALL_TARGET} \
-      -f unix/Makefile \
-      install) &
-n=$((n + 1))
 
 while [[ $n -gt 0 ]]; do
 	wait -n
