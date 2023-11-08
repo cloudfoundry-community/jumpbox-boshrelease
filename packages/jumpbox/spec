@@ -27,9 +27,6 @@ files:
   - jumpbox/bins/yq
   - jumpbox/cloudfoundry-utils/*
 
-    # curl
-  - jumpbox/curl-7.81.0.tar.gz
-
     # git
   - jumpbox/git-2.35.7.tar.gz
 
@@ -42,12 +39,8 @@ files:
   - jumpbox/tree-2.0.2.tar.gz
 
     # vim
-  - jumpbox/vim-8.2.4528.tar.gz
   - jumpbox/vimrc
 
     # wget
-  - jumpbox/wget-1.21.3.tar.gz
+  - jumpbox/wget-1.21.3.tar.gz  # jammy: 1.21.2
 
-    # zip
-  - jumpbox/zip30.tar.gz
-  - jumpbox/unzip60.tar.gz

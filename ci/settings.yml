@@ -11,10 +11,10 @@ meta:
     path: ci/manifest.yml
 
   git:
-    name:  Cloudfoundry Community CI Bot
-    email: ci@cloudfoundry-community.org
+    name:  ((github.name))
+    email: ((github.email))
 
-  bosh-lite:
+  bosh:
     target:   ((thunder-dome.url))
     username: ((thunder-dome.username))
     password: ((thunder-dome.password))

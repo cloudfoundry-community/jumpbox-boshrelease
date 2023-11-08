@@ -14,6 +14,10 @@ instance_groups:
   jobs:
     - { release: jumpbox, name: jumpbox }
     - { release: jumpbox, name: inventory }
+  env:
+    bosh:
+      remove_dev_tools: false
+
 
 update:
   canaries: 0

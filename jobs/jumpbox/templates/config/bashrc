@@ -17,8 +17,8 @@ fi
 ################################################################################
 #####################################################  env vars you get for free
 
-export GOPATH=${HOME}/go
-export PATH=/var/vcap/packages/jumpbox/bin:$PATH:/var/vcap/bosh/bin:/var/vcap/packages/golang/bin:${GOPATH}/bin
+source /var/vcap/packages/golang-1-linux/bosh/runtime.env 
+export PATH=/var/vcap/packages/jumpbox/bin:$PATH
 export LD_LIBRARY_PATH=/var/vcap/packages/jumpbox/lib
 export MANPATH=/usr/share/man:/var/vcap/packages/jumpbox/share/man:/var/vcap/packages/jumpbox/man
 

@@ -1,7 +1,3 @@
-golang/go1.17.8.linux-amd64.tar.gz:
-  size: 134902354
-  object_id: f7f706f7-aa75-4929-6910-3c0ef2021618
-  sha: sha256:980e65a863377e69fd9b67df9d8395fd8e93858e7a24c9f55803421e453f4f99
 jumpbox/bins/bbr:
   size: 14678580
   object_id: 961da04e-e79d-4ab3-5ae2-cf47032b8dcd
@@ -122,10 +118,6 @@ jumpbox/cloudfoundry-utils//url:
   size: 80
   object_id: cae33d8a-b86c-4877-4e06-ccfa5bea5c85
   sha: sha256:1f6100be329b0c7dd6bedde63666b12530f3fab5b057bfeeffe4a6b0a288d751
-jumpbox/curl-7.81.0.tar.gz:
-  size: 4188040
-  object_id: 42fb5db3-1f4c-40d9-7910-bea6567c0b44
-  sha: sha256:ac8e1087711084548d788ef18b9b732c8de887457b81f616fc681d1044b32f98
 jumpbox/git-2.35.7.tar.gz:
   size: 10530007
   object_id: b1f6c2f4-5089-44d0-4a0d-3e176cbb1d12
@@ -142,19 +134,7 @@ jumpbox/tree-2.0.2.tar.gz:
   size: 57960
   object_id: 7d13bfdf-29b5-43a6-4e84-d7bc537bdc46
   sha: sha256:7d693a1d88d3c4e70a73e03b8dbbdc12c2945d482647494f2f5bd83a479eeeaf
-jumpbox/unzip60.tar.gz:
-  size: 1376845
-  object_id: 7317d283-62f1-40d3-851a-10418da85106
-  sha: abf7de8a4018a983590ed6f5cbd990d4740f8a22
-jumpbox/vim-8.2.4528.tar.gz:
-  size: 16185073
-  object_id: e1f8a296-40b3-44a3-6604-dd85f988b157
-  sha: sha256:10a7e2b089697f247501c5f269536ae736d21d9dbc2065f2517cfb18bf7d7184
 jumpbox/wget-1.21.3.tar.gz:
   size: 5079864
   object_id: eba5bdf1-b13f-43ce-5eed-f0a7f9d502c9
   sha: sha256:5726bb8bc5ca0f6dc7110f6416e4bb7019e2d2ff5bf93d1ca2ffcc6656f220e5
-jumpbox/zip30.tar.gz:
-  size: 1118845
-  object_id: f46a1f21-a9e9-415a-9e2d-8b8303fe1659
-  sha: c9f4099ecf2772b53c2dd4a8e508064ce015d182

@@ -180,7 +180,7 @@ EOF
   log1 "Setting up system-wide Go runtime at ${JUMPBOX_GO}"
   if [[ ! -e $JUMPBOX_GO ]]; then
     logn "${JUMPBOX_GO} not linked to /var/vcap/packages/golang; fixing"
-    ln -s /var/vcap/packages/golang ${JUMPBOX_GO}
+    ln -s /var/vcap/packages/golang-1-linux ${JUMPBOX_GO}
   fi
 
   log1 "Setting hostname to ${JUMPBOX_HOSTNAME}"
