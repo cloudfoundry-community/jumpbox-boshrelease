@@ -17,7 +17,11 @@ fi
 ################################################################################
 #####################################################  env vars you get for free
 
+ORIG_PATH="$PATH"
 source /var/vcap/packages/golang-1-linux/bosh/runtime.env 
+export GOPATH="${HOME}/go"
+export GOCACHE="${GOPATH}/cache"
+export PATH="${GOROOT}/bin:${GOPATH}/bin:${ORIG_PATH}" # the golang source script above injects a bunch of incorrect values here
 export PATH=/var/vcap/packages/jumpbox/bin:$PATH
 export LD_LIBRARY_PATH=/var/vcap/packages/jumpbox/lib
 export MANPATH=/usr/share/man:/var/vcap/packages/jumpbox/share/man:/var/vcap/packages/jumpbox/man

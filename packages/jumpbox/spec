@@ -38,9 +38,6 @@ files:
     # tree
   - jumpbox/tree-2.0.2.tar.gz
 
-    # vim
-  - jumpbox/vimrc
-
     # wget
-  - jumpbox/wget-1.21.3.tar.gz  # jammy: 1.21.2
+  - jumpbox/wget-1.21.3.tar.gz
 

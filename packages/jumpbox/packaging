@@ -75,5 +75,4 @@ while [[ $n -gt 0 ]]; do
 	n=$((n - 1))
 done
 
-sudo cp jumpbox/vimrc /usr/share/vim/vimrc
 cp jumpbox/tmux.conf  "${BOSH_INSTALL_TARGET}/etc/tmux.conf"
