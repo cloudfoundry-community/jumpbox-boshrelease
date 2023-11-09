@@ -72,7 +72,7 @@ jumpbox:
 - tmux 3.2a
   - libevent 2.1.12
 - tree 2.0.2
-- vim (on stemcell, currently 8.2.4919)
+- vim 8.2.4528
 - wget 1.21.3
 - zip (on stemcell, currently 3.0)
 - unzip (on stemcell, currently 6.0

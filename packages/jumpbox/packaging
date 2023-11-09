@@ -58,6 +58,14 @@ n=$((n + 1))
  make install) &
 n=$((n + 1))
 
+# VIM
+# http://github.com/vim/vim/releases
+(tar -xzvf jumpbox/vim-8.2.4528.tar.gz
+ cd vim-8.2.4528
+ ./configure --prefix=${BOSH_INSTALL_TARGET}
+ make -j${CPUS}
+ make install) &
+n=$((n + 1))
 
 # WGET
 # http://ftp.gnu.org/gnu/wget/
@@ -69,10 +77,10 @@ n=$((n + 1))
  make install) &
 n=$((n + 1))
 
-
 while [[ $n -gt 0 ]]; do
 	wait -n
 	n=$((n - 1))
 done
 
-cp jumpbox/tmux.conf  "${BOSH_INSTALL_TARGET}/etc/tmux.conf"
+cp jumpbox/vimrc     ${BOSH_INSTALL_TARGET}/share/vim/vimrc
+cp jumpbox/tmux.conf ${BOSH_INSTALL_TARGET}/etc/tmux.conf

@@ -9,7 +9,6 @@ templates:
   bin/watcher:     bin/watcher
   config/banner:   config/banner
   config/bashrc:   config/bashrc
-  config/vimrc:    config/vimrc
 
 properties:
   jumpbox.hostname:

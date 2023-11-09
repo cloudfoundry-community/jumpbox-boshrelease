@@ -134,6 +134,10 @@ jumpbox/tree-2.0.2.tar.gz:
   size: 57960
   object_id: 7d13bfdf-29b5-43a6-4e84-d7bc537bdc46
   sha: sha256:7d693a1d88d3c4e70a73e03b8dbbdc12c2945d482647494f2f5bd83a479eeeaf
+jumpbox/vim-8.2.4528.tar.gz:
+  size: 16185073
+  object_id: e1f8a296-40b3-44a3-6604-dd85f988b157
+  sha: sha256:10a7e2b089697f247501c5f269536ae736d21d9dbc2065f2517cfb18bf7d7184
 jumpbox/wget-1.21.3.tar.gz:
   size: 5079864
   object_id: eba5bdf1-b13f-43ce-5eed-f0a7f9d502c9

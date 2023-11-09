@@ -5,7 +5,6 @@ set -e
 rm -f /etc/profile.d/jumpbox.sh
 rm -f /etc/skel/.bashrc
 cp /var/vcap/jobs/jumpbox/config/bashrc /etc/bash.bashrc
-cp /var/vcap/jobs/jumpbox/config/vimrc  /usr/share/vim/vimrc
 
 source /var/vcap/jobs/jumpbox/config/bashrc
 pidfile=/var/vcap/sys/run/jumpbox/watcher.pid
