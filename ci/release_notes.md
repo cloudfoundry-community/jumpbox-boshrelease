@@ -1,36 +1,12 @@
+# Fixes
 
-# credhub
+- Fixed GPG keys in setup script
+- RVM updated to install 3.1.4
 
-- Bumped credhub to v2.9.23
-
-# bosh-cli
-
-- Bumped bosh-cli to v7.5.0
-
-# bosh-cli
-
-- Bumped bosh-cli to v7.5.1
-
-# cf8
-
-- Bumped cf8 to v8.7.6
-
-# cf7
-
-- Bumped cf7 to v7.7.6
-
-# genesis
+# Updated compiled versions of jumpbox binaries
 
 - Bumped genesis to v2.8.12
-
-# cf8
-
-- Bumped cf8 to v8.7.7
-
-# bosh-cli
-
 - Bumped bosh-cli to v7.5.2
-
-# credhub
-
+- Bumped cf8 to v8.7.7
+- Bumped cf7 to v7.7.6
 - Bumped credhub to v2.9.25

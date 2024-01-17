@@ -1,20 +1,29 @@
 #!/bin/bash --login
 
-# install RVM
-if [[ ! -f ~/.rvmrc ]]; then
-	echo rvm_silence_path_mismatch_check_flag=1 > ~/.rvmrc
+# Check for Build tools
+if [[ -z "$(command -v cc)" ]]; then
+  echo "Dev tools unavailable, please add 'dev-tools' feature to the Genesis environment file and redeploy, then run /var/vcap/packages/jumpbox/setup"
+else
+  # install RVM
+  if [[ ! -f ~/.rvmrc ]]; then
+    echo rvm_silence_path_mismatch_check_flag=1 > ~/.rvmrc
+  fi
+  if [[ -z "$(command -v rvm)" ]]; then
+    # Jammy stemcells do not install dirmngr, using rvm.io keys instead
+    # gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+    curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+    curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
+
+    curl -sSL https://get.rvm.io | bash -s stable --ruby
+
+    source ~/.rvm/scripts/rvm
+    source ~/.bashrc
+  fi
+
+  # install ruby
+
+  rvm install ruby-3.1.4
+  rvm --default use 3.1.4
+  gem install -N cf-uaac # TODO: move to uaa-cli https://github.com/cloudfoundry-incubator/uaa-cli
+
 fi
-if [[ -z "$(command -v rvm)" ]]; then
-	gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-	curl -sSL https://get.rvm.io | bash -s stable --ruby
-
-	source ~/.rvm/scripts/rvm
-	source ~/.bashrc
-fi
-
-# install ruby
-
-rvm install ruby-3.1
-rvm --default use 3.1
-gem install -N cf-uaac # TODO: move to uaa-cli https://github.com/cloudfoundry-incubator/uaa-cli
-
