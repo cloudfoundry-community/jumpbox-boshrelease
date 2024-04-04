@@ -50,3 +50,7 @@
 # credhub
 
 - Bumped credhub to v2.9.28
+
+# cf7
+
+- Bumped cf7 to v7.7.10
