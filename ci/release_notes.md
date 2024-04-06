@@ -54,3 +54,7 @@
 # cf7
 
 - Bumped cf7 to v7.7.10
+
+# bosh-cli
+
+- Bumped bosh-cli to v7.5.6
