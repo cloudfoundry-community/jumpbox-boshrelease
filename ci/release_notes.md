@@ -58,3 +58,7 @@
 # bosh-cli
 
 - Bumped bosh-cli to v7.5.6
+
+# bbr
+
+- Bumped bbr to v1.9.63
