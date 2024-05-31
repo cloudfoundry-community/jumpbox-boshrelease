@@ -82,3 +82,7 @@
 # bosh-cli
 
 - Bumped bosh-cli to v7.5.7
+
+# bosh-cli
+
+- Bumped bosh-cli to v7.6.0
