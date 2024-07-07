@@ -110,3 +110,7 @@
 # genesis
 
 - Bumped genesis to v3.0.1
+
+# genesis
+
+- Bumped genesis to v3.0.2
