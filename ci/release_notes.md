@@ -118,3 +118,7 @@
 # cf7
 
 - Bumped cf7 to v7.7.11
+
+# cf8
+
+- Bumped cf8 to v8.7.11
