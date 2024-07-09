@@ -114,3 +114,7 @@
 # genesis
 
 - Bumped genesis to v3.0.2
+
+# cf7
+
+- Bumped cf7 to v7.7.11
