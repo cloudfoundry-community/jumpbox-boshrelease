@@ -122,3 +122,7 @@
 # cf8
 
 - Bumped cf8 to v8.7.11
+
+# genesis
+
+- Bumped genesis to v3.0.3
