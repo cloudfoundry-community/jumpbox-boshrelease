@@ -138,3 +138,7 @@
 # credhub
 
 - Bumped credhub to v2.9.34
+
+# credhub
+
+- Bumped credhub to v2.9.35
