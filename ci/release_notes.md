@@ -146,3 +146,7 @@
 # genesis
 
 - Bumped genesis to v3.0.5
+
+# bbr
+
+- Bumped bbr to v1.9.67
