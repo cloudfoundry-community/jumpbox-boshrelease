@@ -154,3 +154,7 @@
 # spruce
 
 - Bumped spruce to v1.31.1
+
+# genesis
+
+- Bumped genesis to v3.0.6
