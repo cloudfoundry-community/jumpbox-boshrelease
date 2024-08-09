@@ -158,3 +158,7 @@
 # genesis
 
 - Bumped genesis to v3.0.6
+
+# genesis
+
+- Bumped genesis to v3.0.7
