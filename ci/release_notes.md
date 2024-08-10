@@ -162,3 +162,7 @@
 # genesis
 
 - Bumped genesis to v3.0.7
+
+# bosh-cli
+
+- Bumped bosh-cli to v7.6.3
