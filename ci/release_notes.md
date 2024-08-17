@@ -174,3 +174,7 @@
 # credhub
 
 - Bumped credhub to v2.9.36
+
+# bbr
+
+- Bumped bbr to v1.9.68
