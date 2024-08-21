@@ -182,3 +182,7 @@
 # fly
 
 - Bumped fly to v7.11.2
+
+# cf7
+
+- Bumped cf7 to v7.7.12
