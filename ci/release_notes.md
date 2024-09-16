@@ -210,3 +210,7 @@
 # cf8
 
 - Bumped cf8 to v8.8.1
+
+# bbr
+
+- Bumped bbr to v1.9.69
