@@ -222,3 +222,7 @@
 # cf8
 
 - Bumped cf8 to v8.8.2
+
+# bosh-cli
+
+- Bumped bosh-cli to v7.8.0
