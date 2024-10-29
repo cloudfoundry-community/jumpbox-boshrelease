@@ -250,3 +250,7 @@
 # cf7
 
 - Bumped cf7 to v7.7.15
+
+# cf8
+
+- Bumped cf8 to v8.8.3
