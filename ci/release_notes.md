@@ -290,3 +290,7 @@
 # genesis
 
 - Bumped genesis to v3.0.11
+
+# genesis
+
+- Bumped genesis to v3.0.12
