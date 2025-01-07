@@ -302,3 +302,7 @@
 # credhub
 
 - Bumped credhub to v2.9.41
+
+# genesis
+
+- Bumped genesis to v3.0.13
