@@ -26,3 +26,7 @@
 # bosh-cli
 
 - Bumped bosh-cli to v7.9.1
+
+# bosh-cli
+
+- Bumped bosh-cli to v7.9.2
