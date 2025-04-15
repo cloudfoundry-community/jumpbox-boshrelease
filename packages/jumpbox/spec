@@ -25,6 +25,7 @@ files:
   - jumpbox/bins/tmate
   - jumpbox/bins/vault
   - jumpbox/bins/yq
+  - jumpbox/bins/uaa
   - jumpbox/cloudfoundry-utils/*
 
     # git
@@ -45,3 +46,9 @@ files:
     # wget
   - jumpbox/wget-1.21.3.tar.gz
 
+    # pip
+  - jumpbox/get-pip.py
+  - jumpbox/wheels/*
+
+    # s3cmd
+  - jumpbox/s3cmd-2.4.0.tar.gz

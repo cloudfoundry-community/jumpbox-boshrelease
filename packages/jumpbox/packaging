@@ -77,6 +77,18 @@ n=$((n + 1))
  make install) &
 n=$((n + 1))
 
+# S3CMD
+# https://github.com/s3tools/s3cmd/releases/download/v2.4.0/s3cmd-2.4.0.tar.gz
+# Offline install using vendored wheels
+(python3 jumpbox/get-pip.py --no-index --find-links=jumpbox/wheels
+ export PATH=$HOME/.local/bin:$PATH
+ tar -xzvf jumpbox/s3cmd-2.4.0.tar.gz
+ cd s3cmd-2.4.0
+ pip install . --prefix=${BOSH_INSTALL_TARGET} \
+   --no-index \
+   --find-links=../jumpbox/wheels) &
+n=$((n + 1))
+
 while [[ $n -gt 0 ]]; do
 	wait -n
 	n=$((n - 1))
