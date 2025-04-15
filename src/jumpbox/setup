@@ -35,6 +35,26 @@ else
 
   rvm install ruby-3.1.4
   rvm --default use 3.1.4
-  gem install -N cf-uaac # TODO: move to uaa-cli https://github.com/cloudfoundry-incubator/uaa-cli
+  # gem install -N cf-uaac # TODO: move to uaa-cli https://github.com/cloudfoundry-incubator/uaa-cli
+  # install uaa-cli from GitHub
+  echo "Checking for existing uaa-cli installation..."
+  UAA_VERSION="0.16.0"
+  UAA_URL="https://github.com/cloudfoundry/uaa-cli/releases/download/${UAA_VERSION}/uaa-linux-amd64-${UAA_VERSION}"
+  DEST_BIN="/usr/local/bin/uaa"
 
+  if command -v uaa >/dev/null 2>&1; then
+    echo "uaa-cli is already installed at $(command -v uaa)"
+  else
+    echo "Installing uaa-cli version ${UAA_VERSION}..."
+    sudo wget -q "$UAA_URL" -O "$DEST_BIN"
+    sudo chmod +x "$DEST_BIN"
+
+    if ! grep -q "/usr/local/bin" <<< "$PATH"; then
+      echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bashrc
+      export PATH="/usr/local/bin:$PATH"
+    fi
+
+    echo "uaa-cli installed at: $(command -v uaa)"
+    uaa version
+  fi
 fi
