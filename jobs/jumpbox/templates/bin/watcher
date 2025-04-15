@@ -108,7 +108,25 @@ provision() {
 
 deactivate() {
   local user=$1
-  local today=$(date +%Y%M%D.%H%M%S)
+  local today=$(date +%Y%m%d.%H%M%S)
+  local now_epoch=$(date +%s)
+
+  if ! getent passwd "${user}" >/dev/null 2>&1; then
+    log "User ${user} does not exist in /etc/passwd; skipping deactivation"
+    return
+  fi
+
+  local expire_line expire_date expire_epoch
+  expire_line=$(chage -l "${user}" | grep "Account expires")
+  expire_date=$(echo "$expire_line" | cut -d: -f2 | xargs)
+
+  if [ "$expire_date" != "never" ]; then
+    expire_epoch=$(date -d "$expire_date" +%s 2>/dev/null)
+    if [ "$expire_epoch" -le "$now_epoch" ]; then
+      log "User ${user} is already expired (chage check: ${expire_date}); skipping deactivation"
+      return
+    fi
+  fi
 
   local to="${JUMPBOX_HOME}/.${user}.${today}"
   log "Deactivating user $user"
