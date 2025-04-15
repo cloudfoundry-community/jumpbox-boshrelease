@@ -1,8 +1,19 @@
 #!/bin/bash --login
 
+MISSING=false
 # Check for Build tools
 if [[ -z "$(command -v cc)" ]]; then
   echo "Dev tools unavailable, please add 'dev-tools' feature to the Genesis environment file and redeploy, then run /var/vcap/packages/jumpbox/setup"
+  MISSING=true
+fi
+# Check for sudo access
+if ! sudo -n true 2>/dev/null; then
+  echo "User does not have passwordless sudo access. Please ensure you are part of the sudoers group for setup to succeed."
+  MISSING=true
+fi
+
+if [[ "$MISSING" == true ]]; then
+  echo "Exiting setup due to missing prerequisites."
 else
   # install RVM
   if [[ ! -f ~/.rvmrc ]]; then
