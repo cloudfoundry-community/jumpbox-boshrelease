@@ -70,6 +70,10 @@ jumpbox/bins/tmate:
   size: 3135320
   object_id: 1556169c-020e-44e4-5892-995890c24d99
   sha: sha256:d2fff992e40ce18ff81b9a92fa1cb93a56fb5a82c1cc428204552d8dfa1bc04f
+jumpbox/bins/uaa:
+  size: 14413088
+  object_id: 1b2dc57c-7a85-4406-7e3f-48998ebdf18c
+  sha: sha256:86e0445fef28a277e7b5e445ca12b8de7c7f46c92e7fc6cafa2f37f290ab593d
 jumpbox/bins/vault:
   size: 188378621
   object_id: 8cd5b321-9288-4951-527a-322c3ab14630
@@ -118,6 +122,10 @@ jumpbox/cloudfoundry-utils//url:
   size: 80
   object_id: cae33d8a-b86c-4877-4e06-ccfa5bea5c85
   sha: sha256:1f6100be329b0c7dd6bedde63666b12530f3fab5b057bfeeffe4a6b0a288d751
+jumpbox/get-pip.py:
+  size: 2300175
+  object_id: d95e41da-48ca-4f97-63b1-fbfca21e40c2
+  sha: sha256:2f3ff20716690396762da67f20b04ece444fe5fcba3d9f967de0021d71565043
 jumpbox/git-2.35.7.tar.gz:
   size: 10530007
   object_id: b1f6c2f4-5089-44d0-4a0d-3e176cbb1d12
@@ -126,6 +134,10 @@ jumpbox/libevent-2.1.12-stable.tar.gz:
   size: 1100847
   object_id: 853918f8-5529-47a8-7faf-2d68245d479d
   sha: sha256:92e6de1be9ec176428fd2367677e61ceffc2ee1cb119035037a27d346b0403bb
+jumpbox/s3cmd-2.4.0.tar.gz:
+  size: 144976
+  object_id: 50fe234f-8a4e-421a-7afe-4ce78c57698a
+  sha: sha256:6b567521be1c151323f2059c8feec85ded96b6f184ff80535837fea33798b40b
 jumpbox/tmux-3.2a.tar.gz:
   size: 648394
   object_id: c795d961-e908-4f28-7632-f7816d2a9cef
@@ -142,3 +154,27 @@ jumpbox/wget-1.21.3.tar.gz:
   size: 5079864
   object_id: eba5bdf1-b13f-43ce-5eed-f0a7f9d502c9
   sha: sha256:5726bb8bc5ca0f6dc7110f6416e4bb7019e2d2ff5bf93d1ca2ffcc6656f220e5
+jumpbox/wheels/pip-25.0.1-py3-none-any.whl:
+  size: 1841526
+  object_id: 9de5bed0-d2f4-49d9-4b64-076b8129c6fb
+  sha: sha256:c46efd13b6aa8279f33f2864459c8ce587ea6a1a59ee20de055868d8f7688f7f
+jumpbox/wheels/python_dateutil-2.9.0.post0-py2.py3-none-any.whl:
+  size: 229892
+  object_id: 9c7b20b9-4053-479b-42e0-d8d0b14f68ca
+  sha: sha256:a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427
+jumpbox/wheels/python_magic-0.4.27-py2.py3-none-any.whl:
+  size: 13840
+  object_id: 208820fe-6e64-4bfd-4471-d0a295cf8c59
+  sha: sha256:c212960ad306f700aa0d01e5d7a325d20548ff97eb9920dcd29513174f0294d3
+jumpbox/wheels/setuptools-78.1.0-py3-none-any.whl:
+  size: 1256108
+  object_id: c519df3e-bf28-48ef-5687-397af15f86c1
+  sha: sha256:3e386e96793c8702ae83d17b853fb93d3e09ef82ec62722e61da5cd22376dcd8
+jumpbox/wheels/six-1.17.0-py2.py3-none-any.whl:
+  size: 11050
+  object_id: 3f18974f-2930-4686-506e-68446734fa2d
+  sha: sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274
+jumpbox/wheels/wheel-0.45.1-py3-none-any.whl:
+  size: 72494
+  object_id: 9a0caea3-3889-4900-6aa3-19d60a979d3f
+  sha: sha256:708e7481cc80179af0e556bbf0cc00b8444c7321e2700b8d8580231d13017248

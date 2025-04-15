@@ -1,8 +1,19 @@
 #!/bin/bash --login
 
+MISSING=false
 # Check for Build tools
 if [[ -z "$(command -v cc)" ]]; then
   echo "Dev tools unavailable, please add 'dev-tools' feature to the Genesis environment file and redeploy, then run /var/vcap/packages/jumpbox/setup"
+  MISSING=true
+fi
+# Check for sudo access
+if ! sudo -n true 2>/dev/null; then
+  echo "User does not have passwordless sudo access. Please ensure you are part of the sudoers group for setup to succeed."
+  MISSING=true
+fi
+
+if [[ "$MISSING" == true ]]; then
+  echo "Exiting setup due to missing prerequisites."
 else
   # install RVM
   if [[ ! -f ~/.rvmrc ]]; then
@@ -24,6 +35,26 @@ else
 
   rvm install ruby-3.1.4
   rvm --default use 3.1.4
-  gem install -N cf-uaac # TODO: move to uaa-cli https://github.com/cloudfoundry-incubator/uaa-cli
+  # gem install -N cf-uaac # TODO: move to uaa-cli https://github.com/cloudfoundry-incubator/uaa-cli
+  # install uaa-cli from GitHub
+  echo "Checking for existing uaa-cli installation..."
+  UAA_VERSION="0.16.0"
+  UAA_URL="https://github.com/cloudfoundry/uaa-cli/releases/download/${UAA_VERSION}/uaa-linux-amd64-${UAA_VERSION}"
+  DEST_BIN="/usr/local/bin/uaa"
 
+  if command -v uaa >/dev/null 2>&1; then
+    echo "uaa-cli is already installed at $(command -v uaa)"
+  else
+    echo "Installing uaa-cli version ${UAA_VERSION}..."
+    sudo wget -q "$UAA_URL" -O "$DEST_BIN"
+    sudo chmod +x "$DEST_BIN"
+
+    if ! grep -q "/usr/local/bin" <<< "$PATH"; then
+      echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bashrc
+      export PATH="/usr/local/bin:$PATH"
+    fi
+
+    echo "uaa-cli installed at: $(command -v uaa)"
+    uaa version
+  fi
 fi
