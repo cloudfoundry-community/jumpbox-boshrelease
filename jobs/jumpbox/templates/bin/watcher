@@ -90,6 +90,20 @@ provision() {
     rm -f ${home}/.repo
   fi
   chown -R ${user} ${home}
+
+  if echo "${groups}" | grep -q "bosh_sudoers"; then
+    # Sudo should be enabled for this user.
+    if ! id -nG "${user}" | grep -qw "bosh_sudoers"; then
+      log "Adding user ${user} to bosh_sudoers group"
+      /usr/sbin/usermod -a -G bosh_sudoers "${user}"
+    fi
+  else
+    # Sudo should be disabled; remove the user from bosh_sudoers if present.
+    if id -nG "${user}" | grep -qw "bosh_sudoers"; then
+      log "Removing user ${user} from bosh_sudoers group"
+      /usr/sbin/deluser "${user}" bosh_sudoers
+    fi
+  fi
 }
 
 deactivate() {
