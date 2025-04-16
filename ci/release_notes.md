@@ -18,3 +18,7 @@
 # cf8
 
 - Bumped cf8 to v8.12.0
+
+# cf8
+
+- Bumped cf8 to v8.13.0
