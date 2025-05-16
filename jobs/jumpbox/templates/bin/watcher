@@ -277,8 +277,8 @@ EOF
 <% end %>
 
 <% p('jumpbox.delete', []).each do |user| %>
-  unset users["<%= user %>"]
-  remove "<%= user %>"
+  unset users["<%= user['name'] %>"]
+  remove "<%= user['name'] %>"
 <% end %>
 
   for user in ${!users[@]}; do
