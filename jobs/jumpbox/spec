@@ -46,6 +46,10 @@ properties:
   jumpbox.one_time_setup:
     description: "Send new users through a one-time setup.  You generally want to do this."
     default: true
+  
+  jumpbox.distinct_bosh_user:
+    description: "If true, jumpbox will export a distint BOSH user for the logged in user."
+    default: false
 
   jumpbox.users:
     default: []
