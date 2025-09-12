@@ -46,3 +46,7 @@
 # cf8
 
 - Bumped cf8 to v8.14.1
+
+# fly
+
+- Bumped fly to v7.14.1
