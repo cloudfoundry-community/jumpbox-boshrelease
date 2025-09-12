@@ -54,3 +54,7 @@
 # safe
 
 - Bumped safe to v1.9.0
+
+# spruce
+
+- Bumped spruce to v1.31.1
