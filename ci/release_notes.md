@@ -42,3 +42,7 @@
 # cf7
 
 - Bumped cf7 to v7.8.0
+
+# cf8
+
+- Bumped cf8 to v8.14.1
