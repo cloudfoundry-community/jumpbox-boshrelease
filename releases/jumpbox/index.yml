@@ -149,6 +149,8 @@ builds:
     version: 4.8.10
   9b2ca45f-f760-4dc3-8562-bc808ec1d325:
     version: 4.2.5
+  a1fa65a1-642d-4e1b-458f-d8e1d597ae9f:
+    version: 5.1.0
   a2764368-e963-41e3-bcfc-646d7d23e296:
     version: 4.2.12
   a38cd380-0a67-4a2e-46d0-f095f94eb33b:
