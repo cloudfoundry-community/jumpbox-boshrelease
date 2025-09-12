@@ -38,3 +38,7 @@
 # cf
 
 - Bumped cf to v6.53.0
+
+# cf7
+
+- Bumped cf7 to v7.8.0
