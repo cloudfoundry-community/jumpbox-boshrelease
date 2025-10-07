@@ -6,3 +6,7 @@
 # credhub
 
 - Bumped credhub to v2.9.50
+
+# fly
+
+- Bumped fly to v7.14.2
