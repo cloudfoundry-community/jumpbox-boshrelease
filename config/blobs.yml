@@ -3,9 +3,9 @@ jumpbox/bins/bbr:
   object_id: 2b372c5a-b693-4889-6e55-50e39b8e360f
   sha: sha256:3f7002a1a1e514f0910dc7ebda158ac09ab0c4598f0c8c3f5da70be4627ca564
 jumpbox/bins/bosh:
-  size: 65002685
-  object_id: 758aff4e-ab9c-4bcd-4ed7-33143242716f
-  sha: sha256:bb02b7c3f913f990d9765583d8e581477fbf2ea6f9416146e1b2beb58d9e5ba9
+  size: 65200942
+  object_id: 61fa71dc-439f-4fc0-77c1-1a5d67b0f57d
+  sha: sha256:91900b5721d13099e704a3add0595cd56e453e98c883ac7d62a35713e389e772
 jumpbox/bins/certstrap:
   size: 6191115
   object_id: 5e18df77-426d-49e1-794a-d3fd202d7034
