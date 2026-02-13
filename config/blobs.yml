@@ -1,7 +1,7 @@
 jumpbox/bins/bbr:
-  size: 16210444
-  object_id: 2b372c5a-b693-4889-6e55-50e39b8e360f
-  sha: sha256:3f7002a1a1e514f0910dc7ebda158ac09ab0c4598f0c8c3f5da70be4627ca564
+  size: 17172793
+  object_id: 29a57ec4-cbe1-425a-5d3e-093909b2b10f
+  sha: sha256:e693cef7b253165f83cab5b25b3d58cf082dca1a7d0af724ec162faca2587ee1
 jumpbox/bins/bosh:
   size: 65212493
   object_id: 25902bd0-2b40-4049-6d51-a9791c9f55e3
