@@ -22,7 +22,6 @@ files:
   - jumpbox/bins/shield
   - jumpbox/bins/spiff
   - jumpbox/bins/terraform
-  - jumpbox/bins/tmate
   - jumpbox/bins/vault
   - jumpbox/bins/yq
   - jumpbox/bins/uaa
