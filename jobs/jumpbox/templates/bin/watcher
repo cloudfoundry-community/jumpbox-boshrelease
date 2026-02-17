@@ -1,5 +1,5 @@
 #!/bin/bash
-exec </dev/null >>/var/vcap/sys/log/jumpbox.log 2>&1
+exec </dev/null >>/var/vcap/sys/log/jumpbox/jumpbox.log 2>&1
 umask 022
 
 #
