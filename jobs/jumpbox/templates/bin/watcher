@@ -165,8 +165,8 @@ while true; do
   if [[ ${WATCHER_MTIME_NOW} -gt ${WATCHER_MTIME_START} ]]; then
     exec ${WATCHER}
   fi
-
-  if [[ -d ${JUMPBOX_ETC} ]]; then cp -a ${JUMPBOX_ETC}/* /etc/ ; fi
+  #Ignore on first run becasue that can cause issues when the stemcell changes userids
+  if [[ -d ${JUMPBOX_ETC} && $FIRSTRUN -eq 0 ]]; then cp -a ${JUMPBOX_ETC}/* /etc/ ; fi
 
   log1 "Setting up jumpbox banner"
   if [[ -d /etc/update-motd.d && ! -f /etc/update-motd.d/99-banner ]]; then
