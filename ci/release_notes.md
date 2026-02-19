@@ -10,3 +10,7 @@
 # fly
 
 - Bumped fly to v8.0.1
+
+# fly
+
+- Bumped fly to v8.0.2
