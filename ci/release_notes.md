@@ -6,3 +6,7 @@
 # cf8
 
 - Bumped cf8 to v8.17.1
+
+# fly
+
+- Bumped fly to v8.0.1
