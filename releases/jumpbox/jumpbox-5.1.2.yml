@@ -1,0 +1,34 @@
+name: jumpbox
+version: 5.1.2
+commit_hash: a7da992
+uncommitted_changes: false
+jobs:
+- name: inventory
+  version: 4836651d6ffceda80238ae5f8811770d4d2aa59a8ce4d80a5cac65e72185fa49
+  fingerprint: 4836651d6ffceda80238ae5f8811770d4d2aa59a8ce4d80a5cac65e72185fa49
+  sha1: sha256:1de55303259776684e45248febf7b9cced59d693ea105efe37a1cf003d2da150
+  packages:
+  - jumpbox
+  - golang-1-linux
+- name: jumpbox
+  version: b89defb244b80e2234b1a5bd0b45694e90712a36ebabcbb672f77f9f7695b7f4
+  fingerprint: b89defb244b80e2234b1a5bd0b45694e90712a36ebabcbb672f77f9f7695b7f4
+  sha1: sha256:2baaac9a4924463cbdce641f293042c087a7f4cf332fe80ec9b15c6108d0024b
+  packages:
+  - jumpbox
+  - golang-1-linux
+packages:
+- name: golang-1-linux
+  version: 48a59edbcdab872874d3b1851402c38b62fbf4a70ebfbd055a9d63865f021a69
+  fingerprint: 48a59edbcdab872874d3b1851402c38b62fbf4a70ebfbd055a9d63865f021a69
+  sha1: sha256:74d221407b944acb8eca4210fe808b0515f7a7b7a7919d51f65630bfffd22046
+  dependencies: []
+- name: jumpbox
+  version: 61e4dab1202db6e0480e4f55ade1788fb9b50aa73ed759c3fa560a0dc7596f9c
+  fingerprint: 61e4dab1202db6e0480e4f55ade1788fb9b50aa73ed759c3fa560a0dc7596f9c
+  sha1: sha256:38ddba0931964e2804e3816e311263c4d6190516656080124b7a27751b15ca95
+  dependencies: []
+license:
+  version: 4b86670e32bed468b57a08ffdf411e9532b6c4b4cbc317768357c409c3f5b29d
+  fingerprint: 4b86670e32bed468b57a08ffdf411e9532b6c4b4cbc317768357c409c3f5b29d
+  sha1: sha256:0a6d6e210ff9b462a374d4bea12975b170dfc80bfd8a89ffb382389ab8359426
