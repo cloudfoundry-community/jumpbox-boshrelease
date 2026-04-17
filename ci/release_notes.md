@@ -26,3 +26,7 @@
 # cf8
 
 - Bumped cf8 to v8.18.3
+
+# spruce
+
+- Bumped spruce to v1.32.0
