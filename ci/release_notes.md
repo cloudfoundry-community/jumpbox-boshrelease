@@ -38,3 +38,7 @@
 # credhub
 
 - Bumped credhub to v2.9.56
+
+# bosh-cli
+
+- Bumped bosh-cli to v7.10.3
