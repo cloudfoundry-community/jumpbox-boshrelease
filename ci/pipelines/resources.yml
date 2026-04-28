@@ -133,3 +133,10 @@ resources:
       user: geofffranks
       repository: spruce
       access_token: (( grab meta.github.access_token ))
+
+  - name: uaa
+    type: github-release
+    source:
+      user: cloudfoundry
+      repository: uaa-cli
+      access_token: (( grab meta.github.access_token ))
