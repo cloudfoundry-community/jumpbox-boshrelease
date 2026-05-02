@@ -46,3 +46,7 @@
 # bbr
 
 - Bumped bbr to v1.9.78
+
+# spruce
+
+- Bumped spruce to v1.35.1
