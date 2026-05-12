@@ -62,3 +62,7 @@
 # bosh-cli
 
 - Bumped bosh-cli to v7.10.5
+
+# fly
+
+- Bumped fly to v8.2.1
