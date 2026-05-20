@@ -90,3 +90,4 @@ groups:
     - credhub-cli
     - fly
     - spruce
+    - uaa
