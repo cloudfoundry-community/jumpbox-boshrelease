@@ -140,3 +140,45 @@ resources:
       user: cloudfoundry
       repository: uaa-cli
       access_token: (( grab meta.github.access_token ))
+
+  - name: certstrap
+    type: github-release
+    source:
+      user: square
+      repository: certstrap
+      access_token: (( grab meta.github.access_token ))
+
+  - name: jq
+    type: github-release
+    source:
+      user: jqlang
+      repository: jq
+      access_token: (( grab meta.github.access_token ))
+
+  - name: shield
+    type: github-release
+    source:
+      user: shieldproject
+      repository: shield
+      access_token: (( grab meta.github.access_token ))
+
+  - name: yq
+    type: github-release
+    source:
+      user: mikefarah
+      repository: yq
+      access_token: (( grab meta.github.access_token ))
+
+  - name: opentofu
+    type: github-release
+    source:
+      user: opentofu
+      repository: opentofu
+      access_token: (( grab meta.github.access_token ))
+
+  - name: openbao
+    type: github-release
+    source:
+      user: openbao
+      repository: openbao
+      access_token: (( grab meta.github.access_token ))

@@ -91,3 +91,9 @@ groups:
     - fly
     - spruce
     - uaa
+    - certstrap
+    - jq
+    - shield
+    - yq
+    - opentofu
+    - openbao

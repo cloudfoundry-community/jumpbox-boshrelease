@@ -1,0 +1,121 @@
+#!/bin/bash
+#
+# ci/scripts/repack-vim-appimage
+#
+# Converts an upstream vim AppImage (from vim/vim-appimage) into a
+# self-contained, relocatable tarball that the jumpbox package can
+# install without any FUSE dependency at runtime.
+#
+# The vim binary inside the AppImage has RUNPATH '$ORIGIN/../lib', so as
+# long as we keep bin/ and lib/ siblings the bundled shared libraries are
+# found automatically. The only other requirement is pointing VIMRUNTIME
+# at share/vim/vim92 -- the jumpbox packaging wrapper does that.
+#
+# Usage:
+#   ci/scripts/repack-vim-appimage [VERSION]
+#
+#   VERSION   vim tag to fetch, e.g. 9.2.0541. If omitted, the latest
+#             release from vim/vim-appimage is used.
+#
+# Env:
+#   ADD_BLOB=1   after building, run `bosh remove-blob` for the previous
+#                vim tarball and `bosh add-blob` for the new one.
+#
+# Requires: tar, gh, bosh (only when ADD_BLOB=1).
+#
+# NOTE: the AppImage asset is resolved from the release rather than
+#       constructed, because the glibc tag in the filename changes over
+#       time (e.g. glibc2.29 on v9.1.0917, glibc2.34 on v9.2.x).
+
+set -euo pipefail
+
+REPO="vim/vim-appimage"
+
+header() { echo; echo "### $*"; echo; }
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+
+VERSION="${1:-}"
+if [[ -z "$VERSION" ]]; then
+  header "Resolving latest vim-appimage release"
+  VERSION="$(gh release view --repo "$REPO" --json tagName -q .tagName)"
+  VERSION="${VERSION#v}"   # strip leading v
+fi
+echo "vim version: ${VERSION}"
+
+WORK="$(mktemp -d)"
+trap 'rm -rf "$WORK"' EXIT
+
+TARBALL="${REPO_ROOT}/vim-${VERSION}-linux-amd64.tar.gz"
+
+# Resolve the console Vim AppImage asset (not GVim, not .zsync). The glibc
+# fragment in the name varies by release, so match on a glob.
+header "Resolving AppImage asset for v${VERSION}"
+ASSET="$(gh release view --repo "$REPO" "v${VERSION}" --json assets \
+          -q '.assets[].name | select(test("^Vim-.*-x86_64\\.AppImage$"))' | head -1)"
+if [[ -z "$ASSET" ]]; then
+  echo >&2 "ERROR: no console Vim AppImage asset found on release v${VERSION}"
+  exit 1
+fi
+echo "asset: ${ASSET}"
+
+header "Downloading ${ASSET}"
+gh release download --repo "$REPO" "v${VERSION}" --pattern "$ASSET" --dir "$WORK"
+mv "${WORK}/${ASSET}" "${WORK}/vim.AppImage"
+chmod +x "${WORK}/vim.AppImage"
+
+header "Extracting AppImage"
+( cd "$WORK" && ./vim.AppImage --appimage-extract >/dev/null )
+SQUASH="${WORK}/squashfs-root"
+
+# Locate the bundled vim runtime dir (vim92, vim93, ...) so this keeps
+# working across major/minor bumps.
+RUNTIME_DIR="$(basename "$(find "${SQUASH}/usr/share/vim" -maxdepth 1 -type d -name 'vim[0-9]*' | head -1)")"
+if [[ -z "$RUNTIME_DIR" ]]; then
+  echo >&2 "ERROR: could not find vim runtime dir under usr/share/vim"
+  exit 1
+fi
+echo "runtime dir: ${RUNTIME_DIR}"
+
+header "Repacking usr/{bin,lib,share/vim/${RUNTIME_DIR}} -> tarball"
+STAGE="${WORK}/stage/vim"
+mkdir -p "${STAGE}/share/vim"
+cp -a "${SQUASH}/usr/bin"                    "${STAGE}/bin"
+cp -a "${SQUASH}/usr/lib"                    "${STAGE}/lib"
+cp -a "${SQUASH}/usr/share/vim/${RUNTIME_DIR}" "${STAGE}/share/vim/${RUNTIME_DIR}"
+
+( cd "${WORK}/stage" && tar -czf "$TARBALL" vim )
+echo "built: ${TARBALL}"
+ls -lh "$TARBALL"
+
+header "Smoke test"
+T="${WORK}/extract"; mkdir -p "$T"
+tar -xzf "$TARBALL" -C "$T"
+printf 'hello\n' > "${WORK}/smoke.txt"
+env -i VIMRUNTIME="${T}/vim/share/vim/${RUNTIME_DIR}" HOME="$WORK" \
+  "${T}/vim/bin/vim" -E -s -c '%s/hello/world/' -c 'wq' "${WORK}/smoke.txt"
+if [[ "$(cat "${WORK}/smoke.txt")" == "world" ]]; then
+  echo "OK: vim edited a file headlessly"
+else
+  echo >&2 "ERROR: smoke test failed"
+  exit 1
+fi
+
+if [[ "${ADD_BLOB:-}" == "1" ]]; then
+  header "Updating BOSH blob"
+  ( cd "$REPO_ROOT"
+    # remove any previously tracked vim tarball blob
+    spruce json config/blobs.yml 2>/dev/null \
+      | jq -r 'keys[] | select(test("^jumpbox/vim-.*-linux-amd64\\.tar\\.gz$"))' \
+      | xargs -r -L1 bosh remove-blob || true
+    bosh add-blob "$TARBALL" "jumpbox/vim-${VERSION}-linux-amd64.tar.gz"
+  )
+  echo
+  echo "Remember to update:"
+  echo "  - packages/jumpbox/spec       (vim-${VERSION}-linux-amd64.tar.gz)"
+  echo "  - packages/jumpbox/packaging  (tarball name + runtime dir ${RUNTIME_DIR})"
+  echo "  - INCLUDES.yml                (vim: '${VERSION}')"
+  echo "  - bosh upload-blobs"
+fi
+
+header "DONE"

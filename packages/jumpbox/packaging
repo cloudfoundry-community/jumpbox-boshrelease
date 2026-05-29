@@ -20,9 +20,9 @@ chmod 0755 ${BOSH_INSTALL_TARGET}/bin/*
 
 # GIT
 # https://www.kernel.org/pub/software/scm/git
-# https://www.kernel.org/pub/software/scm/git/git-2.35.7.tar.gz
-(tar -xzvf jumpbox/git-2.35.7.tar.gz
- cd git-2.35.7
+# https://www.kernel.org/pub/software/scm/git/git-2.54.0.tar.gz
+(tar -xzvf jumpbox/git-2.54.0.tar.gz
+ cd git-2.54.0
  ./configure --prefix=${BOSH_INSTALL_TARGET}
  make -j${CPUS} all
  make install) &
@@ -30,17 +30,17 @@ n=$((n + 1))
 
 # TMUX
 # http://libevent.org/
-# https://github.com/libevent/libevent/releases/download/release-2.1.11-stable/libevent-2.1.11-stable.tar.gz
+# https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz
 # https://tmux.github.io/
-# https://github.com/tmux/tmux/releases/download/3.0a/tmux-3.0a.tar.gz
+# https://github.com/tmux/tmux/releases/download/3.6b/tmux-3.6b.tar.gz
 (tar -xzvf jumpbox/libevent-2.1.12-stable.tar.gz
  (cd libevent-2.1.12-stable
   ./configure --prefix=/usr --disable-shared
   make -j${CPUS}
   make install)
 
- tar -xzvf jumpbox/tmux-3.2a.tar.gz
- cd tmux-3.2a
+ tar -xzvf jumpbox/tmux-3.6b.tar.gz
+ cd tmux-3.6b
  ./configure --prefix=${BOSH_INSTALL_TARGET} \
              --enable-static
  sed -i 's@#define TMUX_CONF.*@#define TMUX_CONF "'${BOSH_INSTALL_TARGET}'/etc/tmux.conf"@' tmux.h
@@ -49,29 +49,20 @@ n=$((n + 1))
 n=$((n + 1))
 
 # TREE
-# http://mama.indstate.edu/users/ice/tree/
-# ftp://mama.indstate.edu/linux/tree/tree-2.0.2.tgz
-(tar -xzvf jumpbox/tree-2.0.2.tar.gz
- cd tree-2.0.2
+# https://gitlab.com/OldManProgrammer/unix-tree
+# https://gitlab.com/OldManProgrammer/unix-tree/-/archive/2.3.2/unix-tree-2.3.2.tar.gz
+(tar -xzvf jumpbox/tree-2.3.2.tar.gz
+ cd unix-tree-2.3.2
  sed -i "s|^PREFIX=.*|PREFIX=${BOSH_INSTALL_TARGET}|" Makefile
- make -j${CPUS}
- make install) &
-n=$((n + 1))
-
-# VIM
-# http://github.com/vim/vim/releases
-(tar -xzvf jumpbox/vim-8.2.4528.tar.gz
- cd vim-8.2.4528
- ./configure --prefix=${BOSH_INSTALL_TARGET}
  make -j${CPUS}
  make install) &
 n=$((n + 1))
 
 # WGET
 # http://ftp.gnu.org/gnu/wget/
-# https://ftp.gnu.org/gnu/wget/wget-1.21.3.tar.gz
-(tar -xzvf jumpbox/wget-1.21.3.tar.gz
- cd wget-1.21.3
+# https://ftp.gnu.org/gnu/wget/wget-1.25.0.tar.gz
+(tar -xzvf jumpbox/wget-1.25.0.tar.gz
+ cd wget-1.25.0
  OPENSSL_CFLAGS=" " OPENSSL_LIBS="-lssl -lcrypto" ./configure --prefix=${BOSH_INSTALL_TARGET} --with-ssl=openssl
  make -j${CPUS}
  make install) &
@@ -93,6 +84,29 @@ while [[ $n -gt 0 ]]; do
 	wait -n
 	n=$((n - 1))
 done
+
+# VIM (prebuilt, repacked from vim/vim-appimage by ci/scripts/repack-vim-appimage)
+# The vim binary's RUNPATH is '$ORIGIN/../lib', so bin/ and lib/ must stay
+# siblings under vim/. Thin wrappers in bin/ export VIM + VIMRUNTIME so the
+# bundled runtime files and the system vimrc resolve on the jumpbox.
+tar -xzvf jumpbox/vim-9.2.0541-linux-amd64.tar.gz
+mkdir -p ${BOSH_INSTALL_TARGET}/vim ${BOSH_INSTALL_TARGET}/bin ${BOSH_INSTALL_TARGET}/share/vim
+cp -a vim/bin ${BOSH_INSTALL_TARGET}/vim/bin
+cp -a vim/lib ${BOSH_INSTALL_TARGET}/vim/lib
+cp -a vim/share/vim/vim[0-9]* ${BOSH_INSTALL_TARGET}/share/vim/
+for tool in $(ls ${BOSH_INSTALL_TARGET}/vim/bin); do
+  cat > ${BOSH_INSTALL_TARGET}/bin/${tool} <<WRAP
+#!/bin/sh
+here="\$(cd "\$(dirname "\$(readlink -f "\$0")")" && pwd)"
+export VIM="\${here}/../share/vim"
+export VIMRUNTIME="\$(echo "\${here}"/../share/vim/vim[0-9]*)"
+# vim's bundled libs must win over the package-wide LD_LIBRARY_PATH set in bashrc
+export LD_LIBRARY_PATH="\${here}/../vim/lib\${LD_LIBRARY_PATH:+:\$LD_LIBRARY_PATH}"
+exec "\${here}/../vim/bin/${tool}" "\$@"
+WRAP
+  chmod 0755 ${BOSH_INSTALL_TARGET}/bin/${tool}
+done
+ln -sf vim ${BOSH_INSTALL_TARGET}/bin/vi
 
 cp jumpbox/vimrc     ${BOSH_INSTALL_TARGET}/share/vim/vimrc
 cp jumpbox/tmux.conf ${BOSH_INSTALL_TARGET}/etc/tmux.conf

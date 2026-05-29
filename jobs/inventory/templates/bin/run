@@ -20,19 +20,39 @@ check() {
 export HOME=/var/vcap/data/.home
 mkdir -p $HOME
 
+# Cloud Foundry CLIs
+check cf --version
+check cf7 --version
+check cf8 --version
+
+# BOSH / Genesis ecosystem
 check bbr version
 check bosh -v
-check cf --version
 check credhub --version
-check jq --version
-check spruce --version
 check genesis version
 check safe version
+check esuf --version
 check shield -v
+check spruce --version
 check spiff -v
+check uaa version
+
+# secrets / infrastructure
 check vault -v
-check curl --version
+check bao version
+check terraform version
+check tofu version
+check certstrap --version
+
+# data wrangling / misc CLIs
+check jq --version
+check yq --version
+check nats --version
 check fly --version
+check s3cmd --version
+
+# compiled unix tooling
+check curl --version
 check git --version
 check tmux -V
 check tree --version

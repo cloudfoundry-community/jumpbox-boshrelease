@@ -1,0 +1,32 @@
+---
+# ci/version_control.yml
+#
+# Pipeline-owned record of the version currently vendored for each blob.
+# ci/scripts/update-blob reads this to refuse downgrades and to skip
+# re-ingesting a version that is already current, then writes the new
+# version back here on a successful bump.
+#
+# Keys are the BLOB_NAME passed by each job in ci/pipelines/jobs-upstream.yml.
+# This file is machine-managed: do not add comments inside the map below
+# (the updater rewrites it via spruce and will drop them).
+
+bbr:                "1.9.78"
+bosh-cli:           "7.10.5"
+cf:                 "6.53.0"
+cf7:                "7.8.0"
+cf8:                "8.18.3"
+cloudfoundry-utils: "1.0.0"
+credhub:            "2.9.56"
+esuf:               "0.1.2"
+fly:                "8.2.3"
+genesis:            "3.0.14"
+safe:               "1.9.0"
+spruce:             "1.35.5"
+uaa:                "0.16.0"
+
+certstrap:          "1.3.0"
+jq:                 "1.8.1"
+shield:             "9.0.1"
+yq:                 "4.53.2"
+tofu:               "1.12.0"
+bao:                "2.5.4"

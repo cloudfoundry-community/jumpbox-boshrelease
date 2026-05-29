@@ -51,6 +51,36 @@ VERSION="$(cat "${BLOB_DIR}/version")"
 ######
 ######
 ######
+# Downgrade guard: ci/version_control.yml records the version currently
+# vendored for each blob. Refuse to overwrite a newer binary with an older
+# one (upstream re-tags, backport releases, or a fat-fingered manual run),
+# and no-op when the upstream version is already what we ship.
+VERSION_DB="${REPO_ROOT}/ci/version_control.yml"
+norm_ver() { grep -oE '[0-9]+(\.[0-9]+)+' <<<"${1:-}" | head -1; }
+
+if [[ -f "$VERSION_DB" ]]; then
+  current_raw="$(spruce json "$VERSION_DB" 2>/dev/null | jq -r --arg k "$BLOB_NAME" '.[$k] // ""')"
+  cur="$(norm_ver "$current_raw")"
+  inc="$(norm_ver "$VERSION")"
+
+  if [[ -n "$cur" && -n "$inc" ]]; then
+    if [[ "$inc" == "$cur" ]]; then
+      header "Blob '${BLOB_NAME}' already at ${current_raw}; nothing to do."
+      cp -a "${REPO_ROOT}" "${REPO_OUT}"
+      exit 0
+    fi
+    highest="$(printf '%s\n%s\n' "$cur" "$inc" | sort -V | tail -1)"
+    if [[ "$highest" == "$cur" ]]; then
+      header "Refusing downgrade of '${BLOB_NAME}': have ${current_raw}, upstream offered ${VERSION}."
+      cp -a "${REPO_ROOT}" "${REPO_OUT}"
+      exit 0
+    fi
+  fi
+fi
+
+######
+######
+######
 header "Configuring blobstore (AWS)"
 pushd "${REPO_ROOT}"
 cat >config/private.yml <<EOF
@@ -102,7 +132,7 @@ ls -lah "../${BLOB_DIR}"
 header "Updating blobs"
 # expand ${VERSION} env var into file path
 eval "blob_dst=${BLOB_DESTINATION}"
-if [[ ${BLOB_DIR}/${BLOB_BINARY} == *".tgz" ]]; then
+if [[ ${BLOB_DIR}/${BLOB_BINARY} == *".tgz" || ${BLOB_DIR}/${BLOB_BINARY} == *".tar.gz" ]]; then
   echo "Unpacking TarGz"
   tar zxvf ../${BLOB_DIR}/${BLOB_BINARY} -C ../${BLOB_DIR}
   bosh add-blob ../${BLOB_DIR}/${BLOB_NAME} "${blob_dst}"
@@ -123,6 +153,19 @@ header "Uploading blobs to blobstore (AWS)"
 bosh -n upload-blobs
 rm config/private.yml
 popd
+
+######
+######
+######
+# Persist the new version so the downgrade guard sees it on the next run.
+if [[ -f "$VERSION_DB" ]]; then
+  header "Recording ${BLOB_NAME} ${VERSION} in $(basename "$VERSION_DB")"
+  overlay="$(mktemp)"
+  echo "${BLOB_NAME}: \"${VERSION}\"" > "$overlay"
+  spruce merge "$VERSION_DB" "$overlay" > "${VERSION_DB}.new"
+  mv "${VERSION_DB}.new" "$VERSION_DB"
+  rm -f "$overlay"
+fi
 
 ######
 ######

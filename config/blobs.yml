@@ -1,3 +1,7 @@
+jumpbox/bins/bao:
+  size: 187707499
+  object_id: 0b576f3f-448e-4cb2-740e-9e25847d0546
+  sha: sha256:0402103812b795d7b3668812b642aaff469ee860ef4dd99e6616ee5a0cce5e46
 jumpbox/bins/bbr:
   size: 17183322
   object_id: aabe1664-0507-4b7c-5801-604092fc8dfb
@@ -7,9 +11,9 @@ jumpbox/bins/bosh:
   object_id: 027ad73d-f46c-45ba-7026-27af4a274c4b
   sha: sha256:e9847375ba5397589e7b070305defc70321ad0e62d18b67a70a330efcab6e526
 jumpbox/bins/certstrap:
-  size: 6191115
-  object_id: 5e18df77-426d-49e1-794a-d3fd202d7034
-  sha: sha256:db0007333f5285e8b4f42f684e3a9023e910f8955eb2471c4d65748d37b8b35b
+  size: 6658633
+  object_id: 5fe90064-e4a4-4552-405a-be01cebd641b
+  sha: sha256:811681112580439ff112c2faf55f562dc06af94e9460ab05b2869d9a72f1b9a6
 jumpbox/bins/cf:
   size: 24756224
   object_id: 34a3dc3a-7531-45da-5f80-1bf846fdaa45
@@ -39,9 +43,9 @@ jumpbox/bins/genesis:
   object_id: 94f97fbc-300c-4600-4dc9-7d52de35bbea
   sha: sha256:9db85ad2bac689e7f41e6a5e0a66ed363361a4d91d1ec295bd89b08b40f40e48
 jumpbox/bins/jq:
-  size: 3953824
-  object_id: 2416f476-efeb-4d53-69b3-a5cc8962636f
-  sha: sha256:af986793a515d500ab2d35f8d2aecd656e764504b789b66d7e1a0b727a124c44
+  size: 2255816
+  object_id: 627bf3ee-5455-4785-6c66-6bee375f9927
+  sha: sha256:020468de7539ce70ef1bceaf7cde2e8c4f2ca6c3afb84642aabc5c97d9fc2a0d
 jumpbox/bins/nats:
   size: 7014586
   object_id: b6a19bbf-5675-49bd-6995-2f044be4adba
@@ -51,9 +55,9 @@ jumpbox/bins/safe:
   object_id: e967674d-55dd-4649-66f6-bac4c8efd6e2
   sha: sha256:c8cd4e7fbdfad5155eff8b13ea0035922c7fd2aa74a0bedfbbba0aa3ab60e3da
 jumpbox/bins/shield:
-  size: 8557697
-  object_id: eabe4e8b-7c92-4ed3-5708-35aec3a2a82d
-  sha: sha256:a6dd76f36339f92af910f3e6a8ef82228eb1545dcba1021c2cf5ac8f834e46f9
+  size: 10533284
+  object_id: cf3a4472-3b49-4bb3-5504-cec936274552
+  sha: sha256:83ab105ccce5eb35fbc1dbb90368a5c2b12d925c1b532f2a90e6eb7d3ad0021a
 jumpbox/bins/spiff:
   size: 4808407
   object_id: 07cbb1a8-7424-456f-696a-78dd5552a27c
@@ -63,25 +67,29 @@ jumpbox/bins/spruce:
   object_id: a1abdffa-c0ac-4db9-6e33-4cd90e231a58
   sha: sha256:a7b468898530430dd58c9c8bcb2f66c4f1a1d30f8560aadc5b5eeb5fe31c9a45
 jumpbox/bins/terraform:
-  size: 63262720
-  object_id: 74d2c27f-7dc7-4eb2-4538-a89835a402ed
-  sha: sha256:ba86f524c64a97df436d541e67480607d0330ea27b23c3208316260189210151
+  size: 65200128
+  object_id: 0850e513-b730-4688-7919-9fec9fcfbfc7
+  sha: sha256:d49d3a48321c0a7ff258d8d229fb11a64832eff06980b6a348627279759e5747
 jumpbox/bins/tmate:
   size: 3135320
   object_id: 1556169c-020e-44e4-5892-995890c24d99
   sha: sha256:d2fff992e40ce18ff81b9a92fa1cb93a56fb5a82c1cc428204552d8dfa1bc04f
+jumpbox/bins/tofu:
+  size: 114880674
+  object_id: e53a0f5e-f9fd-4a2b-40b0-9018d221439d
+  sha: sha256:eb2197869be64083574ca00e6e30feea22bba9c8105592b2bb6101bd907be21b
 jumpbox/bins/uaa:
   size: 14413088
   object_id: 1b2dc57c-7a85-4406-7e3f-48998ebdf18c
   sha: sha256:86e0445fef28a277e7b5e445ca12b8de7c7f46c92e7fc6cafa2f37f290ab593d
 jumpbox/bins/vault:
-  size: 188378621
-  object_id: 8cd5b321-9288-4951-527a-322c3ab14630
-  sha: sha256:6c27b822dbe38e530fafcf8e15ab197a14451f977b21f3cacf9e9e42e27da253
+  size: 374448283
+  object_id: 80a60c96-54cf-4731-6e01-3d35c80854ab
+  sha: sha256:64f0aefef6eed97fa9837ee4ebd19f8b043a107dcbf8bb272ba2811a0803c765
 jumpbox/bins/yq:
-  size: 10160405
-  object_id: a43b7c03-11f9-44bd-4605-18614787ad1a
-  sha: sha256:042f7462ec8378f8b0d3bac85d1b1a063b63beef5d8e3826bb2377294116ae90
+  size: 13734050
+  object_id: 3c9e6af9-37c2-45bc-5e68-bb8fb9b7b394
+  sha: sha256:d56bf5c6819e8e696340c312bd70f849dc1678a7cda9c2ad63eebd906371d56b
 jumpbox/cloudfoundry-utils//cert_generator:
   size: 6667
   object_id: 9f30cdad-49de-4f2a-5cd5-9999d258d5c1
@@ -126,10 +134,10 @@ jumpbox/get-pip.py:
   size: 2300175
   object_id: d95e41da-48ca-4f97-63b1-fbfca21e40c2
   sha: sha256:2f3ff20716690396762da67f20b04ece444fe5fcba3d9f967de0021d71565043
-jumpbox/git-2.35.7.tar.gz:
-  size: 10530007
-  object_id: b1f6c2f4-5089-44d0-4a0d-3e176cbb1d12
-  sha: sha256:fc849272a95cc7457091221a645fcd753b3b1984767ee3323fb6a0aa944bbcb4
+jumpbox/git-2.54.0.tar.gz:
+  size: 12102611
+  object_id: 77e615b3-b925-4728-7d5a-4fb0f8029f10
+  sha: sha256:45e8107643a44e3ce46f5665beb35af3932fb0d70017687905ab5d4e3aafa8eb
 jumpbox/libevent-2.1.12-stable.tar.gz:
   size: 1100847
   object_id: 853918f8-5529-47a8-7faf-2d68245d479d
@@ -138,22 +146,22 @@ jumpbox/s3cmd-2.4.0.tar.gz:
   size: 144976
   object_id: 50fe234f-8a4e-421a-7afe-4ce78c57698a
   sha: sha256:6b567521be1c151323f2059c8feec85ded96b6f184ff80535837fea33798b40b
-jumpbox/tmux-3.2a.tar.gz:
-  size: 648394
-  object_id: c795d961-e908-4f28-7632-f7816d2a9cef
-  sha: sha256:551553a4f82beaa8dadc9256800bcc284d7c000081e47aa6ecbb6ff36eacd05f
-jumpbox/tree-2.0.2.tar.gz:
-  size: 57960
-  object_id: 7d13bfdf-29b5-43a6-4e84-d7bc537bdc46
-  sha: sha256:7d693a1d88d3c4e70a73e03b8dbbdc12c2945d482647494f2f5bd83a479eeeaf
-jumpbox/vim-8.2.4528.tar.gz:
-  size: 16185073
-  object_id: e1f8a296-40b3-44a3-6604-dd85f988b157
-  sha: sha256:10a7e2b089697f247501c5f269536ae736d21d9dbc2065f2517cfb18bf7d7184
-jumpbox/wget-1.21.3.tar.gz:
-  size: 5079864
-  object_id: eba5bdf1-b13f-43ce-5eed-f0a7f9d502c9
-  sha: sha256:5726bb8bc5ca0f6dc7110f6416e4bb7019e2d2ff5bf93d1ca2ffcc6656f220e5
+jumpbox/tmux-3.6b.tar.gz:
+  size: 750261
+  object_id: b00cd2d9-47a0-4099-796a-b75a7b42e015
+  sha: sha256:390759d25fdba016887ec982b808927e637070fd7d03a8021f8ef3102b9ae3c7
+jumpbox/tree-2.3.2.tar.gz:
+  size: 70834
+  object_id: 8e1513e0-fdd9-44de-6e0a-66a91ac0271b
+  sha: sha256:513a53cbc42ca1f4ea06af2bab1f5283524a3848266b1d162416f8033afc4985
+jumpbox/vim-9.2.0541-linux-amd64.tar.gz:
+  size: 19361984
+  object_id: 6640c093-d930-43f2-5ed9-d622e4ba7b55
+  sha: sha256:e9aabffd9c8dd5b008d1a2fba1a3f9a1bcdd295c42d18a1db1e7019c5290c632
+jumpbox/wget-1.25.0.tar.gz:
+  size: 5263736
+  object_id: e29b2010-7594-42b3-66f2-259b046aa57a
+  sha: sha256:766e48423e79359ea31e41db9e5c289675947a7fcf2efdcedb726ac9d0da3784
 jumpbox/wheels/pip-25.0.1-py3-none-any.whl:
   size: 1841526
   object_id: 9de5bed0-d2f4-49d9-4b64-076b8129c6fb

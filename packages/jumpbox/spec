@@ -22,29 +22,31 @@ files:
   - jumpbox/bins/shield
   - jumpbox/bins/spiff
   - jumpbox/bins/terraform
+  - jumpbox/bins/tofu
   - jumpbox/bins/tmate
   - jumpbox/bins/vault
+  - jumpbox/bins/bao
   - jumpbox/bins/yq
   - jumpbox/bins/uaa
   - jumpbox/cloudfoundry-utils/*
 
     # git
-  - jumpbox/git-2.35.7.tar.gz
+  - jumpbox/git-2.54.0.tar.gz
 
     # tmux
   - jumpbox/libevent-2.1.12-stable.tar.gz
-  - jumpbox/tmux-3.2a.tar.gz
+  - jumpbox/tmux-3.6b.tar.gz
   - jumpbox/tmux.conf
 
     # tree
-  - jumpbox/tree-2.0.2.tar.gz
+  - jumpbox/tree-2.3.2.tar.gz
 
-    # vim
-  - jumpbox/vim-8.2.4528.tar.gz
+    # vim (prebuilt, repacked from vim/vim-appimage via ci/scripts/repack-vim-appimage)
+  - jumpbox/vim-9.2.0541-linux-amd64.tar.gz
   - jumpbox/vimrc
 
     # wget
-  - jumpbox/wget-1.21.3.tar.gz
+  - jumpbox/wget-1.25.0.tar.gz
 
     # pip
   - jumpbox/get-pip.py
