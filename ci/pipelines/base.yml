@@ -42,8 +42,8 @@ meta:
     private_key:  (( param "Please generate an SSH Deployment Key for this repo and specify it here" ))
     access_token: (( param "Please generate a Personal Access Token to be used for creating github releases (do you have a ci-bot?)" ))
 
-  bosh-lite:
-    target:     (( param "Please specify the BOSH target URI for the bosh-lite to run test deployments against" ))
+  bosh:
+    target:     (( param "Please specify the BOSH target URI to run test deployments against" ))
     cacert:     (( param "Please specify the BOSH Director Root CA cert" ))
     username:   admin
     password:   (( param "Please specify the BOSH Director admin password" ))
