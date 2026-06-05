@@ -71,7 +71,11 @@ n=$((n + 1))
 # S3CMD
 # https://github.com/s3tools/s3cmd/releases/download/v2.4.0/s3cmd-2.4.0.tar.gz
 # Offline install using vendored wheels
-(python3 jumpbox/get-pip.py --no-index --find-links=jumpbox/wheels
+# PIP_BREAK_SYSTEM_PACKAGES bypasses PEP-668 (externally-managed-environment),
+# which the ubuntu-noble stemcell's system Python enforces; vendored pip is
+# 25.0.1, which honors this env var (no-op on jammy's compile path).
+(export PIP_BREAK_SYSTEM_PACKAGES=1
+ python3 jumpbox/get-pip.py --no-index --find-links=jumpbox/wheels
  export PATH=$HOME/.local/bin:$PATH
  tar -xzvf jumpbox/s3cmd-2.4.0.tar.gz
  cd s3cmd-2.4.0

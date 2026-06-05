@@ -22,7 +22,8 @@ case $1 in
       cp /etc/ssh/*key* /var/vcap/store/jumpbox/hostkeys
     else
       cp /var/vcap/store/jumpbox/hostkeys/*key* /etc/ssh
-      systemctl restart sshd.service
+      # ssh.service on jammy+noble; sshd.service was a jammy-only alias.
+      systemctl restart ssh.service 2>/dev/null || systemctl restart sshd.service
     fi
 
     exec $watcher

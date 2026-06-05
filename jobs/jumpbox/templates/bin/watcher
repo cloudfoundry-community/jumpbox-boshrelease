@@ -242,7 +242,9 @@ EOF
   sshd_configure ClientAliveInterval <%= p('jumpbox.ssh.client_alive_interval') %>
   sshd_configure ClientAliveCountMax <%= p('jumpbox.ssh.client_alive_count_max') %>
 
-  systemctl restart sshd.service # We assume bionic or later
+  # The unit is ssh.service on jammy and noble; sshd.service was a jammy-only
+  # alias dropped on noble (24.04), so restart ssh.service and fall back.
+  systemctl restart ssh.service 2>/dev/null || systemctl restart sshd.service
 
   log1 "Setting up sudoers to allow certain environment variables to pass through"
   for var in http_proxy https_proxy ftp_proxy no_proxy EDITOR; do
