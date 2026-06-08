@@ -40,7 +40,7 @@ files:
   - jumpbox/tree-2.3.2.tar.gz
 
     # vim (prebuilt, repacked from vim/vim-appimage via ci/scripts/repack-vim-appimage)
-  - jumpbox/vim-9.2.0541-linux-amd64.tar.gz
+  - jumpbox/vim-9.2.0597-linux-amd64.tar.gz
   - jumpbox/vimrc
 
     # wget

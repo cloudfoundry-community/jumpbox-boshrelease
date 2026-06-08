@@ -23,7 +23,7 @@ includes:
 
   tree:     '2.3.2'
 
-  vim:      '9.2.0541'    # prebuilt; repacked from vim/vim-appimage (not source-compiled)
+  vim:      '9.2.0597'    # prebuilt; repacked from vim/vim-appimage (not source-compiled)
 
   wget:     '1.25.0'
 

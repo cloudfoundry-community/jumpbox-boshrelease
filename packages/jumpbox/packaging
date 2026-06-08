@@ -77,7 +77,9 @@ n=$((n + 1))
 # Offline install using vendored wheels
 # PIP_BREAK_SYSTEM_PACKAGES bypasses PEP-668 (externally-managed-environment),
 # which the ubuntu-noble stemcell's system Python enforces; vendored pip is
-# 25.0.1, which honors this env var (no-op on jammy's compile path).
+# 26.1.2, which honors this env var (no-op on jammy's compile path).
+# packaging is vendored because wheel >= 0.46 declares it a runtime dependency;
+# get-pip installs wheel on jammy's python3.10, which fails offline without it.
 (export PIP_BREAK_SYSTEM_PACKAGES=1
  python3 jumpbox/get-pip.py --no-index --find-links=jumpbox/wheels
  export PATH=$HOME/.local/bin:$PATH
@@ -97,7 +99,7 @@ done
 # The vim binary's RUNPATH is '$ORIGIN/../lib', so bin/ and lib/ must stay
 # siblings under vim/. Thin wrappers in bin/ export VIM + VIMRUNTIME so the
 # bundled runtime files and the system vimrc resolve on the jumpbox.
-tar -xzvf jumpbox/vim-9.2.0541-linux-amd64.tar.gz
+tar -xzvf jumpbox/vim-9.2.0597-linux-amd64.tar.gz
 mkdir -p ${BOSH_INSTALL_TARGET}/vim ${BOSH_INSTALL_TARGET}/bin ${BOSH_INSTALL_TARGET}/share/vim
 cp -a vim/bin ${BOSH_INSTALL_TARGET}/vim/bin
 cp -a vim/lib ${BOSH_INSTALL_TARGET}/vim/lib
