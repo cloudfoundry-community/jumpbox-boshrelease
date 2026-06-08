@@ -67,13 +67,13 @@ jumpbox/bins/tmate:
   object_id: 1556169c-020e-44e4-5892-995890c24d99
   sha: sha256:d2fff992e40ce18ff81b9a92fa1cb93a56fb5a82c1cc428204552d8dfa1bc04f
 jumpbox/bins/tofu:
-  size: 114880674
-  object_id: e53a0f5e-f9fd-4a2b-40b0-9018d221439d
-  sha: sha256:eb2197869be64083574ca00e6e30feea22bba9c8105592b2bb6101bd907be21b
+  size: 114966690
+  object_id: 2edc82a9-b030-4024-6a4b-160cc6742ad1
+  sha: sha256:b6cb308bd699c8b53882319986f339eeaa44f925a68f12d5b0a14e6caceedf23
 jumpbox/bins/uaa:
-  size: 14413088
-  object_id: 1b2dc57c-7a85-4406-7e3f-48998ebdf18c
-  sha: sha256:86e0445fef28a277e7b5e445ca12b8de7c7f46c92e7fc6cafa2f37f290ab593d
+  size: 12034210
+  object_id: 9e9ffe37-f8b4-497a-5a57-8a70a345eba4
+  sha: sha256:789684f91dbbc19ea3e1d450884bb0733c82d5857323d51d3e51a871b69750c5
 jumpbox/bins/vault:
   size: 374448283
   object_id: 80a60c96-54cf-4731-6e01-3d35c80854ab

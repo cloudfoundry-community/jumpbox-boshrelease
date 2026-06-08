@@ -12,7 +12,7 @@ jq: 1.8.1
 safe: 1.9.0
 shield: 9.0.1
 spruce: 1.35.7
-tofu: 1.12.0
-uaa: 0.16.0
+tofu: 1.12.1
+uaa: 0.20.2
 yq: 4.53.2
 
