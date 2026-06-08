@@ -82,8 +82,6 @@ groups:
     - safe
     - esuf
     - cf
-    - cf7
-    - cf8
     - cloudfoundry-utils
     - bosh-backup-and-restore
     - bosh-cli

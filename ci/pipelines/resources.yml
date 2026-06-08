@@ -74,22 +74,6 @@ resources:
       user: cloudfoundry
       repository: cli
       access_token: (( grab meta.github.access_token ))
-      tag_filter: "^v?(6\\..*)"
-
-  - name: cf7
-    type: github-release
-    source:
-      user: cloudfoundry
-      repository: cli
-      access_token: (( grab meta.github.access_token ))
-      tag_filter: "^v?(7\\..*)"
-
-  - name: cf8
-    type: github-release
-    source:
-      user: cloudfoundry
-      repository: cli
-      access_token: (( grab meta.github.access_token ))
       tag_filter: "^v?(8\\..*)"
 
   - name: cloudfoundry-utils

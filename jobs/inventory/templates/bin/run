@@ -20,9 +20,8 @@ check() {
 export HOME=/var/vcap/data/.home
 mkdir -p $HOME
 
-# Cloud Foundry CLIs
+# Cloud Foundry CLI (v8; cf8 is an alias for cf)
 check cf --version
-check cf7 --version
 check cf8 --version
 
 # BOSH / Genesis ecosystem

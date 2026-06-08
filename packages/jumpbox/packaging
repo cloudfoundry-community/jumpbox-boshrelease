@@ -18,6 +18,10 @@ cp -a jumpbox/bins/* ${BOSH_INSTALL_TARGET}/bin
 cp -a jumpbox/cloudfoundry-utils/* ${BOSH_INSTALL_TARGET}/bin
 chmod 0755 ${BOSH_INSTALL_TARGET}/bin/*
 
+# cf is the Cloud Foundry CLI v8; keep a cf8 alias for anything that still
+# invokes the version-suffixed name (cf v6/v7 are no longer shipped).
+ln -sf cf ${BOSH_INSTALL_TARGET}/bin/cf8
+
 # GIT
 # https://www.kernel.org/pub/software/scm/git
 # https://www.kernel.org/pub/software/scm/git/git-2.54.0.tar.gz
