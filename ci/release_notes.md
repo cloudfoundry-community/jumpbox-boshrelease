@@ -90,3 +90,7 @@
 # spruce
 
 - Bumped spruce to v1.35.6
+
+# spruce
+
+- Bumped spruce to v1.35.7
