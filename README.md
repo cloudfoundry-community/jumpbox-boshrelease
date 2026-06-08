@@ -63,38 +63,42 @@ installed on the instance, versions, etc.
 
 ### Packages installed
 
-golang-1-linux: 
-- go 1.latest (currently 1.21.4)
+The versions below are illustrative. `INCLUDES.yml` is the source of
+truth for what each release actually ships.
+
+golang-1-linux:
+- go 1.latest
 jumpbox:
-- curl (on stemcell, currently 7.81.0)
-- git 2.35.1
-- jq 1.5
-- tmux 3.2a
+- curl (on stemcell)
+- git 2.54.0
+- tmux 3.6b
   - libevent 2.1.12
-- tree 2.0.2
-- vim 8.2.4528
-- wget 1.21.3
-- zip (on stemcell, currently 3.0)
-- unzip (on stemcell, currently 6.0
+- tree 2.3.2
+- vim 9.2.0541
+- wget 1.25.0
+- s3cmd 2.4.0
+- zip / unzip (on stemcell)
 
 Precompiled binaries / scripts:
 - jumpbox/bins/
-  - bbr 1.9.53
-  - bosh 7.4.1
-  - certstrap 1.2.0
-  - credhub 2.9.22
-  - spruce 1.29.0
-  - fly 7.11.0
-  - cf 6.53.0
-  - cf7 7.7.4
-  - cf8 8.7.4
+  - bbr 1.9.78
+  - bosh 7.10.5
+  - certstrap 1.3.0
+  - cf 8.18.3 (cf8 alias)
+  - credhub 2.9.57
   - esuf 0.1.2
-  - genesis 2.8.11
-  - jq 1.6
-  - nats 1.2.0
+  - fly 8.2.3
+  - genesis 3.0.14
+  - jq 1.8.1
+  - nats 1.0.2
   - safe 1.9.0
-  - shield 8.7.4
+  - shield 9.0.1
   - spiff 1.0.8
-  - terraform 1.1.7
+  - spruce 1.35.7
+  - terraform 1.5.7
+  - tofu 1.12.1
   - tmate 2.4.0
-  - vault 1.9.4
+  - uaa 0.20.2
+  - vault 1.14.10
+  - bao 2.5.4
+  - yq 4.53.2
