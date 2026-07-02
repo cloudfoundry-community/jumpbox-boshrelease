@@ -110,3 +110,7 @@
 # spruce
 
 - Bumped spruce to v1.35.10
+
+# credhub
+
+- Bumped credhub to v2.9.58
