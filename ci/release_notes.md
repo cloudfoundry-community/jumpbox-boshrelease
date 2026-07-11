@@ -118,3 +118,7 @@
 # spruce
 
 - Bumped spruce to v1.35.11
+
+# bosh-cli
+
+- Bumped bosh-cli to v7.10.7
