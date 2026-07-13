@@ -80,14 +80,25 @@ n=$((n + 1))
 # 26.1.2, which honors this env var (no-op on jammy's compile path).
 # packaging is vendored because wheel >= 0.46 declares it a runtime dependency;
 # get-pip installs wheel on jammy's python3.10, which fails offline without it.
+# --target (not --prefix): the stemcells' Debian-patched Python routes --prefix
+# installs to $PREFIX/local/{bin,lib} (posix_local scheme), off the jumpbox
+# PATH. --target keeps a flat, scheme-independent layout; the bin/ wrapper
+# sets PYTHONPATH so the S3 module resolves at runtime.
 (export PIP_BREAK_SYSTEM_PACKAGES=1
  python3 jumpbox/get-pip.py --no-index --find-links=jumpbox/wheels
  export PATH=$HOME/.local/bin:$PATH
  tar -xzvf jumpbox/s3cmd-2.4.0.tar.gz
  cd s3cmd-2.4.0
- pip install . --prefix=${BOSH_INSTALL_TARGET} \
+ pip install . --target=${BOSH_INSTALL_TARGET}/s3cmd \
    --no-index \
-   --find-links=../jumpbox/wheels) &
+   --find-links=../jumpbox/wheels
+ cat > ${BOSH_INSTALL_TARGET}/bin/s3cmd <<'WRAP'
+#!/bin/sh
+here="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
+export PYTHONPATH="${here}/../s3cmd${PYTHONPATH:+:$PYTHONPATH}"
+exec /usr/bin/python3 "${here}/../s3cmd/bin/s3cmd" "$@"
+WRAP
+ chmod 0755 ${BOSH_INSTALL_TARGET}/bin/s3cmd) &
 n=$((n + 1))
 
 while [[ $n -gt 0 ]]; do
