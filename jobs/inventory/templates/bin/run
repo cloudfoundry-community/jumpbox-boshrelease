@@ -7,12 +7,14 @@ EXITSTATUS=0
 check() {
 	name=$1
 	echo -en "Checking \e[1;35m${name}\e[0m... "
-	if ! $* >/dev/null 2>&1; then
+	if output=$("$@" 2>&1); then
+		echo -e "\e[1;32mOK\e[0m"
+	else
 		echo -e "\e[1;31mFAILED!\e[0m"
 		EXITSTATUS=1
-	else
-		echo -e "\e[1;32mOK\e[0m"
-		$* 2>&1 | sed -e 's/^/  /g'
+	fi
+	if [[ -n ${output} ]]; then
+		echo "${output}" | sed -e 's/^/  /g'
 	fi
 	echo
 }
