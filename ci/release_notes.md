@@ -10,3 +10,7 @@
 # tofu
 
 - Bumped tofu to v1.12.4
+
+# spruce
+
+- Bumped spruce to v1.35.12
