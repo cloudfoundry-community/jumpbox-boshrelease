@@ -138,6 +138,9 @@ resources:
       user: jqlang
       repository: jq
       access_token: (( grab meta.github.access_token ))
+      # jq tags releases as "jq-1.8.2"; strip the prefix so version files,
+      # the downgrade guard, and commit messages see a bare version.
+      tag_filter: "jq-(.*)"
 
   - name: shield
     type: github-release
