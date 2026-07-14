@@ -147,6 +147,14 @@ if [[ ${BLOB_DIR}/${BLOB_BINARY} == *".tgz" || ${BLOB_DIR}/${BLOB_BINARY} == *".
   echo "Unpacking TarGz"
   tar zxvf ../${BLOB_DIR}/${BLOB_BINARY} -C ../${BLOB_DIR}
   bosh add-blob ../${BLOB_DIR}/${BLOB_NAME} "${blob_dst}"
+elif [[ ${BLOB_DIR}/${BLOB_BINARY} == *".zip" ]]; then
+  echo "Unpacking Zip"
+  # BLOB_INNER: path (or glob) of the wanted binary inside the archive,
+  # for upstreams whose binary name differs from the blob name
+  unzip -o ../${BLOB_DIR}/${BLOB_BINARY} -d ../${BLOB_DIR}
+  for blob_src in ../${BLOB_DIR}/${BLOB_INNER:-${BLOB_NAME}}; do
+    bosh add-blob "${blob_src}" "${blob_dst}"
+  done
 elif [[ "$BLOB_BINARY" == "*" ]]; then
   for blob_src in ../${BLOB_DIR}/${BLOB_BINARY}; do
     base=${blob_src##*/}
