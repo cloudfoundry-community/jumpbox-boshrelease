@@ -685,7 +685,7 @@ jobs:
     plan:
     - in_parallel:
       - { get: git }
-      - { get: uaa-cli, trigger: true }
+      - { get: uaa, trigger: true }
     - task: update-uaa-cli
       config:
         platform: linux
