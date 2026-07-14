@@ -95,3 +95,5 @@ groups:
     - yq
     - opentofu
     - openbao
+    - spiff
+    - nats
