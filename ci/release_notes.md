@@ -26,3 +26,7 @@
 # spiff
 
 - Bumped spiff to v1.7.0-beta-8
+
+# nats
+
+- Bumped nats to v0.4.0
