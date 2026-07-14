@@ -18,3 +18,7 @@
 # cf
 
 - Bumped cf to v8.18.4
+
+# bao
+
+- Bumped bao to v2.5.5
