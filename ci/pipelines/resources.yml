@@ -86,7 +86,7 @@ resources:
   - name: bosh-backup-and-restore
     type: github-release
     source:
-      user: cloudfoundry-incubator
+      user: cloudfoundry
       repository: bosh-backup-and-restore
       access_token: (( grab meta.github.access_token ))
 
@@ -100,7 +100,7 @@ resources:
   - name: credhub-cli
     type: github-release
     source:
-      user: cloudfoundry-incubator
+      user: cloudfoundry
       repository: credhub-cli
       access_token: (( grab meta.github.access_token ))
 
