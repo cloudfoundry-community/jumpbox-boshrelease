@@ -109,8 +109,8 @@ fi
 ######
 if [[ ${BLOB_SOURCE:-} =~ ^http ]]; then
   header "Fetching blobs from upstream"
-  # shellcheck disable=SC2059
-  BLOB_SRC_URL="$(printf "${BLOB_SOURCE}" "${VERSION}")"
+  # substitute every %s so URLs may embed the version more than once
+  BLOB_SRC_URL="${BLOB_SOURCE//%s/${VERSION}}"
   echo "Fetching blob from upstream $BLOB_SRC_URL ..."
   if [[ ${BLOB_SOURCE} =~ .tgz$ ]]; then
     curl -Lsk "$BLOB_SRC_URL" | tar -xzO "${BLOB_SRC_BINARY:-"$BLOB_BINARY"}" > "../${BLOB_DIR}/${BLOB_BINARY}"
