@@ -169,3 +169,11 @@ resources:
       user: openbao
       repository: openbao
       access_token: (( grab meta.github.access_token ))
+
+  # spiff++, the maintained fork of the archived cloudfoundry-incubator/spiff
+  - name: spiff
+    type: github-release
+    source:
+      user: mandelsoft
+      repository: spiff
+      access_token: (( grab meta.github.access_token ))

@@ -11,6 +11,7 @@ genesis: 3.0.14
 jq: 1.8.2
 safe: 1.9.0
 shield: 9.0.1
+spiff: 1.0.8
 spruce: 1.35.12
 tofu: 1.12.4
 uaa: 0.20.2

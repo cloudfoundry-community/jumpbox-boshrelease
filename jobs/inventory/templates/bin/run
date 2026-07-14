@@ -35,7 +35,7 @@ check safe version
 check esuf --version
 check shield -v
 check spruce --version
-check spiff -v
+check spiff --version
 check uaa version
 
 # secrets / infrastructure
