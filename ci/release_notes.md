@@ -22,3 +22,7 @@
 # bao
 
 - Bumped bao to v2.5.5
+
+# spiff
+
+- Bumped spiff to v1.7.0-beta-8
