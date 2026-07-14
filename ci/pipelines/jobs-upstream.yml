@@ -1,6 +1,7 @@
 jobs:
   - name: genesis
     public: true
+    serial_groups: [git-push]
     plan:
     - in_parallel:
       - { get: git }
@@ -67,6 +68,7 @@ jobs:
 
   - name: safe
     public: true
+    serial_groups: [git-push]
     plan:
     - in_parallel:
       - { get: git }
@@ -135,6 +137,7 @@ jobs:
 
   - name: esuf
     public: true
+    serial_groups: [git-push]
     plan:
     - in_parallel:
       - { get: git }
@@ -201,6 +204,7 @@ jobs:
 
   - name: cf
     public: true
+    serial_groups: [git-push]
     plan:
     - in_parallel:
       - { get: git }
@@ -268,6 +272,7 @@ jobs:
 
   - name: cloudfoundry-utils
     public: true
+    serial_groups: [git-push]
     plan:
     - in_parallel:
       - { get: git }
@@ -334,6 +339,7 @@ jobs:
 
   - name: bosh-backup-and-restore
     public: true
+    serial_groups: [git-push]
     plan:
     - in_parallel:
       - { get: git }
@@ -399,6 +405,7 @@ jobs:
 
   - name: bosh-cli
     public: true
+    serial_groups: [git-push]
     plan:
     - in_parallel:
       - { get: git }
@@ -464,6 +471,7 @@ jobs:
 
   - name: credhub-cli
     public: true
+    serial_groups: [git-push]
     plan:
     - in_parallel:
       - { get: git }
@@ -534,6 +542,7 @@ jobs:
 
   - name: fly
     public: true
+    serial_groups: [git-push]
     plan:
     - in_parallel:
       - { get: git }
@@ -603,6 +612,7 @@ jobs:
 
   - name: spruce
     public: true
+    serial_groups: [git-push]
     plan:
     - in_parallel:
       - { get: git }
@@ -671,6 +681,7 @@ jobs:
           link:    (( grab meta.shout.links.build ))
   - name: uaa
     public: true
+    serial_groups: [git-push]
     plan:
     - in_parallel:
       - { get: git }
@@ -742,6 +753,7 @@ jobs:
   # ---------------------------------------------------------------------------
   - name: certstrap
     public: true
+    serial_groups: [git-push]
     plan:
     - in_parallel:
       - { get: git }
@@ -810,6 +822,7 @@ jobs:
 
   - name: jq
     public: true
+    serial_groups: [git-push]
     plan:
     - in_parallel:
       - { get: git }
@@ -878,6 +891,7 @@ jobs:
 
   - name: shield
     public: true
+    serial_groups: [git-push]
     plan:
     - in_parallel:
       - { get: git }
@@ -946,6 +960,7 @@ jobs:
 
   - name: yq
     public: true
+    serial_groups: [git-push]
     plan:
     - in_parallel:
       - { get: git }
@@ -1014,6 +1029,7 @@ jobs:
 
   - name: opentofu
     public: true
+    serial_groups: [git-push]
     plan:
     - in_parallel:
       - { get: git }
@@ -1082,6 +1098,7 @@ jobs:
 
   - name: openbao
     public: true
+    serial_groups: [git-push]
     plan:
     - in_parallel:
       - { get: git }
