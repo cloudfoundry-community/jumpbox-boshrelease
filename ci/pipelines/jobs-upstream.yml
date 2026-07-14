@@ -1107,9 +1107,13 @@ jobs:
         params:
           REPO_ROOT:        git
           REPO_OUT:         pushme
+          # openbao releases carry 300+ assets; the github-release resource
+          # only lists the first page, so the glob never matches. Fetch the
+          # tarball directly instead of relying on the asset download.
+          BLOB_SOURCE:      https://github.com/openbao/openbao/releases/download/v%s/bao_%s_Linux_x86_64.tar.gz
           BLOB_DIR:         openbao
           BLOB_NAME:        bao
-          BLOB_BINARY:      bao_*_Linux_x86_64.tar.gz
+          BLOB_BINARY:      bao_Linux_x86_64.tar.gz
           BLOB_DESTINATION: jumpbox/bins/bao
           BLOB_CLEANUP:     jumpbox/bins/bao
           AWS_ACCESS_KEY:   (( grab meta.aws.access_key ))
