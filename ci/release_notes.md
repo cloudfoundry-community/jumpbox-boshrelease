@@ -14,3 +14,7 @@
 # spruce
 
 - Bumped spruce to v1.35.12
+
+# cf
+
+- Bumped cf to v8.18.4
