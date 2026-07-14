@@ -174,3 +174,11 @@ resources:
       user: mandelsoft
       repository: spiff
       access_token: (( grab meta.github.access_token ))
+
+  # natscli, the supported successor of the legacy nats pub/sub client
+  - name: nats
+    type: github-release
+    source:
+      user: nats-io
+      repository: natscli
+      access_token: (( grab meta.github.access_token ))
