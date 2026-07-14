@@ -65,15 +65,26 @@ if [[ -f "$VERSION_DB" ]]; then
 
   if [[ -n "$cur" && -n "$inc" ]]; then
     if [[ "$inc" == "$cur" ]]; then
-      header "Blob '${BLOB_NAME}' already at ${current_raw}; nothing to do."
-      cp -a "${REPO_ROOT}" "${REPO_OUT}"
-      exit 0
-    fi
-    highest="$(printf '%s\n%s\n' "$cur" "$inc" | sort -V | tail -1)"
-    if [[ "$highest" == "$cur" ]]; then
-      header "Refusing downgrade of '${BLOB_NAME}': have ${current_raw}, upstream offered ${VERSION}."
-      cp -a "${REPO_ROOT}" "${REPO_OUT}"
-      exit 0
+      # same numeric version: compare the raw strings so pre-release
+      # bumps (1.7.0-beta-8 -> 1.7.0-beta-9) still go through
+      if [[ "$VERSION" == "$current_raw" ]]; then
+        header "Blob '${BLOB_NAME}' already at ${current_raw}; nothing to do."
+        cp -a "${REPO_ROOT}" "${REPO_OUT}"
+        exit 0
+      fi
+      highest_raw="$(printf '%s\n%s\n' "$current_raw" "$VERSION" | sort -V | tail -1)"
+      if [[ "$highest_raw" == "$current_raw" ]]; then
+        header "Refusing downgrade of '${BLOB_NAME}': have ${current_raw}, upstream offered ${VERSION}."
+        cp -a "${REPO_ROOT}" "${REPO_OUT}"
+        exit 0
+      fi
+    else
+      highest="$(printf '%s\n%s\n' "$cur" "$inc" | sort -V | tail -1)"
+      if [[ "$highest" == "$cur" ]]; then
+        header "Refusing downgrade of '${BLOB_NAME}': have ${current_raw}, upstream offered ${VERSION}."
+        cp -a "${REPO_ROOT}" "${REPO_OUT}"
+        exit 0
+      fi
     fi
   fi
 fi
