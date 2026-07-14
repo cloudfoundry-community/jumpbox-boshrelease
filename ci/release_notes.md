@@ -1,7 +1,7 @@
 
 # jq
 
-- Bumped jq to vjq-1.8.2
+- Bumped jq to v1.8.2
 
 # yq
 
