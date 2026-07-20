@@ -200,8 +200,13 @@ EOF
 password    [success=1 default=ignore]  pam_unix.so      obscure sha512
 password    requisite                   pam_deny.so
 password    required                    pam_permit.so
-session     required                    pam_lastlog.so   showfailed
 EOF
+  # pam_lastlog does not exist on Ubuntu 24.04 (noble) and later; a
+  # required-but-missing session module aborts every SSH session right
+  # after the MOTD, locking all users out of the jumpbox.
+  if ls /usr/lib/*/security/pam_lastlog.so >/dev/null 2>&1; then
+    echo "session     required                    pam_lastlog.so   showfailed" >>/etc/pam.d/common-password
+  fi
   cat >/etc/pam.d/common-auth <<EOF
 auth        [success=1 default=ignore]  pam_unix.so
 auth        requisite                   pam_deny.so
