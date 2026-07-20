@@ -55,9 +55,9 @@ jumpbox/bins/spiff:
   object_id: 3049702c-d13f-44e1-66e8-218aa1a84169
   sha: sha256:6e91ea4612c71339102e732ae3d3461d9350feb959ad845e5411f85574f1c8be
 jumpbox/bins/spruce:
-  size: 30049761
-  object_id: 8fca5a06-76cc-43ef-7a1e-ebac31833083
-  sha: sha256:8d195a5cd85c84d6b00befd461e9b8cf540ab714b765bcc6492e116226995e41
+  size: 30051001
+  object_id: f637784a-92fe-4d04-6a8c-08f386e0cf8d
+  sha: sha256:61478b8a0bb10dfa705f676ea736a6d0becbf7d0fde3e79c262bc238bc7e697e
 jumpbox/bins/terraform:
   size: 65200128
   object_id: 0850e513-b730-4688-7919-9fec9fcfbfc7

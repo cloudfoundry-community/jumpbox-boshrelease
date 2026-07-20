@@ -30,3 +30,7 @@
 # nats
 
 - Bumped nats to v0.4.0
+
+# spruce
+
+- Bumped spruce to v1.35.13
