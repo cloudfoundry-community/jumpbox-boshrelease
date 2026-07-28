@@ -6,3 +6,7 @@
 # bosh-cli
 
 - Bumped bosh-cli to v7.10.8
+
+# safe
+
+- Bumped safe to v1.10.0

@@ -10,7 +10,7 @@ fly: 8.2.4
 genesis: 3.0.14
 jq: 1.8.2
 nats: 0.4.0
-safe: 1.9.0
+safe: 1.10.0
 shield: 9.0.1
 spiff: 1.7.0-beta-8
 spruce: 1.35.14
