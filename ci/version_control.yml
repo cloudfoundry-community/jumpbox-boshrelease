@@ -6,7 +6,7 @@ cf: 8.18.4
 cloudfoundry-utils: 1.0.0
 credhub: 2.9.58
 esuf: 0.1.2
-fly: 8.2.4
+fly: 8.2.5
 genesis: 3.0.14
 jq: 1.8.2
 nats: 0.4.0
