@@ -26,3 +26,7 @@
 # bbr
 
 - Bumped bbr to v1.9.81
+
+# cf
+
+- Bumped cf to v8.19.0
