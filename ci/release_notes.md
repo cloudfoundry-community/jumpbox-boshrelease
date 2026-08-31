@@ -30,3 +30,7 @@
 # cf
 
 - Bumped cf to v8.19.0
+
+# safe
+
+- Bumped safe to v1.22.0
