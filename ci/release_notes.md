@@ -42,3 +42,7 @@
 # safe
 
 - Bumped safe to v1.24.0
+
+# credhub
+
+- Bumped credhub to v2.9.61
