@@ -1,6 +1,6 @@
 bao: 2.5.5
 bbr: 1.9.81
-bosh-cli: 7.10.10
+bosh-cli: 7.10.11
 certstrap: 1.3.0
 cf: 8.19.0
 cloudfoundry-utils: 1.0.0
