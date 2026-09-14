@@ -54,3 +54,7 @@
 # bosh-cli
 
 - Bumped bosh-cli to v7.10.11
+
+# spruce
+
+- Bumped spruce to v1.35.19
