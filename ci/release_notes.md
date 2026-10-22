@@ -86,3 +86,7 @@
 # safe
 
 - Bumped safe to v1.26.0
+
+# safe
+
+- Bumped safe to v1.26.1
