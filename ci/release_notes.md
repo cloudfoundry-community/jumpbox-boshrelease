@@ -90,3 +90,7 @@
 # safe
 
 - Bumped safe to v1.26.1
+
+# fly
+
+- Bumped fly to v8.3.2
