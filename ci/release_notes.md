@@ -94,3 +94,7 @@
 # fly
 
 - Bumped fly to v8.3.2
+
+# spruce
+
+- Bumped spruce to v1.35.25
