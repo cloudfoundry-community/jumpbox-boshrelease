@@ -102,3 +102,7 @@
 # fly
 
 - Bumped fly to v8.3.3
+
+# credhub
+
+- Bumped credhub to v2.9.63
