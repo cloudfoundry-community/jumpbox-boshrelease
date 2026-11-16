@@ -114,3 +114,7 @@
 # safe
 
 - Bumped safe to v1.26.2
+
+# spruce
+
+- Bumped spruce to v1.35.27
