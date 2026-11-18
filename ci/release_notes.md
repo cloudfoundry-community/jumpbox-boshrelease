@@ -122,3 +122,7 @@
 # safe
 
 - Bumped safe to v1.27.0
+
+# bosh-cli
+
+- Bumped bosh-cli to v7.11.3
